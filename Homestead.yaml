@@ -17,7 +17,7 @@ folders:
       type: "nfs"
 
 sites:
-    - map: wwwip-project.app
+    - map: www.ip-project.app
       to: "/home/vagrant/ip-project/web"
       type: symfony
 

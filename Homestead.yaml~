@@ -14,6 +14,7 @@ keys:
 folders:
     - map: "/home/administrateur/IP-project"
       to: "/home/vagrant/ip-project"
+      type: "nfs"
 
 sites:
     - map: wwwip-project.app
