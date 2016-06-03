@@ -12,12 +12,12 @@ keys:
     - ~/.ssh/id_rsa
 
 folders:
-    - map: "/home/administrateur/IP-project"
+    - map: "/home/administrateur/websites/IP-project"
       to: "/home/vagrant/ip-project"
       type: "nfs"
 
 sites:
-    - map: wwwip-project.app
+    - map: www.ip-project.app
       to: "/home/vagrant/ip-project/web"
       type: symfony
 
