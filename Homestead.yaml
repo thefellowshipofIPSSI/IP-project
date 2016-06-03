@@ -12,7 +12,7 @@ keys:
     - ~/.ssh/id_rsa
 
 folders:
-    - map: "/home/administrateur/IP-project"
+    - map: "/home/administrateur/websites/IP-project"
       to: "/home/vagrant/ip-project"
       type: "nfs"
 

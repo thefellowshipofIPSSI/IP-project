@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * UserCRA
  *
- * @ORM\Table(name="user_c_r_a")
+ * @ORM\Table(name="user_cra")
  * @ORM\Entity(repositoryClass="Ipssi\IpssiBundle\Repository\UserCRARepository")
  */
 class UserCRA

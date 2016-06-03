@@ -17,3 +17,4 @@
 devbox.box
 .idea/
 .vagrant/
+/nbproject/private/
