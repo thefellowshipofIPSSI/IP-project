@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <title>{% block title %}Intranet - Home{% endblock %}</title>
 
         {% block stylesheets %}
             <script src="{{ asset('js/jquery.min.js') }}"></script>
@@ -26,7 +26,7 @@
                             {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Bonjour, {{ app.user }}<span class="caret"></span></a>                                
                             <ul class="dropdown-menu" role="menu">
-                            <li><a href="{{ path('intranet_homepage') }}">Intranet</a></li>
+                            <li><a href="{{ path('ipssi_homepage') }}">Retour au site</a></li>
                             <li><a href="{{ path('fos_user_security_logout') }}">Déconnexion</a></li>
                             </ul>
                             {% else %}

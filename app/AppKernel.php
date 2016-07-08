@@ -18,7 +18,8 @@ class AppKernel extends Kernel
             new Ipssi\IpssiBundle\IpssiBundle(),
             new FOS\UserBundle\FOSUserBundle(),
             new UserBundle\UserBundle(),
-            new Symfony\Bundle\AsseticBundle\AsseticBundle(),            
+            new Symfony\Bundle\AsseticBundle\AsseticBundle(),
+            new Ipssi\IntranetBundle\IntranetBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {
