@@ -1,3 +1,12 @@
 intranet_homepage:
     path:     /
     defaults: { _controller: IntranetBundle:Default:index }
+
+# News
+intranet_news_homepage:
+    path:   /news
+    defaults: { _controller: IntranetBundle:News:index }
+    
+intranet_news_create:
+    path:   /news/create
+    defaults: { _controller: IntranetBundle:News:create }
