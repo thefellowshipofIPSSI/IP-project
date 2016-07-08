@@ -7,9 +7,16 @@ ipssi:
     type:     annotation
     prefix:   /
 
-app:
-    resource: "@AppBundle/Controller/"
-    type:     annotation
-
 fos_user:
     resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+    
+
+# Routing for Intranet
+#back:
+#    resource:   "@IpssiBundle/Controller/Back/"
+#    prefix:     /intranet
+#    type:       annotation
+
+intranet:
+    path:       /intranet
+    defaults:   { _controller: "backend.backcontroller:indexAction" }

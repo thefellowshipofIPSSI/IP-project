@@ -7,10 +7,10 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * NewsCategoriy
  *
- * @ORM\Table(name="news_categoriy")
- * @ORM\Entity(repositoryClass="Ipssi\IpssiBundle\Repository\NewsCategoriyRepository")
+ * @ORM\Table(name="news_category")
+ * @ORM\Entity(repositoryClass="Ipssi\IpssiBundle\Repository\NewsCategoryRepository")
  */
-class NewsCategoriy
+class NewsCategory
 {
     /**
      * @var int
