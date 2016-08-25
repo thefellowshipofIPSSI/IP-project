@@ -2,21 +2,24 @@ user:
     resource: "@UserBundle/Resources/config/routing.yml"
     prefix:   /
 
-ipssi:
-    resource: "@IpssiBundle/Controller/"
-    type:     annotation
-    prefix:   /
-
 fos_user:
     resource: "@FOSUserBundle/Resources/config/routing/all.xml"
     
+ipssi:
+    resource: "@IpssiBundle/Controller/"
+    prefix:   /
+    type: annotation
 
 # Routing for Intranet
-#back:
-#    resource:   "@IpssiBundle/Controller/Back/"
-#    prefix:     /intranet
-#    type:       annotation
+intranet:
+    resource:   "@IpssiBundle/Controller/Backend/"
+    prefix:     /intranet
+    type:       annotation
 
 intranet:
     path:       /intranet
     defaults:   { _controller: "backend.backcontroller:indexAction" }
+
+intranet/page:
+    path:       /intranet/page
+    defaults:   { _controller: "backend.pagecontroller:indexAction" }

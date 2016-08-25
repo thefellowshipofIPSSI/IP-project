@@ -12,9 +12,8 @@ keys:
     - ~/.ssh/id_rsa
 
 folders:
-    - map: "/home/administrateur/websites/IP-project"
+    - map: "/Users/flori/Documents/dev/IP-project"
       to: "/home/vagrant/ip-project"
-      type: "nfs"
 
 sites:
     - map: www.ip-project.app
@@ -22,7 +21,7 @@ sites:
       type: symfony
 
 databases:
-    - ip-project
+    - ipssi
 
 # blackfire:
 #     - id: foo

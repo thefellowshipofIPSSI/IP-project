@@ -6,16 +6,16 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
-class BackController extends Controller
+class PageController extends Controller
 {
     
     /**
-     * @Route("/intranet", name="intranet")
-     * @Template("IpssiBundle:Back:index.html.twig")
-     * @return array
+     * @Route("/intranet/page", name="intranet/page")
+     * @Template("IpssiBundle:Back:Page:index.html.twig")
+     * @return type
      */
     public function indexAction()
     {
-        return array();
+        return $this->render('IpssiBundle:Back:Page:index.html.twig');
     }
 }
