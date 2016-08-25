@@ -1,0 +1,60 @@
+{% extends "intranet.html.twig" %}
+
+{% block title %} Actualités {% endblock %}
+
+{% block headerContainer %}
+    <div class="col-lg-12">
+        <h1 class="page-header">
+            Actualités
+            <small>Aperçu : {{ news.name }}</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li>
+                <i class="fa fa-dashboard"></i>  <a href="{{ path('intranet_homepage') }}">Dashboard</a>
+            </li>
+            <li class="active">
+                <i class="fa fa-file"></i> <a href="{{ path('intranet_news_homepage') }}">Actualités</a>
+            </li>
+            <li class="active">
+                <i class="fa fa-eye"></i> Aperçu : {{ news.name }}
+            </li>
+        </ol>
+    </div>
+{% endblock %}
+
+{% block body %}
+
+    <div class="col-lg-8">
+
+        <!-- Blog Post -->
+
+        <!-- Title -->
+        <h1>{{ news.title|capitalize }}</h1>
+
+        <!-- Author -->
+        <p class="lead">
+            by {todo: récupérer l'User}
+        </p>
+
+        <hr>
+
+        <!-- Date/Time -->
+        <p><span class="glyphicon glyphicon-time"></span> Posted on {{ news.creationDate|date('m/d/Y') }} à {{ news.creationDate|date('H:i') }}</p>
+
+        <hr>
+
+        <!-- Preview Image -->
+        <img class="img-responsive" src="http://placehold.it/900x300" alt="">
+
+        <hr>
+
+        <!-- Post Content -->
+        <p class="lead">{{ news.resume }}</p>
+
+        <p>
+            {{ news.content|raw }}
+        </p>
+        <hr>
+    </div>
+
+{% endblock %}

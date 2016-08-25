@@ -27,6 +27,7 @@
 
     </head>
     <body>
+
         <div id="wrapper">
             <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
                 {% include('navHeader.html.twig') %}
@@ -35,7 +36,16 @@
             </nav>
 
             <div id="page-wrapper">
+
                 <div class="container-fluid">
+                    {% for label, flashes in app.session.flashbag.all %}
+                        {% for flash in flashes %}
+                            <div class="alert alert-{{ label }}">
+                                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                {{ flash }}
+                            </div>
+                        {% endfor %}
+                    {% endfor %}
                     <!-- Page Heading -->
                     <div class="row">
                         {% block headerContainer %}
