@@ -1,0 +1,31 @@
+intranet_homepage:
+    path:     /
+    defaults: { _controller: IntranetBundle:Default:index }
+
+
+# Pages
+intranet_page_homepage:
+    path:     /page
+    defaults: { _controller: IntranetBundle:Page:index }
+
+# News
+intranet_news_homepage:
+    path:   /news
+    defaults: { _controller: IntranetBundle:News:index }
+
+intranet_news_create:
+    path:   /news/create
+    defaults: { _controller: IntranetBundle:News:create }
+
+intranet_news_update:
+    path:   /news/{news_id}/update
+    defaults: { _controller: IntranetBundle:News:update }
+
+intranet_news_delete:
+    path:   /news/{news_id}/delete
+    defaults: { _controller: IntranetBundle:News:delete }
+
+intranet_news_view:
+    path:   /news/{news_id}/view
+    defaults: { _controller: IntranetBundle:News:view }
+

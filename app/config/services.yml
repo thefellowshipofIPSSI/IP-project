@@ -4,8 +4,3 @@ parameters:
 #    parameter_name: value
 
 services:
-    backend.backcontroller:
-        class: Ipssi\IpssiBundle\Controller\Backend\BackController
-
-    backend.pagecontroller:
-        class: Ipssi\IpssiBundle\Controller\Backend\PageController
