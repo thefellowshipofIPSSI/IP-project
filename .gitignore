@@ -19,3 +19,4 @@ devbox.box
 .vagrant/
 /nbproject/private/
 nbproject/
+composer.phar

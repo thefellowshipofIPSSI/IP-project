@@ -1,3 +1,7 @@
 intranet_homepage:
     path:     /
     defaults: { _controller: IntranetBundle:Default:index }
+
+intranet_page:
+    path:     /page
+    defaults: { _controller: IntranetBundle:Page:index }
