@@ -1,0 +1,3 @@
+ipssi_homepage:
+    path:   /
+    defaults:   { _controller: "IpssiBundle:Default:index"}
