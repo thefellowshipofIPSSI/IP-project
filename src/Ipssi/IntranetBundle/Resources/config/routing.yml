@@ -10,3 +10,15 @@ intranet_news_homepage:
 intranet_news_create:
     path:   /news/create
     defaults: { _controller: IntranetBundle:News:create }
+
+intranet_news_update:
+    path:   /news/{news_id}/update
+    defaults: { _controller: IntranetBundle:News:update }
+
+intranet_news_delete:
+    path:   /news/{news_id}/delete
+    defaults: { _controller: IntranetBundle:News:delete }
+
+intranet_news_view:
+    path:   /news/{news_id}/view
+    defaults: { _controller: IntranetBundle:News:view }

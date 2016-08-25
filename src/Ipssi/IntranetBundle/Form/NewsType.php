@@ -21,13 +21,10 @@ class NewsType extends AbstractType
     {
         $builder
             ->add('name', TextType::class, ['attr' => ['class' => 'form-group']])
-            ->add('creationDate', DateTimeType::class, ['attr' => ['class' => 'form-group']])
-            ->add('modificationDate', DateTimeType::class, ['attr' => ['class' => 'form-group']])
             ->add('title', TextType::class, ['attr' => ['class' => 'form-group']])
             ->add('resume', TextAreaType::class, ['attr' => ['class' => 'form-group']])
             ->add('content', TextAreaType::class, ['attr' => ['class' => 'form-group']])
             ->add('slug', TextType::class, ['attr' => ['class' => 'form-group']])
-            ->add('status')
             ->add('metaDescription', TextAreaType::class, ['attr' => ['class' => 'form-group']])
             ->add('metaTitle', TextType::class, ['attr' => ['class' => 'form-group']])
             
@@ -41,7 +38,7 @@ class NewsType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Ipssi\IpssiBundle\Entity\News'
+            'data_class' => 'Ipssi\IntranetBundle\Entity\News'
         ));
     }
 }

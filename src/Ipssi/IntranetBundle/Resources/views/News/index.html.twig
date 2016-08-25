@@ -6,4 +6,32 @@
 
     <a href="{{ path('intranet_news_create') }}">Nouvelle Actualité</a>
 
+
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Nom</th>
+            <th>URL</th>
+            <th>Statut</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            {% for news in allNews %}
+            <td>{{ news.id }}</td>
+            <td>{{ news.name }}</td>
+            <td>{{ news.slug }}</td>
+            <td>{{ news.status }}</td>
+            <td>
+                <a href="{{ path('intranet_news_view', {'news_id': news.id}) }}" class="fa fa-eye"></a>
+                <a href="{{ path('intranet_news_update', {'news_id': news.id}) }}" class="fa fa-eye"></a>
+                <a href="{{ path('intranet_news_delete', {'news_id': news.id}) }}" class="fa fa-eye"></a>
+            </td>
+            {% endfor %}
+        </tr>
+        </tbody>
+    </table>
+
 {% endblock %}
