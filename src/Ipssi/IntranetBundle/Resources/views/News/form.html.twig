@@ -1,7 +1,24 @@
-{% extends 'intranet.html.twig' %}
+{{ form_start(form) }}
+    <div class="form-group">
+        {{ form_row(form.name) }}
+    </div>
+    <div class="form-group">
+        {{ form_row(form.title) }}
+    </div>
+    <div class="form-group">
+        {{ form_row(form.resume) }}
+    </div>
+    <div class="form-group">
+        {{ form_row(form.content) }}
+    </div>
+    <div class="form-group">
+        {{ form_row(form.slug) }}
+    </div>
+    <div class="form-group">
+        {{ form_row(form.metaDescription) }}
+    </div>
+    <div class="form-group">
+        {{ form_row(form.metaTitle) }}
+    </div>
+{{ form_end(form) }}
 
-{% block body %}
-       
-    {{ form(form) }}
-    
-{% endblock %}

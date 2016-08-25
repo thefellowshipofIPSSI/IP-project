@@ -9,6 +9,7 @@ use Ipssi\IntranetBundle\Entity\News;
 
 use Ipssi\IntranetBundle\Form\NewsType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 
 class NewsController extends Controller {
@@ -45,33 +46,143 @@ class NewsController extends Controller {
         if($form->isSubmitted() && $form->isValid()) {
             $news = $form->getData();
 
+            $em = $this->getDoctrine()->getEntityManager();
+            $em->persist($news);
+            $em->flush();
+
+            $this->addFlash(
+                'success',
+                'Nouvelle actualité créée !'
+            );
+
+            return $this->redirectToRoute('intranet_news_homepage');
+
+        }
+        
+        return $this->render('IntranetBundle:News:create.html.twig', [
+            'form' => $form->createView()
+        ]);
+    }
+
+
+    /**
+     * Update existing News
+     * @param $news_id
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function updateAction($news_id, Request $request)
+    {
+        $newsRepo = $this->getDoctrine()->getRepository('IntranetBundle:News');
+
+        $news = $newsRepo->find($news_id);
+
+        $form = $this->createForm(NewsType::class, $news);
+        $form->add('save', SubmitType::class, [
+            'label' => 'Modifier'
+        ]);
+
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()) {
+            $news = $form->getData();
 
             $em = $this->getDoctrine()->getEntityManager();
             $em->persist($news);
             $em->flush();
 
+            $this->addFlash(
+                'success',
+                'Actualité ' . $news->getName() . ' modifiée !'
+            );
+
+            return $this->redirectToRoute('intranet_news_homepage');
+
         }
-        
-        
-        return $this->render('IntranetBundle:News:form.html.twig', [
+
+        return $this->render('IntranetBundle:News:update.html.twig', [
             'form' => $form->createView()
         ]);
+
     }
 
-    public function updateAction($news_id)
+    /**
+     * Delete a News
+     * @param $news_id
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function deleteAction($news_id)
     {
         $newsRepo = $this->getDoctrine()->getRepository('IntranetBundle:News');
 
         $news = $newsRepo->find($news_id);
-        dump($news);die;
+
+        $em = $this->getDoctrine()->getEntityManager();
+        $em->remove($news);
+        $em->flush();
+
+        $this->addFlash(
+            'success',
+            'Actualité ' . $news->getName() . ' supprimée'
+        );
+
+        return $this->redirectToRoute('intranet_news_homepage');
     }
 
+
+    /**
+     * Display a News
+     * @param $news_id
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function viewAction($news_id)
     {
         $newsRepo = $this->getDoctrine()->getRepository('IntranetBundle:News');
 
         $news = $newsRepo->find($news_id);
-        dump($news);die;
+
+
+        return $this->render('IntranetBundle:News:view.html.twig', [
+            'news' => $news
+        ]);
+    }
+
+
+    /**
+     * Make a News online
+     * @param $news_id
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function onlineAction($news_id)
+    {
+        $newsRepo = $this->getDoctrine()->getRepository('IntranetBundle:News');
+
+        $news = $newsRepo->find($news_id);
+        $news->setStatus(1);
+
+        $em = $this->getDoctrine()->getEntityManager();
+        $em->persist($news);
+        $em->flush();
+
+        return $this->redirectToRoute('intranet_news_homepage');
+    }
+
+    /**
+     * Make a News offline
+     * @param $news_id
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function offlineAction($news_id)
+    {
+        $newsRepo = $this->getDoctrine()->getRepository('IntranetBundle:News');
+
+        $news = $newsRepo->find($news_id);
+        $news->setStatus(0);
+
+        $em = $this->getDoctrine()->getEntityManager();
+        $em->persist($news);
+        $em->flush();
+
+        return $this->redirectToRoute('intranet_news_homepage');
     }
 
 }

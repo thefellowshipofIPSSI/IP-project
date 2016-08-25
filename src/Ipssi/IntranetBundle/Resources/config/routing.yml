@@ -29,3 +29,10 @@ intranet_news_view:
     path:   /news/{news_id}/view
     defaults: { _controller: IntranetBundle:News:view }
 
+intranet_news_online:
+    path:   /news/{news_id}/online
+    defaults: { _controller: IntranetBundle:News:online }
+
+intranet_news_offline:
+    path:   /news/{news_id}/offline
+    defaults: { _controller: IntranetBundle:News:offline }
