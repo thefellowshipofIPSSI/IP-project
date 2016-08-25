@@ -1,25 +1,55 @@
 {% extends 'intranet.html.twig' %}
 
+{% block headerContainer %}
+    <div class="col-lg-12">
+        <h1 class="page-header">
+            Pages
+            <small>Modération</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li>
+                <i class="fa fa-dashboard"></i>  <a href="{{ path('intranet_homepage') }}">Dashboard</a>
+            </li>
+            <li class="active">
+                <i class="fa fa-file"></i> Page
+            </li>
+        </ol>
+    </div>
+{% endblock %}
+
 {% block body %}
 
-    <!-- Page Heading -->
-    <div class="row">
-        <div class="col-lg-12">
-            <h1 class="page-header">
-                Pages
-                <small>Modération</small>
-            </h1>
-            <ol class="breadcrumb">
-                <li>
-                    <i class="fa fa-dashboard"></i>  <a href="{{ path('intranet_homepage') }}">Dashboard</a>
-                </li>
-                <li class="active">
-                    <i class="fa fa-file"></i> Blank Page
-                </li>
-            </ol>
-        </div>
+    <a href="{{ path('intranet_page_create') }}">Nouvelle Page</a>
+
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Nom</th>
+                <th>Titre</th>
+                <th>Slug</th>
+                <th>Date création</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                {% for page in allPages %}
+                    <td>{{ news.id }}</td>
+                    <td>{{ news.name }}</td>
+                    <td>{{ news.slug }}</td>
+                    <td>{{ news.status }}</td>
+                    <td>
+                        <a href="{{ path('intranet_news_view', {'news_id': news.id}) }}" class="fa fa-eye"></a>
+                        <a href="{{ path('intranet_news_update', {'news_id': news.id}) }}" class="fa fa-eye"></a>
+                        <a href="{{ path('intranet_news_delete', {'news_id': news.id}) }}" class="fa fa-eye"></a>
+                    </td>
+                {% endfor %}
+            </tr>
+            </tbody>
+        </table>
     </div>
-    <!-- /.row -->
 
     
 {% endblock %}

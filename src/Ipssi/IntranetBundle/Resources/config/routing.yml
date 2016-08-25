@@ -8,6 +8,23 @@ intranet_page_homepage:
     path:     /page
     defaults: { _controller: IntranetBundle:Page:index }
 
+intranet_page_create:
+    path:   /page/create
+    defaults: { _controller: IntranetBundle:Page:create }
+
+intranet_page_update:
+    path:   /page/{news_id}/update
+    defaults: { _controller: IntranetBundle:Page:update }
+
+intranet_page_delete:
+    path:   /page/{news_id}/delete
+    defaults: { _controller: IntranetBundle:Page:delete }
+
+intranet_page_view:
+    path:   /page/{news_id}/view
+    defaults: { _controller: IntranetBundle:Page:view }
+
+
 # News
 intranet_news_homepage:
     path:   /news
