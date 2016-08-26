@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Page
  *
  * @ORM\Table(name="page")
+ * @ORM\HasLifecycleCallbacks
  * @ORM\Entity(repositoryClass="Ipssi\IntranetBundle\Repository\PageRepository")
  */
 class Page
@@ -87,10 +88,21 @@ class Page
 
     /**
      * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User", inversedBy="page")
-     * @ORM\JoinColumn(nullable=true)
+     * @ORM\JoinColumn(nullable=false)
      */
     private $user;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="Ipssi\IntranetBundle\Entity\PageCategory", inversedBy="page")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $page_category;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Ipssi\IntranetBundle\Entity\PageTemplate", inversedBy="page")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $page_template;
 
     /**
      * Now we tell doctrine that before we persist or update we call the updatedTimestamps() function.
@@ -358,5 +370,53 @@ class Page
     public function getUser()
     {
         return $this->user;
+    }
+
+    /**
+     * Set pageCategory
+     *
+     * @param \Ipssi\IntranetBundle\Entity\PageCategory $pageCategory
+     *
+     * @return Page
+     */
+    public function setPageCategory(\Ipssi\IntranetBundle\Entity\PageCategory $pageCategory)
+    {
+        $this->page_category = $pageCategory;
+
+        return $this;
+    }
+
+    /**
+     * Get pageCategory
+     *
+     * @return \Ipssi\IntranetBundle\Entity\PageCategory
+     */
+    public function getPageCategory()
+    {
+        return $this->page_category;
+    }
+
+    /**
+     * Set pageTemplate
+     *
+     * @param \Ipssi\IntranetBundle\Entity\PageTemplate $pageTemplate
+     *
+     * @return Page
+     */
+    public function setPageTemplate(\Ipssi\IntranetBundle\Entity\PageTemplate $pageTemplate)
+    {
+        $this->page_template = $pageTemplate;
+
+        return $this;
+    }
+
+    /**
+     * Get pageTemplate
+     *
+     * @return \Ipssi\IntranetBundle\Entity\PageTemplate
+     */
+    public function getPageTemplate()
+    {
+        return $this->page_template;
     }
 }

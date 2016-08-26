@@ -38,13 +38,15 @@ class NewsController extends Controller {
 
         $form = $this->createForm(NewsType::class, $news);
         $form->add('save', SubmitType::class, [
-            'label' => 'Créer'
+            'label' => 'Créer',
+            'attr' => ['class' => 'btn btn-primary']
         ]);
 
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()) {
             $news = $form->getData();
+            $news->setUser($this->getUser());
 
             $em = $this->getDoctrine()->getEntityManager();
             $em->persist($news);
@@ -78,7 +80,8 @@ class NewsController extends Controller {
 
         $form = $this->createForm(NewsType::class, $news);
         $form->add('save', SubmitType::class, [
-            'label' => 'Modifier'
+            'label' => 'Modifier',
+            'attr' => ['class' => 'btn btn-primary']
         ]);
 
         $form->handleRequest($request);
