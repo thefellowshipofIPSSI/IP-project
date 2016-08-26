@@ -14,16 +14,24 @@ intranet_page_create:
     defaults: { _controller: IntranetBundle:Page:create }
 
 intranet_page_update:
-    path:   /page/{news_id}/update
+    path:   /page/{page_id}/update
     defaults: { _controller: IntranetBundle:Page:update }
 
 intranet_page_delete:
-    path:   /page/{news_id}/delete
+    path:   /page/{page_id}/delete
     defaults: { _controller: IntranetBundle:Page:delete }
 
 intranet_page_view:
-    path:   /page/{news_id}/view
+    path:   /page/{page_id}/view
     defaults: { _controller: IntranetBundle:Page:view }
+
+intranet_page_online:
+    path:   /page/{page_id}/online
+    defaults: { _controller: IntranetBundle:Page:online }
+
+intranet_page_offline:
+    path:   /page/{page_id}/offline
+    defaults: { _controller: IntranetBundle:Page:offline }
 
 
 ###################### News #########################

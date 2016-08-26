@@ -1,13 +1,16 @@
+<!-- current Route -->
+{% set currentRoute = app.request.attributes.get('_route') %}
+
 <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
 <div class="collapse navbar-collapse navbar-ex1-collapse">
     <ul class="nav navbar-nav side-nav">
-        <li class="active">
+        <li {% if currentRoute == 'intranet_homepage' %} class="active" {% endif %}>
             <a href="{{ path('intranet_homepage') }}"><i class="fa fa-fw fa-dashboard"></i> Accueil</a>
         </li>
-        <li>
+        <li {% if currentRoute == 'intranet_page_homepage' %} class="active" {% endif %}>
             <a href="{{ path('intranet_page_homepage') }}"><i class="fa fa-fw fa-file"></i> Page</a>
         </li>
-        <li>
+        <li {% if currentRoute == 'intranet_news_homepage' %} class="active" {% endif %}>
             <a href="{{ path('intranet_news_homepage') }}"><i class="fa fa-fw fa-file"></i> Actualités</a>
         </li>
         <li>
