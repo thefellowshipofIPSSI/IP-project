@@ -4,6 +4,7 @@
 
 namespace UserBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -26,6 +27,7 @@ class User extends BaseUser {
     {
         parent::__construct();
         $this->page = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->news = new ArrayCollection();
     }
 
     /**
@@ -33,6 +35,13 @@ class User extends BaseUser {
      * @ORM\JoinColumn(nullable=true)
      */
     private $page;
+
+
+    /**
+     * @ORM\OneToMany(targetEntity="Ipssi\IntranetBundle\Entity\News", mappedBy="user")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $news;
 
     
 
@@ -68,5 +77,39 @@ class User extends BaseUser {
     public function getPage()
     {
         return $this->page;
+    }
+
+    /**
+     * Add news
+     *
+     * @param \Ipssi\IntranetBundle\Entity\News $news
+     *
+     * @return User
+     */
+    public function addNews(\Ipssi\IntranetBundle\Entity\News $news)
+    {
+        $this->news[] = $news;
+
+        return $this;
+    }
+
+    /**
+     * Remove news
+     *
+     * @param \Ipssi\IntranetBundle\Entity\News $news
+     */
+    public function removeNews(\Ipssi\IntranetBundle\Entity\News $news)
+    {
+        $this->news->removeElement($news);
+    }
+
+    /**
+     * Get news
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getNews()
+    {
+        return $this->news;
     }
 }

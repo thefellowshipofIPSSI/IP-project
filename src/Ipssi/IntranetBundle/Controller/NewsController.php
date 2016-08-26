@@ -24,6 +24,11 @@ class NewsController extends Controller {
 
         $allNews = $newsRepo->findAll();
 
+        foreach($allNews as $news)
+        {
+
+        }
+
         return $this->render('IntranetBundle:News:index.html.twig', [
             'allNews' => $allNews
         ]);

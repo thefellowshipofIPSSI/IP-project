@@ -29,6 +29,7 @@
                 <th>#</th>
                 <th>Nom</th>
                 <th>URL</th>
+                <th>Créé par</th>
                 <th>Statut</th>
                 <th>Actions</th>
             </tr>
@@ -39,6 +40,7 @@
                     <td>{{ news.id }}</td>
                     <td>{{ news.name }}</td>
                     <td>{{ news.slug }}</td>
+                    <td>{{ news.getUser.usernameCanonical }}</td>
                     <td>
                         {% if news.status == 0 %}
                             Hors ligne
