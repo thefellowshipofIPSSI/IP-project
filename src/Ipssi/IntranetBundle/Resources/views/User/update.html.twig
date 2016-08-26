@@ -1,0 +1,50 @@
+{% extends 'intranet.html.twig' %}
+
+{% block title %} Collaborateurs | Edition {% endblock %}
+
+{% block headerContainer %}
+    <div class="col-lg-12">
+        <h1 class="page-header">
+            Actualités
+            <small>Edition d'un collaborateur</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li>
+                <i class="fa fa-dashboard"></i>  <a href="{{ path('intranet_homepage') }}">Dashboard</a>
+            </li>
+            <li class="active">
+                <i class="fa fa-file"></i> <a href="{{ path('intranet_user_homepage') }}"> Collaborateurs </a>
+            </li>
+            <li class="active">
+                <i class="fa fa-edit"></i> Edition
+            </li>
+        </ol>
+    </div>
+{% endblock %}
+
+{% block body %}
+
+    {% include('IntranetBundle:User:form.html.twig') %}
+    
+{% endblock %}
+
+
+{# Add JqueryUI for Datepicker #}
+{% block customJavascripts %}
+
+    <script src="{{ asset('js/plugins/jui/jquery-ui.min.js') }}"></script>
+    <script>
+        $(function() {
+            $('.js-datepicker').datepicker({
+                dateFormat: 'yy-mm-dd'
+            });
+        });
+    </script>
+
+{% endblock %}
+
+{% block customStylesheets %}
+
+    <link href="{{ asset('css/plugins/jui/jquery-ui.min.css') }}" rel="stylesheet">
+
+{% endblock %}

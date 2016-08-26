@@ -3,7 +3,8 @@ intranet_homepage:
     defaults: { _controller: IntranetBundle:Default:index }
 
 
-# Pages
+###################### Pages #########################
+
 intranet_page_homepage:
     path:     /page
     defaults: { _controller: IntranetBundle:Page:index }
@@ -25,7 +26,8 @@ intranet_page_view:
     defaults: { _controller: IntranetBundle:Page:view }
 
 
-# News
+###################### News #########################
+
 intranet_news_homepage:
     path:   /news
     defaults: { _controller: IntranetBundle:News:index }
@@ -53,3 +55,34 @@ intranet_news_online:
 intranet_news_offline:
     path:   /news/{news_id}/offline
     defaults: { _controller: IntranetBundle:News:offline }
+
+
+###################### Users #########################
+
+intranet_user_homepage:
+    path:   /users
+    defaults: { _controller: IntranetBundle:User:index }
+
+intranet_user_create:
+    path:   /users/create
+    defaults: { _controller: IntranetBundle:User:create }
+    
+intranet_user_update:
+    path:   /user/{user_id}/update
+    defaults: { _controller: IntranetBundle:User:update }
+
+intranet_user_delete:
+    path:   /user/{user_id}/delete
+    defaults: { _controller: IntranetBundle:User:delete }
+
+intranet_user_view:
+    path:   /user/{user_id}/view
+    defaults: { _controller: IntranetBundle:User:view }
+
+intranet_user_enable:
+    path:   /user/{user_id}/online
+    defaults: { _controller: IntranetBundle:User:enable }
+
+intranet_user_disable:
+    path:   /user/{user_id}/offline
+    defaults: { _controller: IntranetBundle:User:disable }

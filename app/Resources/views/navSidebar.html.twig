@@ -11,7 +11,15 @@
             <a href="{{ path('intranet_news_homepage') }}"><i class="fa fa-fw fa-file"></i> Actualités</a>
         </li>
         <li>
-            <a href="charts.html"><i class="fa fa-fw fa-bar-chart-o"></i> Charts</a>
+            <a href="javascript:;" data-toggle="collapse" data-target="#hr"><i class="fa fa-fw fa-user"></i> Ressources Humaines <i class="fa fa-fw fa-caret-down"></i></a>
+            <ul id="hr" class="collapse">
+                <li>
+                    <a href="{{ path('intranet_user_homepage') }}">Collaborateurs</a>
+                </li>
+                <li>
+                    <a href="#">Dropdown Item</a>
+                </li>
+            </ul>
         </li>
         <li>
             <a href="tables.html"><i class="fa fa-fw fa-table"></i> Tables</a>

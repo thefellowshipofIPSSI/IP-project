@@ -23,6 +23,10 @@
             <link href="{{ asset('font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
         {% endblock %}
 
+        {% block customStylesheets %}
+
+        {% endblock %}
+
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
 
     </head>
@@ -78,8 +82,14 @@
 
             <!-- Morris Charts JavaScript -->
             <script src="{{ asset('js/plugins/morris/raphael.min.js') }}"></script>
-            <script src="{{ asset('js/plugins/morris/morris.min.js') }}"></script>
-            <script src="{{ asset('js/plugins/morris/morris-data.js') }}"></script>
+            {#<script src="{{ asset('js/plugins/morris/morris.min.js') }}"></script>#}
+            {#<script src="{{ asset('js/plugins/morris/morris-data.js') }}"></script>#}
+
         {% endblock %}
+
+        {% block customJavascripts %}
+
+        {% endblock %}
+
     </body>
 </html>

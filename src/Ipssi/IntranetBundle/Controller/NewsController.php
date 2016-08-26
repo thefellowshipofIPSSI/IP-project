@@ -24,10 +24,6 @@ class NewsController extends Controller {
 
         $allNews = $newsRepo->findAll();
 
-        foreach($allNews as $news)
-        {
-
-        }
 
         return $this->render('IntranetBundle:News:index.html.twig', [
             'allNews' => $allNews
@@ -50,6 +46,8 @@ class NewsController extends Controller {
 
         if($form->isSubmitted() && $form->isValid()) {
             $news = $form->getData();
+
+            $news->setUser($this->getUser());
 
             $em = $this->getDoctrine()->getEntityManager();
             $em->persist($news);
