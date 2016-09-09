@@ -40,7 +40,8 @@ class UserController extends Controller
 
         $form = $this->createForm(UserType::class, $user);
         $form->add('save', SubmitType::class, [
-            'label' => 'Créer'
+            'label' => 'Créer',
+            'attr' => ['class' => 'btn btn-primary']
         ]);
 
         $form->handleRequest($request);
@@ -86,7 +87,8 @@ class UserController extends Controller
 
         $form = $this->createForm(UserType::class, $user);
         $form->add('save', SubmitType::class, [
-            'label' => 'Modifier'
+            'label' => 'Modifier',
+            'attr' => ['class' => 'btn btn-primary']
         ]);
 
         $form->handleRequest($request);
