@@ -10,4 +10,9 @@ namespace Ipssi\IntranetBundle\Repository;
  */
 class NewsRepository extends \Doctrine\ORM\EntityRepository
 {
+
+    public function findBySlug($slug)
+    {
+        return $this->findOneBy(['slug' => $slug]);
+    }
 }

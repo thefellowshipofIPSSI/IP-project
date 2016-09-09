@@ -1,0 +1,40 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}
+    IPSSI - Actualités
+{% endblock %}
+
+{% block headerContainer %}
+
+    <h2>Actualités d'IPSSI</h2>
+
+
+{% endblock %}
+
+
+{% block body %}
+
+
+    <div class="container">
+        <hr>
+
+        <div class="row">
+            {% for news in allNews %}
+            <div class="col-md-4">
+                <div class="card">
+                    <span class="card-title">{{ news.title }}</span>
+
+                    <div class="card-content">
+                        <p>{{ news.resume }}</p>
+                    </div>
+
+                    <div class="card-action">
+                        <a href="{{ path('news_show', {'slug': news.slug}) }}">Lire</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+{% endblock %}
