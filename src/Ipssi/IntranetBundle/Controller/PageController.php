@@ -20,9 +20,7 @@ class PageController extends Controller {
      */
     public function indexAction() {
 
-        $pageRepo = $this->getDoctrine()->getRepository('IntranetBundle:Page');
-
-        $allPages = $pageRepo->findAll();
+        $allPages = $this->get('intranet.repository.page')->findAll();
 
         return $this->render('IntranetBundle:Page:index.html.twig', [
             'allPages' => $allPages

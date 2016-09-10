@@ -20,9 +20,8 @@ class UserController extends Controller
     public function indexAction()
     {
 
-        $userRepo = $this->getDoctrine()->getRepository('UserBundle:User');
+        $allUsers = $this->get('user.repository.user')->findAll();
 
-        $allUsers = $userRepo->findAll();
 
         return $this->render('IntranetBundle:User:index.html.twig', [
             'allUsers' => $allUsers

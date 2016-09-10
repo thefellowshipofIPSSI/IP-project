@@ -14,7 +14,7 @@ class LoadPageTemplateData implements FixtureInterface
         $pageTemplate->setName('accueil');
 
         $pageTemplate2 = new PageTemplate();
-        $pageTemplate2->setName('base');
+        $pageTemplate2->setName('pageSimple');
 
         $pageTemplate3 = new PageTemplate();
         $pageTemplate3->setName('actualites');

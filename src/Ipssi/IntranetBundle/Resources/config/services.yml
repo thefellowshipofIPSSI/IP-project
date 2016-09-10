@@ -1,4 +1,12 @@
 services:
-#    intranet.example:
-#        class: IntranetBundle\Example
-#        arguments: ["@service_id", "plain_value", %parameter%]
+    intranet.repository.news:
+        class: IntranetBundle\Repository\NewsRepository
+        factory: ['@doctrine.orm.entity_manager', 'getRepository']
+        arguments:
+          - 'IntranetBundle:News'
+
+    intranet.repository.page:
+            class: IntranetBundle\Repository\PageRepository
+            factory: ['@doctrine.orm.entity_manager', 'getRepository']
+            arguments:
+              - 'IntranetBundle:Page'

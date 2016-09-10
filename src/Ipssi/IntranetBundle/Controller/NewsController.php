@@ -20,10 +20,7 @@ class NewsController extends Controller {
      */
     public function indexAction() {
 
-        $newsRepo = $this->getDoctrine()->getRepository('IntranetBundle:News');
-
-        $allNews = $newsRepo->findAll();
-
+        $allNews = $this->get('intranet.repository.news')->findAll();
 
         return $this->render('IntranetBundle:News:index.html.twig', [
             'allNews' => $allNews
