@@ -140,9 +140,9 @@ class PageController extends Controller {
         $pageRepo = $this->getDoctrine()->getRepository('IntranetBundle:Page');
 
         $page = $pageRepo->find($page_id);
+        $pageTemplate = $page->getPageTemplate()->getName();
 
-
-        return $this->render('IntranetBundle:Page:view.html.twig', [
+        return $this->render('IntranetBundle:Page\Templates:'. $pageTemplate .'.html.twig', [
             'page' => $page
         ]);
     }

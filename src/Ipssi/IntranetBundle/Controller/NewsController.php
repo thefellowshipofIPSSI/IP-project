@@ -46,8 +46,6 @@ class NewsController extends Controller {
             $news = $form->getData();
             $news->setUser($this->getUser());
 
-            $news->setUser($this->getUser());
-
             $em = $this->getDoctrine()->getEntityManager();
             $em->persist($news);
             $em->flush();
