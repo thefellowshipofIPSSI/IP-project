@@ -10,3 +10,15 @@ services:
             factory: ['@doctrine.orm.entity_manager', 'getRepository']
             arguments:
               - 'IntranetBundle:Page'
+
+    intranet.repository.job:
+                class: IntranetBundle\Repository\JobRepository
+                factory: ['@doctrine.orm.entity_manager', 'getRepository']
+                arguments:
+                  - 'IntranetBundle:Job'
+
+    intranet.repository.job_offer:
+                    class: IntranetBundle\Repository\JobOfferRepository
+                    factory: ['@doctrine.orm.entity_manager', 'getRepository']
+                    arguments:
+                      - 'IntranetBundle:JobOffer'

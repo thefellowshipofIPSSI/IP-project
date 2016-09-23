@@ -140,6 +140,12 @@ class UserCRA
      */
     private $comments;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User", inversedBy="user_cra")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $user;
+
 
     /**
      * Get id
@@ -558,5 +564,28 @@ class UserCRA
     {
         return $this->comments;
     }
-}
 
+    /**
+     * Set user
+     *
+     * @param \UserBundle\Entity\User $user
+     *
+     * @return UserCRA
+     */
+    public function setUser(\UserBundle\Entity\User $user)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \UserBundle\Entity\User
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+}

@@ -4,37 +4,43 @@ namespace Ipssi\IntranetBundle\DataFixtures\ORM;
 
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
-use Ipssi\IntranetBundle\Entity\PageCategory;
+use Ipssi\IntranetBundle\Entity\Job;
 
-class LoadPageCategoryData implements FixtureInterface
+class JobData implements FixtureInterface
 {
     public function load(ObjectManager $manager)
     {
-        $pageCategory = new PageCategory();
-        $pageCategory->setName('Le groupe');
+        $job = new Job();
+        $job->setTitle('Data scientist');
+        $job->setUser($this->getId('1'));
 
-        $pageCategory2 = new PageCategory();
-        $pageCategory2->setName('L\'activité');
+        $job2 = new Job();
+        $job2->setTitle('Web developer');
+        $job2->setUser($this->getId('1'));
 
-        $pageCategory3 = new PageCategory();
-        $pageCategory3->setName('Nous rejoindre');
+        $job3 = new Job();
+        $job3->setTitle('CTO');
+        $job3->setUser($this->getId('1'));
 
-        $pageCategory4 = new PageCategory();
-        $pageCategory4->setName('Espace collaborateur');
+        $job4 = new Job();
+        $job4->setTitle('Pen tester');
+        $job4->setUser($this->getId('1'));
 
-        $pageCategory5 = new PageCategory();
-        $pageCategory5->setName('Contact');
+        $job5 = new Job();
+        $job5->setTitle('Security expert');
+        $job5->setUser($this->getId('1'));
 
-        $pageCategory6 = new PageCategory();
-        $pageCategory6->setName('Autre');
+        $job6 = new Job();
+        $job6->setTitle('Community manager');
+        $job6->setUser($this->getId('1'));
 
 
-        $manager->persist($pageCategory);
-        $manager->persist($pageCategory2);
-        $manager->persist($pageCategory3);
-        $manager->persist($pageCategory4);
-        $manager->persist($pageCategory5);
-        $manager->persist($pageCategory6);
+        $manager->persist($job);
+        $manager->persist($job2);
+        $manager->persist($job3);
+        $manager->persist($job4);
+        $manager->persist($job5);
+        $manager->persist($job6);
         $manager->flush();
     }
 }

@@ -79,7 +79,7 @@ class UserController extends Controller
      */
     public function updateAction($user_id, Request $request)
     {
-        $userRepo = $this->getDoctrine()->getRepository('UserBundle:User');
+        $userRepo = $this->get('user.repository.user');
 
         $user = $userRepo->find($user_id);
 
@@ -127,7 +127,7 @@ class UserController extends Controller
      */
     public function deleteAction($user_id)
     {
-        $userRepo = $this->getDoctrine()->getRepository('UserBundle:User');
+        $userRepo = $this->get('user.repository.user');
 
         $user = $userRepo->find($user_id);
 
@@ -162,7 +162,7 @@ class UserController extends Controller
      */
     public function viewAction($user_id)
     {
-        $userRepo = $this->getDoctrine()->getRepository('UserBundle:User');
+        $userRepo = $this->get('user.repository.user');
 
         $user = $userRepo->find($user_id);
 
@@ -174,7 +174,7 @@ class UserController extends Controller
 
     public function enableAction($user_id)
     {
-        $userRepo = $this->getDoctrine()->getRepository('UserBundle:User');
+        $userRepo = $this->get('user.repository.user');
 
         $user = $userRepo->find($user_id);
         $user->setEnabled(1);
@@ -194,7 +194,7 @@ class UserController extends Controller
      */
     public function disableAction($user_id)
     {
-        $userRepo = $this->getDoctrine()->getRepository('UserBundle:User');
+        $userRepo = $this->get('user.repository.user');
 
         $user = $userRepo->find($user_id);
         $user->setEnabled(0);

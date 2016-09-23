@@ -70,11 +70,56 @@ class JobOffer
      */
     private $description;
 
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="status", type="integer")
+     */
+    private $status;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User", inversedBy="job_offer")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $user;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="UserBundle\Entity\User", mappedBy="candidacy")
+     */
+    private $users;
+
+    /**
+     * @ORM\OneToOne(targetEntity="Ipssi\IntranetBundle\Entity\Job", inversedBy="job_offer")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $job;
+
+    /**
+     * @ORM\OneToOne(targetEntity="Ipssi\IntranetBundle\Entity\Society", inversedBy="job_offer")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $society;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Ipssi\IntranetBundle\Entity\Skill", inversedBy="job_offer")
+     * @ORM\JoinTable(name="job_offer_skill")
+     */
+    private $skill;
+
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->users = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->skill = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Get id
      *
-     * @return int
+     * @return integer
      */
     public function getId()
     {
@@ -248,5 +293,168 @@ class JobOffer
     {
         return $this->description;
     }
-}
 
+    /**
+     * Set status
+     *
+     * @param integer $status
+     *
+     * @return JobOffer
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+
+    /**
+     * Get status
+     *
+     * @return integer
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \UserBundle\Entity\User $user
+     *
+     * @return JobOffer
+     */
+    public function setUser(\UserBundle\Entity\User $user)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \UserBundle\Entity\User
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * Add user
+     *
+     * @param \UserBundle\Entity\User $user
+     *
+     * @return JobOffer
+     */
+    public function addUser(\UserBundle\Entity\User $user)
+    {
+        $this->users[] = $user;
+
+        return $this;
+    }
+
+    /**
+     * Remove user
+     *
+     * @param \UserBundle\Entity\User $user
+     */
+    public function removeUser(\UserBundle\Entity\User $user)
+    {
+        $this->users->removeElement($user);
+    }
+
+    /**
+     * Get users
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getUsers()
+    {
+        return $this->users;
+    }
+
+    /**
+     * Set job
+     *
+     * @param \Ipssi\IntranetBundle\Entity\Job $job
+     *
+     * @return JobOffer
+     */
+    public function setJob(\Ipssi\IntranetBundle\Entity\Job $job)
+    {
+        $this->job = $job;
+
+        return $this;
+    }
+
+    /**
+     * Get job
+     *
+     * @return \Ipssi\IntranetBundle\Entity\Job
+     */
+    public function getJob()
+    {
+        return $this->job;
+    }
+
+    /**
+     * Set society
+     *
+     * @param \Ipssi\IntranetBundle\Entity\Society $society
+     *
+     * @return JobOffer
+     */
+    public function setSociety(\Ipssi\IntranetBundle\Entity\Society $society)
+    {
+        $this->society = $society;
+
+        return $this;
+    }
+
+    /**
+     * Get society
+     *
+     * @return \Ipssi\IntranetBundle\Entity\Society
+     */
+    public function getSociety()
+    {
+        return $this->society;
+    }
+
+    /**
+     * Add skill
+     *
+     * @param \Ipssi\IntranetBundle\Entity\Skill $skill
+     *
+     * @return JobOffer
+     */
+    public function addSkill(\Ipssi\IntranetBundle\Entity\Skill $skill)
+    {
+        $this->skill[] = $skill;
+
+        return $this;
+    }
+
+    /**
+     * Remove skill
+     *
+     * @param \Ipssi\IntranetBundle\Entity\Skill $skill
+     */
+    public function removeSkill(\Ipssi\IntranetBundle\Entity\Skill $skill)
+    {
+        $this->skill->removeElement($skill);
+    }
+
+    /**
+     * Get skill
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getSkill()
+    {
+        return $this->skill;
+    }
+}

@@ -11,7 +11,6 @@ use Ipssi\IntranetBundle\Form\PageType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Session\Session;
 
-
 class PageController extends Controller {
 
     /**
@@ -72,7 +71,8 @@ class PageController extends Controller {
      */
     public function updateAction($page_id, Request $request)
     {
-        $pageRepo = $this->getDoctrine()->getRepository('IntranetBundle:Page');
+        //$pageRepo = $this->getDoctrine()->getRepository('IntranetBundle:Page');
+        $pageRepo = $this->get('intranet.repository.page');
 
         $page = $pageRepo->find($page_id);
 
@@ -113,7 +113,7 @@ class PageController extends Controller {
      */
     public function deleteAction($page_id)
     {
-        $pageRepo = $this->getDoctrine()->getRepository('IntranetBundle:Page');
+        $pageRepo = $this->get('intranet.repository.page');
 
         $page = $pageRepo->find($page_id);
 
@@ -137,7 +137,7 @@ class PageController extends Controller {
      */
     public function viewAction($page_id)
     {
-        $pageRepo = $this->getDoctrine()->getRepository('IntranetBundle:Page');
+        $pageRepo = $this->get('intranet.repository.page');
 
         $page = $pageRepo->find($page_id);
         $pageTemplate = $page->getPageTemplate()->getName();
@@ -155,7 +155,7 @@ class PageController extends Controller {
      */
     public function onlineAction($page_id)
     {
-        $pageRepo = $this->getDoctrine()->getRepository('IntranetBundle:Page');
+        $pageRepo = $this->get('intranet.repository.page');
 
         $page = $pageRepo->find($page_id);
         $page->setStatus(1);
@@ -174,7 +174,7 @@ class PageController extends Controller {
      */
     public function offlineAction($page_id)
     {
-        $pageRepo = $this->getDoctrine()->getRepository('IntranetBundle:page');
+        $pageRepo = $this->get('intranet.repository.page');
 
         $page = $pageRepo->find($page_id);
         $page->setStatus(0);

@@ -14,13 +14,27 @@
             <a href="{{ path('intranet_news_homepage') }}"><i class="fa fa-fw fa-file"></i> Actualités</a>
         </li>
         <li>
-            <a href="javascript:;" data-toggle="collapse" data-target="#hr"><i class="fa fa-fw fa-user"></i> Ressources Humaines <i class="fa fa-fw fa-caret-down"></i></a>
-            <ul id="hr" class="collapse">
+            <a href="javascript:;" data-toggle="collapse" data-target="#rh"><i class="fa fa-fw fa-user"></i> Ressources Humaines <i class="fa fa-fw fa-caret-down"></i></a>
+            <ul id="rh" class="collapse">
                 <li>
                     <a href="{{ path('intranet_user_homepage') }}">Collaborateurs</a>
                 </li>
                 <li>
                     <a href="#">Dropdown Item</a>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <a href="javascript:;" data-toggle="collapse" data-target="#emploi"><i class="fa fa-fw fa-user"></i> Emplois <i class="fa fa-fw fa-caret-down"></i></a>
+            <ul id="emploi" class="collapse">
+                <li>
+                    <a href="{{ path('intranet_job_homepage') }}">Emploi</a>
+                </li>
+                <li>
+                    <a href="{{ path('intranet_job_offer_homepage') }}">Offres d'emplois</a>
+                </li>
+                <li>
+                    <a href="#">Candidatures</a>
                 </li>
             </ul>
         </li>

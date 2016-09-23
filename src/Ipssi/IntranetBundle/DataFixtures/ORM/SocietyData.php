@@ -4,37 +4,42 @@ namespace Ipssi\IntranetBundle\DataFixtures\ORM;
 
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
-use Ipssi\IntranetBundle\Entity\PageCategory;
+use Ipssi\IntranetBundle\Entity\Society;
 
-class LoadPageCategoryData implements FixtureInterface
+class SocietyData implements FixtureInterface
 {
     public function load(ObjectManager $manager)
     {
-        $pageCategory = new PageCategory();
-        $pageCategory->setName('Le groupe');
+        $society = new Society();
+        $society->setName('Google');
+        $society->setAddress('75 Ninth Avenue 2nd');
+        $society->setZipcode('NY 10011');
+        $society->setCity('New York');
 
-        $pageCategory2 = new PageCategory();
-        $pageCategory2->setName('L\'activité');
+        $society2 = new Society();
+        $society2->setName('Facebook');
+        $society->setAddress('Menlo Park');
+        $society->setZipcode('MP 20065');
+        $society->setCity('Menlo Park');
 
-        $pageCategory3 = new PageCategory();
-        $pageCategory3->setName('Nous rejoindre');
+        $society3 = new Society();
+        $society3->setName('Microsoft');
+        $society->setAddress('Redmond');
+        $society->setZipcode('RM 70036');
+        $society->setCity('Redmond');
 
-        $pageCategory4 = new PageCategory();
-        $pageCategory4->setName('Espace collaborateur');
-
-        $pageCategory5 = new PageCategory();
-        $pageCategory5->setName('Contact');
-
-        $pageCategory6 = new PageCategory();
-        $pageCategory6->setName('Autre');
+        $society4 = new Society();
+        $society4->setName('Pornhub');
+        $society->setAddress('XXX');
+        $society->setZipcode('66666');
+        $society->setCity('New York');
 
 
-        $manager->persist($pageCategory);
-        $manager->persist($pageCategory2);
-        $manager->persist($pageCategory3);
-        $manager->persist($pageCategory4);
-        $manager->persist($pageCategory5);
-        $manager->persist($pageCategory6);
+        $manager->persist($society);
+        $manager->persist($society2);
+        $manager->persist($society3);
+        $manager->persist($society4);
+
         $manager->flush();
     }
 }

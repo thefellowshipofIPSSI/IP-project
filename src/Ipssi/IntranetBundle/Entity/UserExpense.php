@@ -70,6 +70,18 @@ class UserExpense
      */
     private $status;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User", inversedBy="user_expense")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $user;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Ipssi\IntranetBundle\Entity\ExpenseLine", mappedBy="user_expense")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $expense_line;
+
 
     /**
      * Get id
@@ -248,5 +260,69 @@ class UserExpense
     {
         return $this->status;
     }
-}
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->expense_line = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
+    /**
+     * Set user
+     *
+     * @param \UserBundle\Entity\User $user
+     *
+     * @return UserExpense
+     */
+    public function setUser(\UserBundle\Entity\User $user)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \UserBundle\Entity\User
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * Add expenseLine
+     *
+     * @param \Ipssi\IntranetBundle\Entity\ExpenseLine $expenseLine
+     *
+     * @return UserExpense
+     */
+    public function addExpenseLine(\Ipssi\IntranetBundle\Entity\ExpenseLine $expenseLine)
+    {
+        $this->expense_line[] = $expenseLine;
+
+        return $this;
+    }
+
+    /**
+     * Remove expenseLine
+     *
+     * @param \Ipssi\IntranetBundle\Entity\ExpenseLine $expenseLine
+     */
+    public function removeExpenseLine(\Ipssi\IntranetBundle\Entity\ExpenseLine $expenseLine)
+    {
+        $this->expense_line->removeElement($expenseLine);
+    }
+
+    /**
+     * Get expenseLine
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getExpenseLine()
+    {
+        return $this->expense_line;
+    }
+}

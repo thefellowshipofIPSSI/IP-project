@@ -28,6 +28,18 @@ class Job
      */
     private $title;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User", inversedBy="job")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $user;
+
+    /**
+     * @ORM\OneToOne(targetEntity="Ipssi\IntranetBundle\Entity\JobOffer", mappedBy="job")
+     */
+    private $job_offer;
+
+
 
     /**
      * Get id
@@ -62,5 +74,52 @@ class Job
     {
         return $this->title;
     }
-}
 
+    /**
+     * Set user
+     *
+     * @param \UserBundle\Entity\User $user
+     *
+     * @return Job
+     */
+    public function setUser(\UserBundle\Entity\User $user)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \UserBundle\Entity\User
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * Set jobOffer
+     *
+     * @param \Ipssi\IntranetBundle\Entity\JobOffer $jobOffer
+     *
+     * @return Job
+     */
+    public function setJobOffer(\Ipssi\IntranetBundle\Entity\JobOffer $jobOffer = null)
+    {
+        $this->job_offer = $jobOffer;
+
+        return $this;
+    }
+
+    /**
+     * Get jobOffer
+     *
+     * @return \Ipssi\IntranetBundle\Entity\JobOffer
+     */
+    public function getJobOffer()
+    {
+        return $this->job_offer;
+    }
+}

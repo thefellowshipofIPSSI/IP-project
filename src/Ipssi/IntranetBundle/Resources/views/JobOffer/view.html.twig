@@ -1,22 +1,22 @@
 {% extends "intranet.html.twig" %}
 
-{% block title %} Page {% endblock %}
+{% block title %} Offre d'emploi {% endblock %}
 
 {% block headerContainer %}
     <div class="col-lg-12">
         <h1 class="page-header">
-            Page
-            <small>Aperçu : {{ page.name }}</small>
+            Offre d'emploi
+            <small>Aperçu : {{ jobOffer.job.title }}</small>
         </h1>
         <ol class="breadcrumb">
             <li>
                 <i class="fa fa-dashboard"></i>  <a href="{{ path('intranet_homepage') }}">Dashboard</a>
             </li>
             <li class="active">
-                <i class="fa fa-file"></i> <a href="{{ path('intranet_page_homepage') }}">Page</a>
+                <i class="fa fa-file"></i> <a href="{{ path('intranet_job_homepage') }}">Offre d'emploi</a>
             </li>
             <li class="active">
-                <i class="fa fa-eye"></i> Aperçu : {{ page.name }}
+                <i class="fa fa-eye"></i> Aperçu : {{ jobOffer.job.title }}
             </li>
         </ol>
     </div>
@@ -24,33 +24,34 @@
 
 {% block body %}
 
-
     <div class="col-lg-8">
 
-        <a href="{{ path('intranet_page_update', {'page_id': page.id}) }}" class="btn btn-primary" style="margin-bottom:10px;">Modifier</a>
+        <a href="{{ path('intranet_job_offer_update', {'jobOffer_id': jobOffer.id}) }}" class="btn btn-primary" style="margin-bottom:10px;">Modifier</a>
 
 
         <!-- Title -->
-        <h1>{{ page.title|capitalize }}</h1>
+        <h1>Offer d'emploi : {{ jobOffer.job.title|capitalize }}</h1>
 
-        <h4>Categorie : {{ page.pageCategory.name }} / Template : {{ page.pageTemplate.name }}</h4>
+        <h4>Société : {{ jobOffer.pageCategory.name }} / Template : {{ page.pageTemplate.name }}</h4>
         <!-- Author -->
         <p class="lead">
-            by page.getUser(username)
+            by jobOffer.getUser(username)
         </p>
 
         <hr>
 
         <!-- Date/Time -->
-        <p><span class="glyphicon glyphicon-time"></span> Created on {{ page.dateCreation|date('m/d/Y') }} à {{ page.dateCreation|date('H:i') }}</p>
+        <p><span class="glyphicon glyphicon-time"></span> Created on {{ jobOffer.dateCreation|date('m/d/Y') }} à {{ jobOffer.dateCreation|date('H:i') }}</p>
 
         <hr>
 
+
+
         <!-- Page Content -->
-        <p class="lead">{{ page.content }}</p>
+        <p class="lead">{{ jobOffer.description }}</p>
 
         <p>
-            {{ page.content|raw }}
+            {{ jobOffer.description|raw }}
         </p>
         <hr>
     </div>

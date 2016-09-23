@@ -72,7 +72,7 @@ class NewsController extends Controller {
      */
     public function updateAction($news_id, Request $request)
     {
-        $newsRepo = $this->getDoctrine()->getRepository('IntranetBundle:News');
+        $newsRepo = $this->get('intranet.repository.news');
 
         $news = $newsRepo->find($news_id);
 
@@ -113,7 +113,7 @@ class NewsController extends Controller {
      */
     public function deleteAction($news_id)
     {
-        $newsRepo = $this->getDoctrine()->getRepository('IntranetBundle:News');
+        $newsRepo = $this->get('intranet.repository.news');
 
         $news = $newsRepo->find($news_id);
 
@@ -137,7 +137,7 @@ class NewsController extends Controller {
      */
     public function viewAction($news_id)
     {
-        $newsRepo = $this->getDoctrine()->getRepository('IntranetBundle:News');
+        $newsRepo = $this->get('intranet.repository.news');
 
         $news = $newsRepo->find($news_id);
 
@@ -155,7 +155,7 @@ class NewsController extends Controller {
      */
     public function onlineAction($news_id)
     {
-        $newsRepo = $this->getDoctrine()->getRepository('IntranetBundle:News');
+        $newsRepo = $this->get('intranet.repository.news');
 
         $news = $newsRepo->find($news_id);
         $news->setStatus(1);
@@ -174,7 +174,7 @@ class NewsController extends Controller {
      */
     public function offlineAction($news_id)
     {
-        $newsRepo = $this->getDoctrine()->getRepository('IntranetBundle:News');
+        $newsRepo = $this->get('intranet.repository.news');
 
         $news = $newsRepo->find($news_id);
         $news->setStatus(0);

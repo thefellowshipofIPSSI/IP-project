@@ -49,11 +49,17 @@ class Society
      */
     private $city;
 
+    /**
+     * @ORM\OneToOne(targetEntity="Ipssi\IntranetBundle\Entity\JobOffer", mappedBy="society")
+     */
+    private $job_offer;
+
+
 
     /**
      * Get id
      *
-     * @return int
+     * @return integer
      */
     public function getId()
     {
@@ -155,5 +161,28 @@ class Society
     {
         return $this->city;
     }
-}
 
+    /**
+     * Set jobOffer
+     *
+     * @param \Ipssi\IntranetBundle\Entity\JobOffer $jobOffer
+     *
+     * @return Society
+     */
+    public function setJobOffer(\Ipssi\IntranetBundle\Entity\JobOffer $jobOffer = null)
+    {
+        $this->job_offer = $jobOffer;
+
+        return $this;
+    }
+
+    /**
+     * Get jobOffer
+     *
+     * @return \Ipssi\IntranetBundle\Entity\JobOffer
+     */
+    public function getJobOffer()
+    {
+        return $this->job_offer;
+    }
+}

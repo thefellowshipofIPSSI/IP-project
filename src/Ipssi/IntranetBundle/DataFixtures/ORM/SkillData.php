@@ -4,37 +4,28 @@ namespace Ipssi\IntranetBundle\DataFixtures\ORM;
 
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
-use Ipssi\IntranetBundle\Entity\PageCategory;
+use Ipssi\IntranetBundle\Entity\Skill;
 
-class LoadPageCategoryData implements FixtureInterface
+class SkillData implements FixtureInterface
 {
     public function load(ObjectManager $manager)
     {
-        $pageCategory = new PageCategory();
-        $pageCategory->setName('Le groupe');
+        $skill = new Skill();
+        $skill->setTitle('Php');
+        $skill->setUser($this->getId('1'));
 
-        $pageCategory2 = new PageCategory();
-        $pageCategory2->setName('L\'activité');
+        $skill2 = new Skill();
+        $skill2->setTitle('SQL');
+        $skill2->setUser($this->getId('1'));
 
-        $pageCategory3 = new PageCategory();
-        $pageCategory3->setName('Nous rejoindre');
+        $skill3 = new Skill();
+        $skill3->setTitle('Symfony3');
+        $skill3->setUser($this->getId('1'));
 
-        $pageCategory4 = new PageCategory();
-        $pageCategory4->setName('Espace collaborateur');
+        $manager->persist($skill);
+        $manager->persist($skill2);
+        $manager->persist($skill3);
 
-        $pageCategory5 = new PageCategory();
-        $pageCategory5->setName('Contact');
-
-        $pageCategory6 = new PageCategory();
-        $pageCategory6->setName('Autre');
-
-
-        $manager->persist($pageCategory);
-        $manager->persist($pageCategory2);
-        $manager->persist($pageCategory3);
-        $manager->persist($pageCategory4);
-        $manager->persist($pageCategory5);
-        $manager->persist($pageCategory6);
         $manager->flush();
     }
 }

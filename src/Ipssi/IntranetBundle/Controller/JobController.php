@@ -5,36 +5,36 @@ namespace Ipssi\IntranetBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
-use Ipssi\IntranetBundle\Entity\JobOffer;
+use Ipssi\IntranetBundle\Entity\Job;
 
-use Ipssi\IntranetBundle\Form\JobOfferType;
+use Ipssi\IntranetBundle\Form\JobType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Session\Session;
 
 
-class JobOfferController extends Controller {
+class JobController extends Controller {
 
     /**
-     * List all Pages in table
+     * List all Jobs in table
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function indexAction() {
 
-        $allJobOffers = $this->get('intranet.repository.jobOffer')->findAll();
+        $allJobs = $this->get('intranet.repository.job')->findAll();
 
-        return $this->render('IntranetBundle:JobOffer:index.html.twig', [
-            'allJobOffers' => $allJobOffers
+        return $this->render('IntranetBundle:Job:index.html.twig', [
+            'allJobs' => $allJobs
         ]);
     }
 
     /**
-     * Create a new Page
+     * Create a new Job
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function createAction(Request $request) {
-        $page = new Page;
+        $job = new Job;
 
-        $form = $this->createForm(PageType::class, $page);
+        $form = $this->createForm(JobType::class, $job);
         $form->add('save', SubmitType::class, [
             'label' => 'Créer',
             'attr' => ['class' => 'btn btn-primary']
@@ -43,40 +43,40 @@ class JobOfferController extends Controller {
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()) {
-            $page = $form->getData();
-            $page->setUser($this->getUser());
+            $job = $form->getData();
+            $job->setUser($this->getUser());
 
             $em = $this->getDoctrine()->getEntityManager();
-            $em->persist($page);
+            $em->persist($job);
             $em->flush();
 
             $this->addFlash(
                 'success',
-                'Nouvelle page créée !'
+                'Nouveau poste créé !'
             );
 
-            return $this->redirectToRoute('intranet_page_homepage');
+            return $this->redirectToRoute('intranet_job_homepage');
 
         }
 
-        return $this->render('IntranetBundle:Page:create.html.twig', [
+        return $this->render('IntranetBundle:Job:create.html.twig', [
             'form' => $form->createView()
         ]);
     }
 
 
     /**
-     * Update existing Page
-     * @param $page_id
+     * Update existing Job
+     * @param $job_id
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function updateAction($page_id, Request $request)
+    public function updateAction($job_id, Request $request)
     {
-        $pageRepo = $this->getDoctrine()->getRepository('IntranetBundle:Page');
+        $jobRepo = $this->get('intranet.repository.job');
 
-        $page = $pageRepo->find($page_id);
+        $job = $jobRepo->find($job_id);
 
-        $form = $this->createForm(PageType::class, $page);
+        $form = $this->createForm(JobType::class, $job);
         $form->add('save', SubmitType::class, [
             'label' => 'Modifier',
             'attr' => ['class' => 'btn btn-primary']
@@ -85,105 +85,105 @@ class JobOfferController extends Controller {
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()) {
-            $page = $form->getData();
+            $job = $form->getData();
 
             $em = $this->getDoctrine()->getEntityManager();
-            $em->persist($page);
+            $em->persist($job);
             $em->flush();
 
             $this->addFlash(
                 'success',
-                'Page ' . $page->getName() . ' modifiée !'
+                'Job ' . $job->getName() . ' modifiée !'
             );
 
-            return $this->redirectToRoute('intranet_page_homepage');
+            return $this->redirectToRoute('intranet_job_homepage');
 
         }
 
-        return $this->render('IntranetBundle:Page:update.html.twig', [
+        return $this->render('IntranetBundle:Job:update.html.twig', [
             'form' => $form->createView()
         ]);
 
     }
 
     /**
-     * Delete a Page
-     * @param $page_id
+     * Delete a Job
+     * @param $job_id
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function deleteAction($page_id)
+    public function deleteAction($job_id)
     {
-        $pageRepo = $this->getDoctrine()->getRepository('IntranetBundle:Page');
+        $jobRepo = $this->get('intranet.repository.job');
 
-        $page = $pageRepo->find($page_id);
+        $job = $jobRepo->find($job_id);
 
         $em = $this->getDoctrine()->getEntityManager();
-        $em->remove($page);
+        $em->remove($job);
         $em->flush();
 
         $this->addFlash(
             'success',
-            'Page ' . $page->getName() . ' supprimée'
+            'Job ' . $job->getName() . ' supprimée'
         );
 
-        return $this->redirectToRoute('intranet_page_homepage');
+        return $this->redirectToRoute('intranet_job_homepage');
     }
 
 
     /**
-     * Display a Page
-     * @param $page_id
+     * Display a Job
+     * @param $job_id
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function viewAction($page_id)
+    public function viewAction($job_id)
     {
-        $pageRepo = $this->getDoctrine()->getRepository('IntranetBundle:Page');
+        $jobRepo = $this->get('intranet.repository.job');
 
-        $page = $pageRepo->find($page_id);
-        $pageTemplate = $page->getPageTemplate()->getName();
+        $job = $jobRepo->find($job_id);
+        $jobTemplate = $job->getJobTemplate()->getName();
 
-        return $this->render('IntranetBundle:Page\Templates:'. $pageTemplate .'.html.twig', [
-            'page' => $page
+        return $this->render('IntranetBundle:Job\Templates:'. $jobTemplate .'.html.twig', [
+            'job' => $job
         ]);
     }
 
 
-    /**
-     * Make a Page online
-     * @param $page_id
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
-     */
-    public function onlineAction($page_id)
-    {
-        $pageRepo = $this->getDoctrine()->getRepository('IntranetBundle:Page');
-
-        $page = $pageRepo->find($page_id);
-        $page->setStatus(1);
-
-        $em = $this->getDoctrine()->getEntityManager();
-        $em->persist($page);
-        $em->flush();
-
-        return $this->redirectToRoute('intranet_page_homepage');
-    }
-
-    /**
-     * Make a Page offline
-     * @param $page_id
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
-     */
-    public function offlineAction($page_id)
-    {
-        $pageRepo = $this->getDoctrine()->getRepository('IntranetBundle:page');
-
-        $page = $pageRepo->find($page_id);
-        $page->setStatus(0);
-
-        $em = $this->getDoctrine()->getEntityManager();
-        $em->persist($page);
-        $em->flush();
-
-        return $this->redirectToRoute('intranet_page_homepage');
-    }
+//    /**
+//     * Make a Job online
+//     * @param $job_id
+//     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+//     */
+//    public function onlineAction($job_id)
+//    {
+//        $jobRepo = $this->get('intranet.repository.job');
+//
+//        $job = $jobRepo->find($job_id);
+//        $job->setStatus(1);
+//
+//        $em = $this->getDoctrine()->getEntityManager();
+//        $em->persist($job);
+//        $em->flush();
+//
+//        return $this->redirectToRoute('intranet_job_homepage');
+//    }
+//
+//    /**
+//     * Make a Job offline
+//     * @param $job_id
+//     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+//     */
+//    public function offlineAction($job_id)
+//    {
+//        $jobRepo = $this->get('intranet.repository.job');
+//
+//        $job = $jobRepo->find($job_id);
+//        $job->setStatus(0);
+//
+//        $em = $this->getDoctrine()->getEntityManager();
+//        $em->persist($job);
+//        $em->flush();
+//
+//        return $this->redirectToRoute('intranet_job_homepage');
+//    }
 
 }

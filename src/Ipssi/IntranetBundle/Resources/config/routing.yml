@@ -94,3 +94,65 @@ intranet_user_enable:
 intranet_user_disable:
     path:   /user/{user_id}/offline
     defaults: { _controller: IntranetBundle:User:disable }
+
+
+###################### Job Offers #########################
+
+intranet_job_offer_homepage:
+    path:     /job_offer
+    defaults: { _controller: IntranetBundle:JobOffer:index }
+
+intranet_job_offer_create:
+    path:   /job_offer/create
+    defaults: { _controller: IntranetBundle:JobOffer:create }
+
+intranet_job_offer_update:
+    path:   /job_offer/{job_offer_id}/update
+    defaults: { _controller: IntranetBundle:JobOffer:update }
+
+intranet_job_offer_delete:
+    path:   /job_offer/{job_offer_id}/delete
+    defaults: { _controller: IntranetBundle:JobOffer:delete }
+
+intranet_job_offer_view:
+    path:   /job_offer/{job_offer_id}/view
+    defaults: { _controller: IntranetBundle:JobOffer:view }
+
+intranet_job_offer_online:
+    path:   /job_offer/{job_offer_id}/online
+    defaults: { _controller: IntranetBundle:JobOffer:online }
+
+intranet_job_offer_offline:
+    path:   /job_offer/{job_offer_id}/offline
+    defaults: { _controller: IntranetBundle:JobOffer:offline }
+
+
+###################### Jobs #########################
+
+intranet_job_homepage:
+    path:     /job
+    defaults: { _controller: IntranetBundle:Job:index }
+
+intranet_job_create:
+    path:   /job/create
+    defaults: { _controller: IntranetBundle:Job:create }
+
+intranet_job_update:
+    path:   /job/{job_id}/update
+    defaults: { _controller: IntranetBundle:Job:update }
+
+intranet_job_delete:
+    path:   /job/{job_id}/delete
+    defaults: { _controller: IntranetBundle:Job:delete }
+
+intranet_job_view:
+    path:   /job/{job_id}/view
+    defaults: { _controller: IntranetBundle:Job:view }
+#
+#intranet_job_offer_online:
+#    path:   /job_offer/{job_offer_id}/online
+#    defaults: { _controller: IntranetBundle:JobOffer:online }
+#
+#intranet_job_offer_offline:
+#    path:   /job_offer/{job_offer_id}/offline
+#    defaults: { _controller: IntranetBundle:JobOffer:offline }
