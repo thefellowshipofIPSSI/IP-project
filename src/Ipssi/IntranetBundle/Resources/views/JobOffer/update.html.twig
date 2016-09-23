@@ -1,0 +1,29 @@
+{% extends 'intranet.html.twig' %}
+
+{% block title %} Page {% endblock %}
+
+{% block headerContainer %}
+    <div class="col-lg-12">
+        <h1 class="page-header">
+            Page
+            <small>Modification d'une page</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li>
+                <i class="fa fa-dashboard"></i>  <a href="{{ path('intranet_homepage') }}">Dashboard</a>
+            </li>
+            <li class="active">
+                <i class="fa fa-file"></i> <a href="{{ path('intranet_page_homepage') }}">Page</a>
+            </li>
+            <li class="active">
+                <i class="fa fa-edit"></i> Edition
+            </li>
+        </ol>
+    </div>
+{% endblock %}
+
+{% block body %}
+
+    {% include('IntranetBundle:Page:form.html.twig') %}
+    
+{% endblock %}

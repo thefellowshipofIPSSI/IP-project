@@ -1,0 +1,44 @@
+{% extends "intranet.html.twig" %}
+
+{% block title %} Emploi {% endblock %}
+
+{% block headerContainer %}
+    <div class="col-lg-12">
+        <h1 class="page-header">
+            Emploi
+            <small>Aperçu : {{ job.title }}</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li>
+                <i class="fa fa-dashboard"></i>  <a href="{{ path('intranet_homepage') }}">Dashboard</a>
+            </li>
+            <li class="active">
+                <i class="fa fa-file"></i> <a href="{{ path('intranet_job_homepage') }}">Emploi</a>
+            </li>
+            <li class="active">
+                <i class="fa fa-eye"></i> Aperçu : {{ job.title }}
+            </li>
+        </ol>
+    </div>
+{% endblock %}
+
+{% block body %}
+
+
+    <div class="col-lg-8">
+
+        <a href="{{ path('intranet_job_update', {'job_id': job.id}) }}" class="btn btn-primary" style="margin-bottom:10px;">Modifier</a>
+
+
+        <!-- Title -->
+        <h1>{{ job.title|capitalize }}</h1>
+
+        <!-- Author -->
+        <p class="lead">
+            by job.getUser(username)
+        </p>
+
+        <hr>
+    </div>
+
+{% endblock %}
