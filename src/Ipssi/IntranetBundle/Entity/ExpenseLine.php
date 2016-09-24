@@ -50,16 +50,17 @@ class ExpenseLine
     private $prix;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Ipssi\IntranetBundle\Entity\ExpenseLine", inversedBy="expense_line")
+     * @ORM\ManyToOne(targetEntity="Ipssi\IntranetBundle\Entity\UserExpense", inversedBy="expense_line")
      * @ORM\JoinColumn(nullable=false)
      */
     private $user_expense;
 
 
+
     /**
      * Get id
      *
-     * @return int
+     * @return integer
      */
     public function getId()
     {
@@ -165,11 +166,11 @@ class ExpenseLine
     /**
      * Set userExpense
      *
-     * @param \Ipssi\IntranetBundle\Entity\ExpenseLine $userExpense
+     * @param \Ipssi\IntranetBundle\Entity\UserExpense $userExpense
      *
      * @return ExpenseLine
      */
-    public function setUserExpense(\Ipssi\IntranetBundle\Entity\ExpenseLine $userExpense)
+    public function setUserExpense(\Ipssi\IntranetBundle\Entity\UserExpense $userExpense)
     {
         $this->user_expense = $userExpense;
 
@@ -179,7 +180,7 @@ class ExpenseLine
     /**
      * Get userExpense
      *
-     * @return \Ipssi\IntranetBundle\Entity\ExpenseLine
+     * @return \Ipssi\IntranetBundle\Entity\UserExpense
      */
     public function getUserExpense()
     {

@@ -24,15 +24,16 @@ class JobOfferType extends AbstractType
         $builder
             ->add('job', EntityType::class, [
                 'class' => 'IntranetBundle:Job',
-                'choice_label' => 'name',
+                'choice_label' => 'title',
                 'attr' => ['class' => 'form-control']])
             ->add('duration', TextType::class, ['attr' => ['class' => 'form-control']])
             ->add('location', TextType::class, ['attr' => ['class' => 'form-control']])
-            ->add('salary', TextAreaType::class, ['attr' => ['class' => 'form-control']])
-            ->add('description', TextType::class, ['attr' => ['class' => 'form-control']])
+            ->add('salary', TextType::class, ['attr' => ['class' => 'form-control']])
+            ->add('description', TextareaType::class, ['attr' => ['class' => 'form-control']])
             ->add('skill', EntityType::class, [
                 'class' => 'IntranetBundle:Skill',
-                'choice_label' => 'name',
+                'choice_label' => 'title',
+                'multiple' => true,
                 'attr' => ['class' => 'form-control']])
             ->add('society', EntityType::class, [
                 'class' => 'IntranetBundle:Society',

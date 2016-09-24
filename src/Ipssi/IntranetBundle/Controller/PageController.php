@@ -164,6 +164,11 @@ class PageController extends Controller {
         $em->persist($page);
         $em->flush();
 
+        $this->addFlash(
+            'success',
+            'Page ' . $page->getName() . ' mise en ligne'
+        );
+
         return $this->redirectToRoute('intranet_page_homepage');
     }
 
@@ -182,6 +187,11 @@ class PageController extends Controller {
         $em = $this->getDoctrine()->getEntityManager();
         $em->persist($page);
         $em->flush();
+
+        $this->addFlash(
+            'success',
+            'La Page ' . $page->getName() . ' n\'est plus visible sur le site !'
+        );
 
         return $this->redirectToRoute('intranet_page_homepage');
     }

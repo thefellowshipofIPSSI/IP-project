@@ -18,21 +18,21 @@ class SocietyData implements FixtureInterface
 
         $society2 = new Society();
         $society2->setName('Facebook');
-        $society->setAddress('Menlo Park');
-        $society->setZipcode('MP 20065');
-        $society->setCity('Menlo Park');
+        $society2->setAddress('Menlo Park');
+        $society2->setZipcode('MP 20065');
+        $society2->setCity('Menlo Park');
 
         $society3 = new Society();
         $society3->setName('Microsoft');
-        $society->setAddress('Redmond');
-        $society->setZipcode('RM 70036');
-        $society->setCity('Redmond');
+        $society3->setAddress('Redmond');
+        $society3->setZipcode('RM 70036');
+        $society3->setCity('Redmond');
 
         $society4 = new Society();
         $society4->setName('Pornhub');
-        $society->setAddress('XXX');
-        $society->setZipcode('66666');
-        $society->setCity('New York');
+        $society4->setAddress('XXX');
+        $society4->setZipcode('66666');
+        $society4->setCity('New York');
 
 
         $manager->persist($society);

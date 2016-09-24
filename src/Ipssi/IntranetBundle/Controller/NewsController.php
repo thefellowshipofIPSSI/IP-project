@@ -164,6 +164,11 @@ class NewsController extends Controller {
         $em->persist($news);
         $em->flush();
 
+        $this->addFlash(
+            'success',
+            'Actualité ' . $news->getName() . ' mise en ligne'
+        );
+
         return $this->redirectToRoute('intranet_news_homepage');
     }
 
@@ -182,6 +187,11 @@ class NewsController extends Controller {
         $em = $this->getDoctrine()->getEntityManager();
         $em->persist($news);
         $em->flush();
+
+        $this->addFlash(
+            'success',
+            'L\'Actualité ' . $news->getName() . ' n\'est plus visible sur le site'
+        );
 
         return $this->redirectToRoute('intranet_news_homepage');
     }

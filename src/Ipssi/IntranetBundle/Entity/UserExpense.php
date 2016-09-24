@@ -84,9 +84,17 @@ class UserExpense
 
 
     /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->expense_line = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
      * Get id
      *
-     * @return int
+     * @return integer
      */
     public function getId()
     {
@@ -254,18 +262,11 @@ class UserExpense
     /**
      * Get status
      *
-     * @return int
+     * @return integer
      */
     public function getStatus()
     {
         return $this->status;
-    }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->expense_line = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**

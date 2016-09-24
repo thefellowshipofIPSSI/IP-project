@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * JobOffer
  *
  * @ORM\Table(name="job_offer")
+ * @ORM\HasLifecycleCallbacks
  * @ORM\Entity(repositoryClass="Ipssi\IntranetBundle\Repository\JobOfferRepository")
  */
 class JobOffer
@@ -34,13 +35,6 @@ class JobOffer
      * @ORM\Column(name="modificationDate", type="datetime", nullable=true)
      */
     private $modificationDate;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="type", type="string", length=255)
-     */
-    private $type;
 
     /**
      * @var string
@@ -105,6 +99,23 @@ class JobOffer
      * @ORM\JoinTable(name="job_offer_skill")
      */
     private $skill;
+
+    /**
+     * Before persist or update, call the updatedTimestamps() function.
+     *
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
+     */
+    public function onPrePersist()
+    {
+        $this->setModificationDate(new \DateTime('now'));
+
+        if($this->getCreationDate() == null)
+        {
+            $this->setCreationDate(new \DateTime('now'));
+            $this->setStatus(0);
+        }
+    }
 
 
     /**
@@ -172,30 +183,6 @@ class JobOffer
     public function getModificationDate()
     {
         return $this->modificationDate;
-    }
-
-    /**
-     * Set type
-     *
-     * @param string $type
-     *
-     * @return JobOffer
-     */
-    public function setType($type)
-    {
-        $this->type = $type;
-
-        return $this;
-    }
-
-    /**
-     * Get type
-     *
-     * @return string
-     */
-    public function getType()
-    {
-        return $this->type;
     }
 
     /**

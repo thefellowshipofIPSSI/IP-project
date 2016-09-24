@@ -26,32 +26,34 @@
 
     <div class="col-lg-8">
 
-        <a href="{{ path('intranet_job_offer_update', {'jobOffer_id': jobOffer.id}) }}" class="btn btn-primary" style="margin-bottom:10px;">Modifier</a>
+        <a href="{{ path('intranet_job_offer_update', {'job_offer_id': jobOffer.id}) }}" class="btn btn-primary" style="margin-bottom:10px;">Modifier</a>
 
 
         <!-- Title -->
         <h1>Offer d'emploi : {{ jobOffer.job.title|capitalize }}</h1>
 
-        <h4>Société : {{ jobOffer.pageCategory.name }} / Template : {{ page.pageTemplate.name }}</h4>
         <!-- Author -->
         <p class="lead">
-            by jobOffer.getUser(username)
+            by {{ jobOffer.user.username }}
         </p>
 
         <hr>
 
         <!-- Date/Time -->
-        <p><span class="glyphicon glyphicon-time"></span> Created on {{ jobOffer.dateCreation|date('m/d/Y') }} à {{ jobOffer.dateCreation|date('H:i') }}</p>
+        <p><span class="glyphicon glyphicon-time"></span> Created on {{ jobOffer.creationDate|date('m/d/Y') }} à {{ jobOffer.creationDate|date('H:i') }}</p>
 
         <hr>
 
 
-
         <!-- Page Content -->
-        <p class="lead">{{ jobOffer.description }}</p>
+        <p class="lead">Société : {{ jobOffer.society.name }}</p>
+
+        <p>Durée : {{ jobOffer.duration }}</p>
+        <p>Salaire : {{ jobOffer.salary }}</p>
+        <p>Ville : {{ jobOffer.location }}</p>
 
         <p>
-            {{ jobOffer.description|raw }}
+            Description du poste : {{ jobOffer.description|raw }}
         </p>
         <hr>
     </div>

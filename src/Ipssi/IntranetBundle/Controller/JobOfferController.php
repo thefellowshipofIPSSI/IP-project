@@ -52,7 +52,7 @@ class JobOfferController extends Controller {
 
             $this->addFlash(
                 'success',
-                'Nouvelle offer de poste créée !'
+                'Nouvelle offre de poste créée !'
             );
 
             return $this->redirectToRoute('intranet_job_offer_homepage');
@@ -67,14 +67,14 @@ class JobOfferController extends Controller {
 
     /**
      * Update existing JobOffer
-     * @param $jobOffer_id
+     * @param $job_offer_id
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function updateAction($jobOffer_id, Request $request)
+    public function updateAction($job_offer_id, Request $request)
     {
         $jobOfferRepo = $this->get('intranet.repository.jobOffer');
 
-        $jobOffer = $jobOfferRepo->find($jobOffer_id);
+        $jobOffer = $jobOfferRepo->find($job_offer_id);
 
         $form = $this->createForm(JobOfferType::class, $jobOffer);
         $form->add('save', SubmitType::class, [
@@ -93,7 +93,7 @@ class JobOfferController extends Controller {
 
             $this->addFlash(
                 'success',
-                'JobOffer ' . $jobOffer->getName() . ' modifiée !'
+                'L\'offre d\'emploi sur le poste ' . $jobOffer->getJob()->getTitle() . ' modifiée !'
             );
 
             return $this->redirectToRoute('intranet_job_offer_homepage');
@@ -108,14 +108,14 @@ class JobOfferController extends Controller {
 
     /**
      * Delete a JobOffer
-     * @param $jobOffer_id
+     * @param $job_offer_id
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function deleteAction($jobOffer_id)
+    public function deleteAction($job_offer_id)
     {
         $jobOfferRepo = $this->get('intranet.repository.jobOffer');
 
-        $jobOffer = $jobOfferRepo->find($jobOffer_id);
+        $jobOffer = $jobOfferRepo->find($job_offer_id);
 
         $em = $this->getDoctrine()->getEntityManager();
         $em->remove($jobOffer);
@@ -123,7 +123,7 @@ class JobOfferController extends Controller {
 
         $this->addFlash(
             'success',
-            'JobOffer ' . $jobOffer->getName() . ' supprimée'
+            'L\'offre d\'emploi sur le poste ' . $jobOffer->getJob()->getTitle() . ' supprimée !'
         );
 
         return $this->redirectToRoute('intranet_job_offer_homepage');
@@ -132,56 +132,65 @@ class JobOfferController extends Controller {
 
     /**
      * Display a JobOffer
-     * @param $jobOffer_id
+     * @param $job_offer_id
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function viewAction($jobOffer_id)
+    public function viewAction($job_offer_id)
     {
         $jobOfferRepo = $this->get('intranet.repository.jobOffer');
 
-        $jobOffer = $jobOfferRepo->find($jobOffer_id);
-        $jobOfferTemplate = $jobOffer->getJobOfferTemplate()->getName();
+        $jobOffer = $jobOfferRepo->find($job_offer_id);
 
-        return $this->render('IntranetBundle:JobOffer\Templates:'. $jobOfferTemplate .'.html.twig', [
-            'job_offer' => $jobOffer
+        return $this->render('IntranetBundle:JobOffer:view.html.twig', [
+            'jobOffer' => $jobOffer
         ]);
     }
 
 
     /**
      * Make a JobOffer online
-     * @param $jobOffer_id
+     * @param $job_offer_id
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function onlineAction($jobOffer_id)
+    public function onlineAction($job_offer_id)
     {
         $jobOfferRepo = $this->get('intranet.repository.jobOffer');
 
-        $jobOffer = $jobOfferRepo->find($jobOffer_id);
+        $jobOffer = $jobOfferRepo->find($job_offer_id);
         $jobOffer->setStatus(1);
 
         $em = $this->getDoctrine()->getEntityManager();
         $em->persist($jobOffer);
         $em->flush();
 
+        $this->addFlash(
+            'success',
+            'L\'offre d\'emploi sur le poste ' . $jobOffer->getJob()->getTitle() . ' mise en ligne !'
+        );
+
         return $this->redirectToRoute('intranet_job_offer_homepage');
     }
 
     /**
      * Make a JobOffer offline
-     * @param $jobOffer_id
+     * @param $job_offer_id
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function offlineAction($jobOffer_id)
+    public function offlineAction($job_offer_id)
     {
         $jobOfferRepo = $this->get('intranet.repository.jobOffer');
 
-        $jobOffer = $jobOfferRepo->find($jobOffer_id);
+        $jobOffer = $jobOfferRepo->find($job_offer_id);
         $jobOffer->setStatus(0);
 
         $em = $this->getDoctrine()->getEntityManager();
         $em->persist($jobOffer);
         $em->flush();
+
+        $this->addFlash(
+            'success',
+            'L\'offre d\'emploi sur le poste ' . $jobOffer->getJob()->getTitle() . ' n\'est plus visible sur le site !'
+        );
 
         return $this->redirectToRoute('intranet_job_offer_homepage');
     }

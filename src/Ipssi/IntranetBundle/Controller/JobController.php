@@ -93,7 +93,7 @@ class JobController extends Controller {
 
             $this->addFlash(
                 'success',
-                'Job ' . $job->getName() . ' modifiée !'
+                'Job ' . $job->getTitle() . ' modifiée !'
             );
 
             return $this->redirectToRoute('intranet_job_homepage');
@@ -123,7 +123,7 @@ class JobController extends Controller {
 
         $this->addFlash(
             'success',
-            'Job ' . $job->getName() . ' supprimée'
+            'Job ' . $job->getTitle() . ' supprimée'
         );
 
         return $this->redirectToRoute('intranet_job_homepage');
@@ -140,9 +140,8 @@ class JobController extends Controller {
         $jobRepo = $this->get('intranet.repository.job');
 
         $job = $jobRepo->find($job_id);
-        $jobTemplate = $job->getJobTemplate()->getName();
 
-        return $this->render('IntranetBundle:Job\Templates:'. $jobTemplate .'.html.twig', [
+        return $this->render('IntranetBundle:Job:view.html.twig', [
             'job' => $job
         ]);
     }

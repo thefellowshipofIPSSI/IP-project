@@ -105,7 +105,7 @@ class Page
     private $page_template;
 
     /**
-     * Now we tell doctrine that before we persist or update we call the updatedTimestamps() function.
+     * Before persist or update, call the updatedTimestamps() function.
      *
      * @ORM\PrePersist
      * @ORM\PreUpdate

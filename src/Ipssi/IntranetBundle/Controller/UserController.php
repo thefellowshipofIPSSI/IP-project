@@ -183,6 +183,11 @@ class UserController extends Controller
         $em->persist($user);
         $em->flush();
 
+        $this->addFlash(
+            'success',
+            'Utilisateur ' . $user->getUsername() . ' activé'
+        );
+
         return $this->redirectToRoute('intranet_user_homepage');
     }
 
@@ -202,6 +207,11 @@ class UserController extends Controller
         $em = $this->getDoctrine()->getEntityManager();
         $em->persist($user);
         $em->flush();
+
+        $this->addFlash(
+            'success',
+            'Utilisateur ' . $user->getUsername() . ' désactivé'
+        );
 
         return $this->redirectToRoute('intranet_user_homepage');
     }
