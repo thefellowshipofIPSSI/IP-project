@@ -1,11 +1,11 @@
 {% extends "intranet.html.twig" %}
 
-{% block title %} Offre d'emploi {% endblock %}
+{% block title %} Offre de poste {% endblock %}
 
 {% block headerContainer %}
     <div class="col-lg-12">
         <h1 class="page-header">
-            Offre d'emploi
+            Offre de poste
             <small>Aperçu : {{ jobOffer.job.title }}</small>
         </h1>
         <ol class="breadcrumb">
@@ -13,7 +13,7 @@
                 <i class="fa fa-dashboard"></i>  <a href="{{ path('intranet_homepage') }}">Dashboard</a>
             </li>
             <li class="active">
-                <i class="fa fa-file"></i> <a href="{{ path('intranet_job_homepage') }}">Offre d'emploi</a>
+                <i class="fa fa-file"></i> <a href="{{ path('intranet_job_homepage') }}">Offre de poste</a>
             </li>
             <li class="active">
                 <i class="fa fa-eye"></i> Aperçu : {{ jobOffer.job.title }}
@@ -30,7 +30,7 @@
 
 
         <!-- Title -->
-        <h1>Offer d'emploi : {{ jobOffer.job.title|capitalize }}</h1>
+        <h1>Offer de poste : {{ jobOffer.job.title|capitalize }}</h1>
 
         <!-- Author -->
         <p class="lead">

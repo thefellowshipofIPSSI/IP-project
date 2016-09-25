@@ -7,65 +7,64 @@
         <li {% if currentRoute == 'intranet_homepage' %} class="active" {% endif %}>
             <a href="{{ path('intranet_homepage') }}"><i class="fa fa-fw fa-dashboard"></i> Accueil</a>
         </li>
-        <li {% if currentRoute == 'intranet_page_homepage' %} class="active" {% endif %}>
-            <a href="{{ path('intranet_page_homepage') }}"><i class="fa fa-fw fa-file"></i> Page</a>
-        </li>
+
         <li {% if currentRoute == 'intranet_news_homepage' %} class="active" {% endif %}>
             <a href="{{ path('intranet_news_homepage') }}"><i class="fa fa-fw fa-file"></i> Actualités</a>
         </li>
-        <li>
-            <a href="javascript:;" data-toggle="collapse" data-target="#rh"><i class="fa fa-fw fa-user"></i> Ressources Humaines <i class="fa fa-fw fa-caret-down"></i></a>
+        <li class="active" >
+            <a href="javascript:;" data-toggle="collapse" data-target="#rh"><i class="fa fa-fw fa-group"></i> Ressources Humaines <i class="fa fa-fw fa-caret-down"></i></a>
             <ul id="rh" class="collapse">
-                <li>
+                <li {% if currentRoute == 'intranet_job_offer_homepage' %} class="active" {% endif %}>
+                    <a href="{{ path('intranet_job_offer_homepage') }}">Compte rendu d'activité</a>
+                </li>
+                <li {% if currentRoute == 'intranet_job_offer_homepage' %} class="active" {% endif %}>
+                    <a href="{{ path('intranet_job_offer_homepage') }}">Note de frais</a>
+                </li>
+                <li {% if currentRoute == 'intranet_news_homepage' %} class="active" {% endif %}>
+                    <a href="{{ path('intranet_job_offer_homepage') }}">Demandes de congés</a>
+                </li>
+                <li {% if currentRoute == 'intranet_news_homepage' %} class="active" {% endif %}>
+                    <a href="{{ path('intranet_job_offer_homepage') }}">CVthèque</a>
+                </li>
+                <li {% if currentRoute == 'intranet_news_homepage' %} class="active" {% endif %}>
+                    <a href="{{ path('intranet_job_offer_homepage') }}">Offres de poste</a>
+                </li>
+                <li {% if currentRoute == 'intranet_news_homepage' %} class="active" {% endif %}>
+                    <a href="{{ path('intranet_job_offer_homepage') }}">Candidatures</a>
+                </li>
+                <li {% if currentRoute == 'intranet_user_homepage' %} class="active" {% endif %}>
                     <a href="{{ path('intranet_user_homepage') }}">Collaborateurs</a>
                 </li>
-                <li>
-                    <a href="#">Dropdown Item</a>
-                </li>
             </ul>
         </li>
         <li>
-            <a href="javascript:;" data-toggle="collapse" data-target="#emploi"><i class="fa fa-fw fa-user"></i> Emplois <i class="fa fa-fw fa-caret-down"></i></a>
-            <ul id="emploi" class="collapse">
+            <a href="javascript:;" data-toggle="collapse" data-target="#tool"><i class="fa fa-fw fa-wrench"></i> Boite à outils <i class="fa fa-fw fa-caret-down"></i></a>
+            <ul id="tool" class="collapse">
+                <li {% if currentRoute == 'intranet_page_homepage' %} class="active" {% endif %}>
+                    <a href="#"><i class="fa fa-fw fa-file"></i> ???</a>
+                </li>
                 <li>
+                    <a href="#">???</a>
+                </li>
+
+            </ul>
+        </li>
+        <li>
+            <a href="javascript:;" data-toggle="collapse" data-target="#admin"><i class="fa fa-fw fa-suitcase"></i> Administration <i class="fa fa-fw fa-caret-down"></i></a>
+            <ul id="admin" class="collapse">
+                <li>
+                    <a href="{{ path('intranet_user_homepage') }}">Gestion des utilisateurs</a>
+                </li>
+                <li {% if currentRoute == 'intranet_page_homepage' %} class="active" {% endif %}>
+                    <a href="{{ path('intranet_page_homepage') }}">Page</a>
+                </li>
+                <li {% if currentRoute == 'intranet_job_homepage' %} class="active" {% endif %}>
                     <a href="{{ path('intranet_job_homepage') }}">Emploi</a>
                 </li>
-                <li>
-                    <a href="{{ path('intranet_job_offer_homepage') }}">Offres d'emplois</a>
-                </li>
-                <li>
-                    <a href="#">Candidatures</a>
+                <li {% if currentRoute == 'intranet_skill_homepage' %} class="active" {% endif %}>
+                    <a href="{{ path('intranet_skill_homepage') }}">Compétences</a>
                 </li>
             </ul>
-        </li>
-        <li>
-            <a href="tables.html"><i class="fa fa-fw fa-table"></i> Tables</a>
-        </li>
-        <li>
-            <a href="forms.html"><i class="fa fa-fw fa-edit"></i> Forms</a>
-        </li>
-        <li>
-            <a href="bootstrap-elements.html"><i class="fa fa-fw fa-desktop"></i> Bootstrap Elements</a>
-        </li>
-        <li>
-            <a href="bootstrap-grid.html"><i class="fa fa-fw fa-wrench"></i> Bootstrap Grid</a>
-        </li>
-        <li>
-            <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> Dropdown <i class="fa fa-fw fa-caret-down"></i></a>
-            <ul id="demo" class="collapse">
-                <li>
-                    <a href="#">Dropdown Item</a>
-                </li>
-                <li>
-                    <a href="#">Dropdown Item</a>
-                </li>
-            </ul>
-        </li>
-        <li>
-            <a href="blank-page.html"><i class="fa fa-fw fa-file"></i> Blank Page</a>
-        </li>
-        <li>
-            <a href="index-rtl.html"><i class="fa fa-fw fa-dashboard"></i> RTL Dashboard</a>
         </li>
     </ul>
 </div>

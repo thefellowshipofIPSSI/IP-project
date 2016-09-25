@@ -156,3 +156,34 @@ intranet_job_view:
 #intranet_job_offer_offline:
 #    path:   /job_offer/{job_offer_id}/offline
 #    defaults: { _controller: IntranetBundle:JobOffer:offline }
+
+
+###################### Skills #########################
+
+intranet_skill_homepage:
+    path:     /skill
+    defaults: { _controller: IntranetBundle:Skill:index }
+
+intranet_skill_create:
+    path:   /skill/create
+    defaults: { _controller: IntranetBundle:Skill:create }
+
+intranet_skill_update:
+    path:   /skill/{skill_id}/update
+    defaults: { _controller: IntranetBundle:Skill:update }
+
+intranet_skill_delete:
+    path:   /skill/{skill_id}/delete
+    defaults: { _controller: IntranetBundle:Skill:delete }
+
+intranet_skill_view:
+    path:   /skill/{skill_id}/view
+    defaults: { _controller: IntranetBundle:Skill:view }
+
+#intranet_skill_online:
+#    path:   /skill/{skill_id}/online
+#    defaults: { _controller: IntranetBundle:Skill:online }
+#
+#intranet_skill_offline:
+#    path:   /skill/{skill_id}/offline
+#    defaults: { _controller: IntranetBundle:Skill:offline }

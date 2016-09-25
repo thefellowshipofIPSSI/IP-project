@@ -1,19 +1,19 @@
 {% extends 'intranet.html.twig' %}
 
-{% block title %} Offre d'emploi {% endblock %}
+{% block title %} Offre de poste {% endblock %}
 
 {% block headerContainer %}
     <div class="col-lg-12">
         <h1 class="page-header">
-            Offres d'emploi
-            <small>Liste des offres d'emploi</small>
+            Offres de poste
+            <small>Liste des offres de poste</small>
         </h1>
         <ol class="breadcrumb">
             <li>
                 <i class="fa fa-dashboard"></i>  <a href="{{ path('intranet_homepage') }}">Dashboard</a>
             </li>
             <li class="active">
-                <i class="fa fa-file"></i> Offre d'emploi
+                <i class="fa fa-file"></i> Offre de poste
             </li>
         </ol>
     </div>
@@ -21,7 +21,7 @@
 
 {% block body %}
 
-    <a href="{{ path('intranet_job_offer_create') }}" class="btn btn-primary" style="margin-bottom:10px;">Nouvelle offre d'emploi</a>
+    <a href="{{ path('intranet_job_offer_create') }}" class="btn btn-primary" style="margin-bottom:10px;">Nouvel offre de poste</a>
 
     <div class="table-responsive">
         <table class="table table-bordered table-hover">
