@@ -1,0 +1,65 @@
+{% extends "intranet.html.twig" %}
+
+{% block title %} Compte rendu d'activité {% endblock %}
+
+{% block headerContainer %}
+    <div class="col-lg-12">
+        <h1 class="page-header">
+            Compte rendu d'activité
+            <small>Aperçu : Compte rendu d'activité du {{ userCRA.creationDate|date('m/d/Y') }}</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li>
+                <i class="fa fa-dashboard"></i>  <a href="{{ path('intranet_homepage') }}">Dashboard</a>
+            </li>
+            <li class="active">
+                <i class="fa fa-file"></i> <a href="{{ path('intranet_cra_homepage') }}">Offre de poste</a>
+            </li>
+            <li class="active">
+                <i class="fa fa-eye"></i> Aperçu : {{ userCRA.title }}
+            </li>
+        </ol>
+    </div>
+{% endblock %}
+
+{% block body %}
+
+    <div class="col-lg-8">
+
+        <a href="{{ path('intranet_cra_update', {'userCRA_id': userCRA.id}) }}" class="btn btn-primary" style="margin-bottom:10px;">Modifier</a>
+
+
+        <!-- Title -->
+        <h1>Offer de poste : {{ userCRA.title|capitalize }}</h1>
+
+        <!-- Author -->
+        <p class="lead">
+            by {{ userCRA.user.username }}
+        </p>
+
+        <hr>
+
+        <!-- Date/Time -->
+        <p><span class="glyphicon glyphicon-time"></span> Created on {{ userCRA.creationDate|date('m/d/Y') }} à {{ userCRA.creationDate|date('H:i') }}</p>
+
+        <hr>
+
+        <!-- Page Content -->
+        <p>Client : {{ userCRA.client }}</p>
+        <p>Description : {{ userCRA.description }}</p>
+        <p>Date de début : {{ userCRA.beginDate }}</p>
+        <p>Date de fin : {{ userCRA.endDate }}</p>
+        <p>Nombre d'accident avec arrêt : {{ userCRA.nbLostTimeAccident }}</p>
+        <p>Nombre d'accient sans arrêt : {{ userCRA.nbNoneLostTimeAccident }}</p>
+        <p>Nombre d'accident de trajet : {{ userCRA.nbTravelAccident }}</p>
+        <p>Nombre de jours d'arrêt maladie : {{ userCRA.nbSickDay }}</p>
+        <p>Nombre de jours de congés : {{ userCRA.nbVacancyDay }}</p>
+        <p>Satisfaction du client : {{ userCRA.clientSatisfaction }}</p>
+        <p>Satisfaction du consultant : {{ userCRA.consultantSatisfaction }}</p>
+        <p>Points à améliorer : {{ userCRA.ameliorationPoint }}</p>
+        <p>Activités restant à éffectuer : {{ userCRA.leftActivity }}</p>
+        <p>Commentaires : {{ userCRA.comments }}</p>
+        <hr>
+    </div>
+
+{% endblock %}

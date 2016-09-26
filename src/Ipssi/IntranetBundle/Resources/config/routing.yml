@@ -187,3 +187,158 @@ intranet_skill_view:
 #intranet_skill_offline:
 #    path:   /skill/{skill_id}/offline
 #    defaults: { _controller: IntranetBundle:Skill:offline }
+
+
+###################### CRA #########################
+
+intranet_cra_homepage:
+    path:     /cra
+    defaults: { _controller: IntranetBundle:UserCRA:index }
+
+intranet_cra_create:
+    path:   /cra/create
+    defaults: { _controller: IntranetBundle:UserCRA:create }
+
+intranet_cra_update:
+    path:   /cra/{cra_id}/update
+    defaults: { _controller: IntranetBundle:UserCRA:update }
+
+intranet_cra_delete:
+    path:   /cra/{cra_id}/delete
+    defaults: { _controller: IntranetBundle:UserCRA:delete }
+
+intranet_cra_view:
+    path:   /cra/{cra_id}/view
+    defaults: { _controller: IntranetBundle:UserCRA:view }
+
+intranet_cra_online:
+    path:   /cra/{cra_id}/online
+    defaults: { _controller: IntranetBundle:UserCRA:online }
+
+intranet_cra_offline:
+    path:   /cra/{cra_id}/offline
+    defaults: { _controller: IntranetBundle:UserCRA:offline }
+
+
+###################### Expense #########################
+
+intranet_expense_homepage:
+    path:     /expense
+    defaults: { _controller: IntranetBundle:Expense:index }
+
+intranet_expense_create:
+    path:   /expense/create
+    defaults: { _controller: IntranetBundle:Expense:create }
+
+intranet_expense_update:
+    path:   /expense/{expense_id}/update
+    defaults: { _controller: IntranetBundle:Expense:update }
+
+intranet_expense_delete:
+    path:   /expense/{expense_id}/delete
+    defaults: { _controller: IntranetBundle:Expense:delete }
+
+intranet_expense_view:
+    path:   /expense/{expense_id}/view
+    defaults: { _controller: IntranetBundle:Expense:view }
+
+intranet_expense_online:
+    path:   /expense/{expense_id}/online
+    defaults: { _controller: IntranetBundle:Expense:online }
+
+intranet_expense_offline:
+    path:   /expense/{expense_id}/offline
+    defaults: { _controller: IntranetBundle:Expense:offline }
+
+
+###################### CV #########################
+
+intranet_cv_homepage:
+    path:     /cv
+    defaults: { _controller: IntranetBundle:Cv:index }
+
+intranet_cv_create:
+    path:   /cv/create
+    defaults: { _controller: IntranetBundle:Cv:create }
+
+intranet_cv_update:
+    path:   /cv/{cv_id}/update
+    defaults: { _controller: IntranetBundle:Cv:update }
+
+intranet_cv_delete:
+    path:   /cv/{cv_id}/delete
+    defaults: { _controller: IntranetBundle:Cv:delete }
+
+intranet_cv_view:
+    path:   /cv/{cv_id}/view
+    defaults: { _controller: IntranetBundle:Cv:view }
+
+intranet_cv_online:
+    path:   /cv/{cv_id}/online
+    defaults: { _controller: IntranetBundle:Cv:online }
+
+intranet_cv_offline:
+    path:   /cv/{cv_id}/offline
+    defaults: { _controller: IntranetBundle:Cv:offline }
+
+
+###################### Vacation #########################
+
+intranet_vacation_homepage:
+    path:     /vacation
+    defaults: { _controller: IntranetBundle:Vacation:index }
+
+intranet_vacation_create:
+    path:   /vacation/create
+    defaults: { _controller: IntranetBundle:Vacation:create }
+
+intranet_vacation_update:
+    path:   /vacation/{vacation_id}/update
+    defaults: { _controller: IntranetBundle:Vacation:update }
+
+intranet_vacation_delete:
+    path:   /vacation/{vacation_id}/delete
+    defaults: { _controller: IntranetBundle:Vacation:delete }
+
+intranet_vacation_view:
+    path:   /vacation/{vacation_id}/view
+    defaults: { _controller: IntranetBundle:Vacation:view }
+
+intranet_vacation_online:
+    path:   /vacation/{vacation_id}/online
+    defaults: { _controller: IntranetBundle:Vacation:online }
+
+intranet_vacation_offline:
+    path:   /vacation/{vacation_id}/offline
+    defaults: { _controller: IntranetBundle:Vacation:offline }
+
+
+###################### Candidacy #########################
+
+intranet_candidacy_homepage:
+    path:     /candidacy
+    defaults: { _controller: IntranetBundle:Candidacy:index }
+
+intranet_candidacy_create:
+    path:   /candidacy/create
+    defaults: { _controller: IntranetBundle:Candidacy:create }
+
+intranet_candidacy_update:
+    path:   /candidacy/{candidacy_id}/update
+    defaults: { _controller: IntranetBundle:Candidacy:update }
+
+intranet_candidacy_delete:
+    path:   /candidacy/{candidacy_id}/delete
+    defaults: { _controller: IntranetBundle:Candidacy:delete }
+
+intranet_candidacy_view:
+    path:   /candidacy/{candidacy_id}/view
+    defaults: { _controller: IntranetBundle:Candidacy:view }
+
+intranet_candidacy_online:
+    path:   /candidacy/{candidacy_id}/online
+    defaults: { _controller: IntranetBundle:Candidacy:online }
+
+intranet_candidacy_offline:
+    path:   /candidacy/{candidacy_id}/offline
+    defaults: { _controller: IntranetBundle:Candidacy:offline }

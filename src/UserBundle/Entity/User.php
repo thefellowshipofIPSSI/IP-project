@@ -77,10 +77,22 @@ class User extends BaseUser {
     private $user_expense;
 
     /**
+     * @ORM\OneToMany(targetEntity="Ipssi\IntranetBundle\Entity\UserExpense", mappedBy="user_validation")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $user_validation_expense;
+
+    /**
      * @ORM\OneToMany(targetEntity="Ipssi\IntranetBundle\Entity\UserCRA", mappedBy="user")
      * @ORM\JoinColumn(nullable=true)
      */
     private $user_cra;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Ipssi\IntranetBundle\Entity\UserCRA", mappedBy="user_validation")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $user_validation_cra;
 
     /**
      * @ORM\OneToMany(targetEntity="Ipssi\IntranetBundle\Entity\Job", mappedBy="user")
@@ -101,23 +113,54 @@ class User extends BaseUser {
     private $skill;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Ipssi\IntranetBundle\Entity\JobOffer", inversedBy="users")
-     * @ORM\JoinTable(name="users_candidaty")
+     * @ORM\OneToMany(targetEntity="Ipssi\IntranetBundle\Entity\Candidacy", mappedBy="user")
+     * @ORM\JoinColumn(nullable=true)
      */
     private $candidacy;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Ipssi\IntranetBundle\Entity\UserCV", mappedBy="user")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $user_cv;
 
-    public function __construct()
-    {
+    /**
+     * @ORM\OneToMany(targetEntity="Ipssi\IntranetBundle\Entity\UserCV", mappedBy="user_validation")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $user_validation_cv;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Ipssi\IntranetBundle\Entity\UserVacation", mappedBy="user")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $user_vacation;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Ipssi\IntranetBundle\Entity\UserVacation", mappedBy="user_validation")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $user_validation_vacation;
+
+
+
+    public function __construct() {
         parent::__construct();
-        $this->page = new ArrayCollection();
         $this->news = new ArrayCollection();
         $this->user_expense = new ArrayCollection();
+        $this->user_validation_expense = new ArrayCollection();
+        $this->user_cra = new ArrayCollection();
+        $this->user_validation_cra = new ArrayCollection();
         $this->job = new ArrayCollection();
         $this->job_offer = new ArrayCollection();
         $this->skill = new ArrayCollection();
         $this->candidacy = new ArrayCollection();
+        $this->user_cv = new ArrayCollection();
+        $this->user_validation_cv = new ArrayCollection();
+        $this->user_vacation = new ArrayCollection();
+        $this->user_validation_vacation = new ArrayCollection();
     }
+
 
     /**
      * Set firstname
@@ -342,6 +385,40 @@ class User extends BaseUser {
     }
 
     /**
+     * Add userValidationExpense
+     *
+     * @param \Ipssi\IntranetBundle\Entity\UserExpense $userValidationExpense
+     *
+     * @return User
+     */
+    public function addUserValidationExpense(\Ipssi\IntranetBundle\Entity\UserExpense $userValidationExpense)
+    {
+        $this->user_validation_expense[] = $userValidationExpense;
+
+        return $this;
+    }
+
+    /**
+     * Remove userValidationExpense
+     *
+     * @param \Ipssi\IntranetBundle\Entity\UserExpense $userValidationExpense
+     */
+    public function removeUserValidationExpense(\Ipssi\IntranetBundle\Entity\UserExpense $userValidationExpense)
+    {
+        $this->user_validation_expense->removeElement($userValidationExpense);
+    }
+
+    /**
+     * Get userValidationExpense
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getUserValidationExpense()
+    {
+        return $this->user_validation_expense;
+    }
+
+    /**
      * Add userCra
      *
      * @param \Ipssi\IntranetBundle\Entity\UserCRA $userCra
@@ -373,6 +450,40 @@ class User extends BaseUser {
     public function getUserCra()
     {
         return $this->user_cra;
+    }
+
+    /**
+     * Add userValidationCra
+     *
+     * @param \Ipssi\IntranetBundle\Entity\UserCRA $userValidationCra
+     *
+     * @return User
+     */
+    public function addUserValidationCra(\Ipssi\IntranetBundle\Entity\UserCRA $userValidationCra)
+    {
+        $this->user_validation_cra[] = $userValidationCra;
+
+        return $this;
+    }
+
+    /**
+     * Remove userValidationCra
+     *
+     * @param \Ipssi\IntranetBundle\Entity\UserCRA $userValidationCra
+     */
+    public function removeUserValidationCra(\Ipssi\IntranetBundle\Entity\UserCRA $userValidationCra)
+    {
+        $this->user_validation_cra->removeElement($userValidationCra);
+    }
+
+    /**
+     * Get userValidationCra
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getUserValidationCra()
+    {
+        return $this->user_validation_cra;
     }
 
     /**
@@ -480,11 +591,11 @@ class User extends BaseUser {
     /**
      * Add candidacy
      *
-     * @param \Ipssi\IntranetBundle\Entity\JobOffer $candidacy
+     * @param \Ipssi\IntranetBundle\Entity\Candidacy $candidacy
      *
      * @return User
      */
-    public function addCandidacy(\Ipssi\IntranetBundle\Entity\JobOffer $candidacy)
+    public function addCandidacy(\Ipssi\IntranetBundle\Entity\Candidacy $candidacy)
     {
         $this->candidacy[] = $candidacy;
 
@@ -494,9 +605,9 @@ class User extends BaseUser {
     /**
      * Remove candidacy
      *
-     * @param \Ipssi\IntranetBundle\Entity\JobOffer $candidacy
+     * @param \Ipssi\IntranetBundle\Entity\Candidacy $candidacy
      */
-    public function removeCandidacy(\Ipssi\IntranetBundle\Entity\JobOffer $candidacy)
+    public function removeCandidacy(\Ipssi\IntranetBundle\Entity\Candidacy $candidacy)
     {
         $this->candidacy->removeElement($candidacy);
     }
@@ -509,5 +620,141 @@ class User extends BaseUser {
     public function getCandidacy()
     {
         return $this->candidacy;
+    }
+
+    /**
+     * Add userCv
+     *
+     * @param \Ipssi\IntranetBundle\Entity\UserCV $userCv
+     *
+     * @return User
+     */
+    public function addUserCv(\Ipssi\IntranetBundle\Entity\UserCV $userCv)
+    {
+        $this->user_cv[] = $userCv;
+
+        return $this;
+    }
+
+    /**
+     * Remove userCv
+     *
+     * @param \Ipssi\IntranetBundle\Entity\UserCV $userCv
+     */
+    public function removeUserCv(\Ipssi\IntranetBundle\Entity\UserCV $userCv)
+    {
+        $this->user_cv->removeElement($userCv);
+    }
+
+    /**
+     * Get userCv
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getUserCv()
+    {
+        return $this->user_cv;
+    }
+
+    /**
+     * Add userValidationCv
+     *
+     * @param \Ipssi\IntranetBundle\Entity\UserCV $userValidationCv
+     *
+     * @return User
+     */
+    public function addUserValidationCv(\Ipssi\IntranetBundle\Entity\UserCV $userValidationCv)
+    {
+        $this->user_validation_cv[] = $userValidationCv;
+
+        return $this;
+    }
+
+    /**
+     * Remove userValidationCv
+     *
+     * @param \Ipssi\IntranetBundle\Entity\UserCV $userValidationCv
+     */
+    public function removeUserValidationCv(\Ipssi\IntranetBundle\Entity\UserCV $userValidationCv)
+    {
+        $this->user_validation_cv->removeElement($userValidationCv);
+    }
+
+    /**
+     * Get userValidationCv
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getUserValidationCv()
+    {
+        return $this->user_validation_cv;
+    }
+
+    /**
+     * Add userVacation
+     *
+     * @param \Ipssi\IntranetBundle\Entity\UserVacation $userVacation
+     *
+     * @return User
+     */
+    public function addUserVacation(\Ipssi\IntranetBundle\Entity\UserVacation $userVacation)
+    {
+        $this->user_vacation[] = $userVacation;
+
+        return $this;
+    }
+
+    /**
+     * Remove userVacation
+     *
+     * @param \Ipssi\IntranetBundle\Entity\UserVacation $userVacation
+     */
+    public function removeUserVacation(\Ipssi\IntranetBundle\Entity\UserVacation $userVacation)
+    {
+        $this->user_vacation->removeElement($userVacation);
+    }
+
+    /**
+     * Get userVacation
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getUserVacation()
+    {
+        return $this->user_vacation;
+    }
+
+    /**
+     * Add userValidationVacation
+     *
+     * @param \Ipssi\IntranetBundle\Entity\UserVacation $userValidationVacation
+     *
+     * @return User
+     */
+    public function addUserValidationVacation(\Ipssi\IntranetBundle\Entity\UserVacation $userValidationVacation)
+    {
+        $this->user_validation_vacation[] = $userValidationVacation;
+
+        return $this;
+    }
+
+    /**
+     * Remove userValidationVacation
+     *
+     * @param \Ipssi\IntranetBundle\Entity\UserVacation $userValidationVacation
+     */
+    public function removeUserValidationVacation(\Ipssi\IntranetBundle\Entity\UserVacation $userValidationVacation)
+    {
+        $this->user_validation_vacation->removeElement($userValidationVacation);
+    }
+
+    /**
+     * Get userValidationVacation
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getUserValidationVacation()
+    {
+        return $this->user_validation_vacation;
     }
 }

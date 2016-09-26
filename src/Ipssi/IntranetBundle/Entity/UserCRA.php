@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * UserCRA
  *
  * @ORM\Table(name="user_cra")
+ * @ORM\HasLifecycleCallbacks
  * @ORM\Entity(repositoryClass="Ipssi\IntranetBundle\Repository\UserCRARepository")
  */
 class UserCRA
@@ -141,16 +142,62 @@ class UserCRA
     private $comments;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="client", type="string", length=255)
+     */
+    private $client;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="client_validation", type="integer")
+     */
+    private $client_validation;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="client_validation_date", type="datetime")
+     */
+    private $client_validation_date;
+
+    /**
      * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User", inversedBy="user_cra")
      * @ORM\JoinColumn(nullable=false)
      */
     private $user;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User", inversedBy="user_validation_cra")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $user_validation;
+
+
+    /**
+     * Before persist or update, call the updatedTimestamps() function.
+     *
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
+     */
+    public function onPrePersist()
+    {
+        $this->setModificationDate(new \DateTime('now'));
+
+        if($this->getCreationDate() == null)
+        {
+            $this->setCreationDate(new \DateTime('now'));
+            $this->setStatus(0);
+            $this->setClientSatisfaction(0);
+        }
+    }
+
 
     /**
      * Get id
      *
-     * @return int
+     * @return integer
      */
     public function getId()
     {
@@ -318,7 +365,7 @@ class UserCRA
     /**
      * Get status
      *
-     * @return int
+     * @return integer
      */
     public function getStatus()
     {
@@ -342,7 +389,7 @@ class UserCRA
     /**
      * Get nbLostTimeAccident
      *
-     * @return int
+     * @return integer
      */
     public function getNbLostTimeAccident()
     {
@@ -366,7 +413,7 @@ class UserCRA
     /**
      * Get nbNoneLostTimeAccident
      *
-     * @return int
+     * @return integer
      */
     public function getNbNoneLostTimeAccident()
     {
@@ -390,7 +437,7 @@ class UserCRA
     /**
      * Get nbTravelAccident
      *
-     * @return int
+     * @return integer
      */
     public function getNbTravelAccident()
     {
@@ -414,7 +461,7 @@ class UserCRA
     /**
      * Get nbSickDay
      *
-     * @return int
+     * @return integer
      */
     public function getNbSickDay()
     {
@@ -438,7 +485,7 @@ class UserCRA
     /**
      * Get nbVacancyDay
      *
-     * @return int
+     * @return integer
      */
     public function getNbVacancyDay()
     {
@@ -566,6 +613,78 @@ class UserCRA
     }
 
     /**
+     * Set client
+     *
+     * @param string $client
+     *
+     * @return UserCRA
+     */
+    public function setClient($client)
+    {
+        $this->client = $client;
+
+        return $this;
+    }
+
+    /**
+     * Get client
+     *
+     * @return string
+     */
+    public function getClient()
+    {
+        return $this->client;
+    }
+
+    /**
+     * Set clientValidation
+     *
+     * @param integer $clientValidation
+     *
+     * @return UserCRA
+     */
+    public function setClientValidation($clientValidation)
+    {
+        $this->client_validation = $clientValidation;
+
+        return $this;
+    }
+
+    /**
+     * Get clientValidation
+     *
+     * @return integer
+     */
+    public function getClientValidation()
+    {
+        return $this->client_validation;
+    }
+
+    /**
+     * Set clientValidationDate
+     *
+     * @param \DateTime $clientValidationDate
+     *
+     * @return UserCRA
+     */
+    public function setClientValidationDate($clientValidationDate)
+    {
+        $this->client_validation_date = $clientValidationDate;
+
+        return $this;
+    }
+
+    /**
+     * Get clientValidationDate
+     *
+     * @return \DateTime
+     */
+    public function getClientValidationDate()
+    {
+        return $this->client_validation_date;
+    }
+
+    /**
      * Set user
      *
      * @param \UserBundle\Entity\User $user
@@ -587,5 +706,29 @@ class UserCRA
     public function getUser()
     {
         return $this->user;
+    }
+
+    /**
+     * Set userValidation
+     *
+     * @param \UserBundle\Entity\User $userValidation
+     *
+     * @return UserCRA
+     */
+    public function setUserValidation(\UserBundle\Entity\User $userValidation = null)
+    {
+        $this->user_validation = $userValidation;
+
+        return $this;
+    }
+
+    /**
+     * Get userValidation
+     *
+     * @return \UserBundle\Entity\User
+     */
+    public function getUserValidation()
+    {
+        return $this->user_validation;
     }
 }

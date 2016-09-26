@@ -77,10 +77,7 @@ class JobOffer
      */
     private $user;
 
-    /**
-     * @ORM\ManyToMany(targetEntity="UserBundle\Entity\User", mappedBy="candidacy")
-     */
-    private $users;
+
 
     /**
      * @ORM\OneToOne(targetEntity="Ipssi\IntranetBundle\Entity\Job", inversedBy="job_offer")
@@ -117,13 +114,11 @@ class JobOffer
         }
     }
 
-
     /**
      * Constructor
      */
     public function __construct()
     {
-        $this->users = new \Doctrine\Common\Collections\ArrayCollection();
         $this->skill = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
@@ -327,40 +322,6 @@ class JobOffer
     public function getUser()
     {
         return $this->user;
-    }
-
-    /**
-     * Add user
-     *
-     * @param \UserBundle\Entity\User $user
-     *
-     * @return JobOffer
-     */
-    public function addUser(\UserBundle\Entity\User $user)
-    {
-        $this->users[] = $user;
-
-        return $this;
-    }
-
-    /**
-     * Remove user
-     *
-     * @param \UserBundle\Entity\User $user
-     */
-    public function removeUser(\UserBundle\Entity\User $user)
-    {
-        $this->users->removeElement($user);
-    }
-
-    /**
-     * Get users
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getUsers()
-    {
-        return $this->users;
     }
 
     /**

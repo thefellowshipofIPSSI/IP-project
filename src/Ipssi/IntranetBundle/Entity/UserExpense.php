@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * UserExpense
  *
  * @ORM\Table(name="user_expense")
+ * @ORM\HasLifecycleCallbacks
  * @ORM\Entity(repositoryClass="Ipssi\IntranetBundle\Repository\UserExpenseRepository")
  */
 class UserExpense
@@ -71,16 +72,49 @@ class UserExpense
     private $status;
 
     /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="validationDate", type="datetime", nullable=true)
+     */
+    private $validationDate;
+
+
+    /**
      * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User", inversedBy="user_expense")
      * @ORM\JoinColumn(nullable=false)
      */
     private $user;
+
+
+    /**
+     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User", inversedBy="user_validation_expense")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $user_validation;
 
     /**
      * @ORM\OneToMany(targetEntity="Ipssi\IntranetBundle\Entity\ExpenseLine", mappedBy="user_expense")
      * @ORM\JoinColumn(nullable=true)
      */
     private $expense_line;
+
+
+    /**
+     * Before persist or update, call the updatedTimestamps() function.
+     *
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
+     */
+    public function onPrePersist()
+    {
+        $this->setModificationDate(new \DateTime('now'));
+
+        if($this->getCreationDate() == null)
+        {
+            $this->setCreationDate(new \DateTime('now'));
+            $this->setStatus(0);
+        }
+    }
 
 
     /**
@@ -270,6 +304,30 @@ class UserExpense
     }
 
     /**
+     * Set validationDate
+     *
+     * @param \DateTime $validationDate
+     *
+     * @return UserExpense
+     */
+    public function setValidationDate($validationDate)
+    {
+        $this->validationDate = $validationDate;
+
+        return $this;
+    }
+
+    /**
+     * Get validationDate
+     *
+     * @return \DateTime
+     */
+    public function getValidationDate()
+    {
+        return $this->validationDate;
+    }
+
+    /**
      * Set user
      *
      * @param \UserBundle\Entity\User $user
@@ -291,6 +349,30 @@ class UserExpense
     public function getUser()
     {
         return $this->user;
+    }
+
+    /**
+     * Set userValidation
+     *
+     * @param \UserBundle\Entity\User $userValidation
+     *
+     * @return UserExpense
+     */
+    public function setUserValidation(\UserBundle\Entity\User $userValidation = null)
+    {
+        $this->user_validation = $userValidation;
+
+        return $this;
+    }
+
+    /**
+     * Get userValidation
+     *
+     * @return \UserBundle\Entity\User
+     */
+    public function getUserValidation()
+    {
+        return $this->user_validation;
     }
 
     /**

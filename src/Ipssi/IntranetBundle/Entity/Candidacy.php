@@ -5,13 +5,13 @@ namespace Ipssi\IntranetBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * UserCV
+ * Candidacy
  *
- * @ORM\Table(name="user_cv")
+ * @ORM\Table(name="candidacy")
  * @ORM\HasLifecycleCallbacks
- * @ORM\Entity(repositoryClass="Ipssi\IntranetBundle\Repository\UserCVRepository")
+ * @ORM\Entity(repositoryClass="Ipssi\IntranetBundle\Repository\CandidacyRepository")
  */
-class UserCV
+class Candidacy
 {
     /**
      * @var int
@@ -21,13 +21,6 @@ class UserCV
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="path", type="string", length=255)
-     */
-    private $path;
 
     /**
      * @var \DateTime
@@ -44,16 +37,23 @@ class UserCV
     private $modificationDate;
 
     /**
-     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User", inversedBy="user_cv")
+     * @var string
+     *
+     * @ORM\Column(name="freeText", type="text", nullable=true)
+     */
+    private $freeText;
+
+    /**
+     * @ORM\OneToOne(targetEntity="Ipssi\IntranetBundle\Entity\JobOffer")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $job_offer;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User", inversedBy="candidacy")
      * @ORM\JoinColumn(nullable=false)
      */
     private $user;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User", inversedBy="user_validation_cv")
-     * @ORM\JoinColumn(nullable=true)
-     */
-    private $user_validation;
 
 
     /**
@@ -72,10 +72,11 @@ class UserCV
         }
     }
 
+
     /**
      * Get id
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -83,35 +84,11 @@ class UserCV
     }
 
     /**
-     * Set path
-     *
-     * @param string $path
-     *
-     * @return UserCV
-     */
-    public function setPath($path)
-    {
-        $this->path = $path;
-
-        return $this;
-    }
-
-    /**
-     * Get path
-     *
-     * @return string
-     */
-    public function getPath()
-    {
-        return $this->path;
-    }
-
-    /**
      * Set creationDate
      *
      * @param \DateTime $creationDate
      *
-     * @return UserCV
+     * @return Candidacy
      */
     public function setCreationDate($creationDate)
     {
@@ -135,7 +112,7 @@ class UserCV
      *
      * @param \DateTime $modificationDate
      *
-     * @return UserCV
+     * @return Candidacy
      */
     public function setModificationDate($modificationDate)
     {
@@ -155,11 +132,59 @@ class UserCV
     }
 
     /**
+     * Set freeText
+     *
+     * @param string $freeText
+     *
+     * @return Candidacy
+     */
+    public function setFreeText($freeText)
+    {
+        $this->freeText = $freeText;
+
+        return $this;
+    }
+
+    /**
+     * Get freeText
+     *
+     * @return string
+     */
+    public function getFreeText()
+    {
+        return $this->freeText;
+    }
+
+    /**
+     * Set jobOffer
+     *
+     * @param \Ipssi\IntranetBundle\Entity\JobOffer $jobOffer
+     *
+     * @return Candidacy
+     */
+    public function setJobOffer(\Ipssi\IntranetBundle\Entity\JobOffer $jobOffer = null)
+    {
+        $this->job_offer = $jobOffer;
+
+        return $this;
+    }
+
+    /**
+     * Get jobOffer
+     *
+     * @return \Ipssi\IntranetBundle\Entity\JobOffer
+     */
+    public function getJobOffer()
+    {
+        return $this->job_offer;
+    }
+
+    /**
      * Set user
      *
      * @param \UserBundle\Entity\User $user
      *
-     * @return UserCV
+     * @return Candidacy
      */
     public function setUser(\UserBundle\Entity\User $user)
     {
@@ -176,29 +201,5 @@ class UserCV
     public function getUser()
     {
         return $this->user;
-    }
-
-    /**
-     * Set userValidation
-     *
-     * @param \UserBundle\Entity\User $userValidation
-     *
-     * @return UserCV
-     */
-    public function setUserValidation(\UserBundle\Entity\User $userValidation = null)
-    {
-        $this->user_validation = $userValidation;
-
-        return $this;
-    }
-
-    /**
-     * Get userValidation
-     *
-     * @return \UserBundle\Entity\User
-     */
-    public function getUserValidation()
-    {
-        return $this->user_validation;
     }
 }
