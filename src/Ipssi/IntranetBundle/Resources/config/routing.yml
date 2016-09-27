@@ -224,31 +224,46 @@ intranet_cra_offline:
 
 intranet_expense_homepage:
     path:     /expense
-    defaults: { _controller: IntranetBundle:Expense:index }
+    defaults: { _controller: IntranetBundle:UserExpense:index }
 
 intranet_expense_create:
     path:   /expense/create
-    defaults: { _controller: IntranetBundle:Expense:create }
+    defaults: { _controller: IntranetBundle:UserExpense:create }
 
 intranet_expense_update:
     path:   /expense/{expense_id}/update
-    defaults: { _controller: IntranetBundle:Expense:update }
+    defaults: { _controller: IntranetBundle:UserExpense:update }
 
 intranet_expense_delete:
     path:   /expense/{expense_id}/delete
-    defaults: { _controller: IntranetBundle:Expense:delete }
+    defaults: { _controller: IntranetBundle:UserExpense:delete }
 
 intranet_expense_view:
     path:   /expense/{expense_id}/view
-    defaults: { _controller: IntranetBundle:Expense:view }
+    defaults: { _controller: IntranetBundle:UserExpense:view }
 
 intranet_expense_online:
     path:   /expense/{expense_id}/online
-    defaults: { _controller: IntranetBundle:Expense:online }
+    defaults: { _controller: IntranetBundle:UserExpense:online }
 
 intranet_expense_offline:
     path:   /expense/{expense_id}/offline
-    defaults: { _controller: IntranetBundle:Expense:offline }
+    defaults: { _controller: IntranetBundle:UserExpense:offline }
+
+###################### Expense Line #########################
+
+intranet_expense_expense_line_create:
+    path:   /expense/{expense_id}/expense_line/create
+    defaults: { _controller: IntranetBundle:ExpenseLine:create }
+
+intranet_expense_expense_line_update:
+    path:   /expense/{expense_id}/expense_line/{expenseLine_id}/update
+    defaults: { _controller: IntranetBundle:ExpenseLine:update }
+
+intranet_expense_expense_line_delete:
+    path:   /expense/{expense_id}/expense_line/{expenseLine_id}/delete
+    defaults: { _controller: IntranetBundle:ExpenseLine:delete }
+
 
 
 ###################### CV #########################
@@ -286,31 +301,31 @@ intranet_cv_offline:
 
 intranet_vacation_homepage:
     path:     /vacation
-    defaults: { _controller: IntranetBundle:Vacation:index }
+    defaults: { _controller: IntranetBundle:UserVacation:index }
 
 intranet_vacation_create:
     path:   /vacation/create
-    defaults: { _controller: IntranetBundle:Vacation:create }
+    defaults: { _controller: IntranetBundle:UserVacation:create }
 
 intranet_vacation_update:
     path:   /vacation/{vacation_id}/update
-    defaults: { _controller: IntranetBundle:Vacation:update }
+    defaults: { _controller: IntranetBundle:UserVacation:update }
 
 intranet_vacation_delete:
     path:   /vacation/{vacation_id}/delete
-    defaults: { _controller: IntranetBundle:Vacation:delete }
+    defaults: { _controller: IntranetBundle:UserVacation:delete }
 
 intranet_vacation_view:
     path:   /vacation/{vacation_id}/view
-    defaults: { _controller: IntranetBundle:Vacation:view }
+    defaults: { _controller: IntranetBundle:UserVacation:view }
 
 intranet_vacation_online:
     path:   /vacation/{vacation_id}/online
-    defaults: { _controller: IntranetBundle:Vacation:online }
+    defaults: { _controller: IntranetBundle:UserVacation:online }
 
 intranet_vacation_offline:
     path:   /vacation/{vacation_id}/offline
-    defaults: { _controller: IntranetBundle:Vacation:offline }
+    defaults: { _controller: IntranetBundle:UserVacation:offline }
 
 
 ###################### Candidacy #########################

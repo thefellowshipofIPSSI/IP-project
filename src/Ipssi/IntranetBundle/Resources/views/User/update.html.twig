@@ -1,22 +1,22 @@
 {% extends 'intranet.html.twig' %}
 
-{% block title %} Collaborateurs | Edition {% endblock %}
+{% block title %} Utilisateur | Edition {% endblock %}
 
 {% block headerContainer %}
     <div class="col-lg-12">
         <h1 class="page-header">
             Actualités
-            <small>Edition d'un collaborateur</small>
+            <small>Edition d'un utilisateur</small>
         </h1>
         <ol class="breadcrumb">
             <li>
-                <i class="fa fa-dashboard"></i>  <a href="{{ path('intranet_homepage') }}">Dashboard</a>
+                <i class="fa fa-home"></i>  <a href="{{ path('intranet_homepage') }}">Accueil</a>
             </li>
             <li class="active">
-                <i class="fa fa-file"></i> <a href="{{ path('intranet_user_homepage') }}"> Collaborateurs </a>
+                <a href="{{ path('intranet_user_homepage') }}"> Utilisateurs </a>
             </li>
             <li class="active">
-                <i class="fa fa-edit"></i> Edition
+                <i class="fa fa-eye"></i> Edition
             </li>
         </ol>
     </div>

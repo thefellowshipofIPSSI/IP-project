@@ -34,3 +34,21 @@ services:
                             factory: ['@doctrine.orm.entity_manager', 'getRepository']
                             arguments:
                               - 'IntranetBundle:UserCRA'
+
+    intranet.repository.expense:
+                                class: IntranetBundle\Repository\UserExpenseRepository
+                                factory: ['@doctrine.orm.entity_manager', 'getRepository']
+                                arguments:
+                                  - 'IntranetBundle:UserExpense'
+
+    intranet.repository.expense_line:
+                                    class: IntranetBundle\Repository\ExpenseLineRepository
+                                    factory: ['@doctrine.orm.entity_manager', 'getRepository']
+                                    arguments:
+                                      - 'IntranetBundle:ExpenseLine'
+
+    intranet.repository.vacation:
+                                        class: IntranetBundle\Repository\UserVacationRepository
+                                        factory: ['@doctrine.orm.entity_manager', 'getRepository']
+                                        arguments:
+                                          - 'IntranetBundle:UserVacation'

@@ -10,10 +10,10 @@
         </h1>
         <ol class="breadcrumb">
             <li>
-                <i class="fa fa-dashboard"></i>  <a href="{{ path('intranet_homepage') }}">Dashboard</a>
+                <i class="fa fa-home"></i>  <a href="{{ path('intranet_homepage') }}">Accueil</a>
             </li>
             <li class="active">
-                <i class="fa fa-file"></i> <a href="{{ path('intranet_page_homepage') }}">Page</a>
+                <a href="{{ path('intranet_page_homepage') }}">Page</a>
             </li>
             <li class="active">
                 <i class="fa fa-eye"></i> Aperçu : {{ page.name }}
@@ -25,23 +25,15 @@
 {% block body %}
 
 
-    <div class="col-lg-8">
-
-        <a href="{{ path('intranet_page_update', {'page_id': page.id}) }}" class="btn btn-primary" style="margin-bottom:10px;">Modifier</a>
-
+    <div class="col-lg-12">
 
         <!-- Title -->
         <h1>{{ page.title|capitalize }}</h1>
 
         <!-- Author -->
         <p class="lead">
-            by {{ page.user.username }}
+            par {{ page.user.username }} le {{ page.dateCreation|date('m/d/Y') }} à {{ page.dateCreation|date('H:i') }}
         </p>
-
-        <hr>
-
-        <!-- Date/Time -->
-        <p><span class="glyphicon glyphicon-time"></span> Created on {{ page.dateCreation|date('m/d/Y') }} à {{ page.dateCreation|date('H:i') }}</p>
 
         <hr>
 
@@ -51,7 +43,11 @@
         <p>
             {{ page.content|raw }}
         </p>
-        <hr>
+
     </div>
+
+    <br><br><br>
+    <a href="{{ path('intranet_page_update', {'page_id': page.id}) }}" class="btn btn-primary" style="margin-bottom:10px;">Modifier</a>
+
 
 {% endblock %}

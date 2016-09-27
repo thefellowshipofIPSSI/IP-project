@@ -3,6 +3,8 @@
 namespace Ipssi\IntranetBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * UserCRA
@@ -39,21 +41,24 @@ class UserCRA
     /**
      * @var string
      *
-     * @ORM\Column(name="title", type="string", length=255)
+     * @ORM\Column(name="projectName", type="string", length=255)
+     * @Assert\NotBlank()
      */
-    private $title;
+    private $projectName;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="description", type="text")
+     * @ORM\Column(name="activityReport", type="text")
+     * @Assert\NotBlank()
      */
-    private $description;
+    private $activityReport;
 
     /**
      * @var \DateTime
      *
      * @ORM\Column(name="beginDate", type="datetime")
+     * @Assert\Type("\DateTime")
      */
     private $beginDate;
 
@@ -61,48 +66,49 @@ class UserCRA
      * @var \DateTime
      *
      * @ORM\Column(name="endDate", type="datetime")
+     * @Assert\Type("\DateTime")
      */
     private $endDate;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="status", type="integer")
+     * @ORM\Column(name="status", type="integer", options={"default":0})
      */
     private $status;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="nbLostTimeAccident", type="integer")
+     * @ORM\Column(name="nbLostTimeAccident", type="integer", options={"default":0})
      */
     private $nbLostTimeAccident;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="nbNoneLostTimeAccident", type="integer")
+     * @ORM\Column(name="nbNoneLostTimeAccident", type="integer", options={"default":0})
      */
     private $nbNoneLostTimeAccident;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="nbTravelAccident", type="integer")
+     * @ORM\Column(name="nbTravelAccident", type="integer", options={"default":0})
      */
     private $nbTravelAccident;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="nbSickDay", type="integer")
+     * @ORM\Column(name="nbSickDay", type="integer", options={"default":0})
      */
     private $nbSickDay;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="nbVacancyDay", type="integer")
+     * @ORM\Column(name="nbVacancyDay", type="integer", options={"default":0})
      */
     private $nbVacancyDay;
 
@@ -110,6 +116,7 @@ class UserCRA
      * @var string
      *
      * @ORM\Column(name="clientSatisfaction", type="text")
+     * @Assert\NotBlank()
      */
     private $clientSatisfaction;
 
@@ -117,6 +124,7 @@ class UserCRA
      * @var string
      *
      * @ORM\Column(name="consultantSatisfaction", type="text")
+     * @Assert\NotBlank()
      */
     private $consultantSatisfaction;
 
@@ -124,20 +132,21 @@ class UserCRA
      * @var string
      *
      * @ORM\Column(name="ameliorationPoint", type="text")
+     * @Assert\NotBlank()
      */
     private $ameliorationPoint;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="leftActivity", type="text")
+     * @ORM\Column(name="leftActivity", type="text", nullable=true)
      */
     private $leftActivity;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="comments", type="text")
+     * @ORM\Column(name="comments", type="text", nullable=true)
      */
     private $comments;
 
@@ -145,20 +154,21 @@ class UserCRA
      * @var string
      *
      * @ORM\Column(name="client", type="string", length=255)
+     * @Assert\NotBlank()
      */
     private $client;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="client_validation", type="integer")
+     * @ORM\Column(name="client_validation", type="integer", nullable=true)
      */
     private $client_validation;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="client_validation_date", type="datetime")
+     * @ORM\Column(name="client_validation_date", type="datetime", nullable=true)
      */
     private $client_validation_date;
 
@@ -253,51 +263,51 @@ class UserCRA
     }
 
     /**
-     * Set title
+     * Set projectName
      *
-     * @param string $title
+     * @param string $projectName
      *
      * @return UserCRA
      */
-    public function setTitle($title)
+    public function setProjectName($projectName)
     {
-        $this->title = $title;
+        $this->projectName = $projectName;
 
         return $this;
     }
 
     /**
-     * Get title
+     * Get projectName
      *
      * @return string
      */
-    public function getTitle()
+    public function getProjectName()
     {
-        return $this->title;
+        return $this->projectName;
     }
 
     /**
-     * Set description
+     * Set activityReport
      *
-     * @param string $description
+     * @param string $activityReport
      *
      * @return UserCRA
      */
-    public function setDescription($description)
+    public function setActivityReport($activityReport)
     {
-        $this->description = $description;
+        $this->activityReport = $activityReport;
 
         return $this;
     }
 
     /**
-     * Get description
+     * Get activityReport
      *
      * @return string
      */
-    public function getDescription()
+    public function getActivityReport()
     {
-        return $this->description;
+        return $this->activityReport;
     }
 
     /**

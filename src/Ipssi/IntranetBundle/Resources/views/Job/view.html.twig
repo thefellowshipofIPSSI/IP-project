@@ -10,10 +10,10 @@
         </h1>
         <ol class="breadcrumb">
             <li>
-                <i class="fa fa-dashboard"></i>  <a href="{{ path('intranet_homepage') }}">Dashboard</a>
+                <i class="fa fa-home"></i>  <a href="{{ path('intranet_homepage') }}">Accueil</a>
             </li>
             <li class="active">
-                <i class="fa fa-file"></i> <a href="{{ path('intranet_job_homepage') }}">Poste</a>
+                <a href="{{ path('intranet_job_homepage') }}">Postes</a>
             </li>
             <li class="active">
                 <i class="fa fa-eye"></i> Aperçu : {{ job.title }}
@@ -25,20 +25,20 @@
 {% block body %}
 
 
-    <div class="col-lg-8">
-
-        <a href="{{ path('intranet_job_update', {'job_id': job.id}) }}" class="btn btn-primary" style="margin-bottom:10px;">Modifier</a>
-
+    <div class="col-lg-12">
 
         <!-- Title -->
         <h1>{{ job.title|capitalize }}</h1>
 
         <!-- Author -->
         <p class="lead">
-            by {{ job.user.username }}
+            par {{ job.user.username }}
         </p>
 
-        <hr>
     </div>
+
+    <br><br><br>
+    <a href="{{ path('intranet_job_update', {'job_id': job.id}) }}" class="btn btn-primary" style="margin-bottom:10px;">Modifier</a>
+
 
 {% endblock %}

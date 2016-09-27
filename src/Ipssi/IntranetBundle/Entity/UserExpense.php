@@ -67,7 +67,7 @@ class UserExpense
     /**
      * @var int
      *
-     * @ORM\Column(name="status", type="integer")
+     * @ORM\Column(name="status", type="integer", options={"default":0})
      */
     private $status;
 

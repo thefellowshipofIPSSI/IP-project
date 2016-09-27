@@ -1,22 +1,22 @@
 {% extends 'intranet.html.twig' %}
 
-{% block title %} Page {% endblock %}
+{% block title %} Note de frais {% endblock %}
 
 {% block headerContainer %}
     <div class="col-lg-12">
         <h1 class="page-header">
-            Page
-            <small>Modification</small>
+            Note de frais
+            <small>Création d'une note de frais</small>
         </h1>
         <ol class="breadcrumb">
             <li>
                 <i class="fa fa-home"></i>  <a href="{{ path('intranet_homepage') }}">Accueil</a>
             </li>
-            <li class="active">
-                <a href="{{ path('intranet_page_homepage') }}">Page</a>
+            <li>
+                </i> <a href="{{ path('intranet_expense_homepage') }}">Toutes les notes de frais</a>
             </li>
             <li class="active">
-                <i class="fa fa-eye"></i> Edition
+                <i class="fa fa-eye"></i> Nouvelle note de frais
             </li>
         </ol>
     </div>
@@ -24,6 +24,6 @@
 
 {% block body %}
 
-    {% include('IntranetBundle:Page:form.html.twig') %}
-    
+    {% include('IntranetBundle:UserExpense:form.html.twig') %}
+
 {% endblock %}

@@ -66,14 +66,14 @@ class UserCRAController extends Controller {
 
     /**
      * Update existing CRA
-     * @param $userCRA_id
+     * @param $cra_id
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function updateAction($userCRA_id, Request $request)
+    public function updateAction($cra_id, Request $request)
     {
         $userCRARepo = $this->get('intranet.repository.cra');
 
-        $userCRA = $userCRARepo->find($userCRA_id);
+        $userCRA = $userCRARepo->find($cra_id);
 
         $form = $this->createForm(UserCRAType::class, $userCRA);
         $form->add('save', SubmitType::class, [
@@ -92,7 +92,7 @@ class UserCRAController extends Controller {
 
             $this->addFlash(
                 'success',
-                'Compte rendu d\'activité ' . $userCRA->getName() . ' modifiée !'
+                'Compte rendu d\'activité ' . $userCRA->getProjectName() . ' modifiée !'
             );
 
             return $this->redirectToRoute('intranet_cra_homepage');
@@ -107,14 +107,14 @@ class UserCRAController extends Controller {
 
     /**
      * Delete a CRA
-     * @param $userCRA_id
+     * @param $cra_id
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function deleteAction($userCRA_id)
+    public function deleteAction($cra_id)
     {
         $userCRARepo = $this->get('intranet.repository.cra');
 
-        $userCRA = $userCRARepo->find($userCRA_id);
+        $userCRA = $userCRARepo->find($cra_id);
 
         $em = $this->getDoctrine()->getEntityManager();
         $em->remove($userCRA);
@@ -122,7 +122,7 @@ class UserCRAController extends Controller {
 
         $this->addFlash(
             'success',
-            'Compte rendu d\'activité ' . $userCRA->getName() . ' supprimé'
+            'Compte rendu d\'activité ' . $userCRA->getProjectName() . ' supprimé'
         );
 
         return $this->redirectToRoute('intranet_cra_homepage');
@@ -131,14 +131,14 @@ class UserCRAController extends Controller {
 
     /**
      * Display a CRA
-     * @param $userCRA_id
+     * @param $cra_id
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function viewAction($userCRA_id)
+    public function viewAction($cra_id)
     {
         $userCRARepo = $this->get('intranet.repository.cra');
 
-        $userCRA = $userCRARepo->find($userCRA_id);
+        $userCRA = $userCRARepo->find($cra_id);
 
         return $this->render('IntranetBundle:UserCRA:view.html.twig', [
             'userCRA' => $userCRA
@@ -148,14 +148,14 @@ class UserCRAController extends Controller {
 
     /**
      * Make a CRA online
-     * @param $userCRA_id
+     * @param $cra_id
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function onlineAction($userCRA_id)
+    public function onlineAction($cra_id)
     {
         $userCRARepo = $this->get('intranet.repository.cra');
 
-        $userCRA = $userCRARepo->find($userCRA_id);
+        $userCRA = $userCRARepo->find($cra_id);
         $userCRA->setStatus(1);
 
         $em = $this->getDoctrine()->getEntityManager();
@@ -164,7 +164,7 @@ class UserCRAController extends Controller {
 
         $this->addFlash(
             'success',
-            'Compte rendu d\'activité ' . $userCRA->getName() . ' mis en ligne'
+            'Compte rendu d\'activité ' . $userCRA->getProjectName() . ' mis en ligne'
         );
 
         return $this->redirectToRoute('intranet_cra_homepage');
@@ -172,14 +172,14 @@ class UserCRAController extends Controller {
 
     /**
      * Make a CRA offline
-     * @param $userCRA_id
+     * @param $cra_id
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function offlineAction($userCRA_id)
+    public function offlineAction($cra_id)
     {
         $userCRARepo = $this->get('intranet.repository.cra');
 
-        $userCRA = $userCRARepo->find($userCRA_id);
+        $userCRA = $userCRARepo->find($cra_id);
         $userCRA->setStatus(0);
 
         $em = $this->getDoctrine()->getEntityManager();
@@ -188,7 +188,7 @@ class UserCRAController extends Controller {
 
         $this->addFlash(
             'success',
-            'Le compte rendu d\'activité ' . $userCRA->getName() . ' n\'est plus visible sur le site !'
+            'Le compte rendu d\'activité ' . $userCRA->getProjectName() . ' n\'est plus visible sur le site !'
         );
 
         return $this->redirectToRoute('intranet_cra_homepage');
