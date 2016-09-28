@@ -23,6 +23,16 @@ class User extends BaseUser {
     protected $id;
 
     /**
+     * @ORM\Column(name="google_id", type="string", length=255, nullable=true)
+     */
+    protected $google_id;
+
+    /**
+     * @ORM\Column(name="google_access_token", type="string", length=255, nullable=true)
+     */
+    protected $google_access_token;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="firstname", type="string", length=255, nullable=true)
@@ -160,7 +170,6 @@ class User extends BaseUser {
         $this->user_vacation = new ArrayCollection();
         $this->user_validation_vacation = new ArrayCollection();
     }
-
 
     /**
      * Set firstname
@@ -756,5 +765,53 @@ class User extends BaseUser {
     public function getUserValidationVacation()
     {
         return $this->user_validation_vacation;
+    }
+
+    /**
+     * Set googleId
+     *
+     * @param string $googleId
+     *
+     * @return User
+     */
+    public function setGoogleId($googleId)
+    {
+        $this->google_id = $googleId;
+
+        return $this;
+    }
+
+    /**
+     * Get googleId
+     *
+     * @return string
+     */
+    public function getGoogleId()
+    {
+        return $this->google_id;
+    }
+
+    /**
+     * Set googleAccessToken
+     *
+     * @param string $googleAccessToken
+     *
+     * @return User
+     */
+    public function setGoogleAccessToken($googleAccessToken)
+    {
+        $this->google_access_token = $googleAccessToken;
+
+        return $this;
+    }
+
+    /**
+     * Get googleAccessToken
+     *
+     * @return string
+     */
+    public function getGoogleAccessToken()
+    {
+        return $this->google_access_token;
     }
 }

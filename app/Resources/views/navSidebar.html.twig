@@ -41,7 +41,7 @@
             <a href="javascript:;" data-toggle="collapse" data-target="#tool"><i class="fa fa-fw fa-wrench"></i> Boite à outils <i class="fa fa-fw fa-caret-down"></i></a>
             <ul id="tool" class="collapse">
                 <li {% if currentRoute == 'intranet_page_homepage' %} class="active" {% endif %}>
-                    <a href="#">Outil 1</a>
+                    <a href="{{ path('google_login') }}">Google</a>
                 </li>
                 <li>
                     <a href="#">Outil 2</a>
