@@ -1,0 +1,28 @@
+{% extends 'intranet.html.twig' %}
+
+{% block title %} Google {% endblock %}
+
+{% block headerContainer %}
+    <div class="col-lg-12">
+        <h1 class="page-header">
+            Google
+        </h1>
+        <ol class="breadcrumb">
+            <li>
+                <i class="fa fa-home"></i>  <a href="{{ path('intranet_homepage') }}">Accueil</a>
+            </li>
+            <li class="active">
+                <i class="fa fa-eye"></i> Google
+            </li>
+        </ol>
+    </div>
+{% endblock %}
+
+{% block body %}
+
+    <a href="{{ path('intranet_google_login') }}" class="btn btn-primary" style="margin-bottom:10px;">Se conneter à google</a>
+
+    <div class="col-lg-12">
+        <p>Infos :</p>
+    </div>
+{% endblock %}

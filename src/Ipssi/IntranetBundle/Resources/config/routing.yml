@@ -1,7 +1,18 @@
+hwi_oauth_redirect:
+    resource: "@HWIOAuthBundle/Resources/config/routing/redirect.xml"
+    prefix:   /google/
+
+hwi_oauth_connect:
+    resource: "@HWIOAuthBundle/Resources/config/routing/connect.xml"
+    prefix:   /google/connect
+
+hwi_oauth_login:
+    resource: "@HWIOAuthBundle/Resources/config/routing/login.xml"
+    prefix:   /google/login
+
 intranet_homepage:
     path:     /
     defaults: { _controller: IntranetBundle:Default:index }
-
 
 ###################### Pages #########################
 
@@ -357,3 +368,16 @@ intranet_candidacy_online:
 intranet_candidacy_offline:
     path:   /candidacy/{candidacy_id}/offline
     defaults: { _controller: IntranetBundle:Candidacy:offline }
+
+
+###################### Google #########################
+
+intranet_google_homepage:
+    path: /google
+    defaults: { _controller: IntranetBundle:Google:index }
+
+intranet_google_login:
+    path: /google/connect/google
+
+google_login:
+    path: /google/login/check-google
