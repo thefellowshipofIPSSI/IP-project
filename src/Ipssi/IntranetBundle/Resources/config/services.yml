@@ -6,49 +6,49 @@ services:
           - 'IntranetBundle:News'
 
     intranet.repository.page:
-            class: IntranetBundle\Repository\PageRepository
-            factory: ['@doctrine.orm.entity_manager', 'getRepository']
-            arguments:
-              - 'IntranetBundle:Page'
+        class: IntranetBundle\Repository\PageRepository
+        factory: ['@doctrine.orm.entity_manager', 'getRepository']
+        arguments:
+          - 'IntranetBundle:Page'
 
     intranet.repository.job:
-                class: IntranetBundle\Repository\JobRepository
-                factory: ['@doctrine.orm.entity_manager', 'getRepository']
-                arguments:
-                  - 'IntranetBundle:Job'
+        class: IntranetBundle\Repository\JobRepository
+        factory: ['@doctrine.orm.entity_manager', 'getRepository']
+        arguments:
+          - 'IntranetBundle:Job'
 
     intranet.repository.job_offer:
-                    class: IntranetBundle\Repository\JobOfferRepository
-                    factory: ['@doctrine.orm.entity_manager', 'getRepository']
-                    arguments:
-                      - 'IntranetBundle:JobOffer'
+        class: IntranetBundle\Repository\JobOfferRepository
+        factory: ['@doctrine.orm.entity_manager', 'getRepository']
+        arguments:
+          - 'IntranetBundle:JobOffer'
 
     intranet.repository.skill:
-                        class: IntranetBundle\Repository\SkillRepository
-                        factory: ['@doctrine.orm.entity_manager', 'getRepository']
-                        arguments:
-                          - 'IntranetBundle:Skill'
+        class: IntranetBundle\Repository\SkillRepository
+        factory: ['@doctrine.orm.entity_manager', 'getRepository']
+        arguments:
+          - 'IntranetBundle:Skill'
 
     intranet.repository.cra:
-                            class: IntranetBundle\Repository\UserCRARepository
-                            factory: ['@doctrine.orm.entity_manager', 'getRepository']
-                            arguments:
-                              - 'IntranetBundle:UserCRA'
+        class: IntranetBundle\Repository\UserCRARepository
+        factory: ['@doctrine.orm.entity_manager', 'getRepository']
+        arguments:
+          - 'IntranetBundle:UserCRA'
 
     intranet.repository.expense:
-                                class: IntranetBundle\Repository\UserExpenseRepository
-                                factory: ['@doctrine.orm.entity_manager', 'getRepository']
-                                arguments:
-                                  - 'IntranetBundle:UserExpense'
+        class: IntranetBundle\Repository\UserExpenseRepository
+        factory: ['@doctrine.orm.entity_manager', 'getRepository']
+        arguments:
+          - 'IntranetBundle:UserExpense'
 
     intranet.repository.expense_line:
-                                    class: IntranetBundle\Repository\ExpenseLineRepository
-                                    factory: ['@doctrine.orm.entity_manager', 'getRepository']
-                                    arguments:
-                                      - 'IntranetBundle:ExpenseLine'
+        class: IntranetBundle\Repository\ExpenseLineRepository
+        factory: ['@doctrine.orm.entity_manager', 'getRepository']
+        arguments:
+          - 'IntranetBundle:ExpenseLine'
 
     intranet.repository.vacation:
-                                        class: IntranetBundle\Repository\UserVacationRepository
-                                        factory: ['@doctrine.orm.entity_manager', 'getRepository']
-                                        arguments:
-                                          - 'IntranetBundle:UserVacation'
+        class: IntranetBundle\Repository\UserVacationRepository
+        factory: ['@doctrine.orm.entity_manager', 'getRepository']
+        arguments:
+          - 'IntranetBundle:UserVacation'

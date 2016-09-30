@@ -31,9 +31,11 @@ security:
                 #use_referer:                    false
             oauth:
                 resource_owners:
-                    google:             "/intranet/google/login/check-google"
-                login_path:        /intranet/google/login
-                failure_path:      /intranet/google/login
+                    google:             "/login/check-google"
+                login_path:        /login
+                failure_path:      /login
+                always_use_default_target_path: true
+                default_target_path: /intranet
 
                 oauth_user_provider:
                     service: my_user_provider

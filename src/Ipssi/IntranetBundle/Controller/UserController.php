@@ -29,6 +29,23 @@ class UserController extends Controller
     }
 
     /**
+     * Profile of a user
+     * @param $user_id
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function profileAction($user_id)
+    {
+
+        $userRepo = $this->get('user.repository.user');
+
+        $user = $userRepo->find($user_id);
+
+        return $this->render('IntranetBundle:User:profile.html.twig', [
+            'user' => $user
+        ]);
+    }
+
+    /**
      * Create new User
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response

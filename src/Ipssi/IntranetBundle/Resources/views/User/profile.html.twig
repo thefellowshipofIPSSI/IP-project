@@ -1,0 +1,32 @@
+{% extends "intranet.html.twig" %}
+
+{% block title %} Mon profile {% endblock %}
+
+{% block headerContainer %}
+    <div class="col-lg-12">
+        <h1 class="page-header">
+            Profile
+        </h1>
+        <ol class="breadcrumb">
+            <li>
+                <i class="fa fa-home"></i>  <a href="{{ path('intranet_homepage') }}">Accueil</a>
+            </li>
+            <li class="active">
+                <i class="fa fa-eye"></i> Mon profile
+            </li>
+        </ol>
+    </div>
+{% endblock %}
+
+{% block body %}
+
+    {% if user.GoogleId == "" %}
+        <a href="{{ path('google_connect') }}" class="btn btn-primary" style="margin-bottom:10px;">Lier mon compte Google</a>
+    {% endif %}
+
+    <div class="col-lg-12">
+        <p>Username : {{ user.username }}</p>
+        <p>Prénom : {{ user.firstname }}</p>
+        <p>Nom : {{ user.lastname }}</p>
+    </div>
+{% endblock %}
