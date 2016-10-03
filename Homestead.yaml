@@ -11,16 +11,12 @@ authorize: ~/.ssh/id_rsa.pub
 keys:
     - ~/.ssh/id_rsa
 
-folders:
-    - map: "."
-      to: "/home/vagrant/ip-project"
-
 sites:
     - map: www.ip-project.app
-      to: "/home/vagrant/ip-project/web"
+      to: "/home/vagrant/IP-project/web"
       type: symfony
     - map: www.adminer.app
-      to: "/home/vagrant/ip-project/adminer"
+      to: "/home/vagrant/IP-project/adminer"
 
 
 databases:
