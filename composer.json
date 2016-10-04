@@ -33,7 +33,7 @@
         "oyejorge/less.php": "v1.7.0.10",
         "symfony/assetic-bundle": "^2.8",
         "hwi/oauth-bundle": "^0.5.0",
-        "symfony/security-acl": "^3.0"
+        "symfony/security": "^3.1"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",

@@ -33,6 +33,15 @@ class User extends BaseUser {
     protected $google_access_token;
 
     /**
+     * @ORM\ManyToMany(targetEntity="UserBundle\Entity\Group")
+     * @ORM\JoinTable(name="fos_user_user_group",
+     *      joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="group_id", referencedColumnName="id")}
+     * )
+     */
+    protected $groups;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="firstname", type="string", length=255, nullable=true)

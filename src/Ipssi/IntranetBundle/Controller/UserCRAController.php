@@ -75,6 +75,9 @@ class UserCRAController extends Controller {
 
         $userCRA = $userCRARepo->find($cra_id);
 
+        //check if current user can edit
+        $this->denyAccessUnlessGranted('edit', $userCRA);
+
         $form = $this->createForm(UserCRAType::class, $userCRA);
         $form->add('save', SubmitType::class, [
             'label' => 'Modifier',

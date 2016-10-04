@@ -34,6 +34,11 @@
 
         <div id="wrapper">
             <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+
+                {#{{ knp_menu_render('AppBundle:MenuBuilder:buildHeaderMenu', {'currentClass': 'active', 'template': ':Menu:knp_menu.html.twig'}) }}#}
+                {#{{ knp_menu_render('AppBundle:MenuBuilder:buildSidebarMenu', {'currentClass': 'active', 'template': ':Menu:knp_menu.html.twig'}) }}#}
+
+
                 {% include('navHeader.html.twig') %}
 
                 {% include('navSidebar.html.twig') %}

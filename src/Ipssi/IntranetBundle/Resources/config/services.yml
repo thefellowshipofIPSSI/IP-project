@@ -52,3 +52,11 @@ services:
         factory: ['@doctrine.orm.entity_manager', 'getRepository']
         arguments:
           - 'IntranetBundle:UserVacation'
+
+
+    intranet.user_cra_voter:
+        class: Ipssi\IntranetBundle\Security\UserCRAVoter
+        tags:
+            - { name: security.voter }
+        # small performance boost
+        public: false
