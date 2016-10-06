@@ -1,72 +1,43 @@
-<!-- current Route -->
-{% set currentRoute = app.request.attributes.get('_route') %}
+{% extends 'knp_menu.html.twig' %}
 
-<!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
-<div class="collapse navbar-collapse navbar-ex1-collapse">
-    <ul class="nav navbar-nav side-nav">
-        <li {% if currentRoute == 'intranet_homepage' %} class="active" {% endif %}>
-            <a href="{{ path('intranet_homepage') }}"><i class="fa fa-fw fa-home"></i> Accueil</a>
-        </li>
+{% block item %}
+    {% import "knp_menu.html.twig" as macros %}
+    {% set childrens = item.children %}
+    {% if item.displayed %}
+        {% if childrens %}
+            <li>
+                <a href="javascript:;" data-toggle="collapse" data-target="#{{ item.attribute('target') }}" class aria-expanded="true">
+                    {% if item.attribute('icon') is not empty  %}
+                        <i class="fa fa-fw fa-{{ item.attribute('icon') }}"></i>
+                    {% endif %}
+                    {{ item.label }}
+                    {% if item.attribute('icon2') is not empty  %}
+                        <i class="fa fa-fw fa-{{ item.attribute('icon2') }}"></i>
+                    {% endif %}
+                </a>
+                <ul id="{{ item.attribute('target') }}" class="collapse">
+                    {% for children in childrens %}
+                        <li>
+                            <a href="{{ children.uri }}">
+                                {{ children.name }}
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </li>
+        {% else %}
+            <li>
+                <a href="{{ item.uri }}">
+                    {% if item.attribute('icon') is not empty  %}
+                        <i class="fa fa-fw fa-{{ item.attribute('icon') }}"></i>
+                    {% endif %}
+                    {{ item.label }}
+                    {% if item.attribute('icon2') is not empty  %}
+                        <i class="fa fa-fw fa-{{ item.attribute('icon2') }}"></i>
+                    {% endif %}
+                </a>
+            </li>
+        {% endif %}
+    {% endif %}
 
-        <li {% if currentRoute == 'intranet_news_homepage' %} class="active" {% endif %}>
-            <a href="{{ path('intranet_news_homepage') }}"><i class="fa fa-fw fa-newspaper-o"></i> Actualités</a>
-        </li>
-        <li>
-            <a href="javascript:;" data-toggle="collapse" data-target="#rh"><i class="fa fa-fw fa-group"></i> Ressources Humaines <i class="fa fa-fw fa-caret-down"></i></a>
-            <ul id="rh" class="collapse">
-                <li {% if currentRoute == 'intranet_cra_homepage' %} class="active" {% endif %}>
-                    <a href="{{ path('intranet_cra_homepage') }}">Compte rendu d'activité</a>
-                </li>
-                <li {% if currentRoute == 'intranet_expense_homepage' %} class="active" {% endif %}>
-                    <a href="{{ path('intranet_expense_homepage') }}">Note de frais</a>
-                </li>
-                <li {% if currentRoute == 'intranet_vacation_homepage' %} class="active" {% endif %}>
-                    <a href="{{ path('intranet_vacation_homepage') }}">Demandes de congés</a>
-                </li>
-                <li {% if currentRoute == 'intranet_cv_homepage' %} class="active" {% endif %}>
-                    <a href="{{ path('intranet_cv_homepage') }}">CVthèque</a>
-                </li>
-                <li {% if currentRoute == 'intranet_job_offer_homepage' %} class="active" {% endif %}>
-                    <a href="{{ path('intranet_job_offer_homepage') }}">Offres de poste</a>
-                </li>
-                <li {% if currentRoute == 'intranet_candidacy_homepage' %} class="active" {% endif %}>
-                    <a href="{{ path('intranet_candidacy_homepage') }}">Candidatures</a>
-                </li>
-                <li {% if currentRoute == 'intranet_user_homepage' %} class="active" {% endif %}>
-                    <a href="{{ path('intranet_user_homepage') }}">Collaborateurs</a>
-                </li>
-            </ul>
-        </li>
-        <li>
-            <a href="javascript:;" data-toggle="collapse" data-target="#tool"><i class="fa fa-fw fa-wrench"></i> Boite à outils <i class="fa fa-fw fa-caret-down"></i></a>
-            <ul id="tool" class="collapse">
-                <li>
-                    <a href="#">Outil 1</a>
-                </li>
-                <li>
-                    <a href="#">Outil 2</a>
-                </li>
-
-            </ul>
-        </li>
-        <li>
-            <a href="javascript:;" data-toggle="collapse" data-target="#admin"><i class="fa fa-fw fa-cog"></i> Administration <i class="fa fa-fw fa-caret-down"></i></a>
-            <ul id="admin" class="collapse">
-                <li>
-                    <a href="{{ path('intranet_user_homepage') }}">Gestion des utilisateurs</a>
-                </li>
-                <li {% if currentRoute == 'intranet_page_homepage' %} class="active" {% endif %}>
-                    <a href="{{ path('intranet_page_homepage') }}">Pages</a>
-                </li>
-                <li {% if currentRoute == 'intranet_job_homepage' %} class="active" {% endif %}>
-                    <a href="{{ path('intranet_job_homepage') }}">Postes</a>
-                </li>
-                <li {% if currentRoute == 'intranet_skill_homepage' %} class="active" {% endif %}>
-                    <a href="{{ path('intranet_skill_homepage') }}">Compétences</a>
-                </li>
-            </ul>
-        </li>
-    </ul>
-</div>
-<!-- /.navbar-collapse -->
-
+{% endblock %}

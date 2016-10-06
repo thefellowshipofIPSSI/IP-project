@@ -4,9 +4,3 @@ parameters:
 #    parameter_name: value
 
 services:
-    app.menu_builder:
-            class: Ipssi\IntranetBundle\Menu\MenuBuilder
-            arguments: ["@knp_menu.factory"]
-            tags:
-                - { name: knp_menu.menu_builder, method: createHeaderMenu, alias: header }
-                - { name: knp_menu.menu_builder, method: createSidebarMenu, alias: sidebar }

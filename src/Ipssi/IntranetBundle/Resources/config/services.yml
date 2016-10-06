@@ -1,4 +1,6 @@
 services:
+
+    #--------------------------REPOSITORIES-----------------------------
     intranet.repository.news:
         class: IntranetBundle\Repository\NewsRepository
         factory: ['@doctrine.orm.entity_manager', 'getRepository']
@@ -52,6 +54,16 @@ services:
         factory: ['@doctrine.orm.entity_manager', 'getRepository']
         arguments:
           - 'IntranetBundle:UserVacation'
+
+
+    #-----------------------MENU---------------------------------------------
+    app.menu_builder:
+        class: Ipssi\IntranetBundle\Menu\MenuBuilder
+        arguments: ["@knp_menu.factory"]
+        tags:
+            - { name: knp_menu.menu_builder, method: createUserMenu, alias: user }
+            - { name: knp_menu.menu_builder, method: createSidebarMenu, alias: sidebar }
+
 
 
     intranet.user_cra_voter:
