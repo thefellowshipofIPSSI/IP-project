@@ -1,0 +1,51 @@
+{% extends 'intranet.html.twig' %}
+
+{% block title %} Compétences {% endblock %}
+
+{% block headerContainer %}
+    <div class="col-lg-12">
+        <h1 class="page-header">
+            Compétences
+        </h1>
+        <ol class="breadcrumb">
+            <li>
+                <i class="fa fa-home"></i>  <a href="{{ path('intranet_homepage') }}">Accueil</a>
+            </li>
+            <li class="active">
+                Compétence
+            </li>
+        </ol>
+    </div>
+{% endblock %}
+
+{% block body %}
+
+    <a href="{{ path('intranet_skill_create') }}" class="btn btn-primary" style="margin-bottom:10px;">Nouvelle compétence</a>
+
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Titre</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for skill in allSkills %}
+            <tr>
+
+                    <td>{{ skill.id }}</td>
+                    <td>{{ skill.title }}</td>
+                    <td>
+                        <a href="{{ path('intranet_skill_view', {'skill_id': skill.id}) }}" class="fa fa-eye" title="Aperçu"></a>
+                        <a href="{{ path('intranet_skill_update', {'skill_id': skill.id}) }}" class="fa fa-pencil-square-o" title="Modifier"></a>
+                        <a href="{{ path('intranet_skill_delete', {'skill_id': skill.id}) }}" class="fa fa-trash-o" title="Supprimer"></a>
+                    </td>
+
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

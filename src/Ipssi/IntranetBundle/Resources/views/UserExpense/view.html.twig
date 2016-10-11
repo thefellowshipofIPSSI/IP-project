@@ -1,0 +1,83 @@
+{% extends "intranet.html.twig" %}
+
+{% block title %} Note de frais {% endblock %}
+
+{% block headerContainer %}
+    <div class="col-lg-12">
+        <h1 class="page-header">
+            Note de frais
+            <small> du {{ userExpense.beginDate|date('d/m/Y') }} au {{ userExpense.endDate|date('d/m/Y') }}</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li>
+                <i class="fa fa-home"></i>  <a href="{{ path('intranet_homepage') }}">Accueil</a>
+            </li>
+            <li>
+                </i> <a href="{{ path('intranet_expense_homepage') }}">Toutes les notes de frais</a>
+            </li>
+            <li class="active">
+                <i class="fa fa-eye"></i> Note de frais du {{ userExpense.beginDate|date('d/m/Y') }} au {{ userExpense.endDate|date('d/m/Y') }}
+            </li>
+        </ol>
+    </div>
+{% endblock %}
+
+{% block body %}
+
+    <div class="col-lg-12">
+
+
+        <!-- Title -->
+        <h1>{{ userExpense.title|capitalize }}</h1>
+
+        <!-- Author -->
+        <p class="lead">
+            crée par {{ userExpense.user.username|capitalize }} le {{ userExpense.creationDate|date('d/m/Y') }} à {{ userExpense.creationDate|date('H:i') }}
+        </p>
+
+        <hr>
+
+        <!-- Page Content -->
+        <p>Description : {{ userExpense.description }}</p>
+
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Date</th>
+                    <th>Type</th>
+                    <th>Description</th>
+                    <th>Prix</th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% set total = 0 %}
+                {% for expenseLine in allExpenseLines %}
+                    <tr>
+                        <td>{{ loop.index }}</td>
+                        <td>{{ expenseLine.expenseLineDate|date('d/m/Y') }}</td>
+                        <td>{{ expenseLine.type }}</td>
+                        <td>{{ expenseLine.description }}</td>
+                        <td>{{ expenseLine.prix }}</td>
+                        {% set total = total + expenseLine.prix %}
+                        <td>
+                            <a href="{{ path('intranet_expense_expense_line_update', {'expenseLine_id': expenseLine.id, 'expense_id': userExpense.id}) }}" class="fa fa-pencil-square-o" title="Modifier"></a>
+                            <a href="{{ path('intranet_expense_expense_line_delete', {'expenseLine_id': expenseLine.id, 'expense_id': userExpense.id}) }}" class="fa fa-trash-o" title="Supprimer"></a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <p class="lead pull-right">Total : {{ total }} €</p>
+        <br><br><br>
+        <a href="{{ path('intranet_expense_expense_line_create', {'expense_id': userExpense.id}) }}" class="btn btn-primary pull-right" style="margin-bottom:10px;">Ajouter une ligne</a>
+
+    </div>
+    <br><br><br>
+    <a href="{{ path('intranet_expense_update', {'expense_id': userExpense.id}) }}" class="btn btn-primary" style="margin-bottom:10px;">Modifier</a>
+
+
+{% endblock %}

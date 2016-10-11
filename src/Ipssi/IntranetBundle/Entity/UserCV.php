@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * UserCV
  *
  * @ORM\Table(name="user_cv")
+ * @ORM\HasLifecycleCallbacks
  * @ORM\Entity(repositoryClass="Ipssi\IntranetBundle\Repository\UserCVRepository")
  */
 class UserCV
@@ -42,11 +43,39 @@ class UserCV
      */
     private $modificationDate;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User", inversedBy="user_cv")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $user;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User", inversedBy="user_validation_cv")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $user_validation;
+
+
+    /**
+     * Before persist or update, call the updatedTimestamps() function.
+     *
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
+     */
+    public function onPrePersist()
+    {
+        $this->setModificationDate(new \DateTime('now'));
+
+        if($this->getCreationDate() == null)
+        {
+            $this->setCreationDate(new \DateTime('now'));
+        }
+    }
 
     /**
      * Get id
      *
-     * @return int
+     * @return integer
      */
     public function getId()
     {
@@ -124,5 +153,52 @@ class UserCV
     {
         return $this->modificationDate;
     }
-}
 
+    /**
+     * Set user
+     *
+     * @param \UserBundle\Entity\User $user
+     *
+     * @return UserCV
+     */
+    public function setUser(\UserBundle\Entity\User $user)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \UserBundle\Entity\User
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * Set userValidation
+     *
+     * @param \UserBundle\Entity\User $userValidation
+     *
+     * @return UserCV
+     */
+    public function setUserValidation(\UserBundle\Entity\User $userValidation = null)
+    {
+        $this->user_validation = $userValidation;
+
+        return $this;
+    }
+
+    /**
+     * Get userValidation
+     *
+     * @return \UserBundle\Entity\User
+     */
+    public function getUserValidation()
+    {
+        return $this->user_validation;
+    }
+}

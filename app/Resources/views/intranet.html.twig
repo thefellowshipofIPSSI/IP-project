@@ -34,9 +34,17 @@
 
         <div id="wrapper">
             <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-                {% include('navHeader.html.twig') %}
 
-                {% include('navSidebar.html.twig') %}
+                {#{{ knp_menu_render('AppBundle:MenuBuilder:buildHeaderMenu', ) }}#}
+                {#{{ knp_menu_render('AppBundle:MenuBuilder:buildSidebarMenu', {'currentClass': 'active', 'template': ':Menu:knp_menu.html.twig'}) }}#}
+
+
+                {% include('navHeader.html.twig') %}
+                {{ knp_menu_render('user', {'template': 'navUser.html.twig'}) }}
+                {{ knp_menu_render('sidebar', {'template': 'navSidebar.html.twig'}) }}
+
+
+                {#{% include('navSidebar.html.twig') %}#}
             </nav>
 
             <div id="page-wrapper">

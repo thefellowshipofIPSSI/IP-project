@@ -17,3 +17,6 @@ parameters:
 
     # A secret key that's used to generate certain security-related tokens
     secret:            ThisTokenIsNotSoSecretChangeIt
+
+    google_app_id:     find it in Drive ip-project/Api
+    google_app_secret: find it in Drive ip-project/Api

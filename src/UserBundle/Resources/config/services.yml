@@ -1,0 +1,9 @@
+services:
+    user.repository.user:
+        class: UserBundle\Repository\UserRepository
+        factory: ['@doctrine.orm.entity_manager', 'getRepository']
+        arguments:
+          - 'UserBundle:User'
+    my_user_provider:
+        class: UserBundle\Security\Core\User\FOSUBUserProvider
+        arguments: ['@fos_user.user_manager', {google: google_id}]

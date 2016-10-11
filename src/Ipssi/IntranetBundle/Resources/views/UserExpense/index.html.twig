@@ -1,0 +1,67 @@
+{% extends 'intranet.html.twig' %}
+
+{% block title %} Note de frais {% endblock %}
+
+{% block headerContainer %}
+    <div class="col-lg-12">
+        <h1 class="page-header">
+            Note de frais
+            <small>Toutes les notes de frais</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li>
+                <i class="fa fa-home"></i>  <a href="{{ path('intranet_homepage') }}">Accueil</a>
+            </li>
+            <li class="active">
+                <i class="fa fa-eye"></i> Toutes les notes de frais
+            </li>
+        </ol>
+    </div>
+{% endblock %}
+
+{% block body %}
+
+    <a href="{{ path('intranet_expense_create') }}" class="btn btn-primary" style="margin-bottom:10px;">Nouvelle note de frais</a>
+
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Date</th>
+                <th>Titre</th>
+                <th>Statut</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for userExpense in allUserExpenses %}
+            <tr>
+                <td>{{ userExpense.id }}</td>
+                <td>{{ userExpense.creationDate|date('d/m/Y') }}</td>
+                <td>{{ userExpense.title }}</td>
+                <td>
+                    {% if userExpense.status == 0 %}
+                        Hors ligne
+                    {% else %}
+                        En ligne
+                    {% endif %}
+                </td>
+                <td>
+                    <a href="{{ path('intranet_expense_view', {'expense_id': userExpense.id}) }}" class="fa fa-eye" title="Aperçu"></a>
+                    <a href="{{ path('intranet_expense_update', {'expense_id': userExpense.id}) }}" class="fa fa-pencil-square-o" title="Modifier"></a>
+                    <a href="{{ path('intranet_expense_delete', {'expense_id': userExpense.id}) }}" class="fa fa-trash-o" title="Supprimer"></a>
+                    <a href="#" class="fa fa-download" title="Télécharger le .csv"></a>
+                    {% if userExpense.status == 0 %}
+                        <a href="{{ path('intranet_expense_online', {'expense_id': userExpense.id}) }}" class="fa fa-toggle-off pull-right" title="Mettre en ligne"></a>
+                    {% else %}
+                        <a href="{{ path('intranet_expense_offline', {'expense_id': userExpense.id}) }}" class="fa fa-toggle-on pull-right" title="Mettre hors ligne"></a>
+                    {% endif %}
+                </td>
+
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

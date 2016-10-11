@@ -10,4 +10,15 @@ namespace Ipssi\IntranetBundle\Repository;
  */
 class ExpenseLineRepository extends \Doctrine\ORM\EntityRepository
 {
+    /**
+     * @param $expense_id
+     */
+    public function findAllLinesForOneExpense($expense_id)
+    {
+        return $this->createQueryBuilder('expenseLine')
+            ->where('expenseLine.user_expense = :user_expense')
+            ->setParameter('user_expense', $expense_id)
+            ->orderBy('expenseLine.id', 'ASC')
+            ->getQuery()->getResult();
+    }
 }

@@ -20,12 +20,28 @@ class UserController extends Controller
     public function indexAction()
     {
 
-        $userRepo = $this->getDoctrine()->getRepository('UserBundle:User');
+        $allUsers = $this->get('user.repository.user')->findAll();
 
-        $allUsers = $userRepo->findAll();
 
         return $this->render('IntranetBundle:User:index.html.twig', [
             'allUsers' => $allUsers
+        ]);
+    }
+
+    /**
+     * Profile of a user
+     * @param $user_id
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function profileAction($user_id)
+    {
+
+        $userRepo = $this->get('user.repository.user');
+
+        $user = $userRepo->find($user_id);
+
+        return $this->render('IntranetBundle:User:profile.html.twig', [
+            'user' => $user
         ]);
     }
 
@@ -40,7 +56,8 @@ class UserController extends Controller
 
         $form = $this->createForm(UserType::class, $user);
         $form->add('save', SubmitType::class, [
-            'label' => 'Créer'
+            'label' => 'Créer',
+            'attr' => ['class' => 'btn btn-primary']
         ]);
 
         $form->handleRequest($request);
@@ -79,14 +96,15 @@ class UserController extends Controller
      */
     public function updateAction($user_id, Request $request)
     {
-        $userRepo = $this->getDoctrine()->getRepository('UserBundle:User');
+        $userRepo = $this->get('user.repository.user');
 
         $user = $userRepo->find($user_id);
 
 
         $form = $this->createForm(UserType::class, $user);
         $form->add('save', SubmitType::class, [
-            'label' => 'Modifier'
+            'label' => 'Modifier',
+            'attr' => ['class' => 'btn btn-primary']
         ]);
 
         $form->handleRequest($request);
@@ -126,7 +144,7 @@ class UserController extends Controller
      */
     public function deleteAction($user_id)
     {
-        $userRepo = $this->getDoctrine()->getRepository('UserBundle:User');
+        $userRepo = $this->get('user.repository.user');
 
         $user = $userRepo->find($user_id);
 
@@ -161,7 +179,7 @@ class UserController extends Controller
      */
     public function viewAction($user_id)
     {
-        $userRepo = $this->getDoctrine()->getRepository('UserBundle:User');
+        $userRepo = $this->get('user.repository.user');
 
         $user = $userRepo->find($user_id);
 
@@ -173,7 +191,7 @@ class UserController extends Controller
 
     public function enableAction($user_id)
     {
-        $userRepo = $this->getDoctrine()->getRepository('UserBundle:User');
+        $userRepo = $this->get('user.repository.user');
 
         $user = $userRepo->find($user_id);
         $user->setEnabled(1);
@@ -181,6 +199,11 @@ class UserController extends Controller
         $em = $this->getDoctrine()->getEntityManager();
         $em->persist($user);
         $em->flush();
+
+        $this->addFlash(
+            'success',
+            'Utilisateur ' . $user->getUsername() . ' activé'
+        );
 
         return $this->redirectToRoute('intranet_user_homepage');
     }
@@ -193,7 +216,7 @@ class UserController extends Controller
      */
     public function disableAction($user_id)
     {
-        $userRepo = $this->getDoctrine()->getRepository('UserBundle:User');
+        $userRepo = $this->get('user.repository.user');
 
         $user = $userRepo->find($user_id);
         $user->setEnabled(0);
@@ -201,6 +224,11 @@ class UserController extends Controller
         $em = $this->getDoctrine()->getEntityManager();
         $em->persist($user);
         $em->flush();
+
+        $this->addFlash(
+            'success',
+            'Utilisateur ' . $user->getUsername() . ' désactivé'
+        );
 
         return $this->redirectToRoute('intranet_user_homepage');
     }

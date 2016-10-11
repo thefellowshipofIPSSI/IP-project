@@ -28,6 +28,17 @@ class Skill
      */
     private $title;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="Ipssi\IntranetBundle\Entity\JobOffer", mappedBy="skill")
+     */
+    private $job_offer;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User", inversedBy="skill")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $user;
+
 
     /**
      * Get id
@@ -62,5 +73,70 @@ class Skill
     {
         return $this->title;
     }
-}
 
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->job_offer = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add jobOffer
+     *
+     * @param \Ipssi\IntranetBundle\Entity\JobOffer $jobOffer
+     *
+     * @return Skill
+     */
+    public function addJobOffer(\Ipssi\IntranetBundle\Entity\JobOffer $jobOffer)
+    {
+        $this->job_offer[] = $jobOffer;
+
+        return $this;
+    }
+
+    /**
+     * Remove jobOffer
+     *
+     * @param \Ipssi\IntranetBundle\Entity\JobOffer $jobOffer
+     */
+    public function removeJobOffer(\Ipssi\IntranetBundle\Entity\JobOffer $jobOffer)
+    {
+        $this->job_offer->removeElement($jobOffer);
+    }
+
+    /**
+     * Get jobOffer
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getJobOffer()
+    {
+        return $this->job_offer;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \UserBundle\Entity\User $user
+     *
+     * @return Skill
+     */
+    public function setUser(\UserBundle\Entity\User $user)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \UserBundle\Entity\User
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+}

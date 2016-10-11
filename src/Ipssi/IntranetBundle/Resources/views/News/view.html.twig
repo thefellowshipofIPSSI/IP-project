@@ -10,10 +10,10 @@
         </h1>
         <ol class="breadcrumb">
             <li>
-                <i class="fa fa-dashboard"></i>  <a href="{{ path('intranet_homepage') }}">Dashboard</a>
+                <i class="fa fa-home"></i>  <a href="{{ path('intranet_homepage') }}">Accueil</a>
             </li>
             <li class="active">
-                <i class="fa fa-file"></i> <a href="{{ path('intranet_news_homepage') }}">Actualités</a>
+                <a href="{{ path('intranet_news_homepage') }}">Actualités</a>
             </li>
             <li class="active">
                 <i class="fa fa-eye"></i> Aperçu : {{ news.name }}
@@ -24,9 +24,8 @@
 
 {% block body %}
 
-    <div class="col-lg-8">
+    <div class="col-lg-12">
 
-        <a href="{{ path('intranet_news_update', {'news_id': news.id}) }}" class="btn btn-primary" style="margin-bottom:10px;">Modifier</a>
 
         <!-- Blog Post -->
 
@@ -35,13 +34,8 @@
 
         <!-- Author -->
         <p class="lead">
-            by {{ news.getUser.usernameCanonical|capitalize }}
+            par {{ news.getUser.usernameCanonical|capitalize }} le {{ news.creationDate|date('d/m/Y') }} à {{ news.creationDate|date('H:i') }}
         </p>
-
-        <hr>
-
-        <!-- Date/Time -->
-        <p><span class="glyphicon glyphicon-time"></span> Posted on {{ news.creationDate|date('m/d/Y') }} à {{ news.creationDate|date('H:i') }}</p>
 
         <hr>
 
@@ -56,7 +50,11 @@
         <p>
             {{ news.content|raw }}
         </p>
-        <hr>
+
     </div>
+
+    <br><br><br>
+    <a href="{{ path('intranet_news_update', {'news_id': news.id}) }}" class="btn btn-primary" style="margin-bottom:10px;">Modifier</a>
+
 
 {% endblock %}

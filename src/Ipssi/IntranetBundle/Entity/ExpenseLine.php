@@ -31,6 +31,13 @@ class ExpenseLine
     /**
      * @var string
      *
+     * @ORM\Column(name="type", type="string", length=255)
+     */
+    private $type;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="description", type="text")
      */
     private $description;
@@ -42,11 +49,18 @@ class ExpenseLine
      */
     private $prix;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="Ipssi\IntranetBundle\Entity\UserExpense", inversedBy="expense_line")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $user_expense;
+
+
 
     /**
      * Get id
      *
-     * @return int
+     * @return integer
      */
     public function getId()
     {
@@ -75,6 +89,30 @@ class ExpenseLine
     public function getExpenseLineDate()
     {
         return $this->expenseLineDate;
+    }
+
+    /**
+     * Set type
+     *
+     * @param string $type
+     *
+     * @return ExpenseLine
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    /**
+     * Get type
+     *
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->type;
     }
 
     /**
@@ -124,5 +162,28 @@ class ExpenseLine
     {
         return $this->prix;
     }
-}
 
+    /**
+     * Set userExpense
+     *
+     * @param \Ipssi\IntranetBundle\Entity\UserExpense $userExpense
+     *
+     * @return ExpenseLine
+     */
+    public function setUserExpense(\Ipssi\IntranetBundle\Entity\UserExpense $userExpense)
+    {
+        $this->user_expense = $userExpense;
+
+        return $this;
+    }
+
+    /**
+     * Get userExpense
+     *
+     * @return \Ipssi\IntranetBundle\Entity\UserExpense
+     */
+    public function getUserExpense()
+    {
+        return $this->user_expense;
+    }
+}

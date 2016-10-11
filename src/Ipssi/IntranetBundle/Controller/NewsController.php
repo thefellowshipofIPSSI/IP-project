@@ -20,10 +20,7 @@ class NewsController extends Controller {
      */
     public function indexAction() {
 
-        $newsRepo = $this->getDoctrine()->getRepository('IntranetBundle:News');
-
-        $allNews = $newsRepo->findAll();
-
+        $allNews = $this->get('intranet.repository.news')->findAll();
 
         return $this->render('IntranetBundle:News:index.html.twig', [
             'allNews' => $allNews
@@ -47,8 +44,6 @@ class NewsController extends Controller {
 
         if($form->isSubmitted() && $form->isValid()) {
             $news = $form->getData();
-            $news->setUser($this->getUser());
-
             $news->setUser($this->getUser());
 
             $em = $this->getDoctrine()->getEntityManager();
@@ -77,7 +72,7 @@ class NewsController extends Controller {
      */
     public function updateAction($news_id, Request $request)
     {
-        $newsRepo = $this->getDoctrine()->getRepository('IntranetBundle:News');
+        $newsRepo = $this->get('intranet.repository.news');
 
         $news = $newsRepo->find($news_id);
 
@@ -118,7 +113,7 @@ class NewsController extends Controller {
      */
     public function deleteAction($news_id)
     {
-        $newsRepo = $this->getDoctrine()->getRepository('IntranetBundle:News');
+        $newsRepo = $this->get('intranet.repository.news');
 
         $news = $newsRepo->find($news_id);
 
@@ -142,7 +137,7 @@ class NewsController extends Controller {
      */
     public function viewAction($news_id)
     {
-        $newsRepo = $this->getDoctrine()->getRepository('IntranetBundle:News');
+        $newsRepo = $this->get('intranet.repository.news');
 
         $news = $newsRepo->find($news_id);
 
@@ -160,7 +155,7 @@ class NewsController extends Controller {
      */
     public function onlineAction($news_id)
     {
-        $newsRepo = $this->getDoctrine()->getRepository('IntranetBundle:News');
+        $newsRepo = $this->get('intranet.repository.news');
 
         $news = $newsRepo->find($news_id);
         $news->setStatus(1);
@@ -168,6 +163,11 @@ class NewsController extends Controller {
         $em = $this->getDoctrine()->getEntityManager();
         $em->persist($news);
         $em->flush();
+
+        $this->addFlash(
+            'success',
+            'Actualité ' . $news->getName() . ' mise en ligne'
+        );
 
         return $this->redirectToRoute('intranet_news_homepage');
     }
@@ -179,7 +179,7 @@ class NewsController extends Controller {
      */
     public function offlineAction($news_id)
     {
-        $newsRepo = $this->getDoctrine()->getRepository('IntranetBundle:News');
+        $newsRepo = $this->get('intranet.repository.news');
 
         $news = $newsRepo->find($news_id);
         $news->setStatus(0);
@@ -187,6 +187,11 @@ class NewsController extends Controller {
         $em = $this->getDoctrine()->getEntityManager();
         $em->persist($news);
         $em->flush();
+
+        $this->addFlash(
+            'success',
+            'L\'Actualité ' . $news->getName() . ' n\'est plus visible sur le site'
+        );
 
         return $this->redirectToRoute('intranet_news_homepage');
     }

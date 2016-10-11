@@ -11,7 +11,6 @@ use Ipssi\IntranetBundle\Form\PageType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Session\Session;
 
-
 class PageController extends Controller {
 
     /**
@@ -20,9 +19,7 @@ class PageController extends Controller {
      */
     public function indexAction() {
 
-        $pageRepo = $this->getDoctrine()->getRepository('IntranetBundle:Page');
-
-        $allPages = $pageRepo->findAll();
+        $allPages = $this->get('intranet.repository.page')->findAll();
 
         return $this->render('IntranetBundle:Page:index.html.twig', [
             'allPages' => $allPages
@@ -74,7 +71,8 @@ class PageController extends Controller {
      */
     public function updateAction($page_id, Request $request)
     {
-        $pageRepo = $this->getDoctrine()->getRepository('IntranetBundle:Page');
+        //$pageRepo = $this->getDoctrine()->getRepository('IntranetBundle:Page');
+        $pageRepo = $this->get('intranet.repository.page');
 
         $page = $pageRepo->find($page_id);
 
@@ -115,7 +113,7 @@ class PageController extends Controller {
      */
     public function deleteAction($page_id)
     {
-        $pageRepo = $this->getDoctrine()->getRepository('IntranetBundle:Page');
+        $pageRepo = $this->get('intranet.repository.page');
 
         $page = $pageRepo->find($page_id);
 
@@ -139,12 +137,12 @@ class PageController extends Controller {
      */
     public function viewAction($page_id)
     {
-        $pageRepo = $this->getDoctrine()->getRepository('IntranetBundle:Page');
+        $pageRepo = $this->get('intranet.repository.page');
 
         $page = $pageRepo->find($page_id);
+        $pageTemplate = $page->getPageTemplate()->getName();
 
-
-        return $this->render('IntranetBundle:Page:view.html.twig', [
+        return $this->render('IntranetBundle:Page\Templates:'. $pageTemplate .'.html.twig', [
             'page' => $page
         ]);
     }
@@ -157,7 +155,7 @@ class PageController extends Controller {
      */
     public function onlineAction($page_id)
     {
-        $pageRepo = $this->getDoctrine()->getRepository('IntranetBundle:Page');
+        $pageRepo = $this->get('intranet.repository.page');
 
         $page = $pageRepo->find($page_id);
         $page->setStatus(1);
@@ -165,6 +163,11 @@ class PageController extends Controller {
         $em = $this->getDoctrine()->getEntityManager();
         $em->persist($page);
         $em->flush();
+
+        $this->addFlash(
+            'success',
+            'Page ' . $page->getName() . ' mise en ligne'
+        );
 
         return $this->redirectToRoute('intranet_page_homepage');
     }
@@ -176,7 +179,7 @@ class PageController extends Controller {
      */
     public function offlineAction($page_id)
     {
-        $pageRepo = $this->getDoctrine()->getRepository('IntranetBundle:page');
+        $pageRepo = $this->get('intranet.repository.page');
 
         $page = $pageRepo->find($page_id);
         $page->setStatus(0);
@@ -184,6 +187,11 @@ class PageController extends Controller {
         $em = $this->getDoctrine()->getEntityManager();
         $em->persist($page);
         $em->flush();
+
+        $this->addFlash(
+            'success',
+            'La Page ' . $page->getName() . ' n\'est plus visible sur le site !'
+        );
 
         return $this->redirectToRoute('intranet_page_homepage');
     }
