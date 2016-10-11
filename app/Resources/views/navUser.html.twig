@@ -111,20 +111,6 @@
 
 
 
-{#{% block dropdownSidebarElement %}#}
-
-    {#{{ dump(item) }}#}
-
-    {#{%- set attributes = item.linkAttributes %}#}
-    {#{%- set attributes = attributes|merge({'data-toggle': 'collapse'}) %}#}
-    {#{%- set attributes = attributes|merge({'data-target': '#' }) %}#}
-    {#<a href="javascript:;"{{ macros.attributes(attributes) }}>#}
-        {#<ul id="" class="collapse">#}
-            {#{{ block('linkElement') }}#}
-        {#</ul>#}
-    {#</a>#}
-{#{% endblock %}#}
-
 {% block label %}
     {{ item.label }}
 {% endblock %}

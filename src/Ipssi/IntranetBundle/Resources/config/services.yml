@@ -60,10 +60,23 @@ services:
     app.menu_builder:
         class: Ipssi\IntranetBundle\Menu\MenuBuilder
         arguments: ["@knp_menu.factory"]
-        tags:
-            - { name: knp_menu.menu_builder, method: createUserMenu, alias: user }
-            - { name: knp_menu.menu_builder, method: createSidebarMenu, alias: sidebar }
+#        tags:
+#            - { name: knp_menu.menu_builder, method: createUserMenu, alias: user }
+#            - { name: knp_menu.menu_builder, method: createSidebarMenu, alias: sidebar }
 
+    app.user_menu:
+            class: Knp\Menu\MenuItem # the service definition requires setting the class
+            factory: ["@app.menu_builder", createUserMenu]
+            arguments: ["@security.token_storage"]
+            tags:
+                - { name: knp_menu.menu, alias: user } # The alias is what is used to retrieve the menu
+
+    app.sidebar_menu:
+                class: Knp\Menu\MenuItem # the service definition requires setting the class
+                factory: ["@app.menu_builder", createSidebarMenu]
+                arguments: ["@security.token_storage"]
+                tags:
+                    - { name: knp_menu.menu, alias: sidebar } # The alias is what is used to retrieve the menu
 
 
     intranet.user_cra_voter:
@@ -72,3 +85,4 @@ services:
             - { name: security.voter }
         # small performance boost
         public: false
+

@@ -1,12 +1,18 @@
 <?php
 namespace Ipssi\IntranetBundle\Menu;
 
+use Buzz\Message\Request;
 use Knp\Menu\FactoryInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
-class MenuBuilder extends Controller
+use Symfony\Component\Security\Core\Security;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
+
+
+class MenuBuilder
 {
     private $factory;
+    private $tokenStorage;
 
     /**
      * @param FactoryInterface $factory
@@ -18,20 +24,28 @@ class MenuBuilder extends Controller
         $this->factory = $factory;
     }
 
-    public function createUserMenu( array $options)
+    public function createUserMenu(TokenStorage $requestStack)
     {
-        //var_dump($this->get('fos_userbundle'));
-        //$user = $this->get('security.token_storage')->getToken()->getUser();
 
-//      $user = $this->get('fos_userbundle')->getToken()->getUser();
+
+//        if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
+//            throw $this->createAccessDeniedException();
+//        }
+//
+        $user = $requestStack->getToken()->getUser();
+
+
+        //var_dump($this->get('security.authorization_checker'));
+
+
         $menu = $this->factory->createItem('user');
         $menu->setChildrenAttribute('class', 'nav navbar-right top-nav');
 
 
-        $menu->addChild('User', array('label' => 'Bonjour'))
+        $menu->addChild('User', array('label' => 'Bonjour ' . $user->getUsername()))
             ->setAttribute('dropdown', true)
             ->setAttribute('icon', 'user');
-            $menu['User']->addChild('Profile', array('uri' => '#'))
+            $menu['User']->addChild('Profile', array('route' => 'intranet_user_profile', 'routeParameters' => array('user_id' => $user->getId())))
                 ->setAttribute('icon', 'user');
             $menu['User']->addChild('Messages', array('uri' => '#'))
                 ->setAttribute('icon', 'envelope');
@@ -48,7 +62,7 @@ class MenuBuilder extends Controller
 
 
 
-    public function createSidebarMenu(array $options)
+    public function createSidebarMenu()
     {
         $menu = $this->factory->createItem('sidebar');
 
