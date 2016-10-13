@@ -1,0 +1,128 @@
+{% extends "::base.html.twig" %}
+
+{% block body %}
+
+    <div class="col-md-8 col-md-offset-2">
+        <div class="panel panel-default">
+            <div class="panel-heading text-center">
+                <h4 class="panel-title" >
+                    <a data-toggle="collapse" href="#your-infos" aria-expanded="true">
+                        Tes infos sur le site
+                    </a>
+                </h4>
+            </div>
+            <div  id="your-infos" class="panel-body">
+                {{ form_start(form) }}
+                {{ form_errors(form) }}
+                <div class="col-md-6">
+                    <div class="form-group">
+                        {{ form_label(form.username) }}
+                        {{ form_errors(form.username) }}
+                        {{ form_widget(form.username, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+
+                    <div class="form-group">
+                        {{ form_errors(form.password) }}
+                        {{ form_widget(form.password) }}
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        {{ form_label(form.profile.pseudo) }}
+                        {{ form_errors(form.profile.pseudo) }}
+                        {{ form_widget(form.profile.pseudo, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+
+                    <div class="form-group">
+                        {{ form_label(form.profile.genre) }}
+                        {{ form_errors(form.profile.genre) }}
+                        {{ form_widget(form.profile.genre, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+
+                    <div class="form-group">
+                        {{ form_label(form.profile.age) }}
+                        {{ form_errors(form.profile.age) }}
+                        {{ form_widget(form.profile.age, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel-heading text-center">
+                <h4 class="panel-title" >
+                    <a data-toggle="collapse" href="#your-life" aria-expanded="true">
+                        Qui est-tu ?
+                    </a>
+                </h4>
+            </div>
+            <div id="your-life" class="panel-body collapse">
+
+                <div class="form-group">
+                    {{ form_label(form.profile.past) }}
+                    {{ form_errors(form.profile.past) }}
+                    {{ form_widget(form.profile.past, {'attr': {'class': 'form-control'}}) }}
+                </div>
+                <div class="form-group">
+                    {{ form_label(form.profile.present) }}
+                    {{ form_errors(form.profile.present) }}
+                    {{ form_widget(form.profile.present, {'attr': {'class': 'form-control'}}) }}
+                </div>
+                <div class="form-group">
+                    {{ form_label(form.profile.future) }}
+                    {{ form_errors(form.profile.future) }}
+                    {{ form_widget(form.profile.future, {'attr': {'class': 'form-control'}}) }}
+                </div>
+            </div>
+
+            <div class="panel-heading text-center">
+                <h4 class="panel-title" >
+                    <a data-toggle="collapse" href="#your-universe" aria-expanded="true">
+                        Ton univers
+                    </a>
+                </h4>
+            </div>
+            <div id="your-universe" class="panel-body collapse">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            {{ form_label(form.profile.whyRegister) }}
+                            {{ form_errors(form.profile.whyRegister) }}
+                            {{ form_widget(form.profile.whyRegister, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+                        <div class="form-group">
+                            {{ form_label(form.profile.skills) }}
+                            {{ form_errors(form.profile.skills) }}
+                            {{ form_widget(form.profile.skills, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            {{ form_label(form.profile.interests) }}
+                            {{ form_errors(form.profile.interests) }}
+                            {{ form_widget(form.profile.interests, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+                        <div class="form-group">
+                            {{ form_label(form.profile.other) }}
+                            {{ form_errors(form.profile.other) }}
+                            {{ form_widget(form.profile.other, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="panel-footer">
+                <div class="form-group">
+                    {{ form_widget(form.save) }}
+                </div>
+            </div>
+
+            {{ form_end(form) }}
+        </div>
+
+    </div>
+
+
+
+
+{% endblock body %}

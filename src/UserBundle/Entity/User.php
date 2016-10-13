@@ -14,7 +14,7 @@ use Symfony\Component\Validator\Constraints\Date;
  * @ORM\Table(name="user")
  */
 class User extends BaseUser {
-    
+
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")
@@ -41,40 +41,18 @@ class User extends BaseUser {
      */
     protected $groups;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="firstname", type="string", length=255, nullable=true)
-     */
-    private $firstname;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="lastname", type="string", length=255, nullable=true)
+     * @ORM\OneToOne(targetEntity="UserBundle\Entity\Profile", mappedBy="user")
      */
-    private $lastname;
+    private $profile;
+
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="phone", type="string", length=15, nullable=true)
+     * @ORM\OneToOne(targetEntity="UserBundle\Entity\Newsletter", mappedBy="user")
      */
-    private $phone;
+    private $newsletter;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="address", type="string", length=255, nullable=true)
-     */
-    private $address;
-
-    /**
-     * @var Date
-     *
-     * @ORM\Column(name="birth_date", type="date", nullable=true)
-     */
-    private $birthDate;
 
     /**
      * @ORM\OneToMany(targetEntity="Ipssi\IntranetBundle\Entity\Page", mappedBy="user")
@@ -822,5 +800,53 @@ class User extends BaseUser {
     public function getGoogleAccessToken()
     {
         return $this->google_access_token;
+    }
+
+    /**
+     * Set profile
+     *
+     * @param \UserBundle\Entity\Profile $profile
+     *
+     * @return User
+     */
+    public function setProfile(\UserBundle\Entity\Profile $profile = null)
+    {
+        $this->profile = $profile;
+
+        return $this;
+    }
+
+    /**
+     * Get profile
+     *
+     * @return \UserBundle\Entity\Profile
+     */
+    public function getProfile()
+    {
+        return $this->profile;
+    }
+
+    /**
+     * Set newsletter
+     *
+     * @param \EL\UserBundle\Entity\Newsletter $newsletter
+     *
+     * @return User
+     */
+    public function setNewsletter(\EL\UserBundle\Entity\Newsletter $newsletter = null)
+    {
+        $this->newsletter = $newsletter;
+
+        return $this;
+    }
+
+    /**
+     * Get newsletter
+     *
+     * @return \EL\UserBundle\Entity\Newsletter
+     */
+    public function getNewsletter()
+    {
+        return $this->newsletter;
     }
 }

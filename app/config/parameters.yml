@@ -9,6 +9,7 @@ parameters:
     mailer_host: 127.0.0.1
     mailer_user: null
     mailer_password: null
+    mailer_port: 1025
     secret: 2a6ea2a66b94ba384686e736cebde693e965fb46
     google_app_id: 682088660112-k2tdaflej55p3327dbrpv0d6g9t9fk62.apps.googleusercontent.com
     google_app_secret: pTFJzFSaWCn8KT6Msml9S17F

@@ -1,0 +1,18 @@
+{% block subject %}Bienvenue à toi{% endblock %}
+
+{% block body_html %}
+
+<h1>Bienvenue à toi et merci d'avoir rejoint Ipssi !</h1>
+
+
+
+Tu viens de t'inscrire sur le site d'Ipssi.
+<br>
+Pour confirmer ton inscription, tu n'as plus qu'à cliquer sur ce lien : <a href="{{ confirmationUrl }}">Confirmer mon compte !</a>
+<br>
+
+A très vite sur le site <a href="{{ path('ipssi_homepage') }}">Ipssi</a> !
+<br><br>
+Si toutefois tu recevais ce mail par erreur, nous te laissons suivre le lien pour te désinscrire : <b><a href="" title="Faire l'action">Désinscription</a></b>
+
+{% endblock %}

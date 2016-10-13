@@ -22,10 +22,10 @@ security:
             form_login:
                 provider: fos_userbundle
                 csrf_token_generator: security.csrf.token_manager
-                login_path: /login
-                check_path: /login_check
+                # login_path: /login
+                # check_path: /login_check
                 # login success redirecting options (read further below)
-                always_use_default_target_path: true
+                # always_use_default_target_path: true
                 default_target_path: /intranet
                 #target_path_parameter:          _target_path
                 #use_referer:                    false
