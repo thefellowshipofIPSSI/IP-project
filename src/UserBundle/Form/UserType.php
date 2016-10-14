@@ -34,8 +34,9 @@ class UserType extends AbstractType
                 'type' => PasswordType::class,
                 'first_options'  => array('label' => 'Mot de passe', 'attr' => ['class' => 'form-control']),
                 'second_options' => array('label' => 'Confirmez le mot de passe', 'attr' => ['class' => 'form-control']),
-                'attr' => array('class' => 'password-field'),
-                'required' => false
+                'options' => array('attr' => array('class' => 'password-field form-group form-control')),
+                'required' => false,
+                'mapped' => false
             ))
             ->add('email', EmailType::class, [
                 'attr' => ['class' => 'form-control']
