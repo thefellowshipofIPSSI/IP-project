@@ -7,7 +7,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 use UserBundle\Entity\User;
 
-use UserBundle\Form\Type\UserType;
+use UserBundle\Form\UserType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class UserController extends Controller

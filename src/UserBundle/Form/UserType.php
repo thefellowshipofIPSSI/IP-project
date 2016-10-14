@@ -1,6 +1,6 @@
 <?php
 
-namespace UserBundle\Form\Type;
+namespace UserBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
@@ -26,45 +26,21 @@ class UserType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('firstname', TextType::class, [
-                'attr' => ['class' => 'form-control'],
-                'label' => 'Prénom'
-            ])
-            ->add('lastname', TextType::class, [
-                'attr' => ['class' => 'form-control'],
-                'label' => 'Nom'
-            ])
             ->add('username', TextType::class, [
                 'attr' => ['class' => 'form-control'],
                 'label' => 'Login'
             ])
-            ->add('plainPassword', RepeatedType::class, array(
+            ->add('password', RepeatedType::class, array(
                 'type' => PasswordType::class,
                 'first_options'  => array('label' => 'Mot de passe', 'attr' => ['class' => 'form-control']),
                 'second_options' => array('label' => 'Confirmez le mot de passe', 'attr' => ['class' => 'form-control']),
-                'attr' => array('class' => 'password-field')
+                'attr' => array('class' => 'password-field'),
+                'required' => false
             ))
             ->add('email', EmailType::class, [
                 'attr' => ['class' => 'form-control']
             ])
-            ->add('address', TextType::class, [
-                'attr' => ['class' => 'form-control', 'required' => false],
-                'label' => 'Adresse du collaborateur (facultatif)',
-                'required' => false
-            ])
-            ->add('phone', TextType::class, [
-                'attr' => ['class' => 'form-control'],
-                'label' => 'Téléphone (facultatif)',
-                'required' => false
-            ])
-            ->add('birthDate', DateType::class, [
-                'attr' => ['class' => 'form-control js-datepicker'],
-                'label' => 'Date de naissance (facultatif)',
-                'widget' => 'single_text',
-                'html5' => false,
-                'required' => false
-
-            ])
+            ->add('profile', ProfileType::class)
             ->add('enabled', ChoiceType::class, [
                 'attr' => ['class' => 'form-control'],
                 'label' => 'Activer le compte ?',
@@ -72,8 +48,8 @@ class UserType extends AbstractType
                     'Actif' => 1,
                     'Inactif' => 0
                 ],
-                'data' => 0
-            ]);
+            ])
+            ->add('save', SubmitType::class);
     }
     
     /**

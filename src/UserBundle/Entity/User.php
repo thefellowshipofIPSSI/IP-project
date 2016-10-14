@@ -12,6 +12,7 @@ use Symfony\Component\Validator\Constraints\Date;
 /**
  * @ORM\Entity
  * @ORM\Table(name="user")
+ * @ORM\Entity(repositoryClass="UserBundle\Repository\UserRepository")
  */
 class User extends BaseUser {
 
@@ -158,124 +159,102 @@ class User extends BaseUser {
         $this->user_validation_vacation = new ArrayCollection();
     }
 
+
+
     /**
-     * Set firstname
+     * Set googleId
      *
-     * @param string $firstname
+     * @param string $googleId
      *
      * @return User
      */
-    public function setFirstname($firstname)
+    public function setGoogleId($googleId)
     {
-        $this->firstname = $firstname;
+        $this->google_id = $googleId;
 
         return $this;
     }
 
     /**
-     * Get firstname
+     * Get googleId
      *
      * @return string
      */
-    public function getFirstname()
+    public function getGoogleId()
     {
-        return $this->firstname;
+        return $this->google_id;
     }
 
     /**
-     * Set lastname
+     * Set googleAccessToken
      *
-     * @param string $lastname
+     * @param string $googleAccessToken
      *
      * @return User
      */
-    public function setLastname($lastname)
+    public function setGoogleAccessToken($googleAccessToken)
     {
-        $this->lastname = $lastname;
+        $this->google_access_token = $googleAccessToken;
 
         return $this;
     }
 
     /**
-     * Get lastname
+     * Get googleAccessToken
      *
      * @return string
      */
-    public function getLastname()
+    public function getGoogleAccessToken()
     {
-        return $this->lastname;
+        return $this->google_access_token;
     }
 
     /**
-     * Set phone
+     * Set profile
      *
-     * @param string $phone
+     * @param \UserBundle\Entity\Profile $profile
      *
      * @return User
      */
-    public function setPhone($phone)
+    public function setProfile(\UserBundle\Entity\Profile $profile = null)
     {
-        $this->phone = $phone;
+        $this->profile = $profile;
 
         return $this;
     }
 
     /**
-     * Get phone
+     * Get profile
      *
-     * @return string
+     * @return \UserBundle\Entity\Profile
      */
-    public function getPhone()
+    public function getProfile()
     {
-        return $this->phone;
+        return $this->profile;
     }
 
     /**
-     * Set address
+     * Set newsletter
      *
-     * @param string $address
+     * @param \UserBundle\Entity\Newsletter $newsletter
      *
      * @return User
      */
-    public function setAddress($address)
+    public function setNewsletter(\UserBundle\Entity\Newsletter $newsletter = null)
     {
-        $this->address = $address;
+        $this->newsletter = $newsletter;
 
         return $this;
     }
 
     /**
-     * Get address
+     * Get newsletter
      *
-     * @return string
+     * @return \UserBundle\Entity\Newsletter
      */
-    public function getAddress()
+    public function getNewsletter()
     {
-        return $this->address;
-    }
-
-    /**
-     * Set birthDate
-     *
-     * @param \DateTime $birthDate
-     *
-     * @return User
-     */
-    public function setBirthDate($birthDate)
-    {
-        $this->birthDate = $birthDate;
-
-        return $this;
-    }
-
-    /**
-     * Get birthDate
-     *
-     * @return \DateTime
-     */
-    public function getBirthDate()
-    {
-        return $this->birthDate;
+        return $this->newsletter;
     }
 
     /**
@@ -752,101 +731,5 @@ class User extends BaseUser {
     public function getUserValidationVacation()
     {
         return $this->user_validation_vacation;
-    }
-
-    /**
-     * Set googleId
-     *
-     * @param string $googleId
-     *
-     * @return User
-     */
-    public function setGoogleId($googleId)
-    {
-        $this->google_id = $googleId;
-
-        return $this;
-    }
-
-    /**
-     * Get googleId
-     *
-     * @return string
-     */
-    public function getGoogleId()
-    {
-        return $this->google_id;
-    }
-
-    /**
-     * Set googleAccessToken
-     *
-     * @param string $googleAccessToken
-     *
-     * @return User
-     */
-    public function setGoogleAccessToken($googleAccessToken)
-    {
-        $this->google_access_token = $googleAccessToken;
-
-        return $this;
-    }
-
-    /**
-     * Get googleAccessToken
-     *
-     * @return string
-     */
-    public function getGoogleAccessToken()
-    {
-        return $this->google_access_token;
-    }
-
-    /**
-     * Set profile
-     *
-     * @param \UserBundle\Entity\Profile $profile
-     *
-     * @return User
-     */
-    public function setProfile(\UserBundle\Entity\Profile $profile = null)
-    {
-        $this->profile = $profile;
-
-        return $this;
-    }
-
-    /**
-     * Get profile
-     *
-     * @return \UserBundle\Entity\Profile
-     */
-    public function getProfile()
-    {
-        return $this->profile;
-    }
-
-    /**
-     * Set newsletter
-     *
-     * @param \EL\UserBundle\Entity\Newsletter $newsletter
-     *
-     * @return User
-     */
-    public function setNewsletter(\EL\UserBundle\Entity\Newsletter $newsletter = null)
-    {
-        $this->newsletter = $newsletter;
-
-        return $this;
-    }
-
-    /**
-     * Get newsletter
-     *
-     * @return \EL\UserBundle\Entity\Newsletter
-     */
-    public function getNewsletter()
-    {
-        return $this->newsletter;
     }
 }

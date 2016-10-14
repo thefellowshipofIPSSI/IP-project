@@ -18,7 +18,7 @@ user_profile_public:
     defaults:   { _controller: UserBundle:Profile:publicProfile }
 
 user_profile_edit:
-    path:       /profil/edit
+    path:       /user/edit
     defaults:   { _controller: UserBundle:Profile:edit }
 
 

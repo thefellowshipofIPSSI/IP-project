@@ -3,6 +3,7 @@
 namespace UserBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -16,33 +17,32 @@ class ProfileType extends AbstractType
             ->add('pseudo', TextType::class, array(
                 'required' => false
             ))
-            ->add('genre', TextType::class, array(
+            ->add('firstname', TextType::class, [
+                'attr' => ['class' => 'form-control'],
+                'label' => 'Prénom'
+            ])
+            ->add('lastname', TextType::class, [
+                'attr' => ['class' => 'form-control'],
+                'label' => 'Nom'
+            ])
+            ->add('address', TextType::class, [
+                'attr' => ['class' => 'form-control', 'required' => false],
+                'label' => 'Adresse du collaborateur (facultatif)',
                 'required' => false
-            ))
-            ->add('age', TextType::class, array(
+            ])
+            ->add('phone', TextType::class, [
+                'attr' => ['class' => 'form-control'],
+                'label' => 'Téléphone (facultatif)',
                 'required' => false
-            ))
-            ->add('past', TextareaType::class, array(
+            ])
+            ->add('birthDate', DateType::class, [
+                'attr' => ['class' => 'form-control js-datepicker'],
+                'label' => 'Date de naissance (facultatif)',
+                'widget' => 'single_text',
+                'html5' => false,
                 'required' => false
-            ))
-            ->add('present', TextareaType::class, array(
-                'required' => false
-            ))
-            ->add('future', TextareaType::class, array(
-                'required' => false
-            ))
-            ->add('whyRegister', TextareaType::class, array(
-                'required' => false
-            ))
-            ->add('skills', TextareaType::class, array(
-                'required' => false
-            ))
-            ->add('interests', TextareaType::class, array(
-                'required' => false
-            ))
-            ->add('other', TextareaType::class, array(
-                'required' => false
-            ));
+
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

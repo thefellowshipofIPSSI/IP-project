@@ -23,7 +23,7 @@
 
     <div class="panel panel-default">
         <div class="panel-heading text-center">
-            <h3 class="panel-title">Votre profil sur Echos-Libres</h3>
+            <h3 class="panel-title">Votre profil</h3>
         </div>
         <div class="panel-body">
             <div class="row">
@@ -47,6 +47,21 @@
                         {% endif %}
 
                     </div>
+                </div>
+
+                <div class="col-md-8 col-lg-8 right-part">
+                    <table class="table table-user-information">
+                        <tbody>
+                        <tr>
+                            <td>Pseudo</td>
+                            <td>{{ user.profile.pseudo }}</td>
+                        </tr>
+                        <tr>
+                            <td>Email</td>
+                            <td><a href="mailto:{{ user.email }}">{{ user.email }}</a></td>
+                        </tr>
+                        </tbody>
+                    </table>
                 </div>
 
             </div>

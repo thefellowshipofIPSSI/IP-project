@@ -38,8 +38,8 @@
             {% for user in allUsers %}
                 <tr>
                     <td>{{ user.id }}</td>
-                    <td>{{ user.firstname }}</td>
-                    <td>{{ user.lastname }}</td>
+                    <td>{{ user.profile.firstname }}</td>
+                    <td>{{ user.profile.lastname }}</td>
                     <td>{{ user.username }}</td>
                     <td>
                         {% if user.enabled == 0 %}

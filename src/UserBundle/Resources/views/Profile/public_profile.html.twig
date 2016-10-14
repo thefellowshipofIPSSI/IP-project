@@ -18,7 +18,7 @@
 
     <div class="panel panel-default">
         <div class="panel-heading text-center">
-            <h3 class="panel-title">Votre profil sur Echos-Libres</h3>
+            <h3 class="panel-title">Profil de {{ user.profile.pseudo }}</h3>
         </div>
         <div class="panel-body">
             <div class="row">
@@ -34,34 +34,17 @@
                                  class="img-circle img-responsive">
                         {% endif %}
 
-                        {% if user.member and user.member.emailEchos and user.member.numAdherent and user.member.paid == 1 and user.member.dateAdhesion %}
-                        <div class="alert alert-success alert-member">
-                            <p>Membre des Echos-Libres <br> <strong>{{ user.member.position }}</strong></p>
-                        </div>
-                        {% endif %}
 
                     </div>
                 </div>
 
-                <div class="{% if user.member and user.member.emailEchos and user.member.numAdherent and user.member.paid == 1 and user.member.dateAdhesion %}col-md-4 col-lg-4 middle-part{% else %}col-md-8 col-lg-8 right-part{% endif %}">
+                <div class="col-md-8 col-lg-8 right-part">
                     <table class="table table-user-information">
                         <tbody>
                             <tr>
                                 <td>Pseudo</td>
                                 <td>{{ user.profile.pseudo }}</td>
                             </tr>
-                            {% if user.profile.genre %}
-                            <tr>
-                                <td>Genre</td>
-                                <td>{{ user.profile.genre }}</td>
-                            </tr>
-                            {% endif %}
-                            {% if user.profile.age %}
-                            <tr>
-                                <td>Age</td>
-                                <td>{{ user.profile.age }}</td>
-                            </tr>
-                            {% endif %}
                             <tr>
                                 <td>Email</td>
                                 <td><a href="mailto:{{ user.email }}">{{ user.email }}</a></td>
@@ -69,31 +52,6 @@
                         </tbody>
                     </table>
                 </div>
-                {% if user.member and user.member.emailEchos and user.member.numAdherent and user.member.paid == 1 and user.member.dateAdhesion %}
-                <div class="col-md-4 col-lg-4 right-part">
-                    <table class="table table-user-information">
-                        <tbody>
-                            <tr>
-                                <td>Date d'adhésion :</td>
-                                <td>{{ user.member.dateAdhesion|date('d/m/Y') }}</td>
-                            </tr>
-                            <tr>
-                                <td>Numéro d'adhérent</td>
-                                <td>{{ user.member.numAdherent }}</td>
-                            </tr>
-                            <tr>
-                                <td>Poste occupé</td>
-                                <td>{{ user.member.position }}</td>
-                            </tr>
-
-                            <tr>
-                                <td>Mail @echos-libres</td>
-                                <td><a href="mailto:{{ user.member.emailEchos }}">{{ user.member.emailEchos }}</a></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                {% endif %}
             </div>
         </div>
         <div class="panel-heading text-center">
@@ -102,40 +60,6 @@
                     Qui es-tu ?
                 </h3>
             </a>
-        </div>
-        <div id="your-life" class="panel-body collapse">
-
-            <div class="row">
-                <div class="col-md-12">
-                    {% if user.profile.past or user.profile.present or user.profile.future %}
-                    <table class="table table-user-information">
-                        <tbody>
-                        {% if user.profile.past %}
-                        <tr>
-                            <td>Passé</td>
-                            <td>{{ user.profile.past }}</td>
-                        </tr>
-                        {% endif %}
-                        {% if user.profile.present %}
-                        <tr>
-                            <td>Présent</td>
-                            <td>{{ user.profile.present }}</td>
-                        </tr>
-                        {% endif %}
-                        {% if user.profile.future %}
-                        <tr>
-                            <td>Futur</td>
-                            <td>{{ user.profile.future }}</td>
-                        </tr>
-                        {% endif %}
-                        </tbody>
-                    </table>
-                    {% else %}
-                    <p>L'utilisateur n'a pas rempli cette section de son profil</p>
-                    {% endif %}
-                </div>
-            </div>
-
         </div>
         <div class="panel-heading text-center">
             <a data-toggle="collapse" href="#your-universe" aria-expanded="true">
