@@ -64,8 +64,6 @@ class FOSUBUserProvider extends BaseClass
             //@TODO encode password
             $user->setPassword($username);
             $user->setEnabled(true);
-            $user->setFirstname($firstname);
-            $user->setLastname($lastname);
             $this->userManager->updateUser($user);
             return $user;
         }

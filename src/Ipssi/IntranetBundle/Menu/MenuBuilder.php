@@ -45,7 +45,8 @@ class MenuBuilder
         $menu->addChild('User', array('label' => 'Bonjour ' . $user->getUsername()))
             ->setAttribute('dropdown', true)
             ->setAttribute('icon', 'user');
-            $menu['User']->addChild('Profile', array('route' => 'intranet_user_profile', 'routeParameters' => array('user_id' => $user->getId())))
+            //$menu['User']->addChild('Profile', array('route' => 'intranet_user_profile', 'routeParameters' => array('user_id' => $user->getId())))
+            $menu['User']->addChild('Profile', array('route' => 'user_profile'))
                 ->setAttribute('icon', 'user');
             $menu['User']->addChild('Messages', array('uri' => '#'))
                 ->setAttribute('icon', 'envelope');
