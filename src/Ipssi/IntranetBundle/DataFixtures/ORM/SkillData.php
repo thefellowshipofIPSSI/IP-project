@@ -3,11 +3,11 @@
 namespace Ipssi\IntranetBundle\DataFixtures\ORM;
 
 use Doctrine\Common\DataFixtures\AbstractFixture;
-use Doctrine\Common\DataFixtures\FixtureInterface;
+use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Ipssi\IntranetBundle\Entity\Skill;
 
-class SkillData extends AbstractFixture implements FixtureInterface
+class SkillData extends AbstractFixture implements OrderedFixtureInterface
 {
     public function load(ObjectManager $manager)
     {
@@ -32,6 +32,6 @@ class SkillData extends AbstractFixture implements FixtureInterface
 
     public function getOrder()
     {
-        return 3;
+        return 6;
     }
 }

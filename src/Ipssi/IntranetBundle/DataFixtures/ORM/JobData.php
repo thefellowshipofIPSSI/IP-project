@@ -3,11 +3,11 @@
 namespace Ipssi\IntranetBundle\DataFixtures\ORM;
 
 use Doctrine\Common\DataFixtures\AbstractFixture;
-use Doctrine\Common\DataFixtures\FixtureInterface;
+use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Ipssi\IntranetBundle\Entity\Job;
 
-class JobData extends AbstractFixture implements FixtureInterface
+class JobData extends AbstractFixture implements OrderedFixtureInterface
 {
     public function load(ObjectManager $manager)
     {
@@ -47,6 +47,6 @@ class JobData extends AbstractFixture implements FixtureInterface
 
     public function getOrder()
     {
-        return 2;
+        return 3;
     }
 }

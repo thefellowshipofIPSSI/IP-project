@@ -4,9 +4,10 @@ namespace Ipssi\IntranetBundle\DataFixtures\ORM;
 
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Ipssi\IntranetBundle\Entity\Society;
 
-class SocietyData implements FixtureInterface
+class SocietyData implements OrderedFixtureInterface
 {
     public function load(ObjectManager $manager)
     {
@@ -42,4 +43,10 @@ class SocietyData implements FixtureInterface
 
         $manager->flush();
     }
+
+    public function getOrder()
+    {
+        return 7;
+    }
+
 }

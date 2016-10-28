@@ -2,11 +2,11 @@
 
 namespace Ipssi\IntranetBundle\DataFixtures\ORM;
 
-use Doctrine\Common\DataFixtures\FixtureInterface;
+use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Ipssi\IntranetBundle\Entity\PageCategory;
 
-class LoadPageCategoryData implements FixtureInterface
+class LoadPageCategoryData implements OrderedFixtureInterface
 {
     public function load(ObjectManager $manager)
     {
@@ -36,5 +36,10 @@ class LoadPageCategoryData implements FixtureInterface
         $manager->persist($pageCategory5);
         $manager->persist($pageCategory6);
         $manager->flush();
+    }
+
+    public function getOrder()
+    {
+        return 4;
     }
 }

@@ -177,11 +177,11 @@ class Newsletter
     /**
      * Set user
      *
-     * @param \EL\UserBundle\Entity\User $user
+     * @param \UserBundle\Entity\User $user
      *
      * @return Newsletter
      */
-    public function setUser(\EL\UserBundle\Entity\User $user = null)
+    public function setUser(\UserBundle\Entity\User $user = null)
     {
         $this->user = $user;
 

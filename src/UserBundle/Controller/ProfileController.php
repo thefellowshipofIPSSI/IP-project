@@ -26,6 +26,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use FOS\UserBundle\Controller\ProfileController as BaseController;
+use UserBundle\Entity\User;
 
 use UserBundle\Form\ImageType;
 use UserBundle\Form\SwitchAvatarType;
@@ -34,16 +35,14 @@ use UserBundle\Form\SwitchAvatarType;
 /**
  * Controller managing the user profile
  *
- * @author Christophe Coevoet <stof@notk.org>
  */
 class ProfileController extends BaseController
 {
     /**
      * Show the user
      */
-    public function showAction()
+    public function showAction(User $user)
     {
-        $user = $this->getUser();
 
         if (!is_object($user) || !$user instanceof UserInterface) {
             throw new AccessDeniedException('This user does not have access to this section.');
@@ -57,9 +56,8 @@ class ProfileController extends BaseController
     /**
      * Edit the user
      */
-    public function editAction(Request $request)
+    public function editAction(Request $request, User $user)
     {
-        $user = $this->getUser();
         if (!is_object($user) || !$user instanceof UserInterface) {
             throw new AccessDeniedException('This user does not have access to this section.');
         }
@@ -100,7 +98,7 @@ class ProfileController extends BaseController
             $userManager->updateUser($user);
 
 
-            return $this->redirectToRoute('user_profile');
+            return $this->redirectToRoute('intranet_user_profile');
         }
 
 
@@ -114,6 +112,9 @@ class ProfileController extends BaseController
     {
 
         $profile = $this->getUser()->getProfile();
+
+//        dump($profile);
+//        die();
 
         $form = $this->createForm(SwitchAvatarType::class, $profile);
 
@@ -134,7 +135,7 @@ class ProfileController extends BaseController
             $em->persist($profile);
             $em->flush();
 
-            return $this->redirectToRoute('user_profile');
+            return $this->redirectToRoute('intranet_user_profile');
 
         }
 
@@ -206,10 +207,10 @@ class ProfileController extends BaseController
 
         $this->addFlash(
             'success',
-            'Vous êtes inscrit à la liste de diffusion Echos-Libres'
+            'Vous êtes inscrit à la liste de diffusion'
         );
 
-        return $this->redirectToRoute('user_profile');
+        return $this->redirectToRoute('intranet_user_profile');
     }
 
     public function unsubscribeAction()
@@ -226,12 +227,12 @@ class ProfileController extends BaseController
 
             $this->addFlash(
                 'warning',
-                'Vous êtes désinscrit à la liste de diffusion Echos-Libres'
+                'Vous êtes désinscrit à la liste de diffusion'
             );
 
         }
 
-        return $this->redirectToRoute('user_profile');
+        return $this->redirectToRoute('intranet_user_profile');
     }
 
     public function publicProfileAction($pseudo)

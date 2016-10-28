@@ -71,8 +71,12 @@ intranet_user_homepage:
     defaults: { _controller: IntranetBundle:User:index }
 
 intranet_user_profile:
-    path:   /user/{user_id}/profile
-    defaults: { _controller: IntranetBundle:User:profile }
+    path:   /user/profile
+    defaults: { _controller: UserBundle:Profile:show  }
+
+intranet_user_profile_public:
+    path:       /profil/{pseudo}
+    defaults:   { _controller: UserBundle:Profile:publicProfile }
 
 intranet_user_create:
     path:   /users/create
@@ -81,6 +85,10 @@ intranet_user_create:
 intranet_user_update:
     path:   /user/{user_id}/update
     defaults: { _controller: IntranetBundle:User:update }
+
+intranet_user_profile_edit:
+    path:       /user/edit
+    defaults:   { _controller: UserBundle:Profile:edit }
 
 intranet_user_delete:
     path:   /user/{user_id}/delete
@@ -97,6 +105,15 @@ intranet_user_enable:
 intranet_user_disable:
     path:   /user/{user_id}/offline
     defaults: { _controller: IntranetBundle:User:disable }
+
+###################  Avatar ###########################
+intranet_user_change_avatar:
+    path:       /change-avatar
+    defaults:   { _controller: UserBundle:Profile:changeAvatar }
+
+intranet_user_upload_avatar:
+    path:       /upload-avatar
+    defaults:   { _controller: UserBundle:Profile:uploadAvatar }
 
 
 ###################### Job Offers #########################

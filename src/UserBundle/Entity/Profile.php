@@ -79,27 +79,6 @@ class Profile
     /**
      * @var string
      *
-     * @ORM\Column(name="whyRegister", type="string", length=255, nullable=true)
-     */
-    private $whyRegister;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="skills", type="string", length=255, nullable=true)
-     */
-    private $skills;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="interests", type="string", length=255, nullable=true)
-     */
-    private $interests;
-
-    /**
-     * @var string
-     *
      * @ORM\Column(name="other", type="string", length=255, nullable=true)
      */
     private $other;
@@ -317,78 +296,6 @@ class Profile
     public function getBirthDate()
     {
         return $this->birthDate;
-    }
-
-    /**
-     * Set whyRegister
-     *
-     * @param string $whyRegister
-     *
-     * @return Profile
-     */
-    public function setWhyRegister($whyRegister)
-    {
-        $this->whyRegister = $whyRegister;
-
-        return $this;
-    }
-
-    /**
-     * Get whyRegister
-     *
-     * @return string
-     */
-    public function getWhyRegister()
-    {
-        return $this->whyRegister;
-    }
-
-    /**
-     * Set skills
-     *
-     * @param string $skills
-     *
-     * @return Profile
-     */
-    public function setSkills($skills)
-    {
-        $this->skills = $skills;
-
-        return $this;
-    }
-
-    /**
-     * Get skills
-     *
-     * @return string
-     */
-    public function getSkills()
-    {
-        return $this->skills;
-    }
-
-    /**
-     * Set interests
-     *
-     * @param string $interests
-     *
-     * @return Profile
-     */
-    public function setInterests($interests)
-    {
-        $this->interests = $interests;
-
-        return $this;
-    }
-
-    /**
-     * Get interests
-     *
-     * @return string
-     */
-    public function getInterests()
-    {
-        return $this->interests;
     }
 
     /**

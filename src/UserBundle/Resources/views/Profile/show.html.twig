@@ -1,4 +1,4 @@
-{% extends "::base.html.twig" %}
+{% extends "::intranet.html.twig" %}
 
 {% block flashMessages %}
     {% for label, flashes in app.session.flashbag.all %}
@@ -66,37 +66,12 @@
 
             </div>
         </div>
-        <div class="panel-heading text-center">
-            <a data-toggle="collapse" href="#your-universe" aria-expanded="true">
-                <h3 class="panel-title">
-                    Ton univers
-                </h3>
-            </a>
-        </div>
         <div id="your-universe" class="panel-body collapse">
             <div class="row">
                 <div class="col-md-12">
-                    {% if user.profile.whyRegister or user.profile.interests or user.profile.skills or user.profile.other %}
+                    {% if user.profile.other %}
                     <table class="table table-user-information">
                         <tbody>
-                        {% if user.profile.whyRegister %}
-                        <tr>
-                            <td>Tes motivations</td>
-                            <td>{{ user.profile.whyRegister }}</td>
-                        </tr>
-                        {% endif %}
-                        {% if user.profile.interests %}
-                        <tr>
-                            <td>Tes centres d'intérêt</td>
-                            <td>{{ user.profile.interests }}</td>
-                        </tr>
-                        {% endif %}
-                        {% if user.profile.skills %}
-                        <tr>
-                            <td>Tes compétences</td>
-                            <td>{{ user.profile.skills }}</td>
-                        </tr>
-                        {% endif %}
                         {% if user.profile.other %}
                         <tr>
                         <tr>
@@ -107,7 +82,7 @@
                         </tbody>
                     </table>
                     {% else %}
-                        <p>Tu n'as pas encore rempli cette section de ton profil</p>
+                        <p>Vous n'avez pas encore rempli cette section de votre profile</p>
                     {% endif %}
                 </div>
             </div>
@@ -116,9 +91,9 @@
     <div class="panel-footer text-center">
         <div class="profil-actions btn-group">
             <a type="button" class="btn btn-success" data-toggle="modal" data-target="#avatar-modal">
-                Modifier son avatar
+                Modifier votre avatar
             </a>
-            <a class="btn btn-success" href="{{ path('user_profile_edit') }}">Modifier ses infos</a>
+            <a class="btn btn-success" href="{{ path('intranet_user_profile_edit') }}">Modifier vos infos</a>
         </div>
     </div>
 
