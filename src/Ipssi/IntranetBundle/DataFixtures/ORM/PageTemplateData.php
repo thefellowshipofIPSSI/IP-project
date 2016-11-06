@@ -2,11 +2,12 @@
 
 namespace Ipssi\IntranetBundle\DataFixtures\ORM;
 
+use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Ipssi\IntranetBundle\Entity\PageTemplate;
 
-class LoadPageTemplateData implements OrderedFixtureInterface
+class LoadPageTemplateData extends AbstractFixture implements OrderedFixtureInterface
 {
     public function load(ObjectManager $manager)
     {

@@ -2,12 +2,12 @@
 
 namespace Ipssi\IntranetBundle\DataFixtures\ORM;
 
-use Doctrine\Common\DataFixtures\FixtureInterface;
+use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Ipssi\IntranetBundle\Entity\Society;
 
-class SocietyData implements OrderedFixtureInterface
+class SocietyData extends AbstractFixture implements OrderedFixtureInterface
 {
     public function load(ObjectManager $manager)
     {
