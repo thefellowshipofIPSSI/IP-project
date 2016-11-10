@@ -19,8 +19,15 @@ class UserController extends Controller
      */
     public function indexAction()
     {
-
         $allUsers = $this->get('user.repository.user')->findAll();
+
+//        foreach ($allUsers as $user) {
+//            $groupe = $user->getGroupNames();
+//            var_dump($groupe);
+//        }
+//
+//        die();
+
 
 
         return $this->render('IntranetBundle:User:index.html.twig', [
@@ -33,17 +40,17 @@ class UserController extends Controller
      * @param $user_id
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function profileAction($user_id)
-    {
-
-        $userRepo = $this->get('user.repository.user');
-
-        $user = $userRepo->find($user_id);
-
-        return $this->render('IntranetBundle:User:profile.html.twig', [
-            'user' => $user
-        ]);
-    }
+//    public function profileAction($user_id)
+//    {
+//
+//        $userRepo = $this->get('user.repository.user');
+//
+//        $user = $userRepo->find($user_id);
+//
+//        return $this->render('IntranetBundle:User:profile.html.twig', [
+//            'user' => $user
+//        ]);
+//    }
 
     /**
      * Create new User
