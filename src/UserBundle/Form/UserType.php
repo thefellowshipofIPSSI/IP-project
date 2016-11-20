@@ -15,6 +15,7 @@ use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 
 class UserType extends AbstractType
@@ -41,6 +42,11 @@ class UserType extends AbstractType
             ->add('email', EmailType::class, [
                 'attr' => ['class' => 'form-control']
             ])
+            ->add('groups', EntityType::class, [
+                'class' => 'UserBundle:Group',
+                'choice_label' => 'name',
+                'attr' => ['class' => 'form-control'],
+                'multiple' => "true"])
             ->add('profile', ProfileType::class)
             ->add('enabled', ChoiceType::class, [
                 'attr' => ['class' => 'form-control'],

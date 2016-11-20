@@ -26,9 +26,8 @@
             <thead>
             <tr>
                 <th>#</th>
-                <th>Nom</th>
-                <th>Prénom</th>
                 <th>Login</th>
+                <th>email</th>
                 <th>Statut</th>
                 <th>Groupe</th>
                 <th>Actions</th>
@@ -38,9 +37,8 @@
             {% for user in allUsers %}
                 <tr>
                     <td>{{ user.id }}</td>
-                    <td>{{ user.profile.firstname }}</td>
-                    <td>{{ user.profile.lastname }}</td>
                     <td>{{ user.username }}</td>
+                    <td>{{ user.email }}</td>
                     <td>
                         {% if user.enabled == 0 %}
                             Compte désactivé
@@ -48,15 +46,20 @@
                             Compte activé
                         {% endif %}
                     </td>
-                    <td>Groupe User</td>
+                    <td>
+                        {#{{ dump(user.group) }}#}
+                        {% for group in user.groups %}
+                            <p>{{group.name}}</p>
+                        {% endfor %}
+                    </td>
                     <td>
                         {#<a href="{{ path('intranet_user_view', {'user_id': user.id}) }}" class="fa fa-eye" title="Aperçu"></a>#}
                         <a href="{{ path('intranet_user_update', {'user_id': user.id}) }}" class="fa fa-pencil-square-o" title="Modifier"></a>
                         <a href="{{ path('intranet_user_delete', {'user_id': user.id}) }}" class="fa fa-trash-o" title="Supprimer"></a>
                         {% if user.enabled == 0 %}
-                            <a href="{{ path('intranet_user_enable', {'user_id': user.id}) }}" class="fa fa-toggle-on" title="Activer"></a>
+                            <a href="{{ path('intranet_user_enable', {'user_id': user.id}) }}" class="fa fa-toggle-off" title="Activer"></a>
                         {% else %}
-                            <a href="{{ path('intranet_user_disable', {'user_id': user.id}) }}" class="fa fa-toggle-off" title="Désactiver"></a>
+                            <a href="{{ path('intranet_user_disable', {'user_id': user.id}) }}" class="fa fa-toggle-on" title="Désactiver"></a>
                         {% endif %}
                     </td>
                 </tr>

@@ -79,10 +79,18 @@ services:
                     - { name: knp_menu.menu, alias: sidebar } # The alias is what is used to retrieve the menu
 
 
+    #-----------------------VOTERS---------------------------------------------
     intranet.user_cra_voter:
         class: Ipssi\IntranetBundle\Security\UserCRAVoter
         tags:
             - { name: security.voter }
         # small performance boost
         public: false
+
+    intranet.news_voters:
+            class: Ipssi\IntranetBundle\Security\NewsVoters
+            tags:
+                - { name: security.voter }
+            # small performance boost
+            public: false
 

@@ -24,11 +24,71 @@ class LoadProfileData extends AbstractFixture implements OrderedFixtureInterface
 
         $manager->persist($profileAdmin);
 
+        $profileRedacteur = new Profile();
+        $profileRedacteur->setUser($this->getReference('redacteur-user'));
+        $profileRedacteur->setPseudo('RedacteurPseudo');
+        $profileRedacteur->setFirstname('RedacteurFristName');
+        $profileRedacteur->setLastname('RedacteurLastName');
+        $profileRedacteur->setPhone('04 00 00 00 00');
+        $profileRedacteur->setAddress('00 rue du Redacteur');
+        $profileRedacteur->setBirthDate(new \DateTime('2016-12-25'));
+        $profileRedacteur->setOther('Others');
+
+        $manager->persist($profileRedacteur);
+
+        $profileCollaborateur = new Profile();
+        $profileCollaborateur->setUser($this->getReference('collaborateur-user'));
+        $profileCollaborateur->setPseudo('CollaborateurPseudo');
+        $profileCollaborateur->setFirstname('CollaborateurFristName');
+        $profileCollaborateur->setLastname('CollaborateurLastName');
+        $profileCollaborateur->setPhone('04 00 00 00 00');
+        $profileCollaborateur->setAddress('00 rue du Collaborateur');
+        $profileCollaborateur->setBirthDate(new \DateTime('2016-12-25'));
+        $profileCollaborateur->setOther('Others');
+
+        $manager->persist($profileCollaborateur);
+
+        $profileRH = new Profile();
+        $profileRH->setUser($this->getReference('rh-user'));
+        $profileRH->setPseudo('RHPseudo');
+        $profileRH->setFirstname('RHFristName');
+        $profileRH->setLastname('RHLastName');
+        $profileRH->setPhone('04 00 00 00 00');
+        $profileRH->setAddress('00 rue du RH');
+        $profileRH->setBirthDate(new \DateTime('2016-12-25'));
+        $profileRH->setOther('Others');
+
+        $manager->persist($profileRH);
+
+        $profileManager = new Profile();
+        $profileManager->setUser($this->getReference('manager-user'));
+        $profileManager->setPseudo('ManagerPseudo');
+        $profileManager->setFirstname('ManagerFristName');
+        $profileManager->setLastname('ManagerLastName');
+        $profileManager->setPhone('04 00 00 00 00');
+        $profileManager->setAddress('00 rue du Manager');
+        $profileManager->setBirthDate(new \DateTime('2016-12-25'));
+        $profileManager->setOther('Others');
+
+        $manager->persist($profileManager);
+
+        $profileSuperviseur = new Profile();
+        $profileSuperviseur->setUser($this->getReference('superviseur-user'));
+        $profileSuperviseur->setPseudo('SuperviseurPseudo');
+        $profileSuperviseur->setFirstname('SuperviseurFristName');
+        $profileSuperviseur->setLastname('SuperviseurLastName');
+        $profileSuperviseur->setPhone('04 00 00 00 00');
+        $profileSuperviseur->setAddress('00 rue du superviseur');
+        $profileSuperviseur->setBirthDate(new \DateTime('2016-12-25'));
+        $profileSuperviseur->setOther('Others');
+
+        $manager->persist($profileSuperviseur);
+
         $manager->flush();
     }
 
     public function getOrder()
     {
-        return 2;
+        return 3;
     }
 }

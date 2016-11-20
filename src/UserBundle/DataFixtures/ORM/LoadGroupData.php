@@ -13,34 +13,33 @@ class LoadGroupData extends AbstractFixture implements OrderedFixtureInterface
     {
 
         $group = new Group('Administrateur');
-        $group->setName('Administrateur');
         $group->addRole('ROLE_SUPER_ADMIN');
 
         $manager->persist($group);
 
         $group2 = new Group('Superviseur');
-        $group2->setName('Superviseur');
+        $group2->addRole('ROLE_SUPERVISEUR');
 
         $manager->persist($group2);
 
 
         $group3 = new Group('Manager');
-        $group3->setName('Manager');
+        $group3->addRole('ROLE_MANAGER');
 
         $manager->persist($group3);
 
         $group4 = new Group('RH');
-        $group4->setName('RH');
+        $group4->addRole('ROLE_RH');
 
         $manager->persist($group4);
 
         $group5 = new Group('Collaborateur');
-        $group5->setName('Collaborateur');
+        $group5->addRole('ROLE_REDACTEUR');
 
         $manager->persist($group5);
 
         $group6 = new Group('Rédacteur');
-        $group6->setName('Rédacteur');
+        $group6->addRole('ROLE_USER');
 
         $manager->persist($group6);
 
@@ -59,6 +58,6 @@ class LoadGroupData extends AbstractFixture implements OrderedFixtureInterface
      */
     public function getOrder()
     {
-        return 3;
+        return 1;
     }
 }

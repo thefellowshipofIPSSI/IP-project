@@ -72,6 +72,9 @@ class MenuBuilder
         $menu->addChild('News', array('label' => 'Actualités', 'route' => 'intranet_news_homepage'))
         ->setAttribute('icon', 'newspaper-o');
 
+        $menu->addChild('Pages', array('label' => 'Pages', 'route' => 'intranet_page_homepage'))
+            ->setAttribute('icon', 'file-text-o');
+
         $menu->addChild('RH', array('label' => 'Ressources Humaines '))
             ->setAttribute('icon', 'group')
             ->setAttribute('icon2', 'caret-down')

@@ -32,6 +32,6 @@ class LoadPageTemplateData extends AbstractFixture implements OrderedFixtureInte
 
     public function getOrder()
     {
-        return 5;
+        return 6;
     }
 }

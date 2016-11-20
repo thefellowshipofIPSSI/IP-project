@@ -44,7 +44,7 @@ class User extends BaseUser {
 
 
     /**
-     * @ORM\OneToOne(targetEntity="UserBundle\Entity\Profile", mappedBy="user")
+     * @ORM\OneToOne(targetEntity="UserBundle\Entity\Profile", mappedBy="user", cascade="persist")
      */
     private $profile;
 

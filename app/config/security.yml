@@ -45,9 +45,14 @@ security:
 
 
     role_hierarchy:
+        ROLE_REDACTEUR: ROLE_USER
+        ROLE_COLLABORATEUR: ROLE_REDACTEUR
+        ROLE_RH: ROLE_COLLABORATEUR
+        ROLE_MANAGER: ROLE_RH
+        ROLE_SUPERVISEUR: ROLE_MANAGER
+
         ROLE_ADMIN: ROLE_USER
         ROLE_SUPER_ADMIN: ROLE_ADMIN
-
         
     access_control:
     - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }

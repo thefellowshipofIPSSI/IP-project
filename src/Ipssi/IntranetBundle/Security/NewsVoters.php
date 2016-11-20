@@ -1,12 +1,12 @@
 <?php
 namespace Ipssi\IntranetBundle\Security;
 
-use Ipssi\IntranetBundle\Entity\UserCRA;
+use Ipssi\IntranetBundle\Entity\News;
 use UserBundle\Entity\User;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 
-class UserCRAVoter extends Voter
+class NewsVoter extends Voter
 {
     // these strings are just invented: you can use anything
     const VIEW = 'view';
@@ -19,8 +19,8 @@ class UserCRAVoter extends Voter
             return false;
         }
 
-        // only vote on UserCRA objects inside this voter
-        if (!$subject instanceof UserCRA) {
+        // only vote on News objects inside this voter
+        if (!$subject instanceof News) {
             return false;
         }
 
@@ -41,36 +41,36 @@ class UserCRAVoter extends Voter
             return true;
         }
 
-        // you know $subject is a UserCRA object, thanks to supports
-        /** @var UserCRA $userCRA */
-        $userCRA = $subject;
+        // you know $subject is a News object, thanks to supports
+        /** @var News $news */
+        $news = $subject;
 
         switch ($attribute) {
             case self::VIEW:
-                return $this->canView($userCRA, $user);
+                return $this->canView($news, $user);
             case self::EDIT:
-                return $this->canEdit($userCRA, $user);
+                return $this->canEdit($news, $user);
         }
 
         throw new \LogicException('This code should not be reached!');
     }
 
-    private function canView(UserCRA $userCRA, User $user)
+    private function canView(News $news, User $user)
     {
         // if they can edit, they can view
-        if ($this->canEdit($userCRA, $user)) {
+        if ($this->canEdit($news, $user)) {
             return true;
         }
 
-        // the UserCRA object could have, for example, a method isPrivate()
+        // the News object could have, for example, a method isPrivate()
         // that checks a boolean $private property
-        return !$userCRA->isPrivate();
+        return !$news->isPrivate();
     }
 
-    private function canEdit(UserCRA $userCRA, User $user)
+    private function canEdit(News $news, User $user)
     {
         // this assumes that the data object has a getOwner() method
         // to get the entity of the user who owns this data object
-        return $user === $userCRA->getOwner();
+        return $user === $news->getOwner();
     }
 }

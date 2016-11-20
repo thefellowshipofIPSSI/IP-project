@@ -29,24 +29,16 @@ class SocietyData extends AbstractFixture implements OrderedFixtureInterface
         $society3->setZipcode('RM 70036');
         $society3->setCity('Redmond');
 
-        $society4 = new Society();
-        $society4->setName('Pornhub');
-        $society4->setAddress('XXX');
-        $society4->setZipcode('66666');
-        $society4->setCity('New York');
-
-
         $manager->persist($society);
         $manager->persist($society2);
         $manager->persist($society3);
-        $manager->persist($society4);
 
         $manager->flush();
     }
 
     public function getOrder()
     {
-        return 7;
+        return 8;
     }
 
 }
