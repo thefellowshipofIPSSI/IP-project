@@ -80,17 +80,9 @@ services:
 
 
     #-----------------------VOTERS---------------------------------------------
-    intranet.user_cra_voter:
-        class: Ipssi\IntranetBundle\Security\UserCRAVoter
-        tags:
-            - { name: security.voter }
-        # small performance boost
-        public: false
-
-    intranet.news_voters:
-            class: Ipssi\IntranetBundle\Security\NewsVoters
+    intranet.news_voter:
+            class:      Ipssi\IntranetBundle\Security\NewsVoter
+            arguments: ['@security.access.decision_manager']
+            public:     false
             tags:
-                - { name: security.voter }
-            # small performance boost
-            public: false
-
+               - { name: security.voter }

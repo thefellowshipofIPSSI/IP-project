@@ -3,6 +3,7 @@ namespace Ipssi\IntranetBundle\Security;
 
 use Ipssi\IntranetBundle\Entity\UserCRA;
 use UserBundle\Entity\User;
+use Symfony\Component\Security\Core\Authorization\AccessDecisionManagerInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 
@@ -16,6 +17,7 @@ class UserCRAVoter extends Voter
     {
         // if the attribute isn't one we support, return false
         if (!in_array($attribute, array(self::VIEW, self::EDIT))) {
+            die($attribute);
             return false;
         }
 

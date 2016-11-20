@@ -10,6 +10,7 @@ use Ipssi\IntranetBundle\Entity\News;
 use Ipssi\IntranetBundle\Form\NewsType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Session\Session;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 
 class NewsController extends Controller {
@@ -27,9 +28,11 @@ class NewsController extends Controller {
         ]);
     }
 
+
     /**
      * Create a new News
      * @return \Symfony\Component\HttpFoundation\Response
+     * @Security("has_role('ROLE_REDACTEUR') and is_granted('create')")
      */
     public function createAction(Request $request) {
         $news = new News;
@@ -69,6 +72,7 @@ class NewsController extends Controller {
      * Update existing News
      * @param $news_id
      * @return \Symfony\Component\HttpFoundation\Response
+     * @Security("has_role('ROLE_SUPER_ADMIN') or has_role('ROLE_REDACTEUR')")
      */
     public function updateAction($news_id, Request $request)
     {
@@ -110,6 +114,7 @@ class NewsController extends Controller {
      * Delete a News
      * @param $news_id
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @Security("is_granted('edit', news_id)")
      */
     public function deleteAction($news_id)
     {
@@ -152,6 +157,7 @@ class NewsController extends Controller {
      * Make a News online
      * @param $news_id
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @Security("is_granted('edit', news_id)")
      */
     public function onlineAction($news_id)
     {
@@ -176,6 +182,7 @@ class NewsController extends Controller {
      * Make a News offline
      * @param $news_id
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @Security("is_granted('edit', news_id)")
      */
     public function offlineAction($news_id)
     {
