@@ -67,15 +67,11 @@ class SkillController extends Controller {
 
     /**
      * Update existing Skill
-     * @param $skill_id
+     * @param $skill
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function updateAction($skill_id, Request $request)
+    public function updateAction(Skill $skill, Request $request)
     {
-        $skillRepo = $this->get('intranet.repository.skill');
-
-        $skill = $skillRepo->find($skill_id);
-
         $form = $this->createForm(SkillType::class, $skill);
         $form->add('save', SubmitType::class, [
             'label' => 'Modifier',
@@ -108,15 +104,11 @@ class SkillController extends Controller {
 
     /**
      * Delete a Skill
-     * @param $skill_id
+     * @param $skill
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function deleteAction($skill_id)
+    public function deleteAction(Skill $skill)
     {
-        $skillRepo = $this->get('intranet.repository.skill');
-
-        $skill = $skillRepo->find($skill_id);
-
         $em = $this->getDoctrine()->getEntityManager();
         $em->remove($skill);
         $em->flush();
@@ -132,15 +124,11 @@ class SkillController extends Controller {
 
     /**
      * Display a Skill
-     * @param $skill_id
+     * @param $skill
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function viewAction($skill_id)
+    public function viewAction(Skill $skill)
     {
-        $skillRepo = $this->get('intranet.repository.skill');
-
-        $skill = $skillRepo->find($skill_id);
-
         return $this->render('IntranetBundle:Skill:view.html.twig', [
             'skill' => $skill
         ]);
@@ -149,14 +137,11 @@ class SkillController extends Controller {
 
 //    /**
 //     * Make a Skill online
-//     * @param $skill_id
+//     * @param $skill
 //     * @return \Symfony\Component\HttpFoundation\RedirectResponse
 //     */
-//    public function onlineAction($skill_id)
+//    public function onlineAction(Skill $skill)
 //    {
-//        $skillRepo = $this->get('intranet.repository.skill');
-//
-//        $skill = $skillRepo->find($skill_id);
 //        $skill->setStatus(1);
 //
 //        $em = $this->getDoctrine()->getEntityManager();
@@ -168,14 +153,11 @@ class SkillController extends Controller {
 //
 //    /**
 //     * Make a Skill offline
-//     * @param $skill_id
+//     * @param $skill
 //     * @return \Symfony\Component\HttpFoundation\RedirectResponse
 //     */
-//    public function offlineAction($skill_id)
+//    public function offlineAction(Skill $skill)
 //    {
-//        $skillRepo = $this->get('intranet.repository.skill');
-//
-//        $skill = $skillRepo->find($skill_id);
 //        $skill->setStatus(0);
 //
 //        $em = $this->getDoctrine()->getEntityManager();

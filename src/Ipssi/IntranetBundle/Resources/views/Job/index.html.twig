@@ -38,9 +38,9 @@
                     <td>{{ job.id }}</td>
                     <td>{{ job.title }}</td>
                     <td>
-                        <a href="{{ path('intranet_job_view', {'job_id': job.id}) }}" class="fa fa-eye" title="Aperçu"></a>
-                        <a href="{{ path('intranet_job_update', {'job_id': job.id}) }}" class="fa fa-pencil-square-o" title="Modifier"></a>
-                        <a href="{{ path('intranet_job_delete', {'job_id': job.id}) }}" class="fa fa-trash-o" title="Supprimer"></a>
+                        <a href="{{ path('intranet_job_view', {'id': job.id}) }}" class="fa fa-eye" title="Aperçu"></a>
+                        <a href="{{ path('intranet_job_update', {'id': job.id}) }}" class="fa fa-pencil-square-o" title="Modifier"></a>
+                        <a href="{{ path('intranet_job_delete', {'id': job.id}) }}" class="fa fa-trash-o" title="Supprimer"></a>
                     </td>
 
             </tr>

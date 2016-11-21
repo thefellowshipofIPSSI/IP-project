@@ -66,15 +66,11 @@ class UserExpenseController extends Controller {
 
     /**
      * Update existing Expense
-     * @param $expense_id
+     * @param $userExpense
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function updateAction($expense_id, Request $request)
+    public function updateAction(UserExpense $userExpense, Request $request)
     {
-        $userExpenseRepo = $this->get('intranet.repository.expense');
-
-        $userExpense = $userExpenseRepo->find($expense_id);
-
         $form = $this->createForm(UserExpenseType::class, $userExpense);
         $form->add('save', SubmitType::class, [
             'label' => 'Modifier',
@@ -92,7 +88,7 @@ class UserExpenseController extends Controller {
 
             $this->addFlash(
                 'success',
-                'Note de frais du ' . $userExpense->getCreationDate() . ' modifiée !'
+                'Note de frais du ' . $userExpense->getCreationDate()->format('d-m-Y H:i:s') . ' modifiée !'
             );
 
             return $this->redirectToRoute('intranet_expense_homepage');
@@ -107,22 +103,18 @@ class UserExpenseController extends Controller {
 
     /**
      * Delete a Expense
-     * @param $expense_id
+     * @param $userExpense
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function deleteAction($expense_id)
+    public function deleteAction(UserExpense $userExpense)
     {
-        $userExpenseRepo = $this->get('intranet.repository.expense');
-
-        $userExpense = $userExpenseRepo->find($expense_id);
-
         $em = $this->getDoctrine()->getEntityManager();
         $em->remove($userExpense);
         $em->flush();
 
         $this->addFlash(
             'success',
-            'Note de frais du ' . $userExpense->getCreationDate() . ' supprimée'
+            'Note de frais du ' . $userExpense->getCreationDate()->format('d-m-Y H:i:s') . ' supprimée'
         );
 
         return $this->redirectToRoute('intranet_expense_homepage');
@@ -131,16 +123,13 @@ class UserExpenseController extends Controller {
 
     /**
      * Display an Expense
-     * @param $expense_id
+     * @param $userExpense
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function viewAction($expense_id)
+    public function viewAction(UserExpense $userExpense)
     {
-        $userExpenseRepo = $this->get('intranet.repository.expense');
-        $userExpense = $userExpenseRepo->find($expense_id);
-
         $expenseLinesRepo = $this->get('intranet.repository.expense_line');
-        $allExpenseLines = $expenseLinesRepo->findAllLinesForOneExpense($expense_id);
+        $allExpenseLines = $expenseLinesRepo->findAllLinesForOneExpense($userExpense);
 
         return $this->render('IntranetBundle:UserExpense:view.html.twig', [
             'userExpense' => $userExpense,
@@ -151,14 +140,11 @@ class UserExpenseController extends Controller {
 
     /**
      * Make a Expense online
-     * @param $expense_id
+     * @param $userExpense
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function onlineAction($expense_id)
+    public function onlineAction(UserExpense $userExpense)
     {
-        $userExpenseRepo = $this->get('intranet.repository.expense');
-
-        $userExpense = $userExpenseRepo->find($expense_id);
         $userExpense->setStatus(1);
 
         $em = $this->getDoctrine()->getEntityManager();
@@ -167,7 +153,7 @@ class UserExpenseController extends Controller {
 
         $this->addFlash(
             'success',
-            'Note de frais du ' . $userExpense->getCreationDate() . ' mis en ligne'
+            'Note de frais du ' . $userExpense->getCreationDate()->format('d-m-Y H:i:s') . ' mis en ligne'
         );
 
         return $this->redirectToRoute('intranet_expense_homepage');
@@ -175,14 +161,11 @@ class UserExpenseController extends Controller {
 
     /**
      * Make a Expense offline
-     * @param $expense_id
+     * @param $userExpense
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function offlineAction($expense_id)
+    public function offlineAction(UserExpense $userExpense)
     {
-        $userExpenseRepo = $this->get('intranet.repository.expense');
-
-        $userExpense = $userExpenseRepo->find($expense_id);
         $userExpense->setStatus(0);
 
         $em = $this->getDoctrine()->getEntityManager();
@@ -191,7 +174,7 @@ class UserExpenseController extends Controller {
 
         $this->addFlash(
             'success',
-            'Note de frais du ' . $userExpense->getCreationDate() . ' n\'est plus visible sur le site !'
+            'Note de frais du ' . $userExpense->getCreationDate()->format('d-m-Y H:i:s') . ' n\'est plus visible sur le site !'
         );
 
         return $this->redirectToRoute('intranet_expense_homepage');

@@ -53,13 +53,13 @@
                         {% endfor %}
                     </td>
                     <td>
-                        {#<a href="{{ path('intranet_user_view', {'user_id': user.id}) }}" class="fa fa-eye" title="Aperçu"></a>#}
-                        <a href="{{ path('intranet_user_update', {'user_id': user.id}) }}" class="fa fa-pencil-square-o" title="Modifier"></a>
-                        <a href="{{ path('intranet_user_delete', {'user_id': user.id}) }}" class="fa fa-trash-o" title="Supprimer"></a>
+                        {#<a href="{{ path('intranet_user_view', {'id': user.id}) }}" class="fa fa-eye" title="Aperçu"></a>#}
+                        <a href="{{ path('intranet_user_update', {'id': user.id}) }}" class="fa fa-pencil-square-o" title="Modifier"></a>
+                        <a href="{{ path('intranet_user_delete', {'id': user.id}) }}" class="fa fa-trash-o" title="Supprimer"></a>
                         {% if user.enabled == 0 %}
-                            <a href="{{ path('intranet_user_enable', {'user_id': user.id}) }}" class="fa fa-toggle-off" title="Activer"></a>
+                            <a href="{{ path('intranet_user_enable', {'id': user.id}) }}" class="fa fa-toggle-off" title="Activer"></a>
                         {% else %}
-                            <a href="{{ path('intranet_user_disable', {'user_id': user.id}) }}" class="fa fa-toggle-on" title="Désactiver"></a>
+                            <a href="{{ path('intranet_user_disable', {'id': user.id}) }}" class="fa fa-toggle-on" title="Désactiver"></a>
                         {% endif %}
                     </td>
                 </tr>

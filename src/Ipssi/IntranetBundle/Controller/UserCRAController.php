@@ -66,18 +66,11 @@ class UserCRAController extends Controller {
 
     /**
      * Update existing CRA
-     * @param $cra_id
+     * @param $userCRA
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function updateAction($cra_id, Request $request)
+    public function updateAction(userCRA $userCRA, Request $request)
     {
-        $userCRARepo = $this->get('intranet.repository.cra');
-
-        $userCRA = $userCRARepo->find($cra_id);
-
-        //check if current user can edit
-        $this->denyAccessUnlessGranted('edit', $userCRA);
-
         $form = $this->createForm(UserCRAType::class, $userCRA);
         $form->add('save', SubmitType::class, [
             'label' => 'Modifier',
@@ -110,15 +103,11 @@ class UserCRAController extends Controller {
 
     /**
      * Delete a CRA
-     * @param $cra_id
+     * @param $userCRA
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function deleteAction($cra_id)
+    public function deleteAction(UserCRA $userCRA)
     {
-        $userCRARepo = $this->get('intranet.repository.cra');
-
-        $userCRA = $userCRARepo->find($cra_id);
-
         $em = $this->getDoctrine()->getEntityManager();
         $em->remove($userCRA);
         $em->flush();
@@ -134,15 +123,11 @@ class UserCRAController extends Controller {
 
     /**
      * Display a CRA
-     * @param $cra_id
+     * @param $userCRA
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function viewAction($cra_id)
+    public function viewAction(UserCRA $userCRA)
     {
-        $userCRARepo = $this->get('intranet.repository.cra');
-
-        $userCRA = $userCRARepo->find($cra_id);
-
         return $this->render('IntranetBundle:UserCRA:view.html.twig', [
             'userCRA' => $userCRA
         ]);
@@ -151,14 +136,11 @@ class UserCRAController extends Controller {
 
     /**
      * Make a CRA online
-     * @param $cra_id
+     * @param $userCRA
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function onlineAction($cra_id)
+    public function onlineAction(UserCRA $userCRA)
     {
-        $userCRARepo = $this->get('intranet.repository.cra');
-
-        $userCRA = $userCRARepo->find($cra_id);
         $userCRA->setStatus(1);
 
         $em = $this->getDoctrine()->getEntityManager();
@@ -175,14 +157,11 @@ class UserCRAController extends Controller {
 
     /**
      * Make a CRA offline
-     * @param $cra_id
+     * @param $userCRA
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function offlineAction($cra_id)
+    public function offlineAction(UserCRA $userCRA)
     {
-        $userCRARepo = $this->get('intranet.repository.cra');
-
-        $userCRA = $userCRARepo->find($cra_id);
         $userCRA->setStatus(0);
 
         $em = $this->getDoctrine()->getEntityManager();

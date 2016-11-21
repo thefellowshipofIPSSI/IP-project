@@ -93,7 +93,7 @@ class UserExpense
     private $user_validation;
 
     /**
-     * @ORM\OneToMany(targetEntity="Ipssi\IntranetBundle\Entity\ExpenseLine", mappedBy="user_expense")
+     * @ORM\OneToMany(targetEntity="Ipssi\IntranetBundle\Entity\ExpenseLine", mappedBy="user_expense", cascade="remove" )
      * @ORM\JoinColumn(nullable=true)
      */
     private $expense_line;

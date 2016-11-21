@@ -67,15 +67,11 @@ class JobOfferController extends Controller {
 
     /**
      * Update existing JobOffer
-     * @param $job_offer_id
+     * @param $jobOffer
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function updateAction($job_offer_id, Request $request)
+    public function updateAction(JobOffer $jobOffer, Request $request)
     {
-        $jobOfferRepo = $this->get('intranet.repository.jobOffer');
-
-        $jobOffer = $jobOfferRepo->find($job_offer_id);
-
         $form = $this->createForm(JobOfferType::class, $jobOffer);
         $form->add('save', SubmitType::class, [
             'label' => 'Modifier',
@@ -108,15 +104,11 @@ class JobOfferController extends Controller {
 
     /**
      * Delete a JobOffer
-     * @param $job_offer_id
+     * @param $jobOffer
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function deleteAction($job_offer_id)
+    public function deleteAction(JobOffer $jobOffer)
     {
-        $jobOfferRepo = $this->get('intranet.repository.jobOffer');
-
-        $jobOffer = $jobOfferRepo->find($job_offer_id);
-
         $em = $this->getDoctrine()->getEntityManager();
         $em->remove($jobOffer);
         $em->flush();
@@ -132,15 +124,11 @@ class JobOfferController extends Controller {
 
     /**
      * Display a JobOffer
-     * @param $job_offer_id
+     * @param $jobOffer
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function viewAction($job_offer_id)
+    public function viewAction(JobOffer $jobOffer)
     {
-        $jobOfferRepo = $this->get('intranet.repository.jobOffer');
-
-        $jobOffer = $jobOfferRepo->find($job_offer_id);
-
         return $this->render('IntranetBundle:JobOffer:view.html.twig', [
             'jobOffer' => $jobOffer
         ]);
@@ -149,14 +137,11 @@ class JobOfferController extends Controller {
 
     /**
      * Make a JobOffer online
-     * @param $job_offer_id
+     * @param $jobOffer
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function onlineAction($job_offer_id)
+    public function onlineAction(JobOffer $jobOffer)
     {
-        $jobOfferRepo = $this->get('intranet.repository.jobOffer');
-
-        $jobOffer = $jobOfferRepo->find($job_offer_id);
         $jobOffer->setStatus(1);
 
         $em = $this->getDoctrine()->getEntityManager();
@@ -173,14 +158,11 @@ class JobOfferController extends Controller {
 
     /**
      * Make a JobOffer offline
-     * @param $job_offer_id
+     * @param $jobOffer
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function offlineAction($job_offer_id)
+    public function offlineAction(JobOffer $jobOffer)
     {
-        $jobOfferRepo = $this->get('intranet.repository.jobOffer');
-
-        $jobOffer = $jobOfferRepo->find($job_offer_id);
         $jobOffer->setStatus(0);
 
         $em = $this->getDoctrine()->getEntityManager();

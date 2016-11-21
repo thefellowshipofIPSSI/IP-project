@@ -89,16 +89,11 @@ class UserController extends Controller
 
     /**
      * Update an User
-     * @param $user_id
+     * @param $user
      * @param Request $request
      */
-    public function updateAction($user_id, Request $request)
+    public function updateAction(User $user, Request $request)
     {
-        $userRepo = $this->get('user.repository.user');
-
-        $user = $userRepo->find($user_id);
-
-
         $form = $this->createForm(UserType::class, $user);
         $form->add('save', SubmitType::class, [
             'label' => 'Modifier',
@@ -137,16 +132,11 @@ class UserController extends Controller
 
     /**
      * Delete an User
-     * @param $user_id
+     * @param $user
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function deleteAction($user_id)
+    public function deleteAction(User $user)
     {
-        $userRepo = $this->get('user.repository.user');
-
-        $user = $userRepo->find($user_id);
-
-
         if($user === $this->getUser()){
             $this->addFlash(
                 'danger',
@@ -171,27 +161,24 @@ class UserController extends Controller
 
 
     /**
-     * Enable an User
-     * @param $user_id
+     * Display an User
+     * @param $user
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function viewAction($user_id)
+    public function viewAction(User $user)
     {
-        $userRepo = $this->get('user.repository.user');
-
-        $user = $userRepo->find($user_id);
-
         return $this->render('IntranetBundle:User:view', [
             'user' => $user
         ]);
     }
 
-
-    public function enableAction($user_id)
+    /**
+     * Enable an User
+     * @param $user
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function enableAction(User $user)
     {
-        $userRepo = $this->get('user.repository.user');
-
-        $user = $userRepo->find($user_id);
         $user->setEnabled(1);
 
         $em = $this->getDoctrine()->getEntityManager();
@@ -209,14 +196,11 @@ class UserController extends Controller
 
     /**
      * Disable an User
-     * @param $user_id
+     * @param $user
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function disableAction($user_id)
+    public function disableAction(User $user)
     {
-        $userRepo = $this->get('user.repository.user');
-
-        $user = $userRepo->find($user_id);
         $user->setEnabled(0);
 
         $em = $this->getDoctrine()->getEntityManager();

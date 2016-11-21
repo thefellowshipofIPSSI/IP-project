@@ -47,14 +47,14 @@
                     {% endif %}
                 </td>
                 <td>
-                    <a href="{{ path('intranet_vacation_view', {'vacation_id': userVacation.id}) }}" class="fa fa-eye" title="Aperçu"></a>
-                    <a href="{{ path('intranet_vacation_update', {'vacation_id': userVacation.id}) }}" class="fa fa-pencil-square-o" title="Modifier"></a>
-                    <a href="{{ path('intranet_vacation_delete', {'vacation_id': userVacation.id}) }}" class="fa fa-trash-o" title="Supprimer"></a>
+                    <a href="{{ path('intranet_vacation_view', {'id': userVacation.id}) }}" class="fa fa-eye" title="Aperçu"></a>
+                    <a href="{{ path('intranet_vacation_update', {'id': userVacation.id}) }}" class="fa fa-pencil-square-o" title="Modifier"></a>
+                    <a href="{{ path('intranet_vacation_delete', {'id': userVacation.id}) }}" class="fa fa-trash-o" title="Supprimer"></a>
                     <a href="#" class="fa fa-download" title="Télécharger le .csv"></a>
                     {% if userVacation.status == 0 %}
-                        <a href="{{ path('intranet_vacation_online', {'vacation_id': userVacation.id}) }}" class="fa fa-toggle-off pull-right" title="Mettre en ligne"></a>
+                        <a href="{{ path('intranet_vacation_online', {'id': userVacation.id}) }}" class="fa fa-toggle-off pull-right" title="Mettre en ligne"></a>
                     {% else %}
-                        <a href="{{ path('intranet_vacation_offline', {'vacation_id': userVacation.id}) }}" class="fa fa-toggle-on pull-right" title="Mettre hors ligne"></a>
+                        <a href="{{ path('intranet_vacation_offline', {'id': userVacation.id}) }}" class="fa fa-toggle-on pull-right" title="Mettre hors ligne"></a>
                     {% endif %}
                 </td>
 

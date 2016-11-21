@@ -66,15 +66,11 @@ class UserVacationController extends Controller {
 
     /**
      * Update existing Vacation
-     * @param $vacation_id
+     * @param $userVacation
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function updateAction($vacation_id, Request $request)
+    public function updateAction(UserVacation $userVacation, Request $request)
     {
-        $userVacationRepo = $this->get('intranet.repository.vacation');
-
-        $userVacation = $userVacationRepo->find($vacation_id);
-
         $form = $this->createForm(UserVacationType::class, $userVacation);
         $form->add('save', SubmitType::class, [
             'label' => 'Modifier',
@@ -107,15 +103,11 @@ class UserVacationController extends Controller {
 
     /**
      * Delete a Vacation
-     * @param $vacation_id
+     * @param $userVacation
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function deleteAction($vacation_id)
+    public function deleteAction(UserVacation $userVacation)
     {
-        $userVacationRepo = $this->get('intranet.repository.vacation');
-
-        $userVacation = $userVacationRepo->find($vacation_id);
-
         $em = $this->getDoctrine()->getEntityManager();
         $em->remove($userVacation);
         $em->flush();
@@ -131,15 +123,11 @@ class UserVacationController extends Controller {
 
     /**
      * Display a Vacation
-     * @param $vacation_id
+     * @param $userVacation
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function viewAction($vacation_id)
+    public function viewAction(UserVacation $userVacation)
     {
-        $userVacationRepo = $this->get('intranet.repository.vacation');
-
-        $userVacation = $userVacationRepo->find($vacation_id);
-
         return $this->render('IntranetBundle:UserVacation:view.html.twig', [
             'userVacation' => $userVacation
         ]);
@@ -148,14 +136,11 @@ class UserVacationController extends Controller {
 
     /**
      * Make a Vacation online
-     * @param $vacation_id
+     * @param $userVacation
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function onlineAction($vacation_id)
+    public function onlineAction(UserVacation $userVacation)
     {
-        $userVacationRepo = $this->get('intranet.repository.vacation');
-
-        $userVacation = $userVacationRepo->find($vacation_id);
         $userVacation->setStatus(1);
 
         $em = $this->getDoctrine()->getEntityManager();
@@ -172,14 +157,11 @@ class UserVacationController extends Controller {
 
     /**
      * Make a Vacation offline
-     * @param $vacation_id
+     * @param $userVacation
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function offlineAction($vacation_id)
+    public function offlineAction(UserVacation $userVacation)
     {
-        $userVacationRepo = $this->get('intranet.repository.vacation');
-
-        $userVacation = $userVacationRepo->find($vacation_id);
         $userVacation->setStatus(0);
 
         $em = $this->getDoctrine()->getEntityManager();

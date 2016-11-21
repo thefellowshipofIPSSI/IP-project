@@ -13,23 +13,23 @@ intranet_page_create:
     defaults: { _controller: IntranetBundle:Page:create }
 
 intranet_page_update:
-    path:   /page/{page_id}/update
+    path:   /page/{id}/update
     defaults: { _controller: IntranetBundle:Page:update }
 
 intranet_page_delete:
-    path:   /page/{page_id}/delete
+    path:   /page/{id}/delete
     defaults: { _controller: IntranetBundle:Page:delete }
 
 intranet_page_view:
-    path:   /page/{page_id}/view
+    path:   /page/{id}/view
     defaults: { _controller: IntranetBundle:Page:view }
 
 intranet_page_online:
-    path:   /page/{page_id}/online
+    path:   /page/{id}/online
     defaults: { _controller: IntranetBundle:Page:online }
 
 intranet_page_offline:
-    path:   /page/{page_id}/offline
+    path:   /page/{id}/offline
     defaults: { _controller: IntranetBundle:Page:offline }
 
 
@@ -44,23 +44,23 @@ intranet_news_create:
     defaults: { _controller: IntranetBundle:News:create }
 
 intranet_news_update:
-    path:   /news/{news_id}/update
+    path:   /news/{id}/update
     defaults: { _controller: IntranetBundle:News:update }
 
 intranet_news_delete:
-    path:   /news/{news_id}/delete
+    path:   /news/{id}/delete
     defaults: { _controller: IntranetBundle:News:delete }
 
 intranet_news_view:
-    path:   /news/{news_id}/view
+    path:   /news/{id}/view
     defaults: { _controller: IntranetBundle:News:view }
 
 intranet_news_online:
-    path:   /news/{news_id}/online
+    path:   /news/{id}/online
     defaults: { _controller: IntranetBundle:News:online }
 
 intranet_news_offline:
-    path:   /news/{news_id}/offline
+    path:   /news/{id}/offline
     defaults: { _controller: IntranetBundle:News:offline }
 
 
@@ -83,7 +83,7 @@ intranet_user_create:
     defaults: { _controller: IntranetBundle:User:create }
     
 intranet_user_update:
-    path:   /user/{user_id}/update
+    path:   /user/{id}/update
     defaults: { _controller: IntranetBundle:User:update }
 
 intranet_user_profile_edit:
@@ -91,19 +91,19 @@ intranet_user_profile_edit:
     defaults:   { _controller: UserBundle:Profile:edit }
 
 intranet_user_delete:
-    path:   /user/{user_id}/delete
+    path:   /user/{id}/delete
     defaults: { _controller: IntranetBundle:User:delete }
 
 intranet_user_view:
-    path:   /user/{user_id}/view
+    path:   /user/{id}/view
     defaults: { _controller: IntranetBundle:User:view }
 
 intranet_user_enable:
-    path:   /user/{user_id}/online
+    path:   /user/{id}/online
     defaults: { _controller: IntranetBundle:User:enable }
 
 intranet_user_disable:
-    path:   /user/{user_id}/offline
+    path:   /user/{id}/offline
     defaults: { _controller: IntranetBundle:User:disable }
 
 ###################  Avatar ###########################
@@ -127,23 +127,23 @@ intranet_job_offer_create:
     defaults: { _controller: IntranetBundle:JobOffer:create }
 
 intranet_job_offer_update:
-    path:   /job_offer/{job_offer_id}/update
+    path:   /job_offer/{id}/update
     defaults: { _controller: IntranetBundle:JobOffer:update }
 
 intranet_job_offer_delete:
-    path:   /job_offer/{job_offer_id}/delete
+    path:   /job_offer/{id}/delete
     defaults: { _controller: IntranetBundle:JobOffer:delete }
 
 intranet_job_offer_view:
-    path:   /job_offer/{job_offer_id}/view
+    path:   /job_offer/{id}/view
     defaults: { _controller: IntranetBundle:JobOffer:view }
 
 intranet_job_offer_online:
-    path:   /job_offer/{job_offer_id}/online
+    path:   /job_offer/{id}/online
     defaults: { _controller: IntranetBundle:JobOffer:online }
 
 intranet_job_offer_offline:
-    path:   /job_offer/{job_offer_id}/offline
+    path:   /job_offer/{id}/offline
     defaults: { _controller: IntranetBundle:JobOffer:offline }
 
 
@@ -158,23 +158,23 @@ intranet_job_create:
     defaults: { _controller: IntranetBundle:Job:create }
 
 intranet_job_update:
-    path:   /job/{job_id}/update
+    path:   /job/{id}/update
     defaults: { _controller: IntranetBundle:Job:update }
 
 intranet_job_delete:
-    path:   /job/{job_id}/delete
+    path:   /job/{id}/delete
     defaults: { _controller: IntranetBundle:Job:delete }
 
 intranet_job_view:
-    path:   /job/{job_id}/view
+    path:   /job/{id}/view
     defaults: { _controller: IntranetBundle:Job:view }
 #
 #intranet_job_offer_online:
-#    path:   /job_offer/{job_offer_id}/online
+#    path:   /job_offer/{id}/online
 #    defaults: { _controller: IntranetBundle:JobOffer:online }
 #
 #intranet_job_offer_offline:
-#    path:   /job_offer/{job_offer_id}/offline
+#    path:   /job_offer/{id}/offline
 #    defaults: { _controller: IntranetBundle:JobOffer:offline }
 
 
@@ -189,23 +189,23 @@ intranet_skill_create:
     defaults: { _controller: IntranetBundle:Skill:create }
 
 intranet_skill_update:
-    path:   /skill/{skill_id}/update
+    path:   /skill/{id}/update
     defaults: { _controller: IntranetBundle:Skill:update }
 
 intranet_skill_delete:
-    path:   /skill/{skill_id}/delete
+    path:   /skill/{id}/delete
     defaults: { _controller: IntranetBundle:Skill:delete }
 
 intranet_skill_view:
-    path:   /skill/{skill_id}/view
+    path:   /skill/{id}/view
     defaults: { _controller: IntranetBundle:Skill:view }
 
 #intranet_skill_online:
-#    path:   /skill/{skill_id}/online
+#    path:   /skill/{id}/online
 #    defaults: { _controller: IntranetBundle:Skill:online }
 #
 #intranet_skill_offline:
-#    path:   /skill/{skill_id}/offline
+#    path:   /skill/{id}/offline
 #    defaults: { _controller: IntranetBundle:Skill:offline }
 
 
@@ -220,23 +220,23 @@ intranet_cra_create:
     defaults: { _controller: IntranetBundle:UserCRA:create }
 
 intranet_cra_update:
-    path:   /cra/{cra_id}/update
+    path:   /cra/{id}/update
     defaults: { _controller: IntranetBundle:UserCRA:update }
 
 intranet_cra_delete:
-    path:   /cra/{cra_id}/delete
+    path:   /cra/{id}/delete
     defaults: { _controller: IntranetBundle:UserCRA:delete }
 
 intranet_cra_view:
-    path:   /cra/{cra_id}/view
+    path:   /cra/{id}/view
     defaults: { _controller: IntranetBundle:UserCRA:view }
 
 intranet_cra_online:
-    path:   /cra/{cra_id}/online
+    path:   /cra/{id}/online
     defaults: { _controller: IntranetBundle:UserCRA:online }
 
 intranet_cra_offline:
-    path:   /cra/{cra_id}/offline
+    path:   /cra/{id}/offline
     defaults: { _controller: IntranetBundle:UserCRA:offline }
 
 
@@ -251,37 +251,37 @@ intranet_expense_create:
     defaults: { _controller: IntranetBundle:UserExpense:create }
 
 intranet_expense_update:
-    path:   /expense/{expense_id}/update
+    path:   /expense/{id}/update
     defaults: { _controller: IntranetBundle:UserExpense:update }
 
 intranet_expense_delete:
-    path:   /expense/{expense_id}/delete
+    path:   /expense/{id}/delete
     defaults: { _controller: IntranetBundle:UserExpense:delete }
 
 intranet_expense_view:
-    path:   /expense/{expense_id}/view
+    path:   /expense/{id}/view
     defaults: { _controller: IntranetBundle:UserExpense:view }
 
 intranet_expense_online:
-    path:   /expense/{expense_id}/online
+    path:   /expense/{id}/online
     defaults: { _controller: IntranetBundle:UserExpense:online }
 
 intranet_expense_offline:
-    path:   /expense/{expense_id}/offline
+    path:   /expense/{id}/offline
     defaults: { _controller: IntranetBundle:UserExpense:offline }
 
 ###################### Expense Line #########################
 
 intranet_expense_expense_line_create:
-    path:   /expense/{expense_id}/expense_line/create
+    path:   /expense/{id}/expense_line/create
     defaults: { _controller: IntranetBundle:ExpenseLine:create }
 
 intranet_expense_expense_line_update:
-    path:   /expense/{expense_id}/expense_line/{expenseLine_id}/update
+    path:   /expense/{id}/expense_line/{expenseLine_id}/update
     defaults: { _controller: IntranetBundle:ExpenseLine:update }
 
 intranet_expense_expense_line_delete:
-    path:   /expense/{expense_id}/expense_line/{expenseLine_id}/delete
+    path:   /expense/{id}/expense_line/{expenseLine_id}/delete
     defaults: { _controller: IntranetBundle:ExpenseLine:delete }
 
 
@@ -297,23 +297,23 @@ intranet_cv_create:
     defaults: { _controller: IntranetBundle:Cv:create }
 
 intranet_cv_update:
-    path:   /cv/{cv_id}/update
+    path:   /cv/{id}/update
     defaults: { _controller: IntranetBundle:Cv:update }
 
 intranet_cv_delete:
-    path:   /cv/{cv_id}/delete
+    path:   /cv/{id}/delete
     defaults: { _controller: IntranetBundle:Cv:delete }
 
 intranet_cv_view:
-    path:   /cv/{cv_id}/view
+    path:   /cv/{id}/view
     defaults: { _controller: IntranetBundle:Cv:view }
 
 intranet_cv_online:
-    path:   /cv/{cv_id}/online
+    path:   /cv/{id}/online
     defaults: { _controller: IntranetBundle:Cv:online }
 
 intranet_cv_offline:
-    path:   /cv/{cv_id}/offline
+    path:   /cv/{id}/offline
     defaults: { _controller: IntranetBundle:Cv:offline }
 
 
@@ -328,23 +328,23 @@ intranet_vacation_create:
     defaults: { _controller: IntranetBundle:UserVacation:create }
 
 intranet_vacation_update:
-    path:   /vacation/{vacation_id}/update
+    path:   /vacation/{id}/update
     defaults: { _controller: IntranetBundle:UserVacation:update }
 
 intranet_vacation_delete:
-    path:   /vacation/{vacation_id}/delete
+    path:   /vacation/{id}/delete
     defaults: { _controller: IntranetBundle:UserVacation:delete }
 
 intranet_vacation_view:
-    path:   /vacation/{vacation_id}/view
+    path:   /vacation/{id}/view
     defaults: { _controller: IntranetBundle:UserVacation:view }
 
 intranet_vacation_online:
-    path:   /vacation/{vacation_id}/online
+    path:   /vacation/{id}/online
     defaults: { _controller: IntranetBundle:UserVacation:online }
 
 intranet_vacation_offline:
-    path:   /vacation/{vacation_id}/offline
+    path:   /vacation/{id}/offline
     defaults: { _controller: IntranetBundle:UserVacation:offline }
 
 
@@ -359,21 +359,21 @@ intranet_candidacy_create:
     defaults: { _controller: IntranetBundle:Candidacy:create }
 
 intranet_candidacy_update:
-    path:   /candidacy/{candidacy_id}/update
+    path:   /candidacy/{id}/update
     defaults: { _controller: IntranetBundle:Candidacy:update }
 
 intranet_candidacy_delete:
-    path:   /candidacy/{candidacy_id}/delete
+    path:   /candidacy/{id}/delete
     defaults: { _controller: IntranetBundle:Candidacy:delete }
 
 intranet_candidacy_view:
-    path:   /candidacy/{candidacy_id}/view
+    path:   /candidacy/{id}/view
     defaults: { _controller: IntranetBundle:Candidacy:view }
 
 intranet_candidacy_online:
-    path:   /candidacy/{candidacy_id}/online
+    path:   /candidacy/{id}/online
     defaults: { _controller: IntranetBundle:Candidacy:online }
 
 intranet_candidacy_offline:
-    path:   /candidacy/{candidacy_id}/offline
+    path:   /candidacy/{id}/offline
     defaults: { _controller: IntranetBundle:Candidacy:offline }

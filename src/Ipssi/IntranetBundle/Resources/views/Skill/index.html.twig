@@ -38,9 +38,9 @@
                     <td>{{ skill.id }}</td>
                     <td>{{ skill.title }}</td>
                     <td>
-                        <a href="{{ path('intranet_skill_view', {'skill_id': skill.id}) }}" class="fa fa-eye" title="Aperçu"></a>
-                        <a href="{{ path('intranet_skill_update', {'skill_id': skill.id}) }}" class="fa fa-pencil-square-o" title="Modifier"></a>
-                        <a href="{{ path('intranet_skill_delete', {'skill_id': skill.id}) }}" class="fa fa-trash-o" title="Supprimer"></a>
+                        <a href="{{ path('intranet_skill_view', {'id': skill.id}) }}" class="fa fa-eye" title="Aperçu"></a>
+                        <a href="{{ path('intranet_skill_update', {'id': skill.id}) }}" class="fa fa-pencil-square-o" title="Modifier"></a>
+                        <a href="{{ path('intranet_skill_delete', {'id': skill.id}) }}" class="fa fa-trash-o" title="Supprimer"></a>
                     </td>
 
             </tr>

@@ -66,16 +66,11 @@ class PageController extends Controller {
 
     /**
      * Update existing Page
-     * @param $page_id
+     * @param $page
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function updateAction($page_id, Request $request)
+    public function updateAction(Page $page, Request $request)
     {
-        //$pageRepo = $this->getDoctrine()->getRepository('IntranetBundle:Page');
-        $pageRepo = $this->get('intranet.repository.page');
-
-        $page = $pageRepo->find($page_id);
-
         $form = $this->createForm(PageType::class, $page);
         $form->add('save', SubmitType::class, [
             'label' => 'Modifier',
@@ -108,15 +103,11 @@ class PageController extends Controller {
 
     /**
      * Delete a Page
-     * @param $page_id
+     * @param $page
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function deleteAction($page_id)
+    public function deleteAction(Page $page)
     {
-        $pageRepo = $this->get('intranet.repository.page');
-
-        $page = $pageRepo->find($page_id);
-
         $em = $this->getDoctrine()->getEntityManager();
         $em->remove($page);
         $em->flush();
@@ -132,14 +123,11 @@ class PageController extends Controller {
 
     /**
      * Display a Page
-     * @param $page_id
+     * @param $page
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function viewAction($page_id)
+    public function viewAction(Page $page)
     {
-        $pageRepo = $this->get('intranet.repository.page');
-
-        $page = $pageRepo->find($page_id);
         $pageTemplate = $page->getPageTemplate()->getName();
 
         return $this->render('IntranetBundle:Page\Templates:'. $pageTemplate .'.html.twig', [
@@ -150,14 +138,11 @@ class PageController extends Controller {
 
     /**
      * Make a Page online
-     * @param $page_id
+     * @param $page
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function onlineAction($page_id)
+    public function onlineAction(Page $page)
     {
-        $pageRepo = $this->get('intranet.repository.page');
-
-        $page = $pageRepo->find($page_id);
         $page->setStatus(1);
 
         $em = $this->getDoctrine()->getEntityManager();
@@ -174,14 +159,11 @@ class PageController extends Controller {
 
     /**
      * Make a Page offline
-     * @param $page_id
+     * @param $page
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function offlineAction($page_id)
+    public function offlineAction(Page $page)
     {
-        $pageRepo = $this->get('intranet.repository.page');
-
-        $page = $pageRepo->find($page_id);
         $page->setStatus(0);
 
         $em = $this->getDoctrine()->getEntityManager();

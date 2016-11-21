@@ -63,8 +63,8 @@
                         <td>{{ expenseLine.prix }}</td>
                         {% set total = total + expenseLine.prix %}
                         <td>
-                            <a href="{{ path('intranet_expense_expense_line_update', {'expenseLine_id': expenseLine.id, 'expense_id': userExpense.id}) }}" class="fa fa-pencil-square-o" title="Modifier"></a>
-                            <a href="{{ path('intranet_expense_expense_line_delete', {'expenseLine_id': expenseLine.id, 'expense_id': userExpense.id}) }}" class="fa fa-trash-o" title="Supprimer"></a>
+                            <a href="{{ path('intranet_expense_expense_line_update', {'expenseLine_id': expenseLine.id, 'id': userExpense.id}) }}" class="fa fa-pencil-square-o" title="Modifier"></a>
+                            <a href="{{ path('intranet_expense_expense_line_delete', {'expenseLine_id': expenseLine.id, 'id': userExpense.id}) }}" class="fa fa-trash-o" title="Supprimer"></a>
                         </td>
                     </tr>
                 {% endfor %}
@@ -73,11 +73,11 @@
         </div>
         <p class="lead pull-right">Total : {{ total }} €</p>
         <br><br><br>
-        <a href="{{ path('intranet_expense_expense_line_create', {'expense_id': userExpense.id}) }}" class="btn btn-primary pull-right" style="margin-bottom:10px;">Ajouter une ligne</a>
+        <a href="{{ path('intranet_expense_expense_line_create', {'id': userExpense.id}) }}" class="btn btn-primary pull-right" style="margin-bottom:10px;">Ajouter une ligne</a>
 
     </div>
     <br><br><br>
-    <a href="{{ path('intranet_expense_update', {'expense_id': userExpense.id}) }}" class="btn btn-primary" style="margin-bottom:10px;">Modifier</a>
+    <a href="{{ path('intranet_expense_update', {'id': userExpense.id}) }}" class="btn btn-primary" style="margin-bottom:10px;">Modifier</a>
 
 
 {% endblock %}

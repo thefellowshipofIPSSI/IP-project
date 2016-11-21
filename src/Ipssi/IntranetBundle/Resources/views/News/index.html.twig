@@ -48,13 +48,13 @@
                         {% endif %}
                     </td>
                     <td>
-                        <a href="{{ path('intranet_news_view', {'news_id': news.id}) }}" class="fa fa-eye" title="Aperçu"></a>
-                        <a href="{{ path('intranet_news_update', {'news_id': news.id}) }}" class="fa fa-pencil-square-o" title="Modifier"></a>
-                        <a href="{{ path('intranet_news_delete', {'news_id': news.id}) }}" class="fa fa-trash-o" title="Supprimer"></a>
+                        <a href="{{ path('intranet_news_view', {'id': news.id}) }}" class="fa fa-eye" title="Aperçu"></a>
+                        <a href="{{ path('intranet_news_update', {'id': news.id}) }}" class="fa fa-pencil-square-o" title="Modifier"></a>
+                        <a href="{{ path('intranet_news_delete', {'id': news.id}) }}" class="fa fa-trash-o" title="Supprimer"></a>
                         {% if news.status == 0 %}
-                            <a href="{{ path('intranet_news_online', {'news_id': news.id}) }}" class="fa fa-toggle-off" title="Mettre en ligne"></a>
+                            <a href="{{ path('intranet_news_online', {'id': news.id}) }}" class="fa fa-toggle-off" title="Mettre en ligne"></a>
                         {% else %}
-                            <a href="{{ path('intranet_news_offline', {'news_id': news.id}) }}" class="fa fa-toggle-on" title="Mettre hors ligne"></a>
+                            <a href="{{ path('intranet_news_offline', {'id': news.id}) }}" class="fa fa-toggle-on" title="Mettre hors ligne"></a>
                         {% endif %}
                     </td>
                 </tr>

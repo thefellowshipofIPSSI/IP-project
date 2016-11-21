@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
 use Ipssi\IntranetBundle\Entity\ExpenseLine;
+use Ipssi\IntranetBundle\Entity\UserExpense;
 
 use Ipssi\IntranetBundle\Form\ExpenseLineType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -16,14 +17,11 @@ class ExpenseLineController extends Controller {
 
     /**
      * Create a new expense line
-     * @param $expense_id
+     * @param $userExpense
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function createAction($expense_id, Request $request) {
+    public function createAction(UserExpense $userExpense, Request $request) {
         $expenseLine = new ExpenseLine;
-
-        $userExpenseRepo = $this->get('intranet.repository.expense');
-        $userExpense = $userExpenseRepo->find($expense_id);
 
         $form = $this->createForm(ExpenseLineType::class, $expenseLine);
         $form->add('save', SubmitType::class, [
@@ -46,13 +44,13 @@ class ExpenseLineController extends Controller {
                 'Nouvelle ligne créée !'
             );
 
-            return $this->redirectToRoute('intranet_expense_view', array('expense_id' => $expense_id));
+            return $this->redirectToRoute('intranet_expense_view', array('id' => $userExpense->getId()));
 
         }
 
         return $this->render('IntranetBundle:UserExpense/ExpenseLine:create.html.twig', [
             'form' => $form->createView(),
-            'expense_id' => $expense_id
+            'userExpense' => $userExpense
         ]);
     }
 
@@ -60,10 +58,10 @@ class ExpenseLineController extends Controller {
     /**
      * Update existing expense line
      * @param $expenseLine_id
-     * @param $expense_id
+     * @param $userExpense
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function updateAction($expenseLine_id, $expense_id, Request $request)
+    public function updateAction($expenseLine_id, UserExpense $userExpense, Request $request)
     {
         $expenseLineRepo = $this->get('intranet.repository.expense_line');
         $expenseLine = $expenseLineRepo->find($expenseLine_id);
@@ -88,13 +86,13 @@ class ExpenseLineController extends Controller {
                 'La ligne a bien été modifiée !'
             );
 
-            return $this->redirectToRoute('intranet_expense_view', array('expense_id' => $expense_id));
+            return $this->redirectToRoute('intranet_expense_view', array('id' => $userExpense->getId()));
 
         }
 
         return $this->render('IntranetBundle:UserExpense/ExpenseLine:update.html.twig', [
             'form' => $form->createView(),
-            'expense_id' => $expense_id
+            'userExpense' => $userExpense
         ]);
 
     }
@@ -102,10 +100,10 @@ class ExpenseLineController extends Controller {
     /**
      * Delete an expense line
      * @param $expenseLine_id
-     * @param $expense_id
+     * @param $userExpense
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function deleteAction($expenseLine_id, $expense_id)
+    public function deleteAction($expenseLine_id, UserExpense $userExpense)
     {
         $expenseLineRepo = $this->get('intranet.repository.expense_line');
 
@@ -120,7 +118,7 @@ class ExpenseLineController extends Controller {
             'Ligne supprimée'
         );
 
-        return $this->redirectToRoute('intranet_expense_view', array('expense_id' => $expense_id));
+        return $this->redirectToRoute('intranet_expense_view', array('id' => $userExpense->getId()));
     }
 
 }

@@ -28,8 +28,9 @@
             <tr>
                 <th>#</th>
                 <th>Emploi</th>
-                <th>Duration</th>
-                <th>Salary</th>
+                <th>Entreprise</th>
+                <th>Durée</th>
+                <th>Salaire</th>
                 <th>Statut</th>
                 <th>Actions</th>
             </tr>
@@ -39,6 +40,7 @@
             <tr>
                 <td>{{ jobOffer.id }}</td>
                 <td>{{ jobOffer.job.title }}</td>
+                <td>{{ jobOffer.society.name }}</td>
                 <td>{{ jobOffer.duration }}</td>
                 <td>{{ jobOffer.salary }}</td>
                 <td>
@@ -49,13 +51,13 @@
                     {% endif %}
                 </td>
                 <td>
-                    <a href="{{ path('intranet_job_offer_view', {'job_offer_id': jobOffer.id}) }}" class="fa fa-eye" title="Aperçu"></a>
-                    <a href="{{ path('intranet_job_offer_update', {'job_offer_id': jobOffer.id}) }}" class="fa fa-pencil-square-o" title="Modifier"></a>
-                    <a href="{{ path('intranet_job_offer_delete', {'job_offer_id': jobOffer.id}) }}" class="fa fa-trash-o" title="Supprimer"></a>
+                    <a href="{{ path('intranet_job_offer_view', {'id': jobOffer.id}) }}" class="fa fa-eye" title="Aperçu"></a>
+                    <a href="{{ path('intranet_job_offer_update', {'id': jobOffer.id}) }}" class="fa fa-pencil-square-o" title="Modifier"></a>
+                    <a href="{{ path('intranet_job_offer_delete', {'id': jobOffer.id}) }}" class="fa fa-trash-o" title="Supprimer"></a>
                     {% if jobOffer.status == 0 %}
-                        <a href="{{ path('intranet_job_offer_online', {'job_offer_id': jobOffer.id}) }}" class="fa fa-toggle-off" title="Mettre en ligne"></a>
+                        <a href="{{ path('intranet_job_offer_online', {'id': jobOffer.id}) }}" class="fa fa-toggle-off" title="Mettre en ligne"></a>
                     {% else %}
-                        <a href="{{ path('intranet_job_offer_offline', {'job_offer_id': jobOffer.id}) }}" class="fa fa-toggle-on" title="Mettre hors ligne"></a>
+                        <a href="{{ path('intranet_job_offer_offline', {'id': jobOffer.id}) }}" class="fa fa-toggle-on" title="Mettre hors ligne"></a>
                     {% endif %}
                 </td>
 

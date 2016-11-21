@@ -49,14 +49,14 @@
                     {% endif %}
                 </td>
                 <td>
-                    <a href="{{ path('intranet_cra_view', {'cra_id': userCRA.id}) }}" class="fa fa-eye" title="Aperçu"></a>
-                    <a href="{{ path('intranet_cra_update', {'cra_id': userCRA.id}) }}" class="fa fa-pencil-square-o" title="Modifier"></a>
-                    <a href="{{ path('intranet_cra_delete', {'cra_id': userCRA.id}) }}" class="fa fa-trash-o" title="Supprimer"></a>
+                    <a href="{{ path('intranet_cra_view', {'id': userCRA.id}) }}" class="fa fa-eye" title="Aperçu"></a>
+                    <a href="{{ path('intranet_cra_update', {'id': userCRA.id}) }}" class="fa fa-pencil-square-o" title="Modifier"></a>
+                    <a href="{{ path('intranet_cra_delete', {'id': userCRA.id}) }}" class="fa fa-trash-o" title="Supprimer"></a>
                     <a href="#" class="fa fa-download" title="Télécharger le .csv"></a>
                     {% if userCRA.status == 0 %}
-                        <a href="{{ path('intranet_cra_online', {'cra_id': userCRA.id}) }}" class="fa fa-toggle-off pull-right" title="Mettre en ligne"></a>
+                        <a href="{{ path('intranet_cra_online', {'id': userCRA.id}) }}" class="fa fa-toggle-off pull-right" title="Mettre en ligne"></a>
                     {% else %}
-                        <a href="{{ path('intranet_cra_offline', {'cra_id': userCRA.id}) }}" class="fa fa-toggle-on pull-right" title="Mettre hors ligne"></a>
+                        <a href="{{ path('intranet_cra_offline', {'id': userCRA.id}) }}" class="fa fa-toggle-on pull-right" title="Mettre hors ligne"></a>
                     {% endif %}
                 </td>
 

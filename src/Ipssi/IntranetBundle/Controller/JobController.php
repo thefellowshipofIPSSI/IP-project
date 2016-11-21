@@ -67,15 +67,11 @@ class JobController extends Controller {
 
     /**
      * Update existing Job
-     * @param $job_id
+     * @param $job
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function updateAction($job_id, Request $request)
+    public function updateAction(Job $job, Request $request)
     {
-        $jobRepo = $this->get('intranet.repository.job');
-
-        $job = $jobRepo->find($job_id);
-
         $form = $this->createForm(JobType::class, $job);
         $form->add('save', SubmitType::class, [
             'label' => 'Modifier',
@@ -108,15 +104,11 @@ class JobController extends Controller {
 
     /**
      * Delete a Job
-     * @param $job_id
+     * @param $job
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function deleteAction($job_id)
+    public function deleteAction(Job $job)
     {
-        $jobRepo = $this->get('intranet.repository.job');
-
-        $job = $jobRepo->find($job_id);
-
         $em = $this->getDoctrine()->getEntityManager();
         $em->remove($job);
         $em->flush();
@@ -132,15 +124,11 @@ class JobController extends Controller {
 
     /**
      * Display a Job
-     * @param $job_id
+     * @param $job
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function viewAction($job_id)
+    public function viewAction(Job $job)
     {
-        $jobRepo = $this->get('intranet.repository.job');
-
-        $job = $jobRepo->find($job_id);
-
         return $this->render('IntranetBundle:Job:view.html.twig', [
             'job' => $job
         ]);
@@ -149,14 +137,11 @@ class JobController extends Controller {
 
 //    /**
 //     * Make a Job online
-//     * @param $job_id
+//     * @param $job
 //     * @return \Symfony\Component\HttpFoundation\RedirectResponse
 //     */
-//    public function onlineAction($job_id)
+//    public function onlineAction(Job $job)
 //    {
-//        $jobRepo = $this->get('intranet.repository.job');
-//
-//        $job = $jobRepo->find($job_id);
 //        $job->setStatus(1);
 //
 //        $em = $this->getDoctrine()->getEntityManager();
@@ -168,14 +153,11 @@ class JobController extends Controller {
 //
 //    /**
 //     * Make a Job offline
-//     * @param $job_id
+//     * @param $job
 //     * @return \Symfony\Component\HttpFoundation\RedirectResponse
 //     */
-//    public function offlineAction($job_id)
+//    public function offlineAction(Job $job)
 //    {
-//        $jobRepo = $this->get('intranet.repository.job');
-//
-//        $job = $jobRepo->find($job_id);
 //        $job->setStatus(0);
 //
 //        $em = $this->getDoctrine()->getEntityManager();

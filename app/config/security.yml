@@ -42,6 +42,7 @@ security:
 
             logout:       true
             anonymous:    true
+            switch_user:  true
 
 
     role_hierarchy:
@@ -52,10 +53,14 @@ security:
         ROLE_SUPERVISEUR: ROLE_MANAGER
 
         ROLE_ADMIN: ROLE_USER
-        ROLE_SUPER_ADMIN: ROLE_ADMIN, ROLE_REDACTEUR, ROLE_SUPERVISEUR
+        ROLE_SUPER_ADMIN: ROLE_ADMIN, ROLE_REDACTEUR, ROLE_SUPERVISEUR , ROLE_ALLOWED_TO_SWITCH
         
     access_control:
     - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
     - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
     - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
     - { path: ^/intranet, role: ROLE_USER }
+
+# https://symfony.com/doc/3.1/security/voters.html
+    access_decision_manager:
+            strategy: affirmative
