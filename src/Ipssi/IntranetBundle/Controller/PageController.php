@@ -10,6 +10,7 @@ use Ipssi\IntranetBundle\Entity\Page;
 use Ipssi\IntranetBundle\Form\PageType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Session\Session;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 class PageController extends Controller {
 
@@ -29,6 +30,7 @@ class PageController extends Controller {
     /**
      * Create a new Page
      * @return \Symfony\Component\HttpFoundation\Response
+     * @Security("has_role('ROLE_REDACTEUR')")
      */
     public function createAction(Request $request) {
         $page = new Page;
@@ -68,6 +70,7 @@ class PageController extends Controller {
      * Update existing Page
      * @param $page
      * @return \Symfony\Component\HttpFoundation\Response
+     * @Security("is_granted('edit', page) or has_role('ROLE_SUPER_ADMIN')")
      */
     public function updateAction(Page $page, Request $request)
     {
@@ -105,6 +108,7 @@ class PageController extends Controller {
      * Delete a Page
      * @param $page
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @Security("is_granted('edit', page) or has_role('ROLE_SUPER_ADMIN')")
      */
     public function deleteAction(Page $page)
     {
@@ -140,6 +144,7 @@ class PageController extends Controller {
      * Make a Page online
      * @param $page
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @Security("is_granted('edit', page) or has_role('ROLE_SUPER_ADMIN')")
      */
     public function onlineAction(Page $page)
     {
@@ -161,6 +166,7 @@ class PageController extends Controller {
      * Make a Page offline
      * @param $page
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @Security("is_granted('edit', page) or has_role('ROLE_SUPER_ADMIN')")
      */
     public function offlineAction(Page $page)
     {
