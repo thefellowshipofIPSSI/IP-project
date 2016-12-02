@@ -1,37 +1,104 @@
 <?php
 namespace Ipssi\IntranetBundle\Menu;
 
-use Buzz\Message\Request;
 use Knp\Menu\FactoryInterface;
-use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Knp\Menu\ItemInterface;
 
-use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
+use Symfony\Component\DependencyInjection\ContainerInterface;
+use JMS\SecurityExtraBundle\Metadata\Driver\AnnotationDriver;
+
 
 
 class MenuBuilder
 {
+    /** @var FactoryInterface */
     private $factory;
-    private $tokenStorage;
+
+    /** @var ContainerInterface */
+    private $container;
+
+    /** @var Router */
+    private $router;
 
     /**
-     * @param FactoryInterface $factory
+     * @var SecurityContext
+     */
+    private $securityContext;
+
+    /**
+     * @var \JMS\SecurityExtraBundle\Metadata\Driver\AnnotationDriver
+     */
+    private $metadataReader;
+
+
+    /**
+     * @param FactoryInterface $factory, ContainerInterface $container
      *
      * Add any other dependency you need
      */
-    public function __construct(FactoryInterface $factory)
+    public function __construct(FactoryInterface $factory, ContainerInterface $container)
     {
         $this->factory = $factory;
+        $this->container = $container;
+        $this->router = $this->container->get('router');
+        $this->securityContext = $this->container->get('security.authorization_checker');
+        $this->metadataReader = new AnnotationDriver(new \Doctrine\Common\Annotations\AnnotationReader());
     }
+
+    public function filterMenu(ItemInterface $menu)
+    {
+        foreach ($menu->getChildren() as $child) {
+            /** @var \Knp\Menu\MenuItem $child */
+            list($route) = $child->getExtra('routes');
+
+            if ($route && !$this->hasRouteAccess($route)) {
+                $menu->removeChild($child);
+            }
+            $this->filterMenu($child);
+        }
+
+        return $menu;
+    }
+
+    /**
+     * @param $class
+     * @return \JMS\SecurityExtraBundle\Metadata\ClassMetadata
+     */
+    public function getMetadata($class)
+    {
+        return $this->metadataReader->loadMetadataForClass(new \ReflectionClass($class));
+    }
+
+    public function hasRouteAccess($routeName)
+    {
+        if ($this->securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
+
+            $route = $this->router->getRouteCollection()->get($routeName["route"]);
+
+            $controller = $route->getDefault('_controller');
+
+            list($class, $method) = explode('::', $controller, 2);
+
+            $metadata = $this->getMetadata($class);
+
+            if (!isset($metadata->methodMetadata[$method])) {
+                return false;
+            }
+
+            foreach ($metadata->methodMetadata[$method]->roles as $role) {
+                if ($this->securityContext->isGranted($role)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
 
     public function createUserMenu(TokenStorage $requestStack)
     {
 
-
-//        if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
-//            throw $this->createAccessDeniedException();
-//        }
-//
         $user = $requestStack->getToken()->getUser();
 
 
@@ -104,6 +171,8 @@ class MenuBuilder
             $menu['Admin']->addChild('CVthèque', array('route' => 'intranet_cv_homepage'));
             $menu['Admin']->addChild('Postes', array('route' => 'intranet_job_homepage'));
             $menu['Admin']->addChild('Compétences', array('route' => 'intranet_skill_homepage'));
+
+        $this->filterMenu($menu);
 
         return $menu;
     }
