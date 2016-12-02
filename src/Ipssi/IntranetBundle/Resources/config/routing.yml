@@ -70,25 +70,15 @@ intranet_user_homepage:
     path:   /users
     defaults: { _controller: IntranetBundle:User:index }
 
-intranet_user_profile:
-    path:   /user/profile
-    defaults: { _controller: UserBundle:Profile:show  }
-
-intranet_user_profile_public:
-    path:       /profil/{pseudo}
-    defaults:   { _controller: UserBundle:Profile:publicProfile }
 
 intranet_user_create:
-    path:   /users/create
+    path:   /user/create
     defaults: { _controller: IntranetBundle:User:create }
     
 intranet_user_update:
     path:   /user/{id}/update
     defaults: { _controller: IntranetBundle:User:update }
 
-intranet_user_profile_edit:
-    path:       /user/edit
-    defaults:   { _controller: UserBundle:Profile:edit }
 
 intranet_user_delete:
     path:   /user/{id}/delete

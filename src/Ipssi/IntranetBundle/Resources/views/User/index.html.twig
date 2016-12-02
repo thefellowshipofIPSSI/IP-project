@@ -53,7 +53,7 @@
                         {% endfor %}
                     </td>
                     <td>
-                        {#<a href="{{ path('intranet_user_view', {'id': user.id}) }}" class="fa fa-eye" title="Aperçu"></a>#}
+                        <a href="{{ path('user_profile_public', {'pseudo': user.profile.pseudo}) }}" class="fa fa-eye" title="Aperçu"></a>
                         <a href="{{ path('intranet_user_update', {'id': user.id}) }}" class="fa fa-pencil-square-o" title="Modifier"></a>
                         <a href="{{ path('intranet_user_delete', {'id': user.id}) }}" class="fa fa-trash-o" title="Supprimer"></a>
                         {% if user.enabled == 0 %}

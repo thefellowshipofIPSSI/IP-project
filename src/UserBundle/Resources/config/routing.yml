@@ -9,27 +9,27 @@ user_register:
 
 
 ###################  Profil ###########################
-#user_profile:
-#    path:       /profil
-#    defaults:   { _controller: UserBundle:Profile:show }
-#
-#user_profile_public:
-#    path:       /profil/{pseudo}
-#    defaults:   { _controller: UserBundle:Profile:publicProfile }
-#
-#user_profile_edit:
-#    path:       /user/edit
-#    defaults:   { _controller: UserBundle:Profile:edit }
+user_profile:
+    path:       /profil
+    defaults:   { _controller: UserBundle:Profile:show }
+
+user_profile_public:
+    path:       /profil/{pseudo}
+    defaults:   { _controller: UserBundle:Profile:publicProfile }
+
+user_profile_edit:
+    path:       /user/edit
+    defaults:   { _controller: UserBundle:Profile:edit }
 
 
 ####################  Avatar ###########################
-#user_change_avatar:
-#    path:       /change-avatar
-#    defaults:   { _controller: UserBundle:Profile:changeAvatar }
-#
-#user_upload_avatar:
-#    path:       /upload-avatar
-#    defaults:   { _controller: UserBundle:Profile:uploadAvatar }
+user_change_avatar:
+    path:       /change-avatar
+    defaults:   { _controller: UserBundle:Profile:changeAvatar }
+
+user_upload_avatar:
+    path:       /upload-avatar
+    defaults:   { _controller: UserBundle:Profile:uploadAvatar }
 
 
 ###################  Newsletter ###########################

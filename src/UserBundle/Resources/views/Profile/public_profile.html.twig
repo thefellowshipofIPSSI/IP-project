@@ -1,46 +1,35 @@
 {% extends "::intranet.html.twig" %}
 
-{% block flashMessages %}
-    {% for label, flashes in app.session.flashbag.all %}
-        {% for flash in flashes %}
-            <div class="alert alert-{{ label }} alert-dismissible">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
-                            aria-hidden="true">&times;</span></button>
-                {{ flash }}
-            </div>
-        {% endfor %}
-    {% endfor %}
-{% endblock %}
 
 {% block body %}
-<div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 col-xs-offset-0 col-sm-offset-0 col-md-offset-2 col-lg-offset-2 toppad">
+    <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 col-xs-offset-0 col-sm-offset-0 col-md-offset-2 col-lg-offset-2 toppad">
 
 
-    <div class="panel panel-default">
-        <div class="panel-heading text-center">
-            <h3 class="panel-title">Profil de {{ user.profile.pseudo }}</h3>
-        </div>
-        <div class="panel-body">
-            <div class="row">
-                <div class="col-md-3 col-lg-3 left-part" align="center">
-                    <div class="profile-header">
-                        {% if user.profile.avatar is not null and user.profile.gravatar == 0 %}
-                            <img id="avatar-img" alt="User Pic"
-                                 src="{{ asset(user.profile.getAvatar().getWebPath()) }}"
-                                 class="img-circle img-responsive">
-                        {% else %}
-                            <img id="avatar-img" alt="User Pic"
-                                 src="{{ user.profile.getGravatarUrl() }}"
-                                 class="img-circle img-responsive">
-                        {% endif %}
+        <div class="panel panel-default">
+            <div class="panel-heading text-center">
+                <h3 class="panel-title">Profil : {{ user.profile.pseudo }}</h3>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-3 col-lg-3 left-part" align="center">
+                        <div class="profile-header">
+                            {% if user.profile.avatar is not null and user.profile.gravatar == 0 %}
+                                <img id="avatar-img" alt="User Pic"
+                                     src="{{ asset(user.profile.getAvatar().getWebPath()) }}"
+                                     class="img-circle img-responsive">
+                            {% else %}
+                                <img id="avatar-img" alt="User Pic"
+                                     src="{{ user.profile.getGravatarUrl() }}"
+                                     class="img-circle img-responsive">
+                            {% endif %}
 
 
+                        </div>
                     </div>
-                </div>
 
-                <div class="col-md-8 col-lg-8 right-part">
-                    <table class="table table-user-information">
-                        <tbody>
+                    <div class="col-md-8 col-lg-8 right-part">
+                        <table class="table table-user-information">
+                            <tbody>
                             <tr>
                                 <td>Pseudo</td>
                                 <td>{{ user.profile.pseudo }}</td>
@@ -49,65 +38,35 @@
                                 <td>Email</td>
                                 <td><a href="mailto:{{ user.email }}">{{ user.email }}</a></td>
                             </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-        <div class="panel-heading text-center">
-            <a data-toggle="collapse" href="#your-life" aria-expanded="true">
-                <h3 class="panel-title">
-                    Qui es-tu ?
-                </h3>
-            </a>
-        </div>
-        <div class="panel-heading text-center">
-            <a data-toggle="collapse" href="#your-universe" aria-expanded="true">
-                <h3 class="panel-title">
-                    Ton univers
-                </h3>
-            </a>
-        </div>
-        <div id="your-universe" class="panel-body collapse">
-            <div class="row">
-                <div class="col-md-12">
-                    {% if user.profile.whyRegister or user.profile.interests or user.profile.skills or user.profile.other %}
-                    <table class="table table-user-information">
-                        <tbody>
-                        {% if user.profile.whyRegister %}
-                        <tr>
-                            <td>Tes motivations</td>
-                            <td>{{ user.profile.whyRegister }}</td>
-                        </tr>
-                        {% endif %}
-                        {% if user.profile.interests %}
-                        <tr>
-                            <td>Tes centres d'intérêt</td>
-                            <td>{{ user.profile.interests }}</td>
-                        </tr>
-                        {% endif %}
-                        {% if user.profile.skills %}
-                        <tr>
-                            <td>Tes compétences</td>
-                            <td>{{ user.profile.skills }}</td>
-                        </tr>
-                        {% endif %}
-                        {% if user.profile.other %}
-                        <tr>
-                        <tr>
-                            <td>Autre</td>
-                            <td>{{ user.profile.other }}</td>
-                        </tr>
-                        {% endif %}
-                        </tbody>
-                    </table>
-                    {% else %}
-                        <p>L'utilisateur n'a pas rempli cette section de son profil</p>
-                    {% endif %}
-                </div>
-            </div>
-        </div>
-    </div>
+                            </tbody>
+                        </table>
+                    </div>
 
-</div>
+                </div>
+            </div>
+            <div id="your-universe" class="panel-body collapse">
+                <div class="row">
+                    <div class="col-md-12">
+                        {% if user.profile.other %}
+                            <table class="table table-user-information">
+                                <tbody>
+                                {% if user.profile.other %}
+                                    <tr>
+                                    <tr>
+                                        <td>Autre</td>
+                                        <td>{{ user.profile.other }}</td>
+                                    </tr>
+                                {% endif %}
+                                </tbody>
+                            </table>
+                        {% else %}
+                            <p>Vous n'avez pas encore rempli cette section de votre profile</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
 {% endblock %}

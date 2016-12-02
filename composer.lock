@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "11bf5084ca9accdcdc40247a2a81b677",
-    "content-hash": "68c5349d61b18a973e07ae3ff5c38bdc",
+    "hash": "44f1b5262918b778c0ee9512e750adda",
+    "content-hash": "e6cc6fa9a96f3c055836e367bb0f2cf9",
     "packages": [
         {
             "name": "components/jquery",
@@ -255,16 +255,16 @@
         },
         {
             "name": "doctrine/common",
-            "version": "v2.6.1",
+            "version": "v2.6.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/common.git",
-                "reference": "a579557bc689580c19fee4e27487a67fe60defc0"
+                "reference": "7bce00698899aa2c06fe7365c76e4d78ddb15fa3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/common/zipball/a579557bc689580c19fee4e27487a67fe60defc0",
-                "reference": "a579557bc689580c19fee4e27487a67fe60defc0",
+                "url": "https://api.github.com/repos/doctrine/common/zipball/7bce00698899aa2c06fe7365c76e4d78ddb15fa3",
+                "reference": "7bce00698899aa2c06fe7365c76e4d78ddb15fa3",
                 "shasum": ""
             },
             "require": {
@@ -324,7 +324,7 @@
                 "persistence",
                 "spl"
             ],
-            "time": "2015-12-25 13:18:31"
+            "time": "2016-11-30 16:50:46"
         },
         {
             "name": "doctrine/dbal",
@@ -823,12 +823,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfSymfony/FOSUserBundle.git",
-                "reference": "4957dbb3731f9fb0276d7a480a1aa1150263ee7c"
+                "reference": "507ae09e95788d23e8cdbd1b3c23b5c46dc8b5a1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSUserBundle/zipball/4957dbb3731f9fb0276d7a480a1aa1150263ee7c",
-                "reference": "4957dbb3731f9fb0276d7a480a1aa1150263ee7c",
+                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSUserBundle/zipball/507ae09e95788d23e8cdbd1b3c23b5c46dc8b5a1",
+                "reference": "507ae09e95788d23e8cdbd1b3c23b5c46dc8b5a1",
                 "shasum": ""
             },
             "require": {
@@ -837,6 +837,7 @@
                 "symfony/form": "^2.7 || ^3.0",
                 "symfony/framework-bundle": "^2.7 || ^3.0",
                 "symfony/security-bundle": "^2.7 || ^3.0",
+                "symfony/templating": "^2.7 || ^3.0",
                 "symfony/twig-bundle": "^2.7 || ^3.0"
             },
             "conflict": {
@@ -889,7 +890,7 @@
             "keywords": [
                 "User management"
             ],
-            "time": "2016-11-28 12:01:11"
+            "time": "2016-12-02 11:20:52"
         },
         {
             "name": "hwi/oauth-bundle",
@@ -2877,16 +2878,16 @@
         },
         {
             "name": "symfony/security",
-            "version": "v3.1.7",
+            "version": "v3.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/security.git",
-                "reference": "943147f230113903c06ea36e567b700d10e28ab3"
+                "reference": "8a8323587c267be866ae968c362818ca1b05d828"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/security/zipball/943147f230113903c06ea36e567b700d10e28ab3",
-                "reference": "943147f230113903c06ea36e567b700d10e28ab3",
+                "url": "https://api.github.com/repos/symfony/security/zipball/8a8323587c267be866ae968c362818ca1b05d828",
+                "reference": "8a8323587c267be866ae968c362818ca1b05d828",
                 "shasum": ""
             },
             "require": {
@@ -2924,7 +2925,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.1-dev"
+                    "dev-master": "3.2-dev"
                 }
             },
             "autoload": {
@@ -2951,7 +2952,7 @@
             ],
             "description": "Symfony Security Component",
             "homepage": "https://symfony.com",
-            "time": "2016-11-16 22:17:09"
+            "time": "2016-11-25 12:32:42"
         },
         {
             "name": "symfony/security-acl",
@@ -3435,16 +3436,16 @@
         },
         {
             "name": "laravel/homestead",
-            "version": "v3.0.2",
+            "version": "v3.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/homestead.git",
-                "reference": "705449c3dbedbded4bd4f3ed725303c69253cad4"
+                "reference": "7924ab4e27bbeb17dadcc2fc6a40659275bbfb0a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/homestead/zipball/705449c3dbedbded4bd4f3ed725303c69253cad4",
-                "reference": "705449c3dbedbded4bd4f3ed725303c69253cad4",
+                "url": "https://api.github.com/repos/laravel/homestead/zipball/7924ab4e27bbeb17dadcc2fc6a40659275bbfb0a",
+                "reference": "7924ab4e27bbeb17dadcc2fc6a40659275bbfb0a",
                 "shasum": ""
             },
             "require": {
@@ -3477,7 +3478,7 @@
                 }
             ],
             "description": "A virtual machine for web artisans.",
-            "time": "2016-02-16 22:31:00"
+            "time": "2016-11-29 16:43:51"
         },
         {
             "name": "sensio/generator-bundle",
@@ -3533,16 +3534,16 @@
         },
         {
             "name": "symfony/phpunit-bridge",
-            "version": "v3.1.7",
+            "version": "v3.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/phpunit-bridge.git",
-                "reference": "c80098acb81e604eb18030c5e444032ef948f9e7"
+                "reference": "a56acfdb96be7c82f4bcf16b7c77f1960690b0e2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/phpunit-bridge/zipball/c80098acb81e604eb18030c5e444032ef948f9e7",
-                "reference": "c80098acb81e604eb18030c5e444032ef948f9e7",
+                "url": "https://api.github.com/repos/symfony/phpunit-bridge/zipball/a56acfdb96be7c82f4bcf16b7c77f1960690b0e2",
+                "reference": "a56acfdb96be7c82f4bcf16b7c77f1960690b0e2",
                 "shasum": ""
             },
             "require": {
@@ -3551,10 +3552,13 @@
             "suggest": {
                 "symfony/debug": "For tracking deprecated interfaces usages at runtime with DebugClassLoader"
             },
+            "bin": [
+                "bin/simple-phpunit"
+            ],
             "type": "symfony-bridge",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.1-dev"
+                    "dev-master": "3.2-dev"
                 }
             },
             "autoload": {
@@ -3584,7 +3588,7 @@
             ],
             "description": "Symfony PHPUnit Bridge",
             "homepage": "https://symfony.com",
-            "time": "2016-11-17 10:59:24"
+            "time": "2016-11-25 22:54:21"
         }
     ],
     "aliases": [],

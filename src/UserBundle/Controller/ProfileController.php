@@ -99,7 +99,7 @@ class ProfileController extends BaseController
             $userManager->updateUser($user);
 
 
-            return $this->redirectToRoute('intranet_user_profile');
+            return $this->redirectToRoute('user_profile');
         }
 
 
@@ -133,7 +133,7 @@ class ProfileController extends BaseController
             $em->persist($profile);
             $em->flush();
 
-            return $this->redirectToRoute('intranet_user_profile');
+            return $this->redirectToRoute('user_profile');
 
         }
 
@@ -208,7 +208,7 @@ class ProfileController extends BaseController
             'Vous êtes inscrit à la liste de diffusion'
         );
 
-        return $this->redirectToRoute('intranet_user_profile');
+        return $this->redirectToRoute('user_profile');
     }
 
     public function unsubscribeAction()
@@ -230,7 +230,7 @@ class ProfileController extends BaseController
 
         }
 
-        return $this->redirectToRoute('intranet_user_profile');
+        return $this->redirectToRoute('user_profile');
     }
 
     public function publicProfileAction($pseudo)
