@@ -9,6 +9,8 @@ use UserBundle\Entity\User;
 
 use UserBundle\Form\UserType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+
 
 class UserController extends Controller
 {
@@ -16,6 +18,7 @@ class UserController extends Controller
     /**
      * List all Users
      * @return \Symfony\Component\HttpFoundation\Response
+     * @Route("/users", name="intranet_user_homepage")
      */
     public function indexAction()
     {
@@ -25,6 +28,7 @@ class UserController extends Controller
             'allUsers' => $allUsers
         ]);
     }
+
 
     /**
      * Profile of a user
@@ -47,6 +51,7 @@ class UserController extends Controller
      * Create new User
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
+     * @Route("/user/create", name="intranet_user_create")
      */
     public function createAction(Request $request)
     {
@@ -91,6 +96,7 @@ class UserController extends Controller
      * Update an User
      * @param $user
      * @param Request $request
+     * @Route("/user/{id}/update", name="intranet_user_update")
      */
     public function updateAction(User $user, Request $request)
     {
@@ -134,6 +140,7 @@ class UserController extends Controller
      * Delete an User
      * @param $user
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @Route("/user/{id}/delete", name="intranet_user_delete")
      */
     public function deleteAction(User $user)
     {
@@ -164,6 +171,7 @@ class UserController extends Controller
      * Display an User
      * @param $user
      * @return \Symfony\Component\HttpFoundation\Response
+     * @Route("/user/{id}/view", name="intranet_user_view")
      */
     public function viewAction(User $user)
     {
@@ -176,6 +184,7 @@ class UserController extends Controller
      * Enable an User
      * @param $user
      * @return \Symfony\Component\HttpFoundation\Response
+     * @Route("/user/{id}/online", name="intranet_user_enable")
      */
     public function enableAction(User $user)
     {
@@ -198,6 +207,7 @@ class UserController extends Controller
      * Disable an User
      * @param $user
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @Route("/user/{id}/offline", name="intranet_user_disable")
      */
     public function disableAction(User $user)
     {

@@ -11,6 +11,8 @@ use Ipssi\IntranetBundle\Entity\UserExpense;
 use Ipssi\IntranetBundle\Form\ExpenseLineType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Session\Session;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+
 
 class ExpenseLineController extends Controller {
 
@@ -19,6 +21,7 @@ class ExpenseLineController extends Controller {
      * Create a new expense line
      * @param $userExpense
      * @return \Symfony\Component\HttpFoundation\Response
+     * @Route("/expense/{id}/expense_line/create", name="intranet_expense_expense_line_create")
      */
     public function createAction(UserExpense $userExpense, Request $request) {
         $expenseLine = new ExpenseLine;
@@ -60,6 +63,7 @@ class ExpenseLineController extends Controller {
      * @param $expenseLine_id
      * @param $userExpense
      * @return \Symfony\Component\HttpFoundation\Response
+     * @Route("/expense/{id}/expense_line/{expenseLine_id}/update", name="intranet_expense_expense_line_update")
      */
     public function updateAction($expenseLine_id, UserExpense $userExpense, Request $request)
     {
@@ -102,6 +106,7 @@ class ExpenseLineController extends Controller {
      * @param $expenseLine_id
      * @param $userExpense
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @Route("/expense/{id}/expense_line/{expenseLine_id}/delete", name="intranet_expense_expense_line_delete")
      */
     public function deleteAction($expenseLine_id, UserExpense $userExpense)
     {

@@ -10,12 +10,15 @@ use Ipssi\IntranetBundle\Entity\UserCRA;
 use Ipssi\IntranetBundle\Form\UserCRAType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Session\Session;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+
 
 class UserCRAController extends Controller {
 
     /**
      * List all CRA in table
      * @return \Symfony\Component\HttpFoundation\Response
+     * @Route("/cra", name="intranet_cra_homepage")
      */
     public function indexAction() {
 
@@ -29,6 +32,7 @@ class UserCRAController extends Controller {
     /**
      * Create a new CRA
      * @return \Symfony\Component\HttpFoundation\Response
+     * @Route("/cra/create", name="intranet_cra_create")
      */
     public function createAction(Request $request) {
         $userCRA = new UserCRA;
@@ -68,6 +72,7 @@ class UserCRAController extends Controller {
      * Update existing CRA
      * @param $userCRA
      * @return \Symfony\Component\HttpFoundation\Response
+     * @Route("/cra/{id}/update", name="intranet_cra_update")
      */
     public function updateAction(userCRA $userCRA, Request $request)
     {
@@ -105,6 +110,7 @@ class UserCRAController extends Controller {
      * Delete a CRA
      * @param $userCRA
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @Route("/cra/{id}/delete", name="intranet_cra_delete")
      */
     public function deleteAction(UserCRA $userCRA)
     {
@@ -125,6 +131,7 @@ class UserCRAController extends Controller {
      * Display a CRA
      * @param $userCRA
      * @return \Symfony\Component\HttpFoundation\Response
+     * @Route("/cra/{id}/view", name="intranet_cra_view")
      */
     public function viewAction(UserCRA $userCRA)
     {
@@ -138,6 +145,7 @@ class UserCRAController extends Controller {
      * Make a CRA online
      * @param $userCRA
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @Route("/cra/{id}/online", name="intranet_cra_online")
      */
     public function onlineAction(UserCRA $userCRA)
     {
@@ -159,6 +167,7 @@ class UserCRAController extends Controller {
      * Make a CRA offline
      * @param $userCRA
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @Route("/cra/{id}/offline", name="intranet_cra_offline")
      */
     public function offlineAction(UserCRA $userCRA)
     {

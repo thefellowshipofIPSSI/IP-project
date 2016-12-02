@@ -10,6 +10,8 @@ use Ipssi\IntranetBundle\Entity\Job;
 use Ipssi\IntranetBundle\Form\JobType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Session\Session;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+
 
 
 class JobController extends Controller {
@@ -17,6 +19,7 @@ class JobController extends Controller {
     /**
      * List all Jobs in table
      * @return \Symfony\Component\HttpFoundation\Response
+     * @Route("/job", name="intranet_job_homepage")
      */
     public function indexAction() {
 
@@ -30,6 +33,7 @@ class JobController extends Controller {
     /**
      * Create a new Job
      * @return \Symfony\Component\HttpFoundation\Response
+     * @Route("/job/create", name="intranet_job_create")
      */
     public function createAction(Request $request) {
         $job = new Job;
@@ -69,6 +73,7 @@ class JobController extends Controller {
      * Update existing Job
      * @param $job
      * @return \Symfony\Component\HttpFoundation\Response
+     * @Route("/job/{id}/update", name="intranet_job_update")
      */
     public function updateAction(Job $job, Request $request)
     {
@@ -106,6 +111,7 @@ class JobController extends Controller {
      * Delete a Job
      * @param $job
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @Route("/job/{id}/delete", name="intranet_job_delete")
      */
     public function deleteAction(Job $job)
     {
@@ -126,6 +132,7 @@ class JobController extends Controller {
      * Display a Job
      * @param $job
      * @return \Symfony\Component\HttpFoundation\Response
+     * @Route("/job/{id}/view", name="intranet_job_view")
      */
     public function viewAction(Job $job)
     {
@@ -139,6 +146,7 @@ class JobController extends Controller {
 //     * Make a Job online
 //     * @param $job
 //     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+//     * @Route("/job_offer/{id}/online", name="intranet_job_offer_online")
 //     */
 //    public function onlineAction(Job $job)
 //    {
@@ -155,6 +163,7 @@ class JobController extends Controller {
 //     * Make a Job offline
 //     * @param $job
 //     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+//     * @Route("/job_offer/{id}/offline", name="intranet_job_offer_offline")
 //     */
 //    public function offlineAction(Job $job)
 //    {

@@ -11,12 +11,14 @@ use Ipssi\IntranetBundle\Form\PageType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
 class PageController extends Controller {
 
     /**
      * List all Pages in table
      * @return \Symfony\Component\HttpFoundation\Response
+     * @Route("/page", name="intranet_page_homepage")
      */
     public function indexAction() {
 
@@ -30,6 +32,7 @@ class PageController extends Controller {
     /**
      * Create a new Page
      * @return \Symfony\Component\HttpFoundation\Response
+     * @Route("/page/create", name="intranet_page_create")
      * @Security("has_role('ROLE_REDACTEUR')")
      */
     public function createAction(Request $request) {
@@ -70,6 +73,7 @@ class PageController extends Controller {
      * Update existing Page
      * @param $page
      * @return \Symfony\Component\HttpFoundation\Response
+     * @Route("/page/{id}/update", name="intranet_page_update")
      * @Security("is_granted('edit', page) or has_role('ROLE_SUPER_ADMIN')")
      */
     public function updateAction(Page $page, Request $request)
@@ -108,6 +112,7 @@ class PageController extends Controller {
      * Delete a Page
      * @param $page
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @Route("/page/{id}/delete", name="intranet_page_delete")
      * @Security("is_granted('edit', page) or has_role('ROLE_SUPER_ADMIN')")
      */
     public function deleteAction(Page $page)
@@ -129,6 +134,7 @@ class PageController extends Controller {
      * Display a Page
      * @param $page
      * @return \Symfony\Component\HttpFoundation\Response
+     * @Route("/page/{id}/view", name="intranet_page_view")
      */
     public function viewAction(Page $page)
     {
@@ -139,11 +145,11 @@ class PageController extends Controller {
         ]);
     }
 
-
     /**
      * Make a Page online
      * @param $page
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @Route("/page/{id}/online", name="intranet_page_online")
      * @Security("is_granted('edit', page) or has_role('ROLE_SUPER_ADMIN')")
      */
     public function onlineAction(Page $page)
@@ -166,6 +172,7 @@ class PageController extends Controller {
      * Make a Page offline
      * @param $page
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @Route("/page/{id}/offline", name="intranet_page_offline")
      * @Security("is_granted('edit', page) or has_role('ROLE_SUPER_ADMIN')")
      */
     public function offlineAction(Page $page)

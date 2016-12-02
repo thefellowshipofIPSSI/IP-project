@@ -11,6 +11,8 @@ use Ipssi\IntranetBundle\Form\NewsType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+
 
 
 class NewsController extends Controller {
@@ -18,6 +20,7 @@ class NewsController extends Controller {
     /**
      * List all News in table
      * @return \Symfony\Component\HttpFoundation\Response
+     * @Route("/news", name="intranet_news_homepage")
      */
     public function indexAction() {
 
@@ -32,6 +35,7 @@ class NewsController extends Controller {
     /**
      * Create a new News
      * @return \Symfony\Component\HttpFoundation\Response
+     * @Route("/news/create", name="intranet_news_create")
      * @Security("has_role('ROLE_REDACTEUR')")
      */
     public function createAction(Request $request) {
@@ -74,6 +78,7 @@ class NewsController extends Controller {
      * Update existing News
      * @param $news
      * @return \Symfony\Component\HttpFoundation\Response
+     * @Route("/news/{id}/update", name="intranet_news_update")
      * @Security("is_granted('edit', news) or has_role('ROLE_SUPER_ADMIN')")
      */
     public function updateAction(Request $request, News $news)
@@ -112,6 +117,7 @@ class NewsController extends Controller {
      * Delete a News
      * @param $news
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @Route("/news/{id}/delete", name="intranet_news_delete")
      * @Security("is_granted('edit', news) or has_role('ROLE_SUPER_ADMIN')")
      */
     public function deleteAction(News $news)
@@ -132,6 +138,7 @@ class NewsController extends Controller {
     /**
      * Display a News
      * @param $news
+     * @Route("/news/{id}/view", name="intranet_news_view")
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function viewAction(News $news)
@@ -145,6 +152,7 @@ class NewsController extends Controller {
     /**
      * Make a News online
      * @param $news
+     * @Route("/news/{id}/online", name="intranet_news_online")
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      * @Security("is_granted('edit', news) or has_role('ROLE_SUPER_ADMIN')")
      */
@@ -167,6 +175,7 @@ class NewsController extends Controller {
     /**
      * Make a News offline
      * @param $news
+     * @Route("/news/{id}/offline", name="intranet_news_offline")
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      * @Security("is_granted('edit', news) or has_role('ROLE_SUPER_ADMIN')")
      */

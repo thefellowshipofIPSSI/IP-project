@@ -25,8 +25,13 @@ ipssi:
     resource: "@IpssiBundle/Resources/config/routing.yml"
     prefix:   /
 
+#intranet:
+#    resource: "@IntranetBundle/Resources/config/routing.yml"
+#    prefix:   /intranet
+
 intranet:
-    resource: "@IntranetBundle/Resources/config/routing.yml"
+    resource: "@IntranetBundle/Controller"
+    type: annotation
     prefix:   /intranet
 
 google_login:

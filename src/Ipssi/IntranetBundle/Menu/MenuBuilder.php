@@ -78,6 +78,9 @@ class MenuBuilder
 
             $controller = $route->getDefault('_controller');
 
+            dump($route);
+            die();
+
             list($class, $method) = explode('::', $controller, 2);
 
             $metadata = $this->getMetadata($class);
@@ -113,7 +116,7 @@ class MenuBuilder
             ->setAttribute('dropdown', true)
             ->setAttribute('icon', 'user');
             //$menu['User']->addChild('Profile', array('route' => 'intranet_user_profile', 'routeParameters' => array('user_id' => $user->getId())))
-            $menu['User']->addChild('Profile', array('route' => 'intranet_user_profile'))
+            $menu['User']->addChild('Profile', array('route' => 'user_profile'))
                 ->setAttribute('icon', 'user');
             $menu['User']->addChild('Messages', array('uri' => '#'))
                 ->setAttribute('icon', 'envelope');
@@ -123,6 +126,7 @@ class MenuBuilder
                 ->setAttribute('class', 'divider');
             $menu['User']->addChild('Déconnexion', array('route' => 'fos_user_security_logout'))
                 ->setAttribute('icon', 'power-off');
+
 
 
         return $menu;
@@ -149,9 +153,9 @@ class MenuBuilder
         $menu['RH']->addChild('Compte rendu d\'activité', array('route' => 'intranet_cra_homepage'));
             $menu['RH']->addChild('Note de frais', array('route' => 'intranet_expense_homepage'));
             $menu['RH']->addChild('Demande de congés', array('route' => 'intranet_vacation_homepage'));
-            $menu['RH']->addChild('CVthèque', array('route' => 'intranet_cv_homepage'));
+//            $menu['RH']->addChild('CVthèque', array('route' => 'intranet_cv_homepage'));
             $menu['RH']->addChild('Offres de poste', array('route' => 'intranet_job_offer_homepage'));
-            $menu['RH']->addChild('Candidatures', array('route' => 'intranet_candidacy_homepage'));
+//            $menu['RH']->addChild('Candidatures', array('route' => 'intranet_candidacy_homepage'));
             $menu['RH']->addChild('Collaborateurs', array('route' => 'intranet_user_homepage'));
 
         $menu->addChild('ToolBox', array('label' => 'Boite à outils '))
@@ -168,7 +172,7 @@ class MenuBuilder
             $menu['Admin']->addChild('Compte rendu d\'activité', array('route' => 'intranet_cra_homepage'));
             $menu['Admin']->addChild('Note de frais', array('route' => 'intranet_expense_homepage'));
             $menu['Admin']->addChild('Demande de congés', array('route' => 'intranet_vacation_homepage'));
-            $menu['Admin']->addChild('CVthèque', array('route' => 'intranet_cv_homepage'));
+//            $menu['Admin']->addChild('CVthèque', array('route' => 'intranet_cv_homepage'));
             $menu['Admin']->addChild('Postes', array('route' => 'intranet_job_homepage'));
             $menu['Admin']->addChild('Compétences', array('route' => 'intranet_skill_homepage'));
 

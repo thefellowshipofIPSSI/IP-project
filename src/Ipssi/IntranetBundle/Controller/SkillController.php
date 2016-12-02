@@ -10,6 +10,8 @@ use Ipssi\IntranetBundle\Entity\Skill;
 use Ipssi\IntranetBundle\Form\SkillType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Session\Session;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+
 
 
 class SkillController extends Controller {
@@ -17,6 +19,7 @@ class SkillController extends Controller {
     /**
      * List all Skills in table
      * @return \Symfony\Component\HttpFoundation\Response
+     * @Route("/skill", name="intranet_skill_homepage")
      */
     public function indexAction() {
 
@@ -30,6 +33,7 @@ class SkillController extends Controller {
     /**
      * Create a new Skill
      * @return \Symfony\Component\HttpFoundation\Response
+     * @Route("/skill/create", name="intranet_skill_create")
      */
     public function createAction(Request $request) {
         $skill = new Skill;
@@ -69,6 +73,7 @@ class SkillController extends Controller {
      * Update existing Skill
      * @param $skill
      * @return \Symfony\Component\HttpFoundation\Response
+     * @Route("/skill/{id}/update", name="intranet_skill_update")
      */
     public function updateAction(Skill $skill, Request $request)
     {
@@ -106,6 +111,7 @@ class SkillController extends Controller {
      * Delete a Skill
      * @param $skill
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @Route("/skill/{id}/delete", name="intranet_skill_delete")
      */
     public function deleteAction(Skill $skill)
     {
@@ -126,6 +132,7 @@ class SkillController extends Controller {
      * Display a Skill
      * @param $skill
      * @return \Symfony\Component\HttpFoundation\Response
+     * @Route("/skill/{id}/view", name="intranet_skill_view")
      */
     public function viewAction(Skill $skill)
     {
@@ -139,6 +146,7 @@ class SkillController extends Controller {
 //     * Make a Skill online
 //     * @param $skill
 //     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+//     * @Route("/skill/{id}/online", name="intranet_skill_online")
 //     */
 //    public function onlineAction(Skill $skill)
 //    {
@@ -155,6 +163,7 @@ class SkillController extends Controller {
 //     * Make a Skill offline
 //     * @param $skill
 //     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+//     * @Route("/skill/{id}/offline", name="intranet_skill_offline")
 //     */
 //    public function offlineAction(Skill $skill)
 //    {

@@ -10,12 +10,15 @@ use Ipssi\IntranetBundle\Entity\UserExpense;
 use Ipssi\IntranetBundle\Form\UserExpenseType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Session\Session;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+
 
 class UserExpenseController extends Controller {
 
     /**
      * List all Expense in table
      * @return \Symfony\Component\HttpFoundation\Response
+     * @Route("/expense", name="intranet_expense_homepage")
      */
     public function indexAction() {
 
@@ -29,6 +32,7 @@ class UserExpenseController extends Controller {
     /**
      * Create a new Expense
      * @return \Symfony\Component\HttpFoundation\Response
+     * @Route("/expense/create", name="intranet_expense_create")
      */
     public function createAction(Request $request) {
         $userExpense = new UserExpense;
@@ -68,6 +72,7 @@ class UserExpenseController extends Controller {
      * Update existing Expense
      * @param $userExpense
      * @return \Symfony\Component\HttpFoundation\Response
+     * @Route("/expense/{id}/update", name="intranet_expense_update")
      */
     public function updateAction(UserExpense $userExpense, Request $request)
     {
@@ -105,6 +110,7 @@ class UserExpenseController extends Controller {
      * Delete a Expense
      * @param $userExpense
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @Route("/expense/{id}/delete", name="intranet_expense_delete")
      */
     public function deleteAction(UserExpense $userExpense)
     {
@@ -125,6 +131,7 @@ class UserExpenseController extends Controller {
      * Display an Expense
      * @param $userExpense
      * @return \Symfony\Component\HttpFoundation\Response
+     * @Route("/expense/{id}/view", name="intranet_expense_view")
      */
     public function viewAction(UserExpense $userExpense)
     {
@@ -142,6 +149,7 @@ class UserExpenseController extends Controller {
      * Make a Expense online
      * @param $userExpense
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @Route("/expense/{id}/online", name="intranet_expense_online")
      */
     public function onlineAction(UserExpense $userExpense)
     {
@@ -163,6 +171,7 @@ class UserExpenseController extends Controller {
      * Make a Expense offline
      * @param $userExpense
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @Route("/expense/{id}/offline", name="intranet_expense_offline")
      */
     public function offlineAction(UserExpense $userExpense)
     {

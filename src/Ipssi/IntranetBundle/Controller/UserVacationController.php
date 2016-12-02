@@ -10,12 +10,15 @@ use Ipssi\IntranetBundle\Entity\UserVacation;
 use Ipssi\IntranetBundle\Form\UserVacationType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Session\Session;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+
 
 class UserVacationController extends Controller {
 
     /**
      * List all Vacation in table
      * @return \Symfony\Component\HttpFoundation\Response
+     * @Route("/vacation", name="intranet_vacation_homepage")
      */
     public function indexAction() {
 
@@ -29,6 +32,7 @@ class UserVacationController extends Controller {
     /**
      * Create a new Vacation
      * @return \Symfony\Component\HttpFoundation\Response
+     * @Route("/vacation/create", name="intranet_vacation_create")
      */
     public function createAction(Request $request) {
         $userVacation = new UserVacation;
@@ -68,6 +72,7 @@ class UserVacationController extends Controller {
      * Update existing Vacation
      * @param $userVacation
      * @return \Symfony\Component\HttpFoundation\Response
+     * @Route("/vacation/{id}/update", name="intranet_vacation_update")
      */
     public function updateAction(UserVacation $userVacation, Request $request)
     {
@@ -105,6 +110,7 @@ class UserVacationController extends Controller {
      * Delete a Vacation
      * @param $userVacation
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @Route("/vacation/{id}/delete", name="intranet_vacation_delete")
      */
     public function deleteAction(UserVacation $userVacation)
     {
@@ -125,6 +131,7 @@ class UserVacationController extends Controller {
      * Display a Vacation
      * @param $userVacation
      * @return \Symfony\Component\HttpFoundation\Response
+     * @Route("/vacation/{id}/view", name="intranet_vacation_view")
      */
     public function viewAction(UserVacation $userVacation)
     {
@@ -138,6 +145,7 @@ class UserVacationController extends Controller {
      * Make a Vacation online
      * @param $userVacation
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @Route("/vacation/{id}/online", name="intranet_vacation_online")
      */
     public function onlineAction(UserVacation $userVacation)
     {
@@ -159,6 +167,7 @@ class UserVacationController extends Controller {
      * Make a Vacation offline
      * @param $userVacation
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @Route("/vacation/{id}/offline", name="intranet_vacation_offline")
      */
     public function offlineAction(UserVacation $userVacation)
     {
