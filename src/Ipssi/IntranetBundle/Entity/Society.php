@@ -50,11 +50,19 @@ class Society
     private $city;
 
     /**
-     * @ORM\OneToOne(targetEntity="Ipssi\IntranetBundle\Entity\JobOffer", mappedBy="society")
+     * Job Offers for the Society
+     * @ORM\OneToMany(targetEntity="Ipssi\IntranetBundle\Entity\JobOffer", mappedBy="society")
      */
-    private $job_offer;
+    private $jobOffers;
 
 
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->job_offers = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Get id
@@ -163,26 +171,36 @@ class Society
     }
 
     /**
-     * Set jobOffer
+     * Add jobOffer
      *
      * @param \Ipssi\IntranetBundle\Entity\JobOffer $jobOffer
      *
      * @return Society
      */
-    public function setJobOffer(\Ipssi\IntranetBundle\Entity\JobOffer $jobOffer = null)
+    public function addJobOffer(\Ipssi\IntranetBundle\Entity\JobOffer $jobOffer)
     {
-        $this->job_offer = $jobOffer;
+        $this->job_offers[] = $jobOffer;
 
         return $this;
     }
 
     /**
-     * Get jobOffer
+     * Remove jobOffer
      *
-     * @return \Ipssi\IntranetBundle\Entity\JobOffer
+     * @param \Ipssi\IntranetBundle\Entity\JobOffer $jobOffer
      */
-    public function getJobOffer()
+    public function removeJobOffer(\Ipssi\IntranetBundle\Entity\JobOffer $jobOffer)
     {
-        return $this->job_offer;
+        $this->job_offers->removeElement($jobOffer);
+    }
+
+    /**
+     * Get jobOffers
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getJobOffers()
+    {
+        return $this->job_offers;
     }
 }

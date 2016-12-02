@@ -29,21 +29,32 @@ class Skill
     private $title;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Ipssi\IntranetBundle\Entity\JobOffer", mappedBy="skill")
+     * Offer which request the Skill
+     * @ORM\ManyToMany(targetEntity="Ipssi\IntranetBundle\Entity\JobOffer", mappedBy="skills")
      */
-    private $job_offer;
+    private $job_offers;
 
     /**
-     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User", inversedBy="skill")
-     * @ORM\JoinColumn(nullable=false)
+     * Users who have the Skill
+     * @ORM\ManyToMany(targetEntity="UserBundle\Entity\User", mappedBy="skills")
      */
-    private $user;
+    private $users;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->job_offers = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->users = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
 
 
     /**
      * Get id
      *
-     * @return int
+     * @return integer
      */
     public function getId()
     {
@@ -75,14 +86,6 @@ class Skill
     }
 
     /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->job_offer = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-
-    /**
      * Add jobOffer
      *
      * @param \Ipssi\IntranetBundle\Entity\JobOffer $jobOffer
@@ -91,7 +94,7 @@ class Skill
      */
     public function addJobOffer(\Ipssi\IntranetBundle\Entity\JobOffer $jobOffer)
     {
-        $this->job_offer[] = $jobOffer;
+        $this->job_offers[] = $jobOffer;
 
         return $this;
     }
@@ -103,40 +106,50 @@ class Skill
      */
     public function removeJobOffer(\Ipssi\IntranetBundle\Entity\JobOffer $jobOffer)
     {
-        $this->job_offer->removeElement($jobOffer);
+        $this->job_offers->removeElement($jobOffer);
     }
 
     /**
-     * Get jobOffer
+     * Get jobOffers
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getJobOffer()
+    public function getJobOffers()
     {
-        return $this->job_offer;
+        return $this->job_offers;
     }
 
     /**
-     * Set user
+     * Add user
      *
      * @param \UserBundle\Entity\User $user
      *
      * @return Skill
      */
-    public function setUser(\UserBundle\Entity\User $user)
+    public function addUser(\UserBundle\Entity\User $user)
     {
-        $this->user = $user;
+        $this->users[] = $user;
 
         return $this;
     }
 
     /**
-     * Get user
+     * Remove user
      *
-     * @return \UserBundle\Entity\User
+     * @param \UserBundle\Entity\User $user
      */
-    public function getUser()
+    public function removeUser(\UserBundle\Entity\User $user)
     {
-        return $this->user;
+        $this->users->removeElement($user);
+    }
+
+    /**
+     * Get users
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getUsers()
+    {
+        return $this->users;
     }
 }

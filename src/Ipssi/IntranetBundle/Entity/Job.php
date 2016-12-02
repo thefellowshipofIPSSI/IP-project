@@ -29,22 +29,29 @@ class Job
     private $title;
 
     /**
-     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User", inversedBy="job")
+     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User", inversedBy="jobs")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $user;
+    private $createdBy;
 
     /**
-     * @ORM\OneToOne(targetEntity="Ipssi\IntranetBundle\Entity\JobOffer", mappedBy="job")
+     * @ORM\OneToMany(targetEntity="Ipssi\IntranetBundle\Entity\JobOffer", mappedBy="job")
      */
-    private $job_offer;
+    private $jobOffers;
 
 
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->jobOffers = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Get id
      *
-     * @return int
+     * @return integer
      */
     public function getId()
     {
@@ -76,50 +83,60 @@ class Job
     }
 
     /**
-     * Set user
+     * Set createdBy
      *
-     * @param \UserBundle\Entity\User $user
+     * @param \UserBundle\Entity\User $createdBy
      *
      * @return Job
      */
-    public function setUser(\UserBundle\Entity\User $user)
+    public function setCreatedBy(\UserBundle\Entity\User $createdBy)
     {
-        $this->user = $user;
+        $this->createdBy = $createdBy;
 
         return $this;
     }
 
     /**
-     * Get user
+     * Get createdBy
      *
      * @return \UserBundle\Entity\User
      */
-    public function getUser()
+    public function getCreatedBy()
     {
-        return $this->user;
+        return $this->createdBy;
     }
 
     /**
-     * Set jobOffer
+     * Add jobOffer
      *
      * @param \Ipssi\IntranetBundle\Entity\JobOffer $jobOffer
      *
      * @return Job
      */
-    public function setJobOffer(\Ipssi\IntranetBundle\Entity\JobOffer $jobOffer = null)
+    public function addJobOffer(\Ipssi\IntranetBundle\Entity\JobOffer $jobOffer)
     {
-        $this->job_offer = $jobOffer;
+        $this->jobOffers[] = $jobOffer;
 
         return $this;
     }
 
     /**
-     * Get jobOffer
+     * Remove jobOffer
      *
-     * @return \Ipssi\IntranetBundle\Entity\JobOffer
+     * @param \Ipssi\IntranetBundle\Entity\JobOffer $jobOffer
      */
-    public function getJobOffer()
+    public function removeJobOffer(\Ipssi\IntranetBundle\Entity\JobOffer $jobOffer)
     {
-        return $this->job_offer;
+        $this->jobOffers->removeElement($jobOffer);
+    }
+
+    /**
+     * Get jobOffers
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getJobOffers()
+    {
+        return $this->jobOffers;
     }
 }

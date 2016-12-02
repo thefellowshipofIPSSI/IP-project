@@ -72,30 +72,37 @@ class JobOffer
     private $status;
 
     /**
-     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User", inversedBy="job_offer")
+     * User who requested for this Offer
+     * @ORM\ManyToMany(targetEntity="UserBundle\Entity\User", inversedBy="job_offer")
      * @ORM\JoinColumn(nullable=false)
      */
     private $user;
 
 
+    /**
+     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User", inversedBy="createdOffers")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $createdBy;
+
 
     /**
-     * @ORM\OneToOne(targetEntity="Ipssi\IntranetBundle\Entity\Job", inversedBy="job_offer")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\ManyToOne(targetEntity="Ipssi\IntranetBundle\Entity\Job", inversedBy="jobOffers")
+     * @ORM\JoinColumn(name="job_id", referencedColumnName="id")
      */
     private $job;
 
     /**
-     * @ORM\OneToOne(targetEntity="Ipssi\IntranetBundle\Entity\Society", inversedBy="job_offer")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\ManyToOne(targetEntity="Ipssi\IntranetBundle\Entity\Society", inversedBy="jobOffers")
+     * @ORM\JoinColumn(name="society_id", referencedColumnName="id")
      */
     private $society;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Ipssi\IntranetBundle\Entity\Skill", inversedBy="job_offer")
+     * @ORM\ManyToMany(targetEntity="Ipssi\IntranetBundle\Entity\Skill", inversedBy="jobOffers")
      * @ORM\JoinTable(name="job_offer_skill")
      */
-    private $skill;
+    private $skills;
 
     /**
      * Before persist or update, call the updatedTimestamps() function.
@@ -381,7 +388,7 @@ class JobOffer
      */
     public function addSkill(\Ipssi\IntranetBundle\Entity\Skill $skill)
     {
-        $this->skill[] = $skill;
+        $this->skills[] = $skill;
 
         return $this;
     }
@@ -393,16 +400,16 @@ class JobOffer
      */
     public function removeSkill(\Ipssi\IntranetBundle\Entity\Skill $skill)
     {
-        $this->skill->removeElement($skill);
+        $this->skills->removeElement($skill);
     }
 
     /**
-     * Get skill
+     * Get skills
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getSkill()
+    public function getSkills()
     {
-        return $this->skill;
+        return $this->skills;
     }
 }
