@@ -12,6 +12,8 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use JMS\SecurityExtraBundle\Annotation\Secure;
+
 
 
 
@@ -21,6 +23,7 @@ class NewsController extends Controller {
      * List all News in table
      * @return \Symfony\Component\HttpFoundation\Response
      * @Route("/news", name="intranet_news_homepage")
+     * @Security("has_role('ROLE_REDACTEUR')")
      */
     public function indexAction() {
 

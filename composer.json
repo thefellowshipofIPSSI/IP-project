@@ -35,10 +35,7 @@
         "hwi/oauth-bundle": "^0.5.0",
         "symfony/security": "^3.1",
         "knplabs/knp-menu-bundle": "^2.0",
-        "kartik-v/bootstrap-fileinput": "@dev",
-        "jms/security-extra-bundle": "dev-master",
-        "jms/serializer-bundle": "^1.1",
-        "jms/di-extra-bundle": "^1.8"
+        "kartik-v/bootstrap-fileinput": "@dev"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",

@@ -3,11 +3,10 @@ namespace Ipssi\IntranetBundle\Menu;
 
 use Knp\Menu\FactoryInterface;
 use Knp\Menu\ItemInterface;
-
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use JMS\SecurityExtraBundle\Metadata\Driver\AnnotationDriver;
-
+use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 
 class MenuBuilder
@@ -15,97 +14,20 @@ class MenuBuilder
     /** @var FactoryInterface */
     private $factory;
 
-    /** @var ContainerInterface */
-    private $container;
-
-    /** @var Router */
-    private $router;
-
-    /**
-     * @var SecurityContext
-     */
-    private $securityContext;
-
-    /**
-     * @var \JMS\SecurityExtraBundle\Metadata\Driver\AnnotationDriver
-     */
-    private $metadataReader;
-
-
     /**
      * @param FactoryInterface $factory, ContainerInterface $container
      *
      * Add any other dependency you need
      */
-    public function __construct(FactoryInterface $factory, ContainerInterface $container)
+    public function __construct(FactoryInterface $factory)
     {
         $this->factory = $factory;
-        $this->container = $container;
-        $this->router = $this->container->get('router');
-        $this->securityContext = $this->container->get('security.authorization_checker');
-        $this->metadataReader = new AnnotationDriver(new \Doctrine\Common\Annotations\AnnotationReader());
     }
-
-    public function filterMenu(ItemInterface $menu)
-    {
-        foreach ($menu->getChildren() as $child) {
-            /** @var \Knp\Menu\MenuItem $child */
-            list($route) = $child->getExtra('routes');
-
-            if ($route && !$this->hasRouteAccess($route)) {
-                $menu->removeChild($child);
-            }
-            $this->filterMenu($child);
-        }
-
-        return $menu;
-    }
-
-    /**
-     * @param $class
-     * @return \JMS\SecurityExtraBundle\Metadata\ClassMetadata
-     */
-    public function getMetadata($class)
-    {
-        return $this->metadataReader->loadMetadataForClass(new \ReflectionClass($class));
-    }
-
-    public function hasRouteAccess($routeName)
-    {
-        if ($this->securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
-
-            $route = $this->router->getRouteCollection()->get($routeName["route"]);
-
-            $controller = $route->getDefault('_controller');
-
-            dump($route);
-            die();
-
-            list($class, $method) = explode('::', $controller, 2);
-
-            $metadata = $this->getMetadata($class);
-
-            if (!isset($metadata->methodMetadata[$method])) {
-                return false;
-            }
-
-            foreach ($metadata->methodMetadata[$method]->roles as $role) {
-                if ($this->securityContext->isGranted($role)) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
 
     public function createUserMenu(TokenStorage $requestStack)
     {
 
         $user = $requestStack->getToken()->getUser();
-
-
-        //var_dump($this->get('security.authorization_checker'));
 
 
         $menu = $this->factory->createItem('user');
@@ -127,24 +49,26 @@ class MenuBuilder
             $menu['User']->addChild('Déconnexion', array('route' => 'fos_user_security_logout'))
                 ->setAttribute('icon', 'power-off');
 
-
-
         return $menu;
     }
 
 
 
-    public function createSidebarMenu()
+    public function createSidebarMenu(AuthorizationChecker $authorizationChecker)
     {
         $menu = $this->factory->createItem('sidebar');
 
         $menu->setChildrenAttribute('class', 'nav navbar-nav side-nav');
 
-        $menu->addChild('News', array('label' => 'Actualités', 'route' => 'intranet_news_homepage'))
-        ->setAttribute('icon', 'newspaper-o');
+        if ($authorizationChecker->isGranted('ROLE_REDACTEUR')){
+            $menu->addChild('News', array('label' => 'Actualités', 'route' => 'intranet_news_homepage'))
+                ->setAttribute('icon', 'newspaper-o');
+        }
 
-        $menu->addChild('Pages', array('label' => 'Pages', 'route' => 'intranet_page_homepage'))
-            ->setAttribute('icon', 'file-text-o');
+        if ($authorizationChecker->isGranted('ROLE_REDACTEUR')) {
+            $menu->addChild('Pages', array('label' => 'Pages', 'route' => 'intranet_page_homepage'))
+                ->setAttribute('icon', 'file-text-o');
+        }
 
         $menu->addChild('RH', array('label' => 'Ressources Humaines '))
             ->setAttribute('icon', 'group')
@@ -175,8 +99,6 @@ class MenuBuilder
 //            $menu['Admin']->addChild('CVthèque', array('route' => 'intranet_cv_homepage'));
             $menu['Admin']->addChild('Postes', array('route' => 'intranet_job_homepage'));
             $menu['Admin']->addChild('Compétences', array('route' => 'intranet_skill_homepage'));
-
-        $this->filterMenu($menu);
 
         return $menu;
     }

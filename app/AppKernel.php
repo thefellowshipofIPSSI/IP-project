@@ -22,11 +22,6 @@ class AppKernel extends Kernel
             new Ipssi\IntranetBundle\IntranetBundle(),
             new HWI\Bundle\OAuthBundle\HWIOAuthBundle(),
             new Knp\Bundle\MenuBundle\KnpMenuBundle(),
-
-            new JMS\AopBundle\JMSAopBundle(),
-            new JMS\DiExtraBundle\JMSDiExtraBundle($this),
-            new JMS\SerializerBundle\JMSSerializerBundle(),
-//            new JMS\SecurityExtraBundle\JMSSecurityExtraBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

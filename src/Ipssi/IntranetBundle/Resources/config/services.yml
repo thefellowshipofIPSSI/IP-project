@@ -74,7 +74,7 @@ services:
     app.sidebar_menu:
                 class: Knp\Menu\MenuItem # the service definition requires setting the class
                 factory: ["@app.menu_builder", createSidebarMenu]
-                arguments: ["@security.token_storage"]
+                arguments: ["@security.authorization_checker"]
                 tags:
                     - { name: knp_menu.menu, alias: sidebar } # The alias is what is used to retrieve the menu
 
