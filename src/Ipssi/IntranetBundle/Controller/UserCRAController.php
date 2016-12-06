@@ -11,6 +11,7 @@ use Ipssi\IntranetBundle\Form\UserCRAType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 
 class UserCRAController extends Controller {
@@ -19,6 +20,7 @@ class UserCRAController extends Controller {
      * List all CRA in table
      * @return \Symfony\Component\HttpFoundation\Response
      * @Route("/cra", name="intranet_cra_homepage")
+     * @Security("has_role('ROLE_RH') or has_role('ROLE_EDIT_CRA') or has_role('ROLE_CREATE_CRA')")
      */
     public function indexAction() {
 
@@ -33,6 +35,7 @@ class UserCRAController extends Controller {
      * Create a new CRA
      * @return \Symfony\Component\HttpFoundation\Response
      * @Route("/cra/create", name="intranet_cra_create")
+     * @Security("has_role('ROLE_RH') or has_role('ROLE_EDIT_CRA') or has_role('ROLE_CREATE_CRA')")
      */
     public function createAction(Request $request) {
         $userCRA = new UserCRA;
@@ -73,6 +76,7 @@ class UserCRAController extends Controller {
      * @param $userCRA
      * @return \Symfony\Component\HttpFoundation\Response
      * @Route("/cra/{id}/update", name="intranet_cra_update")
+     * @Security("is_granted('edit', userCRA)")
      */
     public function updateAction(userCRA $userCRA, Request $request)
     {
@@ -111,6 +115,7 @@ class UserCRAController extends Controller {
      * @param $userCRA
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      * @Route("/cra/{id}/delete", name="intranet_cra_delete")
+     * @Security("is_granted('edit', userCRA)")
      */
     public function deleteAction(UserCRA $userCRA)
     {
@@ -132,6 +137,7 @@ class UserCRAController extends Controller {
      * @param $userCRA
      * @return \Symfony\Component\HttpFoundation\Response
      * @Route("/cra/{id}/view", name="intranet_cra_view")
+     * @Security("is_granted('edit', userCRA)")
      */
     public function viewAction(UserCRA $userCRA)
     {
@@ -146,6 +152,7 @@ class UserCRAController extends Controller {
      * @param $userCRA
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      * @Route("/cra/{id}/online", name="intranet_cra_online")
+     * @Security("is_granted('edit', userCRA)")
      */
     public function onlineAction(UserCRA $userCRA)
     {
@@ -168,6 +175,7 @@ class UserCRAController extends Controller {
      * @param $userCRA
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      * @Route("/cra/{id}/offline", name="intranet_cra_offline")
+     * @Security("is_granted('edit', userCRA)")
      */
     public function offlineAction(UserCRA $userCRA)
     {

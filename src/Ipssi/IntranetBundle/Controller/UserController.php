@@ -9,8 +9,8 @@ use UserBundle\Entity\User;
 
 use UserBundle\Form\UserType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-
 
 class UserController extends Controller
 {
@@ -19,6 +19,7 @@ class UserController extends Controller
      * List all Users
      * @return \Symfony\Component\HttpFoundation\Response
      * @Route("/users", name="intranet_user_homepage")
+     * @Security("has_role('ROLE_RH') or has_role('ROLE_VIEW_USER')")
      */
     public function indexAction()
     {
@@ -52,6 +53,7 @@ class UserController extends Controller
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      * @Route("/user/create", name="intranet_user_create")
+     * @Security("has_role('ROLE_RH')")
      */
     public function createAction(Request $request)
     {
@@ -97,6 +99,7 @@ class UserController extends Controller
      * @param $user
      * @param Request $request
      * @Route("/user/{id}/update", name="intranet_user_update")
+     * @Security("has_role('ROLE_RH')")
      */
     public function updateAction(User $user, Request $request)
     {
@@ -141,6 +144,7 @@ class UserController extends Controller
      * @param $user
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      * @Route("/user/{id}/delete", name="intranet_user_delete")
+     * @Security("has_role('ROLE_RH')")
      */
     public function deleteAction(User $user)
     {
@@ -172,10 +176,11 @@ class UserController extends Controller
      * @param $user
      * @return \Symfony\Component\HttpFoundation\Response
      * @Route("/user/{id}/view", name="intranet_user_view")
+     * @Security("has_role('ROLE_RH')")
      */
     public function viewAction(User $user)
     {
-        return $this->render('IntranetBundle:User:view', [
+        return $this->render('IntranetBundle:User:profile.html.twig', [
             'user' => $user
         ]);
     }
@@ -185,6 +190,7 @@ class UserController extends Controller
      * @param $user
      * @return \Symfony\Component\HttpFoundation\Response
      * @Route("/user/{id}/online", name="intranet_user_enable")
+     * @Security("has_role('ROLE_RH')")
      */
     public function enableAction(User $user)
     {
@@ -208,6 +214,7 @@ class UserController extends Controller
      * @param $user
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      * @Route("/user/{id}/offline", name="intranet_user_disable")
+     * @Security("has_role('ROLE_RH')")
      */
     public function disableAction(User $user)
     {

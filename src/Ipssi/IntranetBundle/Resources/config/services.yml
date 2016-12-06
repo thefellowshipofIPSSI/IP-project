@@ -93,3 +93,10 @@ services:
                 public:     false
                 tags:
                    - { name: security.voter }
+
+    intranet.user_cra_voter:
+                class:      Ipssi\IntranetBundle\Security\UserCRAVoter
+                arguments: ['@security.access.decision_manager']
+                public:     false
+                tags:
+                   - { name: security.voter }

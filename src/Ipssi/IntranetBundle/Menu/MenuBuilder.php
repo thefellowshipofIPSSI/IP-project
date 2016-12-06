@@ -74,20 +74,25 @@ class MenuBuilder
             ->setAttribute('icon', 'group')
             ->setAttribute('icon2', 'caret-down')
             ->setAttribute('target', 'rh');
-        $menu['RH']->addChild('Compte rendu d\'activité', array('route' => 'intranet_cra_homepage'));
+            if ($authorizationChecker->isGranted('ROLE_CREATE_CRA')
+                or $authorizationChecker->isGranted('ROLE_EDIT_CRA')
+                or $authorizationChecker->isGranted('ROLE_RH')) {
+                $menu['RH']->addChild('Compte rendu d\'activité', array('route' => 'intranet_cra_homepage'));
+            }
             $menu['RH']->addChild('Note de frais', array('route' => 'intranet_expense_homepage'));
             $menu['RH']->addChild('Demande de congés', array('route' => 'intranet_vacation_homepage'));
 //            $menu['RH']->addChild('CVthèque', array('route' => 'intranet_cv_homepage'));
             $menu['RH']->addChild('Offres de poste', array('route' => 'intranet_job_offer_homepage'));
 //            $menu['RH']->addChild('Candidatures', array('route' => 'intranet_candidacy_homepage'));
-            $menu['RH']->addChild('Collaborateurs', array('route' => 'intranet_user_homepage'));
-
+            if ($authorizationChecker->isGranted('ROLE_RH') or $authorizationChecker->isGranted('ROLE_VIEW_USER')) {
+                $menu['RH']->addChild('Collaborateurs', array('route' => 'intranet_user_homepage'));
+            }
         $menu->addChild('ToolBox', array('label' => 'Boite à outils '))
             ->setAttribute('icon', 'wrench')
             ->setAttribute('icon2', 'caret-down')
             ->setAttribute('target', 'toolbox');
-            $menu['ToolBox']->addChild('Compte rendu d\'activité', array('route' => 'intranet_cra_homepage'));
-            $menu['ToolBox']->addChild('Note de frais', array('route' => 'intranet_expense_homepage'));
+            $menu['ToolBox']->addChild('Outil 1', array('route' => 'intranet_homepage'));
+            $menu['ToolBox']->addChild('Outil 2', array('route' => 'intranet_homepage'));
 
         $menu->addChild('Admin', array('label' => 'Administration '))
             ->setAttribute('icon', 'cog')
