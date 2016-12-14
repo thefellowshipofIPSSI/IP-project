@@ -11,7 +11,7 @@ use Ipssi\IntranetBundle\Form\SkillType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 
 class SkillController extends Controller {
@@ -20,6 +20,7 @@ class SkillController extends Controller {
      * List all Skills in table
      * @return \Symfony\Component\HttpFoundation\Response
      * @Route("/skill", name="intranet_skill_homepage")
+     * @Security("has_role('ROLE_SUPERVISEUR')")
      */
     public function indexAction() {
 
@@ -34,6 +35,7 @@ class SkillController extends Controller {
      * Create a new Skill
      * @return \Symfony\Component\HttpFoundation\Response
      * @Route("/skill/create", name="intranet_skill_create")
+     * @Security("has_role('ROLE_SUPERVISEUR')")
      */
     public function createAction(Request $request) {
         $skill = new Skill;
@@ -74,6 +76,7 @@ class SkillController extends Controller {
      * @param $skill
      * @return \Symfony\Component\HttpFoundation\Response
      * @Route("/skill/{id}/update", name="intranet_skill_update")
+     * @Security("has_role('ROLE_SUPERVISEUR')")
      */
     public function updateAction(Skill $skill, Request $request)
     {
@@ -112,6 +115,7 @@ class SkillController extends Controller {
      * @param $skill
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      * @Route("/skill/{id}/delete", name="intranet_skill_delete")
+     * @Security("has_role('ROLE_SUPERVISEUR')")
      */
     public function deleteAction(Skill $skill)
     {
@@ -133,6 +137,7 @@ class SkillController extends Controller {
      * @param $skill
      * @return \Symfony\Component\HttpFoundation\Response
      * @Route("/skill/{id}/view", name="intranet_skill_view")
+     * @Security("has_role('ROLE_SUPERVISEUR')")
      */
     public function viewAction(Skill $skill)
     {
@@ -147,6 +152,7 @@ class SkillController extends Controller {
 //     * @param $skill
 //     * @return \Symfony\Component\HttpFoundation\RedirectResponse
 //     * @Route("/skill/{id}/online", name="intranet_skill_online")
+//     * @Security("has_role('ROLE_SUPERVISEUR')")
 //     */
 //    public function onlineAction(Skill $skill)
 //    {
@@ -164,6 +170,7 @@ class SkillController extends Controller {
 //     * @param $skill
 //     * @return \Symfony\Component\HttpFoundation\RedirectResponse
 //     * @Route("/skill/{id}/offline", name="intranet_skill_offline")
+//     * @Security("has_role('ROLE_SUPERVISEUR')")
 //     */
 //    public function offlineAction(Skill $skill)
 //    {

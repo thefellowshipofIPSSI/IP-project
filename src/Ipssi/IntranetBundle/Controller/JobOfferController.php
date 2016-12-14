@@ -11,6 +11,7 @@ use Ipssi\IntranetBundle\Form\JobOfferType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 
 class JobOfferController extends Controller {
@@ -19,6 +20,7 @@ class JobOfferController extends Controller {
      * List all Job offers in table
      * @return \Symfony\Component\HttpFoundation\Response
      * @Route("/job_offer", name="intranet_job_offer_homepage")
+     * @Security("has_role('ROLE_REDACTEUR')")
      */
     public function indexAction() {
 
@@ -33,6 +35,7 @@ class JobOfferController extends Controller {
      * Create a new Job offer
      * @return \Symfony\Component\HttpFoundation\Response
      * @Route("/job_offer/create", name="intranet_job_offer_create")
+     * @Security("has_role('ROLE_REDACTEUR')")
      */
     public function createAction(Request $request) {
         $jobOffer = new JobOffer;
@@ -73,6 +76,7 @@ class JobOfferController extends Controller {
      * @param $jobOffer
      * @return \Symfony\Component\HttpFoundation\Response
      * @Route("/job_offer/{id}/update", name="intranet_job_offer_update")
+     * @Security("is_granted('edit', joboffer) or has_role('ROLE_SUPER_ADMIN')")
      */
     public function updateAction(JobOffer $jobOffer, Request $request)
     {
@@ -111,6 +115,7 @@ class JobOfferController extends Controller {
      * @param $jobOffer
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      * @Route("/job_offer/{id}/delete", name="intranet_job_offer_delete")
+     * @Security("is_granted('edit', joboffer) or has_role('ROLE_SUPER_ADMIN')")
      */
     public function deleteAction(JobOffer $jobOffer)
     {
@@ -146,6 +151,7 @@ class JobOfferController extends Controller {
      * @param $jobOffer
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      * @Route("/job_offer/{id}/online", name="intranet_job_offer_online")
+     * @Security("is_granted('edit', joboffer) or has_role('ROLE_SUPER_ADMIN')")
      */
     public function onlineAction(JobOffer $jobOffer)
     {
@@ -168,6 +174,7 @@ class JobOfferController extends Controller {
      * @param $jobOffer
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      * @Route("/job_offer/{id}/offline", name="intranet_job_offer_offline")
+     * @Security("is_granted('edit', joboffer) or has_role('ROLE_SUPER_ADMIN')")
      */
     public function offlineAction(JobOffer $jobOffer)
     {

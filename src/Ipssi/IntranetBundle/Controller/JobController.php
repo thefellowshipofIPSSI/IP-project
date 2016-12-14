@@ -11,6 +11,7 @@ use Ipssi\IntranetBundle\Form\JobType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 
 
@@ -20,6 +21,7 @@ class JobController extends Controller {
      * List all Jobs in table
      * @return \Symfony\Component\HttpFoundation\Response
      * @Route("/job", name="intranet_job_homepage")
+     * @Security("has_role('ROLE_SUPERVISEUR')")
      */
     public function indexAction() {
 
@@ -34,6 +36,7 @@ class JobController extends Controller {
      * Create a new Job
      * @return \Symfony\Component\HttpFoundation\Response
      * @Route("/job/create", name="intranet_job_create")
+     * @Security("has_role('ROLE_SUPERVISEUR')")
      */
     public function createAction(Request $request) {
         $job = new Job;
@@ -74,6 +77,7 @@ class JobController extends Controller {
      * @param $job
      * @return \Symfony\Component\HttpFoundation\Response
      * @Route("/job/{id}/update", name="intranet_job_update")
+     * @Security("has_role('ROLE_SUPERVISEUR')")
      */
     public function updateAction(Job $job, Request $request)
     {
@@ -112,6 +116,7 @@ class JobController extends Controller {
      * @param $job
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      * @Route("/job/{id}/delete", name="intranet_job_delete")
+     * @Security("has_role('ROLE_SUPERVISEUR')")
      */
     public function deleteAction(Job $job)
     {
@@ -133,6 +138,7 @@ class JobController extends Controller {
      * @param $job
      * @return \Symfony\Component\HttpFoundation\Response
      * @Route("/job/{id}/view", name="intranet_job_view")
+     * @Security("has_role('ROLE_SUPERVISEUR')")
      */
     public function viewAction(Job $job)
     {
@@ -147,6 +153,7 @@ class JobController extends Controller {
 //     * @param $job
 //     * @return \Symfony\Component\HttpFoundation\RedirectResponse
 //     * @Route("/job_offer/{id}/online", name="intranet_job_offer_online")
+//     * @Security("has_role('ROLE_SUPERVISEUR')")
 //     */
 //    public function onlineAction(Job $job)
 //    {
@@ -164,6 +171,7 @@ class JobController extends Controller {
 //     * @param $job
 //     * @return \Symfony\Component\HttpFoundation\RedirectResponse
 //     * @Route("/job_offer/{id}/offline", name="intranet_job_offer_offline")
+//     * @Security("has_role('ROLE_SUPERVISEUR')")
 //     */
 //    public function offlineAction(Job $job)
 //    {

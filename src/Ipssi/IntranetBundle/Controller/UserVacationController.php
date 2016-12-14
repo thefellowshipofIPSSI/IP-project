@@ -11,6 +11,7 @@ use Ipssi\IntranetBundle\Form\UserVacationType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 
 class UserVacationController extends Controller {
@@ -19,6 +20,7 @@ class UserVacationController extends Controller {
      * List all Vacation in table
      * @return \Symfony\Component\HttpFoundation\Response
      * @Route("/vacation", name="intranet_vacation_homepage")
+     * @Security("has_role('ROLE_RH') or has_role('ROLE_EDIT_VACATION') or has_role('ROLE_CREATE_VACATION')")
      */
     public function indexAction() {
 
@@ -33,6 +35,7 @@ class UserVacationController extends Controller {
      * Create a new Vacation
      * @return \Symfony\Component\HttpFoundation\Response
      * @Route("/vacation/create", name="intranet_vacation_create")
+     * @Security("has_role('ROLE_RH') or has_role('ROLE_EDIT_VACATION') or has_role('ROLE_CREATE_VACATION')")
      */
     public function createAction(Request $request) {
         $userVacation = new UserVacation;
@@ -73,6 +76,7 @@ class UserVacationController extends Controller {
      * @param $userVacation
      * @return \Symfony\Component\HttpFoundation\Response
      * @Route("/vacation/{id}/update", name="intranet_vacation_update")
+     * @Security("is_granted('edit', UserVacation)")
      */
     public function updateAction(UserVacation $userVacation, Request $request)
     {
@@ -111,6 +115,7 @@ class UserVacationController extends Controller {
      * @param $userVacation
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      * @Route("/vacation/{id}/delete", name="intranet_vacation_delete")
+     * @Security("is_granted('edit', UserVacation)")
      */
     public function deleteAction(UserVacation $userVacation)
     {
@@ -132,6 +137,7 @@ class UserVacationController extends Controller {
      * @param $userVacation
      * @return \Symfony\Component\HttpFoundation\Response
      * @Route("/vacation/{id}/view", name="intranet_vacation_view")
+     * @Security("is_granted('edit', UserVacation)")
      */
     public function viewAction(UserVacation $userVacation)
     {
@@ -146,6 +152,7 @@ class UserVacationController extends Controller {
      * @param $userVacation
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      * @Route("/vacation/{id}/online", name="intranet_vacation_online")
+     * @Security("is_granted('edit', UserVacation)")
      */
     public function onlineAction(UserVacation $userVacation)
     {
@@ -168,6 +175,7 @@ class UserVacationController extends Controller {
      * @param $userVacation
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      * @Route("/vacation/{id}/offline", name="intranet_vacation_offline")
+     * @Security("is_granted('edit', UserVacation)")
      */
     public function offlineAction(UserVacation $userVacation)
     {
