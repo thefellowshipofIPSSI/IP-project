@@ -12,8 +12,6 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
-use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
-use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 
 
 class UserCRAController extends Controller {
@@ -25,24 +23,12 @@ class UserCRAController extends Controller {
      * @Security("has_role('ROLE_RH') or has_role('ROLE_EDIT_CRA') or has_role('ROLE_CREATE_CRA')")
      */
     public function indexAction() {
-//        $authorizationChecker = new AuthorizationChecker($tokenStorage,
-//            $authenticationManager,
-//            $accessDecisionManager);
-//        if ($authorizationChecker->isGranted('ROLE_CREATE_CRA')){
-//
-//            $token = new TokenInterface();
-//            $user = $token->getUser()->getId();
-//            $allUserCRAs = $this->get('intranet.repository.cra')->findBy(
-//                array('user_id' => $user)
-//            );
-//        } else {
-//            $allUserCRAs = $this->get('intranet.repository.cra')->findAll();
-//
-//        }
-//
-//        return $this->render('IntranetBundle:UserCRA:index.html.twig', [
-//            'allUserCRAs' => $allUserCRAs
-//        ]);
+
+        $allUserCRAs = $this->get('intranet.repository.cra')->findAll();
+
+        return $this->render('IntranetBundle:UserCRA:index.html.twig', [
+            'allUserCRAs' => $allUserCRAs
+        ]);
     }
 
     /**

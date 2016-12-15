@@ -4,6 +4,7 @@ namespace Ipssi\IntranetBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use UserBundle\Entity\User;
 
 
 /**
@@ -203,6 +204,20 @@ class UserCRA
         }
     }
 
+
+    /**
+     * Is the given User the author of this CRA?
+     *
+     * @return bool
+     */
+    public function isCreator(User $user = null)
+    {
+        if ($user->getId() == $this->getUser()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
     /**
      * Get id

@@ -65,38 +65,38 @@ services:
 #            - { name: knp_menu.menu_builder, method: createSidebarMenu, alias: sidebar }
 
     app.user_menu:
-            class: Knp\Menu\MenuItem # the service definition requires setting the class
-            factory: ["@app.menu_builder", createUserMenu]
-            arguments: ["@security.token_storage"]
-            tags:
-                - { name: knp_menu.menu, alias: user } # The alias is what is used to retrieve the menu
+        class: Knp\Menu\MenuItem # the service definition requires setting the class
+        factory: ["@app.menu_builder", createUserMenu]
+        arguments: ["@security.token_storage"]
+        tags:
+            - { name: knp_menu.menu, alias: user } # The alias is what is used to retrieve the menu
 
     app.sidebar_menu:
-                class: Knp\Menu\MenuItem # the service definition requires setting the class
-                factory: ["@app.menu_builder", createSidebarMenu]
-                arguments: ["@security.authorization_checker"]
-                tags:
-                    - { name: knp_menu.menu, alias: sidebar } # The alias is what is used to retrieve the menu
+        class: Knp\Menu\MenuItem # the service definition requires setting the class
+        factory: ["@app.menu_builder", createSidebarMenu]
+        arguments: ["@security.authorization_checker"]
+        tags:
+            - { name: knp_menu.menu, alias: sidebar } # The alias is what is used to retrieve the menu
 
 
     #-----------------------VOTERS---------------------------------------------
     intranet.news_voter:
-            class:      Ipssi\IntranetBundle\Security\NewsVoter
-            arguments: ['@security.access.decision_manager']
-            public:     false
-            tags:
-               - { name: security.voter }
+        class:      Ipssi\IntranetBundle\Security\NewsVoter
+        arguments: ['@security.access.decision_manager']
+        public:     false
+        tags:
+           - { name: security.voter }
 
     intranet.page_voter:
-                class:      Ipssi\IntranetBundle\Security\PageVoter
-                arguments: ['@security.access.decision_manager']
-                public:     false
-                tags:
-                   - { name: security.voter }
+        class:      Ipssi\IntranetBundle\Security\PageVoter
+        arguments: ['@security.access.decision_manager']
+        public:     false
+        tags:
+           - { name: security.voter }
 
     intranet.user_cra_voter:
-                class:      Ipssi\IntranetBundle\Security\UserCRAVoter
-                arguments: ['@security.access.decision_manager']
-                public:     false
-                tags:
-                   - { name: security.voter }
+        class:      Ipssi\IntranetBundle\Security\UserCRAVoter
+        arguments: ['@security.access.decision_manager']
+        public:     false
+        tags:
+           - { name: security.voter }
