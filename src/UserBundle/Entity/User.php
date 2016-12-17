@@ -57,7 +57,6 @@ class User extends BaseUser {
 
     /**
      * @ORM\OneToMany(targetEntity="Ipssi\IntranetBundle\Entity\Page", mappedBy="user")
-     * @ORM\JoinColumn(nullable=true)
      */
     private $pages;
 
@@ -67,6 +66,37 @@ class User extends BaseUser {
      * @ORM\JoinColumn(nullable=true)
      */
     private $news;
+
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Ipssi\JobBundle\Entity\Society", inversedBy="members")
+     * @@ORMJoinColumn(name="society_id", referencedColumnName="id", nullable=true)
+     */
+    private $society;
+
+
+    /**
+     * User skills
+     * @ORM\ManyToMany(targetEntity="Ipssi\JobBundle\Entity\Skill", inversedBy="users")
+     * @ORM\JoinTable(name="user_skills")
+     */
+    private $skills;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Ipssi\JobBundle\Entity\Candidacy", mappedBy="candidate")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $candidacies;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Ipssi\JobBundle\Entity\CV", mappedBy="user")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $cv;
+
+
+
+    /*****  A revoir ****/
 
     /**
      * @ORM\OneToMany(targetEntity="Ipssi\IntranetBundle\Entity\UserExpense", mappedBy="user")
@@ -92,52 +122,7 @@ class User extends BaseUser {
      */
     private $user_validation_cra;
 
-    /**
-     * Jobs created by the User
-     * @ORM\OneToMany(targetEntity="Ipssi\IntranetBundle\Entity\Job", mappedBy="user")
-     * @ORM\JoinColumn(nullable=true)
-     */
-    private $jobs;
 
-    /**
-     * Offers which is answer by User
-     * @ORM\ManyToMany(targetEntity="Ipssi\IntranetBundle\Entity\JobOffer", mappedBy="user")
-     * @ORM\JoinColumn(nullable=true)
-     */
-    private $jobOffers;
-
-
-    /**
-     * Offers which is answer by User
-     * @ORM\OneToMany(targetEntity="Ipssi\IntranetBundle\Entity\JobOffer", mappedBy="user")
-     * @ORM\JoinColumn(nullable=true)
-     */
-    private $createdOffers;
-
-    /**
-     * User skills
-     * @ORM\ManyToMany(targetEntity="Ipssi\IntranetBundle\Entity\Skill", mappedBy="user")
-     * @ORM\JoinTable(name="user_skills")
-     */
-    private $skills;
-
-    /**
-     * @ORM\OneToMany(targetEntity="Ipssi\IntranetBundle\Entity\Candidacy", mappedBy="user")
-     * @ORM\JoinColumn(nullable=true)
-     */
-    private $candidacies;
-
-    /**
-     * @ORM\OneToMany(targetEntity="Ipssi\IntranetBundle\Entity\UserCV", mappedBy="user")
-     * @ORM\JoinColumn(nullable=true)
-     */
-    private $user_cv;
-
-    /**
-     * @ORM\OneToMany(targetEntity="Ipssi\IntranetBundle\Entity\UserCV", mappedBy="user_validation")
-     * @ORM\JoinColumn(nullable=true)
-     */
-    private $user_validation_cv;
 
     /**
      * @ORM\OneToMany(targetEntity="Ipssi\IntranetBundle\Entity\UserVacation", mappedBy="user")

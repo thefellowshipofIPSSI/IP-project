@@ -1,0 +1,3 @@
+intranet_offer:
+    path:     /offers
+    defaults: { _controller: JobBundle:Intranet/Offer:index }

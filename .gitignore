@@ -21,3 +21,4 @@ devbox.box
 nbproject/
 !/web/uploads/
 /web/uploads/*
+*~

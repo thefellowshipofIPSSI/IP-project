@@ -15,11 +15,7 @@ class AppKernel extends Kernel
             new Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle(),
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
-            new Ipssi\IpssiBundle\IpssiBundle(),
-            new FOS\UserBundle\FOSUserBundle(),
-            new UserBundle\UserBundle(),
             new Symfony\Bundle\AsseticBundle\AsseticBundle(),
-            new Ipssi\IntranetBundle\IntranetBundle(),
             new HWI\Bundle\OAuthBundle\HWIOAuthBundle(),
             new Knp\Bundle\MenuBundle\KnpMenuBundle(),
 
@@ -27,6 +23,18 @@ class AppKernel extends Kernel
             new JMS\DiExtraBundle\JMSDiExtraBundle($this),
             new JMS\SerializerBundle\JMSSerializerBundle(),
 //            new JMS\SecurityExtraBundle\JMSSecurityExtraBundle(),
+
+
+            // Project Bundles
+            new Ipssi\JobBundle\JobBundle(),
+            new Ipssi\IpssiBundle\IpssiBundle(),
+            new Ipssi\IntranetBundle\IntranetBundle(),
+            new UserBundle\UserBundle(),
+
+            new FOS\UserBundle\FOSUserBundle(),
+
+
+
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {
