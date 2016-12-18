@@ -1,3 +1,34 @@
-intranet_offer:
-    path:     /offers
+intranet_offers:
+    path:     /offres-de-poste
     defaults: { _controller: JobBundle:Intranet/Offer:index }
+
+
+intranet_candidacies:
+    path:     /candidatures
+    defaults: { _controller: JobBundle:Intranet/Candidacy:index }
+
+
+############# Society ################
+intranet_societies:
+    path:     /entreprises-partenaires
+    defaults: { _controller: JobBundle:Intranet/Society:index }
+
+
+intranet_society_create:
+    path:     /entreprises-partenaires/nouvelle-entreprise
+    defaults: { _controller: JobBundle:Intranet/Society:create }
+
+
+intranet_society_update:
+    path:     /entreprises-partenaires/modifier/{society}
+    defaults: { _controller: JobBundle:Intranet/Society:update }
+
+
+intranet_society_delete:
+    path:     /entreprises-partenaires/supprimer/{society}
+    defaults: { _controller: JobBundle:Intranet/Society:delete }
+
+
+intranet_society_upload_logo:
+    path:     /entreprises-partenaires/{society}/ajout-logo
+    defaults: { _controller: JobBundle:Intranet/Society:addLogo }

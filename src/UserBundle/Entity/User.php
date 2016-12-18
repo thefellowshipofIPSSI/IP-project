@@ -206,4 +206,450 @@ class User extends BaseUser {
     }
 
 
+
+    /**
+     * Set profile
+     *
+     * @param \UserBundle\Entity\Profile $profile
+     *
+     * @return User
+     */
+    public function setProfile(\UserBundle\Entity\Profile $profile = null)
+    {
+        $this->profile = $profile;
+
+        return $this;
+    }
+
+    /**
+     * Get profile
+     *
+     * @return \UserBundle\Entity\Profile
+     */
+    public function getProfile()
+    {
+        return $this->profile;
+    }
+
+    /**
+     * Set newsletter
+     *
+     * @param \UserBundle\Entity\Newsletter $newsletter
+     *
+     * @return User
+     */
+    public function setNewsletter(\UserBundle\Entity\Newsletter $newsletter = null)
+    {
+        $this->newsletter = $newsletter;
+
+        return $this;
+    }
+
+    /**
+     * Get newsletter
+     *
+     * @return \UserBundle\Entity\Newsletter
+     */
+    public function getNewsletter()
+    {
+        return $this->newsletter;
+    }
+
+    /**
+     * Add page
+     *
+     * @param \Ipssi\IntranetBundle\Entity\Page $page
+     *
+     * @return User
+     */
+    public function addPage(\Ipssi\IntranetBundle\Entity\Page $page)
+    {
+        $this->pages[] = $page;
+
+        return $this;
+    }
+
+    /**
+     * Remove page
+     *
+     * @param \Ipssi\IntranetBundle\Entity\Page $page
+     */
+    public function removePage(\Ipssi\IntranetBundle\Entity\Page $page)
+    {
+        $this->pages->removeElement($page);
+    }
+
+    /**
+     * Get pages
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getPages()
+    {
+        return $this->pages;
+    }
+
+    /**
+     * Add news
+     *
+     * @param \Ipssi\IntranetBundle\Entity\News $news
+     *
+     * @return User
+     */
+    public function addNews(\Ipssi\IntranetBundle\Entity\News $news)
+    {
+        $this->news[] = $news;
+
+        return $this;
+    }
+
+    /**
+     * Remove news
+     *
+     * @param \Ipssi\IntranetBundle\Entity\News $news
+     */
+    public function removeNews(\Ipssi\IntranetBundle\Entity\News $news)
+    {
+        $this->news->removeElement($news);
+    }
+
+    /**
+     * Get news
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getNews()
+    {
+        return $this->news;
+    }
+
+    /**
+     * Set society
+     *
+     * @param \Ipssi\JobBundle\Entity\Society $society
+     *
+     * @return User
+     */
+    public function setSociety(\Ipssi\JobBundle\Entity\Society $society = null)
+    {
+        $this->society = $society;
+
+        return $this;
+    }
+
+    /**
+     * Get society
+     *
+     * @return \Ipssi\JobBundle\Entity\Society
+     */
+    public function getSociety()
+    {
+        return $this->society;
+    }
+
+    /**
+     * Add skill
+     *
+     * @param \Ipssi\JobBundle\Entity\Skill $skill
+     *
+     * @return User
+     */
+    public function addSkill(\Ipssi\JobBundle\Entity\Skill $skill)
+    {
+        $this->skills[] = $skill;
+
+        return $this;
+    }
+
+    /**
+     * Remove skill
+     *
+     * @param \Ipssi\JobBundle\Entity\Skill $skill
+     */
+    public function removeSkill(\Ipssi\JobBundle\Entity\Skill $skill)
+    {
+        $this->skills->removeElement($skill);
+    }
+
+    /**
+     * Get skills
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getSkills()
+    {
+        return $this->skills;
+    }
+
+    /**
+     * Add candidacy
+     *
+     * @param \Ipssi\JobBundle\Entity\Candidacy $candidacy
+     *
+     * @return User
+     */
+    public function addCandidacy(\Ipssi\JobBundle\Entity\Candidacy $candidacy)
+    {
+        $this->candidacies[] = $candidacy;
+
+        return $this;
+    }
+
+    /**
+     * Remove candidacy
+     *
+     * @param \Ipssi\JobBundle\Entity\Candidacy $candidacy
+     */
+    public function removeCandidacy(\Ipssi\JobBundle\Entity\Candidacy $candidacy)
+    {
+        $this->candidacies->removeElement($candidacy);
+    }
+
+    /**
+     * Get candidacies
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getCandidacies()
+    {
+        return $this->candidacies;
+    }
+
+    /**
+     * Add cv
+     *
+     * @param \Ipssi\JobBundle\Entity\CV $cv
+     *
+     * @return User
+     */
+    public function addCv(\Ipssi\JobBundle\Entity\CV $cv)
+    {
+        $this->cv[] = $cv;
+
+        return $this;
+    }
+
+    /**
+     * Remove cv
+     *
+     * @param \Ipssi\JobBundle\Entity\CV $cv
+     */
+    public function removeCv(\Ipssi\JobBundle\Entity\CV $cv)
+    {
+        $this->cv->removeElement($cv);
+    }
+
+    /**
+     * Get cv
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getCv()
+    {
+        return $this->cv;
+    }
+
+    /**
+     * Add userExpense
+     *
+     * @param \Ipssi\IntranetBundle\Entity\UserExpense $userExpense
+     *
+     * @return User
+     */
+    public function addUserExpense(\Ipssi\IntranetBundle\Entity\UserExpense $userExpense)
+    {
+        $this->user_expense[] = $userExpense;
+
+        return $this;
+    }
+
+    /**
+     * Remove userExpense
+     *
+     * @param \Ipssi\IntranetBundle\Entity\UserExpense $userExpense
+     */
+    public function removeUserExpense(\Ipssi\IntranetBundle\Entity\UserExpense $userExpense)
+    {
+        $this->user_expense->removeElement($userExpense);
+    }
+
+    /**
+     * Get userExpense
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getUserExpense()
+    {
+        return $this->user_expense;
+    }
+
+    /**
+     * Add userValidationExpense
+     *
+     * @param \Ipssi\IntranetBundle\Entity\UserExpense $userValidationExpense
+     *
+     * @return User
+     */
+    public function addUserValidationExpense(\Ipssi\IntranetBundle\Entity\UserExpense $userValidationExpense)
+    {
+        $this->user_validation_expense[] = $userValidationExpense;
+
+        return $this;
+    }
+
+    /**
+     * Remove userValidationExpense
+     *
+     * @param \Ipssi\IntranetBundle\Entity\UserExpense $userValidationExpense
+     */
+    public function removeUserValidationExpense(\Ipssi\IntranetBundle\Entity\UserExpense $userValidationExpense)
+    {
+        $this->user_validation_expense->removeElement($userValidationExpense);
+    }
+
+    /**
+     * Get userValidationExpense
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getUserValidationExpense()
+    {
+        return $this->user_validation_expense;
+    }
+
+    /**
+     * Add userCra
+     *
+     * @param \Ipssi\IntranetBundle\Entity\UserCRA $userCra
+     *
+     * @return User
+     */
+    public function addUserCra(\Ipssi\IntranetBundle\Entity\UserCRA $userCra)
+    {
+        $this->user_cra[] = $userCra;
+
+        return $this;
+    }
+
+    /**
+     * Remove userCra
+     *
+     * @param \Ipssi\IntranetBundle\Entity\UserCRA $userCra
+     */
+    public function removeUserCra(\Ipssi\IntranetBundle\Entity\UserCRA $userCra)
+    {
+        $this->user_cra->removeElement($userCra);
+    }
+
+    /**
+     * Get userCra
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getUserCra()
+    {
+        return $this->user_cra;
+    }
+
+    /**
+     * Add userValidationCra
+     *
+     * @param \Ipssi\IntranetBundle\Entity\UserCRA $userValidationCra
+     *
+     * @return User
+     */
+    public function addUserValidationCra(\Ipssi\IntranetBundle\Entity\UserCRA $userValidationCra)
+    {
+        $this->user_validation_cra[] = $userValidationCra;
+
+        return $this;
+    }
+
+    /**
+     * Remove userValidationCra
+     *
+     * @param \Ipssi\IntranetBundle\Entity\UserCRA $userValidationCra
+     */
+    public function removeUserValidationCra(\Ipssi\IntranetBundle\Entity\UserCRA $userValidationCra)
+    {
+        $this->user_validation_cra->removeElement($userValidationCra);
+    }
+
+    /**
+     * Get userValidationCra
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getUserValidationCra()
+    {
+        return $this->user_validation_cra;
+    }
+
+    /**
+     * Add userVacation
+     *
+     * @param \Ipssi\IntranetBundle\Entity\UserVacation $userVacation
+     *
+     * @return User
+     */
+    public function addUserVacation(\Ipssi\IntranetBundle\Entity\UserVacation $userVacation)
+    {
+        $this->user_vacation[] = $userVacation;
+
+        return $this;
+    }
+
+    /**
+     * Remove userVacation
+     *
+     * @param \Ipssi\IntranetBundle\Entity\UserVacation $userVacation
+     */
+    public function removeUserVacation(\Ipssi\IntranetBundle\Entity\UserVacation $userVacation)
+    {
+        $this->user_vacation->removeElement($userVacation);
+    }
+
+    /**
+     * Get userVacation
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getUserVacation()
+    {
+        return $this->user_vacation;
+    }
+
+    /**
+     * Add userValidationVacation
+     *
+     * @param \Ipssi\IntranetBundle\Entity\UserVacation $userValidationVacation
+     *
+     * @return User
+     */
+    public function addUserValidationVacation(\Ipssi\IntranetBundle\Entity\UserVacation $userValidationVacation)
+    {
+        $this->user_validation_vacation[] = $userValidationVacation;
+
+        return $this;
+    }
+
+    /**
+     * Remove userValidationVacation
+     *
+     * @param \Ipssi\IntranetBundle\Entity\UserVacation $userValidationVacation
+     */
+    public function removeUserValidationVacation(\Ipssi\IntranetBundle\Entity\UserVacation $userValidationVacation)
+    {
+        $this->user_validation_vacation->removeElement($userValidationVacation);
+    }
+
+    /**
+     * Get userValidationVacation
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getUserValidationVacation()
+    {
+        return $this->user_validation_vacation;
+    }
 }

@@ -60,6 +60,14 @@ class Society
      */
     private $presentation;
 
+
+    /**
+     * @ORM\OneToOne(targetEntity="Ipssi\IpssiBundle\Entity\File")
+     * @ORM\JoinColumn(name="logo", referencedColumnName="id", onDelete="cascade")
+     */
+    private $logo;
+
+
     /**
      * @var
      * @ORM\Column(name="created_at", type="datetime")
@@ -102,6 +110,16 @@ class Society
         }
     }
 
+
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->offers = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->members = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Get id
@@ -304,23 +322,39 @@ class Society
     {
         return $this->updatedAt;
     }
+
     /**
-     * Constructor
+     * Set logo
+     *
+     * @param \Ipssi\IpssiBundle\Entity\File $logo
+     *
+     * @return Society
      */
-    public function __construct()
+    public function setLogo(\Ipssi\IpssiBundle\Entity\File $logo = null)
     {
-        $this->offers = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->members = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->logo = $logo;
+
+        return $this;
+    }
+
+    /**
+     * Get logo
+     *
+     * @return \Ipssi\IpssiBundle\Entity\File
+     */
+    public function getLogo()
+    {
+        return $this->logo;
     }
 
     /**
      * Add offer
      *
-     * @param \Ipssi\JobBundle\Entity\Offers $offer
+     * @param \Ipssi\JobBundle\Entity\Offer $offer
      *
      * @return Society
      */
-    public function addOffer(\Ipssi\JobBundle\Entity\Offers $offer)
+    public function addOffer(\Ipssi\JobBundle\Entity\Offer $offer)
     {
         $this->offers[] = $offer;
 
@@ -330,9 +364,9 @@ class Society
     /**
      * Remove offer
      *
-     * @param \Ipssi\JobBundle\Entity\Offers $offer
+     * @param \Ipssi\JobBundle\Entity\Offer $offer
      */
-    public function removeOffer(\Ipssi\JobBundle\Entity\Offers $offer)
+    public function removeOffer(\Ipssi\JobBundle\Entity\Offer $offer)
     {
         $this->offers->removeElement($offer);
     }
@@ -350,11 +384,11 @@ class Society
     /**
      * Add member
      *
-     * @param \UserBundle\User $member
+     * @param \UserBundle\Entity\User $member
      *
      * @return Society
      */
-    public function addMember(\UserBundle\User $member)
+    public function addMember(\UserBundle\Entity\User $member)
     {
         $this->members[] = $member;
 
@@ -364,9 +398,9 @@ class Society
     /**
      * Remove member
      *
-     * @param \UserBundle\User $member
+     * @param \UserBundle\Entity\User $member
      */
-    public function removeMember(\UserBundle\User $member)
+    public function removeMember(\UserBundle\Entity\User $member)
     {
         $this->members->removeElement($member);
     }

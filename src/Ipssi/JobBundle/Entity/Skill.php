@@ -53,6 +53,11 @@ class Skill
      */
     private $users;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="Offer", mappedBy="skills")
+     */
+    private $offers;
+
 
 
     /**
@@ -70,6 +75,15 @@ class Skill
         }
     }
 
+
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->users = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Get id
@@ -138,7 +152,7 @@ class Skill
      */
     public function setCreatedAt($createdAt)
     {
-        $this->created_at = $createdAt;
+        $this->createdAt = $createdAt;
 
         return $this;
     }
@@ -150,7 +164,7 @@ class Skill
      */
     public function getCreatedAt()
     {
-        return $this->created_at;
+        return $this->createdAt;
     }
 
     /**
@@ -175,5 +189,73 @@ class Skill
     public function getType()
     {
         return $this->type;
+    }
+
+    /**
+     * Add user
+     *
+     * @param \UserBundle\Entity\User $user
+     *
+     * @return Skill
+     */
+    public function addUser(\UserBundle\Entity\User $user)
+    {
+        $this->users[] = $user;
+
+        return $this;
+    }
+
+    /**
+     * Remove user
+     *
+     * @param \UserBundle\Entity\User $user
+     */
+    public function removeUser(\UserBundle\Entity\User $user)
+    {
+        $this->users->removeElement($user);
+    }
+
+    /**
+     * Get users
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getUsers()
+    {
+        return $this->users;
+    }
+
+    /**
+     * Add offer
+     *
+     * @param \Ipssi\JobBundle\Entity\Offer $offer
+     *
+     * @return Skill
+     */
+    public function addOffer(\Ipssi\JobBundle\Entity\Offer $offer)
+    {
+        $this->offers[] = $offer;
+
+        return $this;
+    }
+
+    /**
+     * Remove offer
+     *
+     * @param \Ipssi\JobBundle\Entity\Offer $offer
+     */
+    public function removeOffer(\Ipssi\JobBundle\Entity\Offer $offer)
+    {
+        $this->offers->removeElement($offer);
+    }
+
+    /**
+     * Get offers
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getOffers()
+    {
+        return $this->offers;
     }
 }

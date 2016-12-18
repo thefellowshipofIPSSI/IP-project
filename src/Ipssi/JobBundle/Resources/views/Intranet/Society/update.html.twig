@@ -1,0 +1,29 @@
+{% extends 'intranet.html.twig' %}
+
+{% block title %} Entreprises partenaires {% endblock %}
+
+{% block headerContainer %}
+    <div class="col-lg-12">
+        <h1 class="page-header">
+            Entreprises partenaires
+            <small>Modification</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li>
+                <i class="fa fa-home"></i>  <a href="{{ path('intranet_homepage') }}">Accueil</a>
+            </li>
+            <li class="active">
+                <a href="{{ path('intranet_news_homepage') }}">Entreprises partenaires</a>
+            </li>
+            <li class="active">
+                <i class="fa fa-eye"></i> Edition
+            </li>
+        </ol>
+    </div>
+{% endblock %}
+
+{% block body %}
+
+    {% include('IntranetBundle:News:form.html.twig') %}
+    
+{% endblock %}
