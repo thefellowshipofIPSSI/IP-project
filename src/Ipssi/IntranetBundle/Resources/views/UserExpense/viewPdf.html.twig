@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    {% block stylesheets %}
+        <!-- Bootstrap Core CSS -->
+        <link href="{{ app.request.schemeAndHttpHost ~ asset('css/bootstrap.min.css') }}" rel="stylesheet">
+        <!-- Custom Fonts -->
+        <link href="{{ app.request.schemeAndHttpHost ~ asset('font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
+    {% endblock %}
+
+</head>
+<body>
+<div id="wrapper">
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <!-- Page Heading -->
+            <div class="row">
+                {% block headerContainer %}
+                    <div class="col-lg-12">
+                        <h1 class="page-header">
+                            Note de frais
+                            <small> du {{ userExpense.beginDate|date('d/m/Y') }} au {{ userExpense.endDate|date('d/m/Y') }}</small>
+                        </h1>
+                    </div>
+                {% endblock %}
+            </div>
+            <!-- CONTENT -->
+            {% block body %}
+
+                <div class="col-lg-12">
+
+                    <!-- Title -->
+                    <h1>{{ userExpense.title|capitalize }}</h1>
+
+                    <!-- Author -->
+                    <p class="lead">
+                        crée par {{ userExpense.user.username|capitalize }} le {{ userExpense.creationDate|date('d/m/Y') }} à {{ userExpense.creationDate|date('H:i') }}
+                    </p>
+
+                    <hr>
+
+                    <!-- Page Content -->
+                    <p>Description : {{ userExpense.description }}</p>
+
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-hover">
+                            <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Date</th>
+                                <th>Type</th>
+                                <th>Description</th>
+                                <th>Prix</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% set total = 0 %}
+                            {% for expenseLine in allExpenseLines %}
+                                <tr>
+                                    <td>{{ loop.index }}</td>
+                                    <td>{{ expenseLine.expenseLineDate|date('d/m/Y') }}</td>
+                                    <td>{{ expenseLine.type }}</td>
+                                    <td>{{ expenseLine.description }}</td>
+                                    <td>{{ expenseLine.prix }}</td>
+                                    {% set total = total + expenseLine.prix %}
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <p class="lead pull-right">Total : {{ total }} €</p>
+                </div>
+
+            {% endblock %}
+            <!-- END CONTENT -->
+        </div>
+    </div>
+    <!-- /#wrapper -->
+</div>
+</body>
+</html>

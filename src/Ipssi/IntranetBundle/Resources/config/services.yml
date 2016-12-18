@@ -100,3 +100,60 @@ services:
         public:     false
         tags:
            - { name: security.voter }
+
+#    intranet.candidacy_voter:
+#            class:      Ipssi\IntranetBundle\Security\CandidacyVoter
+#            arguments: ['@security.access.decision_manager']
+#            public:     false
+#            tags:
+#               - { name: security.voter }
+
+    intranet.job_offer_voter:
+            class:      Ipssi\IntranetBundle\Security\JobOfferVoter
+            arguments: ['@security.access.decision_manager']
+            public:     false
+            tags:
+               - { name: security.voter }
+
+    intranet.job_voter:
+            class:      Ipssi\IntranetBundle\Security\JobVoter
+            arguments: ['@security.access.decision_manager']
+            public:     false
+            tags:
+               - { name: security.voter }
+
+    intranet.skill_voter:
+            class:      Ipssi\IntranetBundle\Security\SkillVoter
+            arguments: ['@security.access.decision_manager']
+            public:     false
+            tags:
+               - { name: security.voter }
+
+    intranet.society_voter:
+                class:      Ipssi\IntranetBundle\Security\SocietyVoter
+                arguments: ['@security.access.decision_manager']
+                public:     false
+                tags:
+                   - { name: security.voter }
+
+#    intranet.user_cv_voter:
+#                class:      Ipssi\IntranetBundle\Security\UserCVVoter
+#                arguments: ['@security.access.decision_manager']
+#                public:     false
+#                tags:
+#                   - { name: security.voter }
+
+    intranet.user_expense_voter:
+                class:      Ipssi\IntranetBundle\Security\UserExpenseVoter
+                arguments: ['@security.access.decision_manager']
+                public:     false
+                tags:
+                   - { name: security.voter }
+
+    intranet.user_vacation_voter:
+                class:      Ipssi\IntranetBundle\Security\UserVacationVoter
+                arguments: ['@security.access.decision_manager']
+                public:     false
+                tags:
+                   - { name: security.voter }
+

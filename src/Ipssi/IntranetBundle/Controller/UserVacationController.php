@@ -12,6 +12,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Symfony\Component\HttpFoundation\Response;
 
 
 class UserVacationController extends Controller {
@@ -85,7 +86,7 @@ class UserVacationController extends Controller {
      * @param $userVacation
      * @return \Symfony\Component\HttpFoundation\Response
      * @Route("/vacation/{id}/update", name="intranet_vacation_update")
-     * @Security("is_granted('edit', UserVacation)")
+     * @Security("is_granted('edit', userVacation)")
      */
     public function updateAction(UserVacation $userVacation, Request $request)
     {
@@ -124,7 +125,7 @@ class UserVacationController extends Controller {
      * @param $userVacation
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      * @Route("/vacation/{id}/delete", name="intranet_vacation_delete")
-     * @Security("is_granted('edit', UserVacation)")
+     * @Security("is_granted('edit', userVacation)")
      */
     public function deleteAction(UserVacation $userVacation)
     {
@@ -146,7 +147,7 @@ class UserVacationController extends Controller {
      * @param $userVacation
      * @return \Symfony\Component\HttpFoundation\Response
      * @Route("/vacation/{id}/view", name="intranet_vacation_view")
-     * @Security("is_granted('edit', UserVacation)")
+     * @Security("is_granted('edit', userVacation)")
      */
     public function viewAction(UserVacation $userVacation)
     {
@@ -155,13 +156,38 @@ class UserVacationController extends Controller {
         ]);
     }
 
+    /**
+     * Display a vacation's pdf
+     * @param $userVacation
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @Route("/vacation/{id}/viewpdf", name="intranet_vacation_view_pdf")
+     * @Security("is_granted('edit', userVacation)")
+     */
+    public function viewPdfAction(UserVacation $userVacation)
+    {
+        $html = $this->renderView('IntranetBundle:UserVacation:viewPdf.html.twig', array(
+            'userVacation'  => $userVacation
+        ));
+
+        $filename = "Demande_conge_" . $userVacation->getId();
+
+        return new Response(
+            $this->get('knp_snappy.pdf')->getOutputFromHtml($html),
+            200,
+            array(
+                'Content-Type'          => 'application/pdf',
+                'Content-Disposition'   => 'attachment; filename="'.$filename.'".pdf"'
+            )
+        );
+    }
+
 
     /**
      * Make a Vacation online
      * @param $userVacation
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      * @Route("/vacation/{id}/online", name="intranet_vacation_online")
-     * @Security("is_granted('edit', UserVacation)")
+     * @Security("is_granted('edit', userVacation)")
      */
     public function onlineAction(UserVacation $userVacation)
     {
@@ -184,7 +210,7 @@ class UserVacationController extends Controller {
      * @param $userVacation
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      * @Route("/vacation/{id}/offline", name="intranet_vacation_offline")
-     * @Security("is_granted('edit', UserVacation)")
+     * @Security("is_granted('edit', userVacation)")
      */
     public function offlineAction(UserVacation $userVacation)
     {

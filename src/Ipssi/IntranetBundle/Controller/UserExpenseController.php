@@ -12,6 +12,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Symfony\Component\HttpFoundation\Response;
 
 
 class UserExpenseController extends Controller {
@@ -85,7 +86,7 @@ class UserExpenseController extends Controller {
      * @param $userExpense
      * @return \Symfony\Component\HttpFoundation\Response
      * @Route("/expense/{id}/update", name="intranet_expense_update")
-     * @Security("is_granted('edit', UserExpense)")
+     * @Security("is_granted('edit', userExpense)")
      */
     public function updateAction(UserExpense $userExpense, Request $request)
     {
@@ -124,7 +125,7 @@ class UserExpenseController extends Controller {
      * @param $userExpense
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      * @Route("/expense/{id}/delete", name="intranet_expense_delete")
-     * @Security("is_granted('edit', UserExpense)")
+     * @Security("is_granted('edit', userExpense)")
      */
     public function deleteAction(UserExpense $userExpense)
     {
@@ -146,7 +147,7 @@ class UserExpenseController extends Controller {
      * @param $userExpense
      * @return \Symfony\Component\HttpFoundation\Response
      * @Route("/expense/{id}/view", name="intranet_expense_view")
-     * @Security("is_granted('edit', UserExpense)")
+     * @Security("is_granted('edit', userExpense)")
      */
     public function viewAction(UserExpense $userExpense)
     {
@@ -159,13 +160,42 @@ class UserExpenseController extends Controller {
         ]);
     }
 
+    /**
+     * Display a expense's pdf
+     * @param $userExpense
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @Route("/expense/{id}/viewpdf", name="intranet_expense_view_pdf")
+     * @Security("is_granted('edit', userExpense)")
+     */
+    public function viewpdfAction(UserExpense $userExpense)
+    {
+        $expenseLinesRepo = $this->get('intranet.repository.expense_line');
+        $allExpenseLines = $expenseLinesRepo->findAllLinesForOneExpense($userExpense);
+
+        $html = $this->renderView('IntranetBundle:UserExpense:viewPdf.html.twig', [
+            'userExpense'  => $userExpense,
+            'allExpenseLines' => $allExpenseLines
+        ]);
+
+        $filename = "note_de_frais_" . $userExpense->getId();
+
+        return new Response(
+            $this->get('knp_snappy.pdf')->getOutputFromHtml($html),
+            200,
+            array(
+                'Content-Type'          => 'application/pdf',
+                'Content-Disposition'   => 'attachment; filename="'.$filename.'".pdf"'
+            )
+        );
+    }
+
 
     /**
      * Make a Expense online
      * @param $userExpense
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      * @Route("/expense/{id}/online", name="intranet_expense_online")
-     * @Security("is_granted('edit', UserExpense)")
+     * @Security("is_granted('edit', userExpense)")
      */
     public function onlineAction(UserExpense $userExpense)
     {
@@ -188,7 +218,7 @@ class UserExpenseController extends Controller {
      * @param $userExpense
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      * @Route("/expense/{id}/offline", name="intranet_expense_offline")
-     * @Security("is_granted('edit', UserExpense)")
+     * @Security("is_granted('edit', userExpense)")
      */
     public function offlineAction(UserExpense $userExpense)
     {

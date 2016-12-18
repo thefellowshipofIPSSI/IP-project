@@ -12,6 +12,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Symfony\Component\HttpFoundation\Response;
 
 
 class JobOfferController extends Controller {
@@ -76,7 +77,7 @@ class JobOfferController extends Controller {
      * @param $jobOffer
      * @return \Symfony\Component\HttpFoundation\Response
      * @Route("/job_offer/{id}/update", name="intranet_job_offer_update")
-     * @Security("is_granted('edit', joboffer) or has_role('ROLE_SUPER_ADMIN')")
+     * @Security("is_granted('edit', jobOffer) or has_role('ROLE_SUPER_ADMIN')")
      */
     public function updateAction(JobOffer $jobOffer, Request $request)
     {
@@ -115,7 +116,7 @@ class JobOfferController extends Controller {
      * @param $jobOffer
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      * @Route("/job_offer/{id}/delete", name="intranet_job_offer_delete")
-     * @Security("is_granted('edit', joboffer) or has_role('ROLE_SUPER_ADMIN')")
+     * @Security("is_granted('edit', jobOffer) or has_role('ROLE_SUPER_ADMIN')")
      */
     public function deleteAction(JobOffer $jobOffer)
     {
@@ -143,6 +144,30 @@ class JobOfferController extends Controller {
         return $this->render('IntranetBundle:JobOffer:view.html.twig', [
             'jobOffer' => $jobOffer
         ]);
+    }
+
+    /**
+     * Display a job_offer's pdf
+     * @param $jobOffer
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @Route("/job_offer/{id}/viewpdf", name="intranet_job_offer_view_pdf")
+     */
+    public function viewpdfAction(JobOffer $jobOffer)
+    {
+        $html = $this->renderView('IntranetBundle:JobOffer:viewPdf.html.twig', [
+            'jobOffer'  => $jobOffer
+        ]);
+
+        $filename = "offre_emploi_" . $jobOffer->getId();
+
+        return new Response(
+            $this->get('knp_snappy.pdf')->getOutputFromHtml($html),
+            200,
+            array(
+                'Content-Type'          => 'application/pdf',
+                'Content-Disposition'   => 'attachment; filename="'.$filename.'".pdf"'
+            )
+        );
     }
 
 

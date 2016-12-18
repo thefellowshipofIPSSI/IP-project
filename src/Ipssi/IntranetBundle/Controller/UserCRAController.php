@@ -12,6 +12,8 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Symfony\Component\HttpFoundation\Response;
+
 
 
 class UserCRAController extends Controller {
@@ -87,7 +89,7 @@ class UserCRAController extends Controller {
      * @Route("/cra/{id}/update", name="intranet_cra_update")
      * @Security("is_granted('edit', userCRA)")
      */
-    public function updateAction(userCRA $userCRA, Request $request)
+    public function updateAction(UserCRA $userCRA, Request $request)
     {
         $form = $this->createForm(UserCRAType::class, $userCRA);
         $form->add('save', SubmitType::class, [
@@ -140,7 +142,6 @@ class UserCRAController extends Controller {
         return $this->redirectToRoute('intranet_cra_homepage');
     }
 
-
     /**
      * Display a CRA
      * @param $userCRA
@@ -155,6 +156,30 @@ class UserCRAController extends Controller {
         ]);
     }
 
+    /**
+     * Display a CRA's pdf
+     * @param $userCRA
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @Route("/cra/{id}/viewpdf", name="intranet_cra_view_pdf")
+     * @Security("is_granted('edit', userCRA)")
+     */
+    public function viewpdfAction(UserCRA $userCRA)
+    {
+        $html = $this->renderView('IntranetBundle:UserCRA:viewPdf.html.twig', [
+            'userCRA'  => $userCRA
+        ]);
+
+        $filename = "compte_rendu_" . $userCRA->getId();
+
+        return new Response(
+            $this->get('knp_snappy.pdf')->getOutputFromHtml($html),
+            200,
+            array(
+                'Content-Type'          => 'application/pdf',
+                'Content-Disposition'   => 'attachment; filename="'.$filename.'".pdf"'
+            )
+        );
+    }
 
     /**
      * Make a CRA online
