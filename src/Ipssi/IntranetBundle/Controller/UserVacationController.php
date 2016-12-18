@@ -26,6 +26,15 @@ class UserVacationController extends Controller {
 
         $allUserVacations = $this->get('intranet.repository.vacation')->findAll();
 
+        //Display only user's cra if ROLE_CREATE_VACATION
+        if ($this->get('security.authorization_checker')->isGranted('ROLE_CREATE_VACATION')) {
+            foreach ($allUserVacations as $key => $userVacation) {
+                if ($userVacation->isCreator($this->getUser()) == false) {
+                    unset($allUserVacations[$key]);
+                }
+            }
+        }
+
         return $this->render('IntranetBundle:UserVacation:index.html.twig', [
             'allUserVacations' => $allUserVacations
         ]);

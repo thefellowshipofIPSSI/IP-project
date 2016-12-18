@@ -27,6 +27,9 @@
             <thead>
             <tr>
                 <th>#</th>
+                {% if is_granted('ROLE_CREATE_VACATION') == false %}
+                    <th>Utilisateur</th>
+                {% endif %}
                 <th>Date de début</th>
                 <th>Date de fin</th>
                 <th>Statut</th>
@@ -37,6 +40,9 @@
             {% for userVacation in allUserVacations %}
             <tr>
                 <td>{{ userVacation.id }}</td>
+                {% if is_granted('ROLE_CREATE_VACATION') == false %}
+                    <td>{{ userVacation.user.username }}</td>
+                {% endif %}
                 <td>{{ userVacation.beginDate|date('d/m/Y') }}</td>
                 <td>{{ userVacation.endDate|date('d/m/Y') }}</td>
                 <td>

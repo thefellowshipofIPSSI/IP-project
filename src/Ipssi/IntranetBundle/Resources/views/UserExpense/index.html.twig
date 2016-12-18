@@ -28,6 +28,9 @@
             <thead>
             <tr>
                 <th>#</th>
+                {% if is_granted('ROLE_CREATE_EXPENSE') == false %}
+                    <th>Utilisateur</th>
+                {% endif %}
                 <th>Date</th>
                 <th>Titre</th>
                 <th>Statut</th>
@@ -38,6 +41,9 @@
             {% for userExpense in allUserExpenses %}
             <tr>
                 <td>{{ userExpense.id }}</td>
+                {% if is_granted('ROLE_CREATE_EXPENSE') == false %}
+                    <td>{{ userExpense.user.username }}</td>
+                {% endif %}
                 <td>{{ userExpense.creationDate|date('d/m/Y') }}</td>
                 <td>{{ userExpense.title }}</td>
                 <td>

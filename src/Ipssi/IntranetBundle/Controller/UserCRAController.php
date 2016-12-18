@@ -26,6 +26,15 @@ class UserCRAController extends Controller {
 
         $allUserCRAs = $this->get('intranet.repository.cra')->findAll();
 
+        //Display only user's cra if ROLE_CREATE_CRA
+        if ($this->get('security.authorization_checker')->isGranted('ROLE_CREATE_CRA')) {
+            foreach ($allUserCRAs as $key => $userCRA) {
+                if ($userCRA->isCreator($this->getUser()) == false) {
+                    unset($allUserCRAs[$key]);
+                }
+            }
+        }
+
         return $this->render('IntranetBundle:UserCRA:index.html.twig', [
             'allUserCRAs' => $allUserCRAs
         ]);

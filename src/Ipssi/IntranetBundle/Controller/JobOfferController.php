@@ -20,7 +20,7 @@ class JobOfferController extends Controller {
      * List all Job offers in table
      * @return \Symfony\Component\HttpFoundation\Response
      * @Route("/job_offer", name="intranet_job_offer_homepage")
-     * @Security("has_role('ROLE_REDACTEUR')")
+     * @Security("has_role('ROLE_VIEW_JOBOFFER') or has_role('ROLE_RH')")
      */
     public function indexAction() {
 
@@ -35,7 +35,7 @@ class JobOfferController extends Controller {
      * Create a new Job offer
      * @return \Symfony\Component\HttpFoundation\Response
      * @Route("/job_offer/create", name="intranet_job_offer_create")
-     * @Security("has_role('ROLE_REDACTEUR')")
+     * @Security("has_role('ROLE_VIEW_JOBOFFER') or has_role('ROLE_RH')")
      */
     public function createAction(Request $request) {
         $jobOffer = new JobOffer;

@@ -26,6 +26,15 @@ class UserExpenseController extends Controller {
 
         $allUserExpenses = $this->get('intranet.repository.expense')->findAll();
 
+        //Display only user's cra if ROLE_CREATE_EXPENSE
+        if ($this->get('security.authorization_checker')->isGranted('ROLE_CREATE_EXPENSE')) {
+            foreach ($allUserExpenses as $key => $userExpense) {
+                if ($userExpense->isCreator($this->getUser()) == false) {
+                    unset($allUserExpenses[$key]);
+                }
+            }
+        }
+
         return $this->render('IntranetBundle:UserExpense:index.html.twig', [
             'allUserExpenses' => $allUserExpenses
         ]);

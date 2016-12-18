@@ -20,15 +20,6 @@
 
 {% block body %}
 
-    {# Display only cra's user if he has ROLE_CREATE_CRA  #}
-    {% if is_granted('ROLE_CREATE_CRA') %}
-        {% for userCRA in allUserCRAs %}
-            {% if userCRA.isCreator(app.user) %}
-                {{ allUserCRAs|slice(userCRA) }}
-            {% endif %}
-        {% endfor %}
-    {% endif %}
-
     <a href="{{ path('intranet_cra_create') }}" class="btn btn-primary" style="margin-bottom:10px;">Nouveau compte rendu d'activité</a>
 
     <div class="table-responsive">
@@ -36,6 +27,9 @@
             <thead>
             <tr>
                 <th>#</th>
+                {% if is_granted('ROLE_CREATE_CRA') == false %}
+                    <th>Utilisateur</th>
+                {% endif %}
                 <th>Date</th>
                 <th>Projet</th>
                 <th>Client</th>
@@ -47,6 +41,9 @@
             {% for userCRA in allUserCRAs %}
                 <tr>
                     <td>{{ userCRA.id }}</td>
+                    {% if is_granted('ROLE_CREATE_CRA') == false %}
+                        <td>{{ userCRA.user.username }}</td>
+                    {% endif %}
                     <td>{{ userCRA.creationDate|date('d/m/Y') }}</td>
                     <td>{{ userCRA.projectName }}</td>
                     <td>{{ userCRA.client }}</td>
