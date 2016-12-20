@@ -31,32 +31,52 @@ class Society
 
     /**
      * @var
-     * @ORM\Column(name="address", type="string", length=255)
+     * @ORM\Column(name="address", type="string", length=255, nullable=true)
      */
     private $address;
 
     /**
      * @var
-     * @ORM\Column(name="zipcode", type="string", length=10)
+     * @ORM\Column(name="zipcode", type="string", length=10, nullable=true)
      */
     private $zipcode;
 
     /**
      * @var
-     * @ORM\Column(name="city", type="string", length=100)
+     * @ORM\Column(name="city", type="string", length=100, nullable=true)
      */
     private $city;
 
 
     /**
      * @var
-     * @ORM\Column(name="country", type="string", length=100)
+     * @ORM\Column(name="email", type="string", length=50, nullable=true)
+     */
+    private $email;
+
+
+    /**
+     * @var
+     * @ORM\Column(name="primary_phone", type="string", length=15, nullable=true)
+     */
+    private $primaryPhone;
+
+    /**
+     * @var
+     * @ORM\Column(name="secondary_phone", type="string", length=15, nullable=true)
+     */
+    private $secondaryPhone;
+
+
+    /**
+     * @var
+     * @ORM\Column(name="country", type="string", length=100, nullable=true)
      */
     private $country;
 
     /**
      * @var
-     * @ORM\Column(name="presentation", type="text")
+     * @ORM\Column(name="presentation", type="text", nullable=true)
      */
     private $presentation;
 
@@ -332,6 +352,7 @@ class Society
      */
     public function setLogo(\Ipssi\IpssiBundle\Entity\File $logo = null)
     {
+
         $this->logo = $logo;
 
         return $this;
@@ -413,5 +434,77 @@ class Society
     public function getMembers()
     {
         return $this->members;
+    }
+
+    /**
+     * Set email
+     *
+     * @param string $email
+     *
+     * @return Society
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    /**
+     * Get email
+     *
+     * @return string
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * Set primaryPhone
+     *
+     * @param string $primaryPhone
+     *
+     * @return Society
+     */
+    public function setPrimaryPhone($primaryPhone)
+    {
+        $this->primaryPhone = $primaryPhone;
+
+        return $this;
+    }
+
+    /**
+     * Get primaryPhone
+     *
+     * @return string
+     */
+    public function getPrimaryPhone()
+    {
+        return $this->primaryPhone;
+    }
+
+    /**
+     * Set secondaryPhone
+     *
+     * @param string $secondaryPhone
+     *
+     * @return Society
+     */
+    public function setSecondaryPhone($secondaryPhone)
+    {
+        $this->secondaryPhone = $secondaryPhone;
+
+        return $this;
+    }
+
+    /**
+     * Get secondaryPhone
+     *
+     * @return string
+     */
+    public function getSecondaryPhone()
+    {
+        return $this->secondaryPhone;
     }
 }

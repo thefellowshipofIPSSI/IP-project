@@ -26,7 +26,7 @@
     border-radius: 2px 2px 0 0;
     background-clip: padding-box;
     position: relative;
-    z-index: -1;
+    /*z-index: -1;*/
 }
 .card .card-image span.card-title {
     position: absolute;

@@ -17,9 +17,19 @@
     <div class="form-group">
         {{ form_row(form.country) }}
     </div>
+
+
+    {% if society.logo is not null %}
+
+        <img src="{{ asset(society.logo.webPath) }}" height="200">
+
+    {% endif %}
+
     <div class="form-group">
-        {{ form_row(form.logo, { 'id': 'input-file' }) }}
+        {{ form_row(form.logo.file, { 'id': 'input-file' }) }}
     </div>
+
+
 
 
 {{ form_end(form) }}
@@ -30,11 +40,11 @@
     <script type="text/javascript">
         $("#input-file").fileinput({
             theme: "fa",
-            uploadUrl: "{{ path('file_upload') }}"
-        }).on('fileuploaded', function(e, data, index) {
-            console.log('fichier uploadé');
-            alert('Fichier uploadé');
-        });
+            showRemove: true,
+            showUpload: false,
+            maxFileCount: 1,
+            allowedFileTypes: ["image"]
+        })
 
 
     </script>

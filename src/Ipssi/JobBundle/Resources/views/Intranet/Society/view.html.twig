@@ -1,4 +1,4 @@
-{% extends "intranet.html.twig" %}
+{% extends 'intranet.html.twig' %}
 
 {% block title %} Entreprises partenaires {% endblock %}
 
@@ -6,17 +6,17 @@
     <div class="col-lg-12">
         <h1 class="page-header">
             Entreprises partenaires
-            <small>Aperçu : {{ news.name }}</small>
+            <small>Détails</small>
         </h1>
         <ol class="breadcrumb">
             <li>
                 <i class="fa fa-home"></i>  <a href="{{ path('intranet_homepage') }}">Accueil</a>
             </li>
             <li class="active">
-                <a href="{{ path('intranet_news_homepage') }}">Entreprises partenaires</a>
+                <a href="{{ path('intranet_societies') }}">Entreprises partenaires</a>
             </li>
             <li class="active">
-                <i class="fa fa-eye"></i> Aperçu : {{ news.name }}
+                <i class="fa fa-eye"></i> Détails : {{ society.name }}
             </li>
         </ol>
     </div>
@@ -30,31 +30,36 @@
         <!-- Blog Post -->
 
         <!-- Title -->
-        <h1>{{ news.title|capitalize }}</h1>
+        <h1>{{ society.name|capitalize }}</h1>
 
         <!-- Author -->
         <p class="lead">
-            par {{ news.getUser.usernameCanonical|capitalize }} le {{ news.creationDate|date('d/m/Y') }} à {{ news.creationDate|date('H:i') }}
+            Société ajoutée le {{ society.createdAt|date('d/m/Y') }} à {{ society.createdAt|date('H:i') }}
         </p>
 
         <hr>
 
-        <!-- Preview Image -->
-        <img class="img-responsive" src="http://placehold.it/900x300" alt="">
+        {% if society.logo is not null %}
+
+            <img src="{{ asset(society.logo.webPath) }}" height="200">
+
+        {% endif %}
 
         <hr>
 
         <!-- Post Content -->
-        <p class="lead">{{ news.resume }}</p>
+        <p class="lead">{{ society.presentation }}</p>
 
-        <p>
-            {{ news.content|raw }}
-        </p>
+        <address>
+            <strong>{{ society.name | capitalize }}</strong><br>
+            {{ society.address }}
+            {#<abbr title="Phone">P:</abbr> (123) 456-7890#}
+        </address>
 
     </div>
 
     <br><br><br>
-    <a href="{{ path('intranet_news_update', {'id': news.id}) }}" class="btn btn-primary" style="margin-bottom:10px;">Modifier</a>
+    <a href="{{ path('intranet_society_update', {'society': society.id}) }}" class="btn btn-primary" style="margin-bottom:10px;">Modifier</a>
 
 
 {% endblock %}

@@ -13,10 +13,10 @@
                 <i class="fa fa-home"></i>  <a href="{{ path('intranet_homepage') }}">Accueil</a>
             </li>
             <li class="active">
-                <a href="{{ path('intranet_news_homepage') }}">Entreprises partenaires</a>
+                <a href="{{ path('intranet_societies') }}">Entreprises partenaires</a>
             </li>
             <li class="active">
-                <i class="fa fa-eye"></i> Edition
+                <i class="fa fa-eye"></i> Modifier : {{ society.name }}
             </li>
         </ol>
     </div>
@@ -24,6 +24,6 @@
 
 {% block body %}
 
-    {% include('IntranetBundle:News:form.html.twig') %}
+    {% include('JobBundle:Intranet/Society:form.html.twig') %}
     
 {% endblock %}

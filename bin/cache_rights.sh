@@ -1,7 +1,5 @@
 #!/bin/bash
 
 
-sudo chown -R devow:www-data $HOME/www-dev/ip-project/var/cache/*
-sudo chown -R devow:www-data $HOME/www-dev/ip-project/var/logs
-sudo chmod -R 775 $HOME/www-dev/ip-project/var/cache/*
-sudo chmod -R 775 $HOME/www-dev/ip-project/var/logs
+sudo setfacl -R -m u:www-data:rwX -m u:devow:rwX var/cache var/logs
+sudo setfacl -dR -m u:www-data:rwx -m u:devow:rwx var/cache var/logs

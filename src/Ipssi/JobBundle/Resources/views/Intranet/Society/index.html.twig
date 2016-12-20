@@ -28,14 +28,21 @@
             {% for society in societies %}
                 <div class="col-md-4">
                     <div class="card">
-                        <span class="card-title">{{ society.name }}</span>
+
+                        <div class="card-image">
+                            <img  src="{{ asset(society.logo.webPath) }}" height="200" style="margin:auto;">
+                        </div>
+
+                            <span class="card-title">{{ society.name }}</span>
 
                         <div class="card-content">
-                            <p>{{ news.presentation }}</p>
+                            <p>{{ society.presentation }}</p>
                         </div>
 
                         <div class="card-action">
-                            <a href="{{ path('intranet_society_show', {'society': society}) }}" class="fa fa-eye"></a>
+                            <a href="{{ path('intranet_society_view', {'society': society.id}) }}" class="fa fa-eye"></a>
+                            <a href="{{ path('intranet_society_update', {'society': society.id}) }}" class="fa fa-edit"></a>
+                            <a href="{{ path('intranet_society_delete', {'society': society.id}) }}" class="fa fa-trash" onClick="return confirm('Supprimer la société ?')"></a>
                         </div>
                     </div>
                 </div>

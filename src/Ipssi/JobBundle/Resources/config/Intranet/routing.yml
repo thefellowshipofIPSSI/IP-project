@@ -13,6 +13,10 @@ intranet_societies:
     path:     /entreprises-partenaires
     defaults: { _controller: JobBundle:Intranet/Society:index }
 
+intranet_society_view:
+    path:     /entreprise/{society}/details
+    defaults: { _controller: JobBundle:Intranet/Society:view }
+
 
 intranet_society_create:
     path:     /entreprises-partenaires/nouvelle-entreprise
