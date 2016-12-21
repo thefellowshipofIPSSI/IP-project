@@ -1,6 +1,3 @@
-intranet_offers:
-    path:     /offres-de-poste
-    defaults: { _controller: JobBundle:Intranet/Offer:index }
 
 
 intranet_candidacies:
@@ -36,3 +33,29 @@ intranet_society_delete:
 intranet_society_upload_logo:
     path:     /entreprises-partenaires/{society}/ajout-logo
     defaults: { _controller: JobBundle:Intranet/Society:addLogo }
+    
+    
+############# Offres ################
+intranet_offers:
+    path:     /offres-de-poste
+    defaults: { _controller: JobBundle:Intranet/Offer:index }
+
+intranet_offer_view:
+    path:     /offre/{offer}/details
+    defaults: { _controller: JobBundle:Intranet/Offer:view }
+
+
+intranet_offer_create:
+    path:     /offres-de-poste/nouvelle-offre
+    defaults: { _controller: JobBundle:Intranet/Offer:create }
+
+
+intranet_offer_update:
+    path:     /offres-de-poste/modifier/{offer}
+    defaults: { _controller: JobBundle:Intranet/Offer:update }
+
+
+intranet_offer_delete:
+    path:     /offres-de-poste/supprimer/{offer}
+    defaults: { _controller: JobBundle:Intranet/Offer:delete }
+    

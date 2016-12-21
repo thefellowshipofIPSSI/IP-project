@@ -49,7 +49,7 @@ class Offer
 
     /**
      * @var
-     * @ORM\Column(name="duration", type="string", length=100)
+     * @ORM\Column(name="duration", type="string", length=100, nullable=true)
      */
     private $duration;
 
@@ -61,27 +61,27 @@ class Offer
 
     /**
      * @var
-     * @ORM\Column(name="salary", type="decimal")
+     * @ORM\Column(name="salary", type="decimal", nullable=true)
      */
     private $salary;
 
 
     /**
      * @var
-     * @ORM\Column(name="currency", type="string", length=30)
+     * @ORM\Column(name="currency", type="string", length=15, nullable=true)
      */
     private $currency;
 
 
     /**
      * @var
-     * @ORM\Column(name="begin_date", type="date")
+     * @ORM\Column(name="begin_date", type="string", length=30)
      */
     private $beginDate;
 
     /**
      * @var
-     * @ORM\Column(name="link", type="string", length=100)
+     * @ORM\Column(name="link", type="string", length=100, nullable=true)
      */
     private $link;
 
