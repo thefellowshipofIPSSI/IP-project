@@ -112,6 +112,13 @@ class Offer
 
 
     /**
+     * @ORM\OneToOne(targetEntity="UserBundle\Entity\User")
+     * @ORM\JoinColumn(name="updated_by", referencedColumnName="id")
+     */
+    private $updatedBy;
+
+
+    /**
     * @ORM\ManyToOne(targetEntity="Society", inversedBy="offers")
     * @ORM\JoinColumn(name="society_id", referencedColumnName="id")
     */
@@ -132,7 +139,7 @@ class Offer
 
 
     /**
-     * @ORM\ManyToMany(targetEntity="Skill", inversedBy="offers")
+     * @ORM\ManyToMany(targetEntity="Skill", inversedBy="offers", cascade={"persist"})
      * @ORM\JoinTable(name="job_offers_skills")
      */
     private $skills;
@@ -152,6 +159,15 @@ class Offer
         {
             $this->setCreatedAt(new \DateTime('now'));
         }
+    }
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->candidacies = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->skills = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -335,7 +351,7 @@ class Offer
     /**
      * Set beginDate
      *
-     * @param \DateTime $beginDate
+     * @param string $beginDate
      *
      * @return Offer
      */
@@ -349,7 +365,7 @@ class Offer
     /**
      * Get beginDate
      *
-     * @return \DateTime
+     * @return string
      */
     public function getBeginDate()
     {
@@ -451,14 +467,6 @@ class Offer
     {
         return $this->updatedAt;
     }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->candidacies = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->skills = new \Doctrine\Common\Collections\ArrayCollection();
-    }
 
     /**
      * Set createdBy
@@ -482,6 +490,30 @@ class Offer
     public function getCreatedBy()
     {
         return $this->createdBy;
+    }
+
+    /**
+     * Set updatedBy
+     *
+     * @param \UserBundle\Entity\User $updatedBy
+     *
+     * @return Offer
+     */
+    public function setUpdatedBy(\UserBundle\Entity\User $updatedBy = null)
+    {
+        $this->updatedBy = $updatedBy;
+
+        return $this;
+    }
+
+    /**
+     * Get updatedBy
+     *
+     * @return \UserBundle\Entity\User
+     */
+    public function getUpdatedBy()
+    {
+        return $this->updatedBy;
     }
 
     /**

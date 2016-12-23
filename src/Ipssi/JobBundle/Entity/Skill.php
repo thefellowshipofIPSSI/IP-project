@@ -24,13 +24,13 @@ class Skill
 
     /**
      * @var
-     * @ORM\Column(name="name", type="string", length=100)
+     * @ORM\Column(name="name", type="string", length=100, unique=true)
      */
     private $name;
 
     /**
      * @var
-     * @ORM\Column(name="description", type="text")
+     * @ORM\Column(name="description", type="text", nullable=true)
      */
     private $description;
 
@@ -64,7 +64,6 @@ class Skill
      * Before persist or update, call the updatedTimestamps() function.
      *
      * @ORM\PrePersist
-     * @ORM\PreUpdate
      */
     public function onPrePersist()
     {

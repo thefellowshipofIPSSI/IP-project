@@ -3,7 +3,12 @@
 namespace Ipssi\JobBundle\Form;
 
 use Ipssi\IpssiBundle\Form\FileType;
+use Ipssi\JobBundle\Repository\SkillRepository;
+use Ipssi\JobBundle\Transformer\ArrayToSkillTransformer;
+use Ipssi\JobBundle\Transformer\SkillTagsTransformer;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -67,7 +72,27 @@ class OfferType extends AbstractType
                 'attr' => array(
                     'class' => 'form-control'
                 )
-            ));
+            ))
+
+            ->add('society', EntityType::class, array(
+
+                'class' => 'JobBundle:Society',
+                'choice_label' => 'name',
+
+                'attr' => array(
+                    'class' => 'form-control'
+                )
+            ))
+
+            ->add('skills', TextType::class, array(
+                'attr' => array(
+                    'class' => 'form-control'
+                )
+            ))
+            ->get('skills')->addModelTransformer(new ArrayToSkillTransformer())
+
+
+        ;
 
 
 
@@ -81,7 +106,8 @@ class OfferType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Ipssi\JobBundle\Entity\Offer'
+            'data_class' => 'Ipssi\JobBundle\Entity\Offer',
+            'allow_extra_fields' => true
         ));
     }
 

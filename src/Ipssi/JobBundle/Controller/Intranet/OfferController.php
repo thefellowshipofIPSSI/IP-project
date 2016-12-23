@@ -52,14 +52,16 @@ class OfferController extends Controller
 
         $form = $this->createForm(OfferType::class, $offer);
         $form->add('submit', SubmitType::class, array(
-            'label' => 'Créer',
+            'label' => 'Créer l\'offre',
             'attr'  => array('class' => 'btn btn-success')
         ));
 
 
         $form->handleRequest($request);
 
+
         if($form->isSubmitted() && $form->isValid()) {
+
 
             $offer = $form->getData();
 
@@ -71,7 +73,7 @@ class OfferController extends Controller
 
             $this->addFlash(
                 'success',
-                'Nouvelle société créée !'
+                'Nouvelle offre créée !'
             );
 
             return $this->redirectToRoute('intranet_offers');
@@ -79,8 +81,12 @@ class OfferController extends Controller
         }
 
 
-        return $this->render('JobBundle:Intranet/Offer:update.html.twig', array(
+        $skills = $em->getRepository('JobBundle:Skill')->allNamesToArray();
+
+
+        return $this->render('JobBundle:Intranet/Offer:create.html.twig', array(
             'offer' => $offer,
+            'skills' => $skills,
             'form' => $form->createView()
         ));
 
@@ -97,7 +103,7 @@ class OfferController extends Controller
 
         $form = $this->createForm(OfferType::class, $offer);
         $form->add('submit', SubmitType::class, array(
-            'label' => 'Créer',
+            'label' => 'Valider les modifications',
             'attr'  => array('class' => 'btn btn-success')
         ));
 
@@ -108,28 +114,30 @@ class OfferController extends Controller
 
         if($form->isSubmitted() && $form->isValid()) {
 
+
             $offer = $form->getData();
 
-            $file = $offer->getLogo();
-
+            $offer->setStatus(0);
 
             $em->persist($offer);
-            $em->persist($file);
             $em->flush();
 
 
             $this->addFlash(
                 'success',
-                'Société modifiée !'
+                'Nouvelle offre créée !'
             );
 
             return $this->redirectToRoute('intranet_offers');
 
         }
 
+        $skills = $em->getRepository('JobBundle:Skill')->allNamesToArray();
 
-        return $this->render('JobBundle:Intranet/Offer:update.html.twig', array(
+
+        return $this->render('JobBundle:Intranet/Offer:create.html.twig', array(
             'offer' => $offer,
+            'skills' => $skills,
             'form' => $form->createView()
         ));
 
@@ -149,7 +157,7 @@ class OfferController extends Controller
 
         $this->addFlash(
             'danger',
-            'Société supprimée'
+            'Offre supprimée'
         );
 
         return $this->redirectToRoute('intranet_offers');
