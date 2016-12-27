@@ -30,7 +30,7 @@ class JobType
 
     /**
      * @var
-     * @ORM\Column(name="description", type="text")
+     * @ORM\Column(name="description", type="text", nullable=true)
      */
     private $description;
 

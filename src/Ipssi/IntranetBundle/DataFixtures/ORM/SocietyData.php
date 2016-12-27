@@ -5,7 +5,7 @@ namespace Ipssi\IntranetBundle\DataFixtures\ORM;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
-use Ipssi\IntranetBundle\Entity\Society;
+use Ipssi\JobBundle\Entity\Society;
 
 class SocietyData extends AbstractFixture implements OrderedFixtureInterface
 {

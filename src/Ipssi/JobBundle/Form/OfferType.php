@@ -41,6 +41,7 @@ class OfferType extends AbstractType
                 )
             ))
             ->add('duration', TextType::class, array(
+                'required' => false,
                 'attr' => array(
                     'class' => 'form-control'
                 )
@@ -57,6 +58,7 @@ class OfferType extends AbstractType
             ))
 
             ->add('currency', TextType::class, array(
+                'required' => false,
                 'attr' => array(
                     'class' => 'form-control'
                 )
@@ -69,6 +71,7 @@ class OfferType extends AbstractType
             ))
 
             ->add('link', TextType::class, array(
+                'required' => false,
                 'attr' => array(
                     'class' => 'form-control'
                 )

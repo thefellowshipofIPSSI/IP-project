@@ -4,6 +4,8 @@ namespace Ipssi\JobBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity as UniqueEntity;
+
 /**
  * News
  *

@@ -29,9 +29,11 @@
                 <div class="col-md-4">
                     <div class="card">
 
-                        <div class="card-image">
-                            <img  src="{{ asset(society.logo.webPath) }}" height="200" style="margin:auto;">
-                        </div>
+                        {% if society.logo is not null %}
+                            <div class="card-image">
+                                <img  src="{{ asset(society.logo.webPath) }}" height="200" style="margin:auto;">
+                            </div>
+                        {% endif %}
 
                             <span class="card-title">{{ society.name }}</span>
 
