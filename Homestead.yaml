@@ -11,6 +11,11 @@ authorize: ~/.ssh/id_rsa.pub
 keys:
     - ~/.ssh/id_rsa
 
+folders:
+    - map: "."
+      to: "/home/vagrant/IP-project"
+      type: nfs
+
 sites:
     - map: www.ip-project.app
       to: "/home/vagrant/IP-project/web"

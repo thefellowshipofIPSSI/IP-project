@@ -81,6 +81,9 @@ class RegistrationController extends BaseController
         } else {
             // Redirect register to login : same view
             if(strstr($request->getPathInfo(), 'register')) {
+
+
+
                 return $this->redirectToRoute('user_login', array(),301);
             }
         }
