@@ -157,3 +157,7 @@ services:
                 tags:
                    - { name: security.voter }
 
+    #-----------------------DATATABLES---------------------------------------------
+    app.datatable.usercra:
+                class: Ipssi\IntranetBundle\Datatables\UserCRADatatable
+                parent: sg_datatables.datatable.abstract

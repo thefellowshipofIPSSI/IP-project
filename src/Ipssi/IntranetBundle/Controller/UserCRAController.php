@@ -12,6 +12,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\HttpFoundation\Response;
 
 
@@ -22,30 +23,62 @@ class UserCRAController extends Controller {
      * List all CRA in table
      * @return \Symfony\Component\HttpFoundation\Response
      * @Route("/cra", name="intranet_cra_homepage")
+     * @Method("GET")
      * @Security("has_role('ROLE_RH') or has_role('ROLE_EDIT_CRA') or has_role('ROLE_CREATE_CRA')")
      */
     public function indexAction() {
 
-        $allUserCRAs = $this->get('intranet.repository.cra')->findAll();
+//        $allUserCRAs = $this->get('intranet.repository.cra')->findAll();
+//
+//        //Display only user's cra if ROLE_CREATE_CRA
+//        if ($this->get('security.authorization_checker')->isGranted('ROLE_CREATE_CRA')) {
+//            foreach ($allUserCRAs as $key => $userCRA) {
+//                if ($userCRA->isCreator($this->getUser()) == false) {
+//                    unset($allUserCRAs[$key]);
+//                }
+//            }
+//        }
+//
+//        return $this->render('IntranetBundle:UserCRA:index.html.twig', [
+//            'allUserCRAs' => $allUserCRAs
+//        ]);
+
+        $datatable = $this->get('app.datatable.usercra');
+        $datatable->buildDatatable();
+
+        return $this->render('IntranetBundle:UserCRA:index.html.twig', array(
+            'datatable' => $datatable,
+        ));
+    }
+
+    /**
+     * @Route("/cra/results", name="intranet_cra_results")
+     */
+    public function indexResultsAction()
+    {
+        $datatable = $this->get('app.datatable.usercra');
+        $datatable->buildDatatable();
+
+
+        $query = $this->get('sg_datatables.query')->getQueryFrom($datatable);
 
         //Display only user's cra if ROLE_CREATE_CRA
-        if ($this->get('security.authorization_checker')->isGranted('ROLE_CREATE_CRA')) {
-            foreach ($allUserCRAs as $key => $userCRA) {
-                if ($userCRA->isCreator($this->getUser()) == false) {
-                    unset($allUserCRAs[$key]);
-                }
-            }
-        }
+//        if ($this->get('security.authorization_checker')->isGranted('ROLE_CREATE_CRA')) {
+//            $query->buildQuery();
+//            $qb = $query->getQuery();
+//
+//            $qb->andWhere("userCRA. = 11");
+//        }
+//
 
-        return $this->render('IntranetBundle:UserCRA:index.html.twig', [
-            'allUserCRAs' => $allUserCRAs
-        ]);
+
+        return $query->getResponse();
     }
 
     /**
      * Create a new CRA
      * @return \Symfony\Component\HttpFoundation\Response
-     * @Route("/cra/create", name="intranet_cra_create")
+     * @Route("/cra/create", name="intranet_cra_create", options={"expose"=true})
      * @Security("has_role('ROLE_RH') or has_role('ROLE_EDIT_CRA') or has_role('ROLE_CREATE_CRA')")
      */
     public function createAction(Request $request) {
@@ -86,7 +119,7 @@ class UserCRAController extends Controller {
      * Update existing CRA
      * @param $userCRA
      * @return \Symfony\Component\HttpFoundation\Response
-     * @Route("/cra/{id}/update", name="intranet_cra_update")
+     * @Route("/cra/{id}/update", name="intranet_cra_update", options={"expose"=true})
      * @Security("is_granted('edit', userCRA)")
      */
     public function updateAction(UserCRA $userCRA, Request $request)
@@ -125,7 +158,7 @@ class UserCRAController extends Controller {
      * Delete a CRA
      * @param $userCRA
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
-     * @Route("/cra/{id}/delete", name="intranet_cra_delete")
+     * @Route("/cra/{id}/delete", name="intranet_cra_delete", options={"expose"=true})
      * @Security("is_granted('edit', userCRA)")
      */
     public function deleteAction(UserCRA $userCRA)
@@ -146,7 +179,7 @@ class UserCRAController extends Controller {
      * Display a CRA
      * @param $userCRA
      * @return \Symfony\Component\HttpFoundation\Response
-     * @Route("/cra/{id}/view", name="intranet_cra_view")
+     * @Route("/cra/{id}/view", name="intranet_cra_view", options={"expose"=true})
      * @Security("is_granted('edit', userCRA)")
      */
     public function viewAction(UserCRA $userCRA)
@@ -160,7 +193,7 @@ class UserCRAController extends Controller {
      * Display a CRA's pdf
      * @param $userCRA
      * @return \Symfony\Component\HttpFoundation\Response
-     * @Route("/cra/{id}/viewpdf", name="intranet_cra_view_pdf")
+     * @Route("/cra/{id}/viewpdf", name="intranet_cra_view_pdf", options={"expose"=true})
      * @Security("is_granted('edit', userCRA)")
      */
     public function viewpdfAction(UserCRA $userCRA)
@@ -185,7 +218,7 @@ class UserCRAController extends Controller {
      * Make a CRA online
      * @param $userCRA
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
-     * @Route("/cra/{id}/online", name="intranet_cra_online")
+     * @Route("/cra/{id}/online", name="intranet_cra_online", options={"expose"=true})
      * @Security("is_granted('edit', userCRA)")
      */
     public function onlineAction(UserCRA $userCRA)
@@ -208,7 +241,7 @@ class UserCRAController extends Controller {
      * Make a CRA offline
      * @param $userCRA
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
-     * @Route("/cra/{id}/offline", name="intranet_cra_offline")
+     * @Route("/cra/{id}/offline", name="intranet_cra_offline", options={"expose"=true})
      * @Security("is_granted('edit', userCRA)")
      */
     public function offlineAction(UserCRA $userCRA)

@@ -20,55 +20,60 @@
 
 {% block body %}
 
-    <a href="{{ path('intranet_cra_create') }}" class="btn btn-primary" style="margin-bottom:10px;">Nouveau compte rendu d'activité</a>
+    {#<a href="{{ path('intranet_cra_create') }}" class="btn btn-primary" style="margin-bottom:10px;">Nouveau compte rendu d'activité</a>#}
 
-    <div class="table-responsive">
-        <table class="table table-bordered table-hover">
-            <thead>
-            <tr>
-                <th>#</th>
-                {% if is_granted('ROLE_CREATE_CRA') == false %}
-                    <th>Utilisateur</th>
-                {% endif %}
-                <th>Date</th>
-                <th>Projet</th>
-                <th>Client</th>
-                <th>Statut</th>
-                <th>Actions</th>
-            </tr>
-            </thead>
-            <tbody>
-            {% for userCRA in allUserCRAs %}
-                <tr>
-                    <td>{{ userCRA.id }}</td>
-                    {% if is_granted('ROLE_CREATE_CRA') == false %}
-                        <td>{{ userCRA.user.username }}</td>
-                    {% endif %}
-                    <td>{{ userCRA.creationDate|date('d/m/Y') }}</td>
-                    <td>{{ userCRA.projectName }}</td>
-                    <td>{{ userCRA.client }}</td>
-                    <td>
-                        {% if userCRA.status == 0 %}
-                            Hors ligne
-                        {% else %}
-                            En ligne
-                        {% endif %}
-                    </td>
-                    <td>
-                        <a href="{{ path('intranet_cra_view', {'id': userCRA.id}) }}" class="fa fa-eye" title="Aperçu"></a>
-                        <a href="{{ path('intranet_cra_update', {'id': userCRA.id}) }}" class="fa fa-pencil-square-o" title="Modifier"></a>
-                        <a href="{{ path('intranet_cra_delete', {'id': userCRA.id}) }}" class="fa fa-trash-o" title="Supprimer"></a>
-                        <a href="{{ path('intranet_cra_view_pdf', {'id': userCRA.id}) }}" class="fa fa-download" title="Télécharger le .pdf"></a>
-                        {% if userCRA.status == 0 %}
-                            <a href="{{ path('intranet_cra_online', {'id': userCRA.id}) }}" class="fa fa-toggle-off pull-right" title="Mettre en ligne"></a>
-                        {% else %}
-                            <a href="{{ path('intranet_cra_offline', {'id': userCRA.id}) }}" class="fa fa-toggle-on pull-right" title="Mettre hors ligne"></a>
-                        {% endif %}
-                    </td>
+    {#<div class="table-responsive">#}
+        {#<table class="table table-bordered table-hover">#}
+            {#<thead>#}
+            {#<tr>#}
+                {#<th>#</th>#}
+                {#{% if is_granted('ROLE_CREATE_CRA') == false %}#}
+                    {#<th>Utilisateur</th>#}
+                {#{% endif %}#}
+                {#<th>Date</th>#}
+                {#<th>Projet</th>#}
+                {#<th>Client</th>#}
+                {#<th>Statut</th>#}
+                {#<th>Actions</th>#}
+            {#</tr>#}
+            {#</thead>#}
+            {#<tbody>#}
+            {#{% for userCRA in allUserCRAs %}#}
+                {#<tr>#}
+                    {#<td>{{ userCRA.id }}</td>#}
+                    {#{% if is_granted('ROLE_CREATE_CRA') == false %}#}
+                        {#<td>{{ userCRA.user.username }}</td>#}
+                    {#{% endif %}#}
+                    {#<td>{{ userCRA.creationDate|date('d/m/Y') }}</td>#}
+                    {#<td>{{ userCRA.projectName }}</td>#}
+                    {#<td>{{ userCRA.client }}</td>#}
+                    {#<td>#}
+                        {#{% if userCRA.status == 0 %}#}
+                            {#Hors ligne#}
+                        {#{% else %}#}
+                            {#En ligne#}
+                        {#{% endif %}#}
+                    {#</td>#}
+                    {#<td>#}
+                        {#<a href="{{ path('intranet_cra_view', {'id': userCRA.id}) }}" class="fa fa-eye" title="Aperçu"></a>#}
+                        {#<a href="{{ path('intranet_cra_update', {'id': userCRA.id}) }}" class="fa fa-pencil-square-o" title="Modifier"></a>#}
+                        {#<a href="{{ path('intranet_cra_delete', {'id': userCRA.id}) }}" class="fa fa-trash-o" title="Supprimer"></a>#}
+                        {#<a href="{{ path('intranet_cra_view_pdf', {'id': userCRA.id}) }}" class="fa fa-download" title="Télécharger le .pdf"></a>#}
+                        {#{% if userCRA.status == 0 %}#}
+                            {#<a href="{{ path('intranet_cra_online', {'id': userCRA.id}) }}" class="fa fa-toggle-off pull-right" title="Mettre en ligne"></a>#}
+                        {#{% else %}#}
+                            {#<a href="{{ path('intranet_cra_offline', {'id': userCRA.id}) }}" class="fa fa-toggle-on pull-right" title="Mettre hors ligne"></a>#}
+                        {#{% endif %}#}
+                    {#</td>#}
 
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
-    </div>
+                {#</tr>#}
+            {#{% endfor %}#}
+            {#</tbody>#}
+        {#</table>#}
+    {#</div>#}
+
+
+    {{ datatable_render(datatable) }}
+
+
 {% endblock %}
