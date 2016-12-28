@@ -2,6 +2,7 @@
 
 namespace Ipssi\JobBundle\Form;
 
+use Doctrine\ORM\EntityManager;
 use Ipssi\IpssiBundle\Form\FileType;
 use Ipssi\JobBundle\Repository\SkillRepository;
 use Ipssi\JobBundle\Transformer\ArrayToSkillTransformer;
@@ -24,6 +25,7 @@ class OfferType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+
         $builder
             ->add('name', TextType::class, array(
                 'attr' => array(
@@ -92,7 +94,7 @@ class OfferType extends AbstractType
                     'class' => 'form-control'
                 )
             ))
-            ->get('skills')->addModelTransformer(new ArrayToSkillTransformer())
+            ->get('skills')->addModelTransformer(new ArrayToSkillTransformer($options['manager']))
 
 
         ;
@@ -110,7 +112,8 @@ class OfferType extends AbstractType
     {
         $resolver->setDefaults(array(
             'data_class' => 'Ipssi\JobBundle\Entity\Offer',
-            'allow_extra_fields' => true
+            'allow_extra_fields' => true,
+            'manager' => null
         ));
     }
 

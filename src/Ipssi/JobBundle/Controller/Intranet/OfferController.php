@@ -50,7 +50,7 @@ class OfferController extends Controller
         $offer = new Offer();
 
 
-        $form = $this->createForm(OfferType::class, $offer);
+        $form = $this->createForm(OfferType::class, $offer, array('manager' => $em));
         $form->add('submit', SubmitType::class, array(
             'label' => 'Créer l\'offre',
             'attr'  => array('class' => 'btn btn-success')

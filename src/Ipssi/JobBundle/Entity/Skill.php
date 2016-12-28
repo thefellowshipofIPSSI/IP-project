@@ -3,8 +3,8 @@
 namespace Ipssi\JobBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity as UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * News
@@ -12,6 +12,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity as UniqueEntity;
  * @ORM\Table(name="skill")
  * @ORM\HasLifecycleCallbacks
  * @ORM\Entity(repositoryClass="Ipssi\JobBundle\Repository\SkillRepository")
+ * @UniqueEntity(fields="name", message="Le Skill existe déjà")
  */
 class Skill
 {
@@ -28,7 +29,7 @@ class Skill
      * @var
      * @ORM\Column(name="name", type="string", length=100, unique=true)
      */
-    private $name;
+    protected $name;
 
     /**
      * @var

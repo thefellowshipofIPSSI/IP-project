@@ -28,4 +28,12 @@ class SkillRepository extends EntityRepository
     }
 
 
+    public function existName($name)
+    {
+        $skill = $this->findBy(['name' => $name]);
+
+
+
+    }
+
 }
