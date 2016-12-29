@@ -45,7 +45,7 @@ class Skill
 
 
     /**
-     * @ORM\ManyToOne(targetEntity="SkillType", inversedBy="skills")
+     * @ORM\ManyToOne(targetEntity="SkillType", inversedBy="skills", cascade={"persist"})
      * @ORM\JoinColumn(name="type_id", referencedColumnName="id")
      */
     private $type;

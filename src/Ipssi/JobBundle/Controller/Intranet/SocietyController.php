@@ -105,8 +105,6 @@ class SocietyController extends Controller
 
         $form->handleRequest($request);
 
-        $form->handleRequest($request);
-
         if($form->isSubmitted() && $form->isValid()) {
 
             $society = $form->getData();

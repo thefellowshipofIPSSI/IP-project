@@ -19,11 +19,11 @@ class OfferController extends Controller
 
         $em = $this->getDoctrine()->getManager();
 
-        $societies = $em->getRepository('JobBundle:Offer')->findAll();
+        $offers = $em->getRepository('JobBundle:Offer')->findAll();
 
 
         return $this->render('JobBundle:Intranet/Offer:index.html.twig', array(
-            'societies' => $societies
+            'offers' => $offers
         ));
 
     }
@@ -50,6 +50,7 @@ class OfferController extends Controller
         $offer = new Offer();
 
 
+        // Pass EntityManager for using ArrayToSkillTransformer
         $form = $this->createForm(OfferType::class, $offer, array('manager' => $em));
         $form->add('submit', SubmitType::class, array(
             'label' => 'Créer l\'offre',
@@ -96,12 +97,15 @@ class OfferController extends Controller
 
     public function updateAction(Request $request, $offer)
     {
+        // Get current Offer
         $em = $this->getDoctrine()->getManager();
-
         $offer = $em->getRepository('JobBundle:Offer')->find($offer);
 
 
-        $form = $this->createForm(OfferType::class, $offer);
+        // Pass EntityManager for using ArrayToSkillTransformer
+        $form = $this->createForm(OfferType::class, $offer, array('manager' => $em));
+
+        // Add submit btn
         $form->add('submit', SubmitType::class, array(
             'label' => 'Valider les modifications',
             'attr'  => array('class' => 'btn btn-success')
@@ -110,11 +114,10 @@ class OfferController extends Controller
 
         $form->handleRequest($request);
 
-        $form->handleRequest($request);
-
         if($form->isSubmitted() && $form->isValid()) {
 
 
+            // Get form data and save Offer
             $offer = $form->getData();
 
             $offer->setStatus(0);
@@ -132,6 +135,8 @@ class OfferController extends Controller
 
         }
 
+
+        // Get all names for Skill Input
         $skills = $em->getRepository('JobBundle:Skill')->allNamesToArray();
 
 
@@ -146,12 +151,12 @@ class OfferController extends Controller
 
     public function deleteAction($offer)
     {
+
         $em = $this->getDoctrine()->getManager();
 
+        // Get current offer and delete it
         $offer = $em->getRepository('JobBundle:Offer')->find($offer);
-
         $em->remove($offer);
-
         $em->flush();
 
 

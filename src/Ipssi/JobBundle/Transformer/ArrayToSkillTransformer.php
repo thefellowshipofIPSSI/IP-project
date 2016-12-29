@@ -35,7 +35,7 @@ class ArrayToSkillTransformer implements DataTransformerInterface
 
     public function reverseTransform($skills)
     {
-        //dump($this->manager);die;
+
         $skillCollection = new ArrayCollection();
 
         foreach (explode(',', $skills) as $skill)
@@ -51,7 +51,6 @@ class ArrayToSkillTransformer implements DataTransformerInterface
             $skillCollection->add($skillObject);
         }
 
-        //dump($skillCollection);die;
         return $skillCollection;
     }
 

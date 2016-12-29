@@ -27,6 +27,29 @@ class SkillRepository extends EntityRepository
         return json_encode($array);
     }
 
+    public function allUnusedNamesToArray($skillType = null)
+    {
+        $skills = $this->createQueryBuilder('s')
+            ->select('s.name')
+            ->where('s.type IS NULL')
+            ->orWhere('s.type = :skillType')
+            ->setParameter('skillType', $skillType)
+            ->orderBy('s.name')
+            ->getQuery()
+            ->getArrayResult();
+
+        $array = array();
+
+        foreach($skills as $key => $val) {
+            $array[] = $val['name'];
+        }
+
+
+
+        return json_encode($array);
+    }
+
+
 
     public function existName($name)
     {

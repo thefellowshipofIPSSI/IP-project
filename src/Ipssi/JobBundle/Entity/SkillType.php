@@ -30,7 +30,7 @@ class SkillType
 
     /**
      * @var
-     * @ORM\Column(name="description", type="text")
+     * @ORM\Column(name="description", type="text", nullable=true)
      */
     private $description;
 
@@ -42,7 +42,7 @@ class SkillType
 
 
     /**
-     * @ORM\OneToMany(targetEntity="Skill", mappedBy="type")
+     * @ORM\OneToMany(targetEntity="Skill", mappedBy="type", cascade={"persist"})
      */
     private $skills;
 
@@ -60,6 +60,15 @@ class SkillType
         {
             $this->setCreatedAt(new \DateTime('now'));
         }
+    }
+
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->skills = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -129,7 +138,7 @@ class SkillType
      */
     public function setCreatedAt($createdAt)
     {
-        $this->created_at = $createdAt;
+        $this->createdAt = $createdAt;
 
         return $this;
     }
@@ -141,14 +150,7 @@ class SkillType
      */
     public function getCreatedAt()
     {
-        return $this->created_at;
-    }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->skills = new \Doctrine\Common\Collections\ArrayCollection();
+        return $this->createdAt;
     }
 
     /**

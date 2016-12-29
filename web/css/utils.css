@@ -21,6 +21,7 @@
 .card .card-image {
     position: relative;
     overflow: hidden;
+    text-align: center;
 }
 .card .card-image img {
     border-radius: 2px 2px 0 0;
