@@ -88,19 +88,19 @@ intranet_skill_type_delete:
 # Skill
 intranet_skill_view:
     path:     /administration/competence/{skill}/details
-    defaults: { _controller: JobBundle:Intranet/Offer:view }
+    defaults: { _controller: JobBundle:Intranet/Skill:view }
 
 
 intranet_skill_create:
     path:     /administration/competence/ajouter
-    defaults: { _controller: JobBundle:Intranet/Offer:create }
+    defaults: { _controller: JobBundle:Intranet/Skill:create }
 
 
 intranet_skill_update:
-    path:     /administration/competence/modifier/{offer}
-    defaults: { _controller: JobBundle:Intranet/Offer:update }
+    path:     /administration/competence/modifier/{skill}
+    defaults: { _controller: JobBundle:Intranet/Skill:update }
 
 
 intranet_skill_delete:
-    path:     /administration/competence/supprimer/{offer}
-    defaults: { _controller: JobBundle:Intranet/Offer:delete }
+    path:     /administration/competence/supprimer/{skill}
+    defaults: { _controller: JobBundle:Intranet/Skill:delete }

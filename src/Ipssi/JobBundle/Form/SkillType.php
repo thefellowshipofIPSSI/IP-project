@@ -9,6 +9,7 @@ use Ipssi\JobBundle\Transformer\ArrayToSkillTransformer;
 use Ipssi\JobBundle\Transformer\SkillTagsTransformer;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -32,73 +33,19 @@ class SkillType extends AbstractType
                     'class' => 'form-control'
                 )
             ))
-            ->add('contract', TextType::class, array(
-                'attr' => array(
-                    'class' => 'form-control'
-                )
-            ))
             ->add('description', TextAreaType::class, array(
                 'attr' => array(
                     'class' => 'form-control'
                 )
             ))
-            ->add('duration', TextType::class, array(
-                'required' => false,
-                'attr' => array(
-                    'class' => 'form-control'
-                )
-            ))
-            ->add('location', TextType::class, array(
-                'attr' => array(
-                    'class' => 'form-control'
-                )
-            ))
-            ->add('salary', TextType::class, array(
-                'attr' => array(
-                    'class' => 'form-control'
-                )
-            ))
-
-            ->add('currency', TextType::class, array(
-                'required' => false,
-                'attr' => array(
-                    'class' => 'form-control'
-                )
-            ))
-
-            ->add('beginDate', TextType::class, array(
-                'attr' => array(
-                    'class' => 'form-control'
-                )
-            ))
-
-            ->add('link', TextType::class, array(
-                'required' => false,
-                'attr' => array(
-                    'class' => 'form-control'
-                )
-            ))
-
-            ->add('society', EntityType::class, array(
-
-                'class' => 'JobBundle:Society',
+            ->add('type', EntityType::class, array(
+                'class' => 'Ipssi\JobBundle\Entity\SkillType',
                 'choice_label' => 'name',
-
+                'placeholder' => 'Choisissez un type...',
                 'attr' => array(
                     'class' => 'form-control'
                 )
-            ))
-
-            ->add('skills', TextType::class, array(
-                'attr' => array(
-                    'class' => 'form-control'
-                )
-            ))
-            ->get('skills')->addModelTransformer(new ArrayToSkillTransformer($options['manager']))
-
-
-        ;
-
+            ));
 
 
 

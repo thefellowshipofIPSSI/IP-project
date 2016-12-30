@@ -70,7 +70,7 @@ class SkillController extends Controller
 
 
         // Pass EntityManager for using ArrayToSkillTransformer
-        $form = $this->createForm(SkillForm::class, $skill, array('manager' => $em));
+        $form = $this->createForm(SkillForm::class, $skill);
         $form->add('submit', SubmitType::class, array(
             'label' => 'Créer l\'offre',
             'attr'  => array('class' => 'btn btn-success')
@@ -85,15 +85,13 @@ class SkillController extends Controller
 
             $skill = $form->getData();
 
-            $skill->setStatus(0);
-
             $em->persist($skill);
             $em->flush();
 
 
             $this->addFlash(
                 'success',
-                'Nouvelle offre créée !'
+                'Compétence '. $skill->getName() .' créée !'
             );
 
             return $this->redirectToRoute('intranet_skills');
@@ -106,7 +104,6 @@ class SkillController extends Controller
 
         return $this->render('JobBundle:Intranet/Skill:create.html.twig', array(
             'skill' => $skill,
-            'skills' => $skills,
             'form' => $form->createView()
         ));
 
@@ -120,9 +117,8 @@ class SkillController extends Controller
         $em = $this->getDoctrine()->getManager();
         $skill = $em->getRepository('JobBundle:Skill')->find($skill);
 
-
         // Pass EntityManager for using ArrayToSkillTransformer
-        $form = $this->createForm(SkillForm::class, $skill, array('manager' => $em));
+        $form = $this->createForm(SkillForm::class, $skill);
 
         // Add submit btn
         $form->add('submit', SubmitType::class, array(
@@ -139,15 +135,13 @@ class SkillController extends Controller
             // Get form data and save Skill
             $skill = $form->getData();
 
-            $skill->setStatus(0);
-
             $em->persist($skill);
             $em->flush();
 
 
             $this->addFlash(
                 'success',
-                'Nouvelle offre créée !'
+                'Compétence '. $skill->getName() .' modifiée !'
             );
 
             return $this->redirectToRoute('intranet_skills');
@@ -181,7 +175,7 @@ class SkillController extends Controller
 
         $this->addFlash(
             'danger',
-            'Offre supprimée'
+            'Compétence '. $skill->getName() .' supprimée !'
         );
 
         return $this->redirectToRoute('intranet_skills');
@@ -219,7 +213,7 @@ class SkillController extends Controller
         if($form->isSubmitted() && $form->isValid()) {
 
 
-            // Get form data and save Skill
+            // Get form data and save SkillType
             $skillType = $form->getData();
 
             $em->persist($skillType);
