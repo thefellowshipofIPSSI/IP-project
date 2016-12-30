@@ -32,6 +32,7 @@ class AppKernel extends Kernel
             new UserBundle\UserBundle(),
 
             new FOS\UserBundle\FOSUserBundle(),
+            new \Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle()
 
 
 
