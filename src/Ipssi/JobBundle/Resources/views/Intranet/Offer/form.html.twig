@@ -58,7 +58,8 @@
         $("#input-skills").tagit({
             autocomplete: {delay: 0, minLength: 0},
             availableTags: {{ skills|raw }},
-            showAutocompleteOnFocus: true
+            showAutocompleteOnFocus: true,
+            allowSpaces: true
         });
     </script>
 {% endblock %}

@@ -42,7 +42,7 @@
                         <span class="card-title">{{ offer.name }}</span>
 
                         <div class="card-content">
-                            <p>{{ offer.description }}</p>
+                            <p>{{ offer.description|slice(1,200) }}</p>
                         </div>
 
                         <div class="card-action">

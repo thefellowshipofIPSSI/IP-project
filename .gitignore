@@ -20,4 +20,5 @@ devbox.box
 /nbproject/private/
 nbproject/
 !/web/uploads/
+/web/uploads/*
 *~

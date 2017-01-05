@@ -9,8 +9,8 @@ case $distr in
         ;;
 
     arch )
-        sudo chown -R devow:http ./var/cache/* ./var/logs/* ./web/uploads
-        sudo chmod -R 770 ./var/cache/* ./var/logs/* ./web/uploads
+        sudo chown -R devow:http ./var/cache/* ./var/logs ./web/uploads
+        sudo chmod -R 770 ./var/cache/* ./var/logs ./web/uploads
         ;;
 
     * ) echo "Please answer debian or arch.";;

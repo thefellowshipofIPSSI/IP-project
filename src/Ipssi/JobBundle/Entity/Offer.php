@@ -93,6 +93,12 @@ class Offer
 
     /**
      * @var
+     * @ORM\Column(name="slug", type="string", length=30)
+     */
+    private $slug;
+
+    /**
+     * @var
      * @ORM\Column(name="created_at", type="datetime")
      */
     private $createdAt;
@@ -630,5 +636,29 @@ class Offer
     public function getSkills()
     {
         return $this->skills;
+    }
+
+    /**
+     * Set slug
+     *
+     * @param string $slug
+     *
+     * @return Offer
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * Get slug
+     *
+     * @return string
+     */
+    public function getSlug()
+    {
+        return $this->slug;
     }
 }
