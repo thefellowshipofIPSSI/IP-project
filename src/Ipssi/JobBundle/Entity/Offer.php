@@ -9,6 +9,7 @@
 namespace Ipssi\JobBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Ipssi\IntranetBundle\Helper\UrlHelper;
 
 /**
  * News
@@ -93,7 +94,7 @@ class Offer
 
     /**
      * @var
-     * @ORM\Column(name="slug", type="string", length=30)
+     * @ORM\Column(name="slug", type="string", length=50)
      */
     private $slug;
 
@@ -161,10 +162,15 @@ class Offer
     {
         $this->setUpdatedAt(new \DateTime('now'));
 
-        if($this->getCreatedAt() == null)
+        if($this->getCreatedAt() == NULL)
         {
             $this->setCreatedAt(new \DateTime('now'));
         }
+
+        if($this->getSlug() == NULL) {
+            $this->setSlug($this->generateSlug());
+        }
+
     }
 
     /**
@@ -660,5 +666,21 @@ class Offer
     public function getSlug()
     {
         return $this->slug;
+    }
+
+
+    protected function generateSlug()
+    {
+        if($this->getSlug() === NULL) {
+
+            $hash = substr(uniqid('', true), -5);
+            $slug = $this->getSociety()->getName() . '-' . $this->getName() . '-' . $this->getLocation() . '-' . $hash;
+            $slug = UrlHelper::stringToKebab($slug);
+
+            return $slug;
+
+        } else {
+            return NULL;
+        }
     }
 }

@@ -79,6 +79,13 @@ class OfferType extends AbstractType
                 )
             ))
 
+            ->add('slug', TextType::class, array(
+                'required' => false,
+                'attr' => array(
+                    'class' => 'form-control'
+                )
+            ))
+
             ->add('society', EntityType::class, array(
 
                 'class' => 'JobBundle:Society',

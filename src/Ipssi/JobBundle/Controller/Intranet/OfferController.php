@@ -67,6 +67,7 @@ class OfferController extends Controller
             $offer = $form->getData();
 
             $offer->setStatus(0);
+            $offer->setCreatedBy($this->getUser());
 
             $em->persist($offer);
             $em->flush();
@@ -121,6 +122,8 @@ class OfferController extends Controller
             $offer = $form->getData();
 
             $offer->setStatus(0);
+            $offer->setUpdatedBy($this->getUser());
+
 
             $em->persist($offer);
             $em->flush();
