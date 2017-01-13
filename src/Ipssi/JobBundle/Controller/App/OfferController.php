@@ -22,6 +22,7 @@ class OfferController extends Controller
 
         $offers = $em->getRepository('JobBundle:Offer')->findAllOnline();
 
+
         return $this->render('JobBundle:App/Offer:index.html.twig', array(
             'offers' => $offers
         ));

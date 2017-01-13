@@ -35,6 +35,20 @@
 
             <hr>
 
+            {# If the user already postulated #}
+            {% set candidate = false %}
+            {% for candidacy in app.user.candidacies %}
+                {% if offer == candidacy.offer %}
+                    {% set candidate = true %}
+
+                    <div class="alert alert-success" role="alert">
+                        Vous avez déjà postulé à cette offre
+                    </div>
+
+                    <hr>
+                {% endif %}
+            {% endfor %}
+
             <!-- Page Content -->
 
             <p>
@@ -42,7 +56,10 @@
             </p>
             <hr>
 
-            <a href="{{ path('offer_candidate', { 'slug': offer.slug }) }}" class="btn btn-primary">Postuler</a>
+            {% if candidate == false %}
+                <a href="{{ path('offer_candidate', { 'slug': offer.slug }) }}" class="btn btn-primary">Postuler</a>
+            {% endif %}
+
         </div>
     </div>
 
