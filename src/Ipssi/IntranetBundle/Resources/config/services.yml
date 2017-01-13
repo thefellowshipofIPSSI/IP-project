@@ -1,4 +1,163 @@
 services:
-#    intranet.example:
-#        class: IntranetBundle\Example
-#        arguments: ["@service_id", "plain_value", %parameter%]
+
+    #--------------------------REPOSITORIES-----------------------------
+    intranet.repository.news:
+        class: IntranetBundle\Repository\NewsRepository
+        factory: ['@doctrine.orm.entity_manager', 'getRepository']
+        arguments:
+          - 'IntranetBundle:News'
+
+    intranet.repository.page:
+        class: IntranetBundle\Repository\PageRepository
+        factory: ['@doctrine.orm.entity_manager', 'getRepository']
+        arguments:
+          - 'IntranetBundle:Page'
+
+    intranet.repository.job:
+        class: IntranetBundle\Repository\JobRepository
+        factory: ['@doctrine.orm.entity_manager', 'getRepository']
+        arguments:
+          - 'IntranetBundle:Job'
+
+    intranet.repository.job_offer:
+        class: IntranetBundle\Repository\JobOfferRepository
+        factory: ['@doctrine.orm.entity_manager', 'getRepository']
+        arguments:
+          - 'IntranetBundle:JobOffer'
+
+    intranet.repository.skill:
+        class: IntranetBundle\Repository\SkillRepository
+        factory: ['@doctrine.orm.entity_manager', 'getRepository']
+        arguments:
+          - 'IntranetBundle:Skill'
+
+    intranet.repository.cra:
+        class: IntranetBundle\Repository\UserCRARepository
+        factory: ['@doctrine.orm.entity_manager', 'getRepository']
+        arguments:
+          - 'IntranetBundle:UserCRA'
+
+    intranet.repository.expense:
+        class: IntranetBundle\Repository\UserExpenseRepository
+        factory: ['@doctrine.orm.entity_manager', 'getRepository']
+        arguments:
+          - 'IntranetBundle:UserExpense'
+
+    intranet.repository.expense_line:
+        class: IntranetBundle\Repository\ExpenseLineRepository
+        factory: ['@doctrine.orm.entity_manager', 'getRepository']
+        arguments:
+          - 'IntranetBundle:ExpenseLine'
+
+    intranet.repository.vacation:
+        class: IntranetBundle\Repository\UserVacationRepository
+        factory: ['@doctrine.orm.entity_manager', 'getRepository']
+        arguments:
+          - 'IntranetBundle:UserVacation'
+
+
+    #-----------------------MENU---------------------------------------------
+    app.menu_builder:
+        class: Ipssi\IntranetBundle\Menu\MenuBuilder
+        arguments: ["@knp_menu.factory", "@service_container"]
+#        tags:
+#            - { name: knp_menu.menu_builder, method: createUserMenu, alias: user }
+#            - { name: knp_menu.menu_builder, method: createSidebarMenu, alias: sidebar }
+
+    app.user_menu:
+        class: Knp\Menu\MenuItem # the service definition requires setting the class
+        factory: ["@app.menu_builder", createUserMenu]
+        arguments: ["@security.token_storage"]
+        tags:
+            - { name: knp_menu.menu, alias: user } # The alias is what is used to retrieve the menu
+
+    app.sidebar_menu:
+        class: Knp\Menu\MenuItem # the service definition requires setting the class
+        factory: ["@app.menu_builder", createSidebarMenu]
+        arguments: ["@security.authorization_checker"]
+        tags:
+            - { name: knp_menu.menu, alias: sidebar } # The alias is what is used to retrieve the menu
+
+
+    #-----------------------VOTERS---------------------------------------------
+    intranet.news_voter:
+        class:      Ipssi\IntranetBundle\Security\NewsVoter
+        arguments: ['@security.access.decision_manager']
+        public:     false
+        tags:
+           - { name: security.voter }
+
+    intranet.page_voter:
+        class:      Ipssi\IntranetBundle\Security\PageVoter
+        arguments: ['@security.access.decision_manager']
+        public:     false
+        tags:
+           - { name: security.voter }
+
+    intranet.user_cra_voter:
+        class:      Ipssi\IntranetBundle\Security\UserCRAVoter
+        arguments: ['@security.access.decision_manager']
+        public:     false
+        tags:
+           - { name: security.voter }
+
+#    intranet.candidacy_voter:
+#            class:      Ipssi\IntranetBundle\Security\CandidacyVoter
+#            arguments: ['@security.access.decision_manager']
+#            public:     false
+#            tags:
+#               - { name: security.voter }
+
+    intranet.job_offer_voter:
+            class:      Ipssi\IntranetBundle\Security\JobOfferVoter
+            arguments: ['@security.access.decision_manager']
+            public:     false
+            tags:
+               - { name: security.voter }
+
+    intranet.job_voter:
+            class:      Ipssi\IntranetBundle\Security\JobVoter
+            arguments: ['@security.access.decision_manager']
+            public:     false
+            tags:
+               - { name: security.voter }
+
+    intranet.skill_voter:
+            class:      Ipssi\IntranetBundle\Security\SkillVoter
+            arguments: ['@security.access.decision_manager']
+            public:     false
+            tags:
+               - { name: security.voter }
+
+    intranet.society_voter:
+                class:      Ipssi\IntranetBundle\Security\SocietyVoter
+                arguments: ['@security.access.decision_manager']
+                public:     false
+                tags:
+                   - { name: security.voter }
+
+#    intranet.user_cv_voter:
+#                class:      Ipssi\IntranetBundle\Security\UserCVVoter
+#                arguments: ['@security.access.decision_manager']
+#                public:     false
+#                tags:
+#                   - { name: security.voter }
+
+    intranet.user_expense_voter:
+                class:      Ipssi\IntranetBundle\Security\UserExpenseVoter
+                arguments: ['@security.access.decision_manager']
+                public:     false
+                tags:
+                   - { name: security.voter }
+
+    intranet.user_vacation_voter:
+                class:      Ipssi\IntranetBundle\Security\UserVacationVoter
+                arguments: ['@security.access.decision_manager']
+                public:     false
+                tags:
+                   - { name: security.voter }
+
+    #-----------------------DATATABLES---------------------------------------------
+    app.datatable.usercra:
+                class: Ipssi\IntranetBundle\Datatables\UserCRADatatable
+                parent: sg_datatables.datatable.abstract

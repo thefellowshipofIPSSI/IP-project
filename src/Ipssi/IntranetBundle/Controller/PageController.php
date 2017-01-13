@@ -10,19 +10,19 @@ use Ipssi\IntranetBundle\Entity\Page;
 use Ipssi\IntranetBundle\Form\PageType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Session\Session;
-
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
 class PageController extends Controller {
 
     /**
      * List all Pages in table
      * @return \Symfony\Component\HttpFoundation\Response
+     * @Route("/page", name="intranet_page_homepage")
      */
     public function indexAction() {
 
-        $pageRepo = $this->getDoctrine()->getRepository('IntranetBundle:Page');
-
-        $allPages = $pageRepo->findAll();
+        $allPages = $this->get('intranet.repository.page')->findAll();
 
         return $this->render('IntranetBundle:Page:index.html.twig', [
             'allPages' => $allPages
@@ -32,6 +32,8 @@ class PageController extends Controller {
     /**
      * Create a new Page
      * @return \Symfony\Component\HttpFoundation\Response
+     * @Route("/page/create", name="intranet_page_create")
+     * @Security("has_role('ROLE_REDACTEUR')")
      */
     public function createAction(Request $request) {
         $page = new Page;
@@ -69,15 +71,13 @@ class PageController extends Controller {
 
     /**
      * Update existing Page
-     * @param $page_id
+     * @param $page
      * @return \Symfony\Component\HttpFoundation\Response
+     * @Route("/page/{id}/update", name="intranet_page_update")
+     * @Security("is_granted('edit', page) or has_role('ROLE_SUPER_ADMIN')")
      */
-    public function updateAction($page_id, Request $request)
+    public function updateAction(Page $page, Request $request)
     {
-        $pageRepo = $this->getDoctrine()->getRepository('IntranetBundle:Page');
-
-        $page = $pageRepo->find($page_id);
-
         $form = $this->createForm(PageType::class, $page);
         $form->add('save', SubmitType::class, [
             'label' => 'Modifier',
@@ -110,15 +110,13 @@ class PageController extends Controller {
 
     /**
      * Delete a Page
-     * @param $page_id
+     * @param $page
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @Route("/page/{id}/delete", name="intranet_page_delete")
+     * @Security("is_granted('edit', page) or has_role('ROLE_SUPER_ADMIN')")
      */
-    public function deleteAction($page_id)
+    public function deleteAction(Page $page)
     {
-        $pageRepo = $this->getDoctrine()->getRepository('IntranetBundle:Page');
-
-        $page = $pageRepo->find($page_id);
-
         $em = $this->getDoctrine()->getEntityManager();
         $em->remove($page);
         $em->flush();
@@ -134,56 +132,61 @@ class PageController extends Controller {
 
     /**
      * Display a Page
-     * @param $page_id
+     * @param $page
      * @return \Symfony\Component\HttpFoundation\Response
+     * @Route("/page/{id}/view", name="intranet_page_view")
      */
-    public function viewAction($page_id)
+    public function viewAction(Page $page)
     {
-        $pageRepo = $this->getDoctrine()->getRepository('IntranetBundle:Page');
+        $pageTemplate = $page->getPageTemplate()->getName();
 
-        $page = $pageRepo->find($page_id);
-
-
-        return $this->render('IntranetBundle:Page:view.html.twig', [
+        return $this->render('IntranetBundle:Page\Templates:'. $pageTemplate .'.html.twig', [
             'page' => $page
         ]);
     }
 
-
     /**
      * Make a Page online
-     * @param $page_id
+     * @param $page
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @Route("/page/{id}/online", name="intranet_page_online")
+     * @Security("is_granted('edit', page) or has_role('ROLE_SUPER_ADMIN')")
      */
-    public function onlineAction($page_id)
+    public function onlineAction(Page $page)
     {
-        $pageRepo = $this->getDoctrine()->getRepository('IntranetBundle:Page');
-
-        $page = $pageRepo->find($page_id);
         $page->setStatus(1);
 
         $em = $this->getDoctrine()->getEntityManager();
         $em->persist($page);
         $em->flush();
 
+        $this->addFlash(
+            'success',
+            'Page ' . $page->getName() . ' mise en ligne'
+        );
+
         return $this->redirectToRoute('intranet_page_homepage');
     }
 
     /**
      * Make a Page offline
-     * @param $page_id
+     * @param $page
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @Route("/page/{id}/offline", name="intranet_page_offline")
+     * @Security("is_granted('edit', page) or has_role('ROLE_SUPER_ADMIN')")
      */
-    public function offlineAction($page_id)
+    public function offlineAction(Page $page)
     {
-        $pageRepo = $this->getDoctrine()->getRepository('IntranetBundle:page');
-
-        $page = $pageRepo->find($page_id);
         $page->setStatus(0);
 
         $em = $this->getDoctrine()->getEntityManager();
         $em->persist($page);
         $em->flush();
+
+        $this->addFlash(
+            'success',
+            'La Page ' . $page->getName() . ' n\'est plus visible sur le site !'
+        );
 
         return $this->redirectToRoute('intranet_page_homepage');
     }

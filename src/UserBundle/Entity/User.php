@@ -12,9 +12,10 @@ use Symfony\Component\Validator\Constraints\Date;
 /**
  * @ORM\Entity
  * @ORM\Table(name="user")
+ * @ORM\Entity(repositoryClass="UserBundle\Repository\UserRepository")
  */
 class User extends BaseUser {
-    
+
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")
@@ -23,53 +24,41 @@ class User extends BaseUser {
     protected $id;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="firstname", type="string", length=255, nullable=true)
+     * @ORM\Column(name="google_id", type="string", length=255, nullable=true)
      */
-    private $firstname;
+    protected $google_id;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="lastname", type="string", length=255, nullable=true)
+     * @ORM\Column(name="google_access_token", type="string", length=255, nullable=true)
      */
-    private $lastname;
+    protected $google_access_token;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="phone", type="string", length=15, nullable=true)
+     * @ORM\ManyToMany(targetEntity="UserBundle\Entity\Group")
+     * @ORM\JoinTable(name="fos_user_user_group",
+     *      joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="group_id", referencedColumnName="id")}
+     * )
      */
-    private $phone;
+    protected $groups;
+
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="address", type="string", length=255, nullable=true)
+     * @ORM\OneToOne(targetEntity="UserBundle\Entity\Profile", mappedBy="user", cascade="persist")
      */
-    private $address;
+    private $profile;
+
 
     /**
-     * @var Date
-     *
-     * @ORM\Column(name="birth_date", type="date", nullable=true)
+     * @ORM\OneToOne(targetEntity="UserBundle\Entity\Newsletter", mappedBy="user")
      */
-    private $birthDate;
+    private $newsletter;
 
-
-    public function __construct()
-    {
-        parent::__construct();
-        $this->page = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->news = new ArrayCollection();
-    }
 
     /**
      * @ORM\OneToMany(targetEntity="Ipssi\IntranetBundle\Entity\Page", mappedBy="user")
-     * @ORM\JoinColumn(nullable=true)
      */
-    private $page;
+    private $pages;
 
 
     /**
@@ -78,7 +67,191 @@ class User extends BaseUser {
      */
     private $news;
 
-    
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Ipssi\JobBundle\Entity\Society", inversedBy="members")
+     * @@ORMJoinColumn(name="society_id", referencedColumnName="id", nullable=true)
+     */
+    private $society;
+
+
+    /**
+     * User skills
+     * @ORM\ManyToMany(targetEntity="Ipssi\JobBundle\Entity\Skill", inversedBy="users")
+     * @ORM\JoinTable(name="user_skills")
+     */
+    private $skills;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Ipssi\JobBundle\Entity\Candidacy", mappedBy="candidate")
+     */
+    private $candidacies;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Ipssi\JobBundle\Entity\CV", mappedBy="user")
+     */
+    private $cv;
+
+
+
+    /*****  A revoir ****/
+
+    /**
+     * @ORM\OneToMany(targetEntity="Ipssi\IntranetBundle\Entity\UserExpense", mappedBy="user")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $user_expense;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Ipssi\IntranetBundle\Entity\UserExpense", mappedBy="user_validation")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $user_validation_expense;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Ipssi\IntranetBundle\Entity\UserCRA", mappedBy="user")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $user_cra;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Ipssi\IntranetBundle\Entity\UserCRA", mappedBy="user_validation")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $user_validation_cra;
+
+
+
+    /**
+     * @ORM\OneToMany(targetEntity="Ipssi\IntranetBundle\Entity\UserVacation", mappedBy="user")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $user_vacation;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Ipssi\IntranetBundle\Entity\UserVacation", mappedBy="user_validation")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $user_validation_vacation;
+
+
+
+    public function __construct() {
+        parent::__construct();
+        $this->news = new ArrayCollection();
+        $this->user_expense = new ArrayCollection();
+        $this->user_validation_expense = new ArrayCollection();
+        $this->user_cra = new ArrayCollection();
+        $this->user_validation_cra = new ArrayCollection();
+        $this->jobs = new ArrayCollection();
+        $this->job_offers = new ArrayCollection();
+        $this->skills = new ArrayCollection();
+        $this->candidacy = new ArrayCollection();
+        $this->user_cv = new ArrayCollection();
+        $this->user_validation_cv = new ArrayCollection();
+        $this->user_vacation = new ArrayCollection();
+        $this->user_validation_vacation = new ArrayCollection();
+    }
+
+
+
+    /**
+     * Set googleId
+     *
+     * @param string $googleId
+     *
+     * @return User
+     */
+    public function setGoogleId($googleId)
+    {
+        $this->google_id = $googleId;
+
+        return $this;
+    }
+
+    /**
+     * Get googleId
+     *
+     * @return string
+     */
+    public function getGoogleId()
+    {
+        return $this->google_id;
+    }
+
+    /**
+     * Set googleAccessToken
+     *
+     * @param string $googleAccessToken
+     *
+     * @return User
+     */
+    public function setGoogleAccessToken($googleAccessToken)
+    {
+        $this->google_access_token = $googleAccessToken;
+
+        return $this;
+    }
+
+    /**
+     * Get googleAccessToken
+     *
+     * @return string
+     */
+    public function getGoogleAccessToken()
+    {
+        return $this->google_access_token;
+    }
+
+
+
+    /**
+     * Set profile
+     *
+     * @param \UserBundle\Entity\Profile $profile
+     *
+     * @return User
+     */
+    public function setProfile(\UserBundle\Entity\Profile $profile = null)
+    {
+        $this->profile = $profile;
+
+        return $this;
+    }
+
+    /**
+     * Get profile
+     *
+     * @return \UserBundle\Entity\Profile
+     */
+    public function getProfile()
+    {
+        return $this->profile;
+    }
+
+    /**
+     * Set newsletter
+     *
+     * @param \UserBundle\Entity\Newsletter $newsletter
+     *
+     * @return User
+     */
+    public function setNewsletter(\UserBundle\Entity\Newsletter $newsletter = null)
+    {
+        $this->newsletter = $newsletter;
+
+        return $this;
+    }
+
+    /**
+     * Get newsletter
+     *
+     * @return \UserBundle\Entity\Newsletter
+     */
+    public function getNewsletter()
+    {
+        return $this->newsletter;
+    }
 
     /**
      * Add page
@@ -89,7 +262,7 @@ class User extends BaseUser {
      */
     public function addPage(\Ipssi\IntranetBundle\Entity\Page $page)
     {
-        $this->page[] = $page;
+        $this->pages[] = $page;
 
         return $this;
     }
@@ -101,17 +274,17 @@ class User extends BaseUser {
      */
     public function removePage(\Ipssi\IntranetBundle\Entity\Page $page)
     {
-        $this->page->removeElement($page);
+        $this->pages->removeElement($page);
     }
 
     /**
-     * Get page
+     * Get pages
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getPage()
+    public function getPages()
     {
-        return $this->page;
+        return $this->pages;
     }
 
     /**
@@ -149,122 +322,332 @@ class User extends BaseUser {
     }
 
     /**
-     * Set firstname
+     * Set society
      *
-     * @param string $firstname
+     * @param \Ipssi\JobBundle\Entity\Society $society
      *
      * @return User
      */
-    public function setFirstname($firstname)
+    public function setSociety(\Ipssi\JobBundle\Entity\Society $society = null)
     {
-        $this->firstname = $firstname;
+        $this->society = $society;
 
         return $this;
     }
 
     /**
-     * Get firstname
+     * Get society
      *
-     * @return string
+     * @return \Ipssi\JobBundle\Entity\Society
      */
-    public function getFirstname()
+    public function getSociety()
     {
-        return $this->firstname;
+        return $this->society;
     }
 
     /**
-     * Set lastname
+     * Add skill
      *
-     * @param string $lastname
+     * @param \Ipssi\JobBundle\Entity\Skill $skill
      *
      * @return User
      */
-    public function setLastname($lastname)
+    public function addSkill(\Ipssi\JobBundle\Entity\Skill $skill)
     {
-        $this->lastname = $lastname;
+        $this->skills[] = $skill;
 
         return $this;
     }
 
     /**
-     * Get lastname
+     * Remove skill
      *
-     * @return string
+     * @param \Ipssi\JobBundle\Entity\Skill $skill
      */
-    public function getLastname()
+    public function removeSkill(\Ipssi\JobBundle\Entity\Skill $skill)
     {
-        return $this->lastname;
+        $this->skills->removeElement($skill);
     }
 
     /**
-     * Set phone
+     * Get skills
      *
-     * @param string $phone
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getSkills()
+    {
+        return $this->skills;
+    }
+
+    /**
+     * Add candidacy
+     *
+     * @param \Ipssi\JobBundle\Entity\Candidacy $candidacy
      *
      * @return User
      */
-    public function setPhone($phone)
+    public function addCandidacy(\Ipssi\JobBundle\Entity\Candidacy $candidacy)
     {
-        $this->phone = $phone;
+        $this->candidacies[] = $candidacy;
 
         return $this;
     }
 
     /**
-     * Get phone
+     * Remove candidacy
      *
-     * @return string
+     * @param \Ipssi\JobBundle\Entity\Candidacy $candidacy
      */
-    public function getPhone()
+    public function removeCandidacy(\Ipssi\JobBundle\Entity\Candidacy $candidacy)
     {
-        return $this->phone;
+        $this->candidacies->removeElement($candidacy);
     }
 
     /**
-     * Set address
+     * Get candidacies
      *
-     * @param string $address
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getCandidacies()
+    {
+        return $this->candidacies;
+    }
+
+    /**
+     * Add cv
+     *
+     * @param \Ipssi\JobBundle\Entity\CV $cv
      *
      * @return User
      */
-    public function setAddress($address)
+    public function addCv(\Ipssi\JobBundle\Entity\CV $cv)
     {
-        $this->address = $address;
+        $this->cv[] = $cv;
 
         return $this;
     }
 
     /**
-     * Get address
+     * Remove cv
      *
-     * @return string
+     * @param \Ipssi\JobBundle\Entity\CV $cv
      */
-    public function getAddress()
+    public function removeCv(\Ipssi\JobBundle\Entity\CV $cv)
     {
-        return $this->address;
+        $this->cv->removeElement($cv);
     }
 
     /**
-     * Set birthDate
+     * Get cv
      *
-     * @param \DateTime $birthDate
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getCv()
+    {
+        return $this->cv;
+    }
+
+    /**
+     * Add userExpense
+     *
+     * @param \Ipssi\IntranetBundle\Entity\UserExpense $userExpense
      *
      * @return User
      */
-    public function setBirthDate($birthDate)
+    public function addUserExpense(\Ipssi\IntranetBundle\Entity\UserExpense $userExpense)
     {
-        $this->birthDate = $birthDate;
+        $this->user_expense[] = $userExpense;
 
         return $this;
     }
 
     /**
-     * Get birthDate
+     * Remove userExpense
      *
-     * @return \DateTime
+     * @param \Ipssi\IntranetBundle\Entity\UserExpense $userExpense
      */
-    public function getBirthDate()
+    public function removeUserExpense(\Ipssi\IntranetBundle\Entity\UserExpense $userExpense)
     {
-        return $this->birthDate;
+        $this->user_expense->removeElement($userExpense);
+    }
+
+    /**
+     * Get userExpense
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getUserExpense()
+    {
+        return $this->user_expense;
+    }
+
+    /**
+     * Add userValidationExpense
+     *
+     * @param \Ipssi\IntranetBundle\Entity\UserExpense $userValidationExpense
+     *
+     * @return User
+     */
+    public function addUserValidationExpense(\Ipssi\IntranetBundle\Entity\UserExpense $userValidationExpense)
+    {
+        $this->user_validation_expense[] = $userValidationExpense;
+
+        return $this;
+    }
+
+    /**
+     * Remove userValidationExpense
+     *
+     * @param \Ipssi\IntranetBundle\Entity\UserExpense $userValidationExpense
+     */
+    public function removeUserValidationExpense(\Ipssi\IntranetBundle\Entity\UserExpense $userValidationExpense)
+    {
+        $this->user_validation_expense->removeElement($userValidationExpense);
+    }
+
+    /**
+     * Get userValidationExpense
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getUserValidationExpense()
+    {
+        return $this->user_validation_expense;
+    }
+
+    /**
+     * Add userCra
+     *
+     * @param \Ipssi\IntranetBundle\Entity\UserCRA $userCra
+     *
+     * @return User
+     */
+    public function addUserCra(\Ipssi\IntranetBundle\Entity\UserCRA $userCra)
+    {
+        $this->user_cra[] = $userCra;
+
+        return $this;
+    }
+
+    /**
+     * Remove userCra
+     *
+     * @param \Ipssi\IntranetBundle\Entity\UserCRA $userCra
+     */
+    public function removeUserCra(\Ipssi\IntranetBundle\Entity\UserCRA $userCra)
+    {
+        $this->user_cra->removeElement($userCra);
+    }
+
+    /**
+     * Get userCra
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getUserCra()
+    {
+        return $this->user_cra;
+    }
+
+    /**
+     * Add userValidationCra
+     *
+     * @param \Ipssi\IntranetBundle\Entity\UserCRA $userValidationCra
+     *
+     * @return User
+     */
+    public function addUserValidationCra(\Ipssi\IntranetBundle\Entity\UserCRA $userValidationCra)
+    {
+        $this->user_validation_cra[] = $userValidationCra;
+
+        return $this;
+    }
+
+    /**
+     * Remove userValidationCra
+     *
+     * @param \Ipssi\IntranetBundle\Entity\UserCRA $userValidationCra
+     */
+    public function removeUserValidationCra(\Ipssi\IntranetBundle\Entity\UserCRA $userValidationCra)
+    {
+        $this->user_validation_cra->removeElement($userValidationCra);
+    }
+
+    /**
+     * Get userValidationCra
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getUserValidationCra()
+    {
+        return $this->user_validation_cra;
+    }
+
+    /**
+     * Add userVacation
+     *
+     * @param \Ipssi\IntranetBundle\Entity\UserVacation $userVacation
+     *
+     * @return User
+     */
+    public function addUserVacation(\Ipssi\IntranetBundle\Entity\UserVacation $userVacation)
+    {
+        $this->user_vacation[] = $userVacation;
+
+        return $this;
+    }
+
+    /**
+     * Remove userVacation
+     *
+     * @param \Ipssi\IntranetBundle\Entity\UserVacation $userVacation
+     */
+    public function removeUserVacation(\Ipssi\IntranetBundle\Entity\UserVacation $userVacation)
+    {
+        $this->user_vacation->removeElement($userVacation);
+    }
+
+    /**
+     * Get userVacation
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getUserVacation()
+    {
+        return $this->user_vacation;
+    }
+
+    /**
+     * Add userValidationVacation
+     *
+     * @param \Ipssi\IntranetBundle\Entity\UserVacation $userValidationVacation
+     *
+     * @return User
+     */
+    public function addUserValidationVacation(\Ipssi\IntranetBundle\Entity\UserVacation $userValidationVacation)
+    {
+        $this->user_validation_vacation[] = $userValidationVacation;
+
+        return $this;
+    }
+
+    /**
+     * Remove userValidationVacation
+     *
+     * @param \Ipssi\IntranetBundle\Entity\UserVacation $userValidationVacation
+     */
+    public function removeUserValidationVacation(\Ipssi\IntranetBundle\Entity\UserVacation $userValidationVacation)
+    {
+        $this->user_validation_vacation->removeElement($userValidationVacation);
+    }
+
+    /**
+     * Get userValidationVacation
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getUserValidationVacation()
+    {
+        return $this->user_validation_vacation;
     }
 }

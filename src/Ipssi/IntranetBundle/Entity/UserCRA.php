@@ -3,11 +3,15 @@
 namespace Ipssi\IntranetBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use UserBundle\Entity\User;
+
 
 /**
  * UserCRA
  *
  * @ORM\Table(name="user_cra")
+ * @ORM\HasLifecycleCallbacks
  * @ORM\Entity(repositoryClass="Ipssi\IntranetBundle\Repository\UserCRARepository")
  */
 class UserCRA
@@ -38,21 +42,24 @@ class UserCRA
     /**
      * @var string
      *
-     * @ORM\Column(name="title", type="string", length=255)
+     * @ORM\Column(name="projectName", type="string", length=255)
+     * @Assert\NotBlank()
      */
-    private $title;
+    private $projectName;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="description", type="text")
+     * @ORM\Column(name="activityReport", type="text")
+     * @Assert\NotBlank()
      */
-    private $description;
+    private $activityReport;
 
     /**
      * @var \DateTime
      *
      * @ORM\Column(name="beginDate", type="datetime")
+     * @Assert\Type("\DateTime")
      */
     private $beginDate;
 
@@ -60,48 +67,49 @@ class UserCRA
      * @var \DateTime
      *
      * @ORM\Column(name="endDate", type="datetime")
+     * @Assert\Type("\DateTime")
      */
     private $endDate;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="status", type="integer")
+     * @ORM\Column(name="status", type="integer", options={"default":0})
      */
     private $status;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="nbLostTimeAccident", type="integer")
+     * @ORM\Column(name="nbLostTimeAccident", type="integer", options={"default":0})
      */
     private $nbLostTimeAccident;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="nbNoneLostTimeAccident", type="integer")
+     * @ORM\Column(name="nbNoneLostTimeAccident", type="integer", options={"default":0})
      */
     private $nbNoneLostTimeAccident;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="nbTravelAccident", type="integer")
+     * @ORM\Column(name="nbTravelAccident", type="integer", options={"default":0})
      */
     private $nbTravelAccident;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="nbSickDay", type="integer")
+     * @ORM\Column(name="nbSickDay", type="integer", options={"default":0})
      */
     private $nbSickDay;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="nbVacancyDay", type="integer")
+     * @ORM\Column(name="nbVacancyDay", type="integer", options={"default":0})
      */
     private $nbVacancyDay;
 
@@ -109,6 +117,7 @@ class UserCRA
      * @var string
      *
      * @ORM\Column(name="clientSatisfaction", type="text")
+     * @Assert\NotBlank()
      */
     private $clientSatisfaction;
 
@@ -116,6 +125,7 @@ class UserCRA
      * @var string
      *
      * @ORM\Column(name="consultantSatisfaction", type="text")
+     * @Assert\NotBlank()
      */
     private $consultantSatisfaction;
 
@@ -123,28 +133,96 @@ class UserCRA
      * @var string
      *
      * @ORM\Column(name="ameliorationPoint", type="text")
+     * @Assert\NotBlank()
      */
     private $ameliorationPoint;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="leftActivity", type="text")
+     * @ORM\Column(name="leftActivity", type="text", nullable=true)
      */
     private $leftActivity;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="comments", type="text")
+     * @ORM\Column(name="comments", type="text", nullable=true)
      */
     private $comments;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="client", type="string", length=255)
+     * @Assert\NotBlank()
+     */
+    private $client;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="client_validation", type="integer", nullable=true)
+     */
+    private $client_validation;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="client_validation_date", type="datetime", nullable=true)
+     */
+    private $client_validation_date;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User", inversedBy="user_cra")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $user;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User", inversedBy="user_validation_cra")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $user_validation;
+
+
+    /**
+     * Before persist or update, call the updatedTimestamps() function.
+     *
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
+     */
+    public function onPrePersist()
+    {
+        $this->setModificationDate(new \DateTime('now'));
+
+        if($this->getCreationDate() == null)
+        {
+            $this->setCreationDate(new \DateTime('now'));
+            $this->setStatus(0);
+            $this->setClientSatisfaction(0);
+        }
+    }
+
+
+    /**
+     * Is the given User the author of this CRA?
+     *
+     * @return bool
+     */
+    public function isCreator(User $user = null)
+    {
+        if ($user->getId() === $this->getUser()->getId()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
     /**
      * Get id
      *
-     * @return int
+     * @return integer
      */
     public function getId()
     {
@@ -200,51 +278,51 @@ class UserCRA
     }
 
     /**
-     * Set title
+     * Set projectName
      *
-     * @param string $title
+     * @param string $projectName
      *
      * @return UserCRA
      */
-    public function setTitle($title)
+    public function setProjectName($projectName)
     {
-        $this->title = $title;
+        $this->projectName = $projectName;
 
         return $this;
     }
 
     /**
-     * Get title
+     * Get projectName
      *
      * @return string
      */
-    public function getTitle()
+    public function getProjectName()
     {
-        return $this->title;
+        return $this->projectName;
     }
 
     /**
-     * Set description
+     * Set activityReport
      *
-     * @param string $description
+     * @param string $activityReport
      *
      * @return UserCRA
      */
-    public function setDescription($description)
+    public function setActivityReport($activityReport)
     {
-        $this->description = $description;
+        $this->activityReport = $activityReport;
 
         return $this;
     }
 
     /**
-     * Get description
+     * Get activityReport
      *
      * @return string
      */
-    public function getDescription()
+    public function getActivityReport()
     {
-        return $this->description;
+        return $this->activityReport;
     }
 
     /**
@@ -312,7 +390,7 @@ class UserCRA
     /**
      * Get status
      *
-     * @return int
+     * @return integer
      */
     public function getStatus()
     {
@@ -336,7 +414,7 @@ class UserCRA
     /**
      * Get nbLostTimeAccident
      *
-     * @return int
+     * @return integer
      */
     public function getNbLostTimeAccident()
     {
@@ -360,7 +438,7 @@ class UserCRA
     /**
      * Get nbNoneLostTimeAccident
      *
-     * @return int
+     * @return integer
      */
     public function getNbNoneLostTimeAccident()
     {
@@ -384,7 +462,7 @@ class UserCRA
     /**
      * Get nbTravelAccident
      *
-     * @return int
+     * @return integer
      */
     public function getNbTravelAccident()
     {
@@ -408,7 +486,7 @@ class UserCRA
     /**
      * Get nbSickDay
      *
-     * @return int
+     * @return integer
      */
     public function getNbSickDay()
     {
@@ -432,7 +510,7 @@ class UserCRA
     /**
      * Get nbVacancyDay
      *
-     * @return int
+     * @return integer
      */
     public function getNbVacancyDay()
     {
@@ -558,5 +636,124 @@ class UserCRA
     {
         return $this->comments;
     }
-}
 
+    /**
+     * Set client
+     *
+     * @param string $client
+     *
+     * @return UserCRA
+     */
+    public function setClient($client)
+    {
+        $this->client = $client;
+
+        return $this;
+    }
+
+    /**
+     * Get client
+     *
+     * @return string
+     */
+    public function getClient()
+    {
+        return $this->client;
+    }
+
+    /**
+     * Set clientValidation
+     *
+     * @param integer $clientValidation
+     *
+     * @return UserCRA
+     */
+    public function setClientValidation($clientValidation)
+    {
+        $this->client_validation = $clientValidation;
+
+        return $this;
+    }
+
+    /**
+     * Get clientValidation
+     *
+     * @return integer
+     */
+    public function getClientValidation()
+    {
+        return $this->client_validation;
+    }
+
+    /**
+     * Set clientValidationDate
+     *
+     * @param \DateTime $clientValidationDate
+     *
+     * @return UserCRA
+     */
+    public function setClientValidationDate($clientValidationDate)
+    {
+        $this->client_validation_date = $clientValidationDate;
+
+        return $this;
+    }
+
+    /**
+     * Get clientValidationDate
+     *
+     * @return \DateTime
+     */
+    public function getClientValidationDate()
+    {
+        return $this->client_validation_date;
+    }
+
+    /**
+     * Set user
+     *
+     * @param \UserBundle\Entity\User $user
+     *
+     * @return UserCRA
+     */
+    public function setUser(\UserBundle\Entity\User $user)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return \UserBundle\Entity\User
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * Set userValidation
+     *
+     * @param \UserBundle\Entity\User $userValidation
+     *
+     * @return UserCRA
+     */
+    public function setUserValidation(\UserBundle\Entity\User $userValidation = null)
+    {
+        $this->user_validation = $userValidation;
+
+        return $this;
+    }
+
+    /**
+     * Get userValidation
+     *
+     * @return \UserBundle\Entity\User
+     */
+    public function getUserValidation()
+    {
+        return $this->user_validation;
+    }
+}

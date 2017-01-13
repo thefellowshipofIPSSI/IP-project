@@ -1,0 +1,39 @@
+{% extends 'HWIOAuthBundle::layout.html.twig' %}
+
+    {% block title %} Mon profile {% endblock %}
+
+    {% block headerContainer %}
+        <div class="col-lg-12">
+            <h1 class="page-header">
+                Profile
+            </h1>
+            <ol class="breadcrumb">
+                <li>
+                    <i class="fa fa-home"></i>  <a href="{{ path('intranet_homepage') }}">Accueil</a>
+                </li>
+                <li class="active">
+                    <i class="fa fa-eye"></i> Mon profile
+                </li>
+            </ol>
+        </div>
+    {% endblock %}
+
+    {% block hwi_oauth_content %}
+
+        <h3>Synchroniser mon compte google</h3>
+    <div class="row">
+            <p>Êtes-vous sûr de vouloir connecter votre compte Ipssi avec votre compte {{ userInformation.realName }} ?</p>
+                {% if userInformation.profilePicture is defined and userInformation.profilePicture is not empty %}
+                    <img src="{{ userInformation.profilePicture }}" height="150" width="150" />
+                {% endif %}
+            <p>
+                {{ form_start(form, {'action': path('hwi_oauth_connect_service', {'service': service, 'key': key}), 'attr': {'class': 'fos_user_registration_register'}}) }}
+                    {{ form_widget(form) }}
+                    <div>
+                        <button type="submit" class="btn btn-primary">{{ 'connect.confirm.submit' | trans({}, 'HWIOAuthBundle') }}</button>
+                        <a href="{{ path('intranet_user_profile', {'user_id': app.user.id}) }}" class="btn">{{ 'connect.confirm.cancel' | trans({}, 'HWIOAuthBundle') }}</a>
+                    </div>
+                {{ form_end(form) }}
+            </p>
+    </div>
+{% endblock hwi_oauth_content %}

@@ -87,8 +87,8 @@ class Page
     private $dateUpdate;
 
     /**
-     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User", inversedBy="page")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User", inversedBy="pages")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     private $user;
 
@@ -105,7 +105,7 @@ class Page
     private $page_template;
 
     /**
-     * Now we tell doctrine that before we persist or update we call the updatedTimestamps() function.
+     * Before persist or update, call the updatedTimestamps() function.
      *
      * @ORM\PrePersist
      * @ORM\PreUpdate

@@ -7,8 +7,10 @@ use Symfony\Component\HttpFoundation\Request;
 
 use UserBundle\Entity\User;
 
-use UserBundle\Form\Type\UserType;
+use UserBundle\Form\UserType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
 class UserController extends Controller
 {
@@ -16,23 +18,42 @@ class UserController extends Controller
     /**
      * List all Users
      * @return \Symfony\Component\HttpFoundation\Response
+     * @Route("/users", name="intranet_user_homepage")
+     * @Security("has_role('ROLE_RH') or has_role('ROLE_VIEW_USER')")
      */
     public function indexAction()
     {
-
-        $userRepo = $this->getDoctrine()->getRepository('UserBundle:User');
-
-        $allUsers = $userRepo->findAll();
+        $allUsers = $this->get('user.repository.user')->findAll();
 
         return $this->render('IntranetBundle:User:index.html.twig', [
             'allUsers' => $allUsers
         ]);
     }
 
+
+    /**
+     * Profile of a user
+     * @param $user_id
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+//    public function profileAction($user_id)
+//    {
+//
+//        $userRepo = $this->get('user.repository.user');
+//
+//        $user = $userRepo->find($user_id);
+//
+//        return $this->render('IntranetBundle:User:profile.html.twig', [
+//            'user' => $user
+//        ]);
+//    }
+
     /**
      * Create new User
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
+     * @Route("/user/create", name="intranet_user_create")
+     * @Security("has_role('ROLE_RH')")
      */
     public function createAction(Request $request)
     {
@@ -40,7 +61,8 @@ class UserController extends Controller
 
         $form = $this->createForm(UserType::class, $user);
         $form->add('save', SubmitType::class, [
-            'label' => 'Créer'
+            'label' => 'Créer',
+            'attr' => ['class' => 'btn btn-primary']
         ]);
 
         $form->handleRequest($request);
@@ -74,19 +96,17 @@ class UserController extends Controller
 
     /**
      * Update an User
-     * @param $user_id
+     * @param $user
      * @param Request $request
+     * @Route("/user/{id}/update", name="intranet_user_update")
+     * @Security("has_role('ROLE_RH')")
      */
-    public function updateAction($user_id, Request $request)
+    public function updateAction(User $user, Request $request)
     {
-        $userRepo = $this->getDoctrine()->getRepository('UserBundle:User');
-
-        $user = $userRepo->find($user_id);
-
-
         $form = $this->createForm(UserType::class, $user);
         $form->add('save', SubmitType::class, [
-            'label' => 'Modifier'
+            'label' => 'Modifier',
+            'attr' => ['class' => 'btn btn-primary']
         ]);
 
         $form->handleRequest($request);
@@ -121,16 +141,13 @@ class UserController extends Controller
 
     /**
      * Delete an User
-     * @param $user_id
+     * @param $user
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @Route("/user/{id}/delete", name="intranet_user_delete")
+     * @Security("has_role('ROLE_RH')")
      */
-    public function deleteAction($user_id)
+    public function deleteAction(User $user)
     {
-        $userRepo = $this->getDoctrine()->getRepository('UserBundle:User');
-
-        $user = $userRepo->find($user_id);
-
-
         if($user === $this->getUser()){
             $this->addFlash(
                 'danger',
@@ -155,32 +172,38 @@ class UserController extends Controller
 
 
     /**
-     * Enable an User
-     * @param $user_id
+     * Display an User
+     * @param $user
      * @return \Symfony\Component\HttpFoundation\Response
+     * @Route("/user/{id}/view", name="intranet_user_view")
+     * @Security("has_role('ROLE_RH')")
      */
-    public function viewAction($user_id)
+    public function viewAction(User $user)
     {
-        $userRepo = $this->getDoctrine()->getRepository('UserBundle:User');
-
-        $user = $userRepo->find($user_id);
-
-        return $this->render('IntranetBundle:User:view', [
+        return $this->render('IntranetBundle:User:profile.html.twig', [
             'user' => $user
         ]);
     }
 
-
-    public function enableAction($user_id)
+    /**
+     * Enable an User
+     * @param $user
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @Route("/user/{id}/online", name="intranet_user_enable")
+     * @Security("has_role('ROLE_RH')")
+     */
+    public function enableAction(User $user)
     {
-        $userRepo = $this->getDoctrine()->getRepository('UserBundle:User');
-
-        $user = $userRepo->find($user_id);
         $user->setEnabled(1);
 
         $em = $this->getDoctrine()->getEntityManager();
         $em->persist($user);
         $em->flush();
+
+        $this->addFlash(
+            'success',
+            'Utilisateur ' . $user->getUsername() . ' activé'
+        );
 
         return $this->redirectToRoute('intranet_user_homepage');
     }
@@ -188,19 +211,23 @@ class UserController extends Controller
 
     /**
      * Disable an User
-     * @param $user_id
+     * @param $user
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @Route("/user/{id}/offline", name="intranet_user_disable")
+     * @Security("has_role('ROLE_RH')")
      */
-    public function disableAction($user_id)
+    public function disableAction(User $user)
     {
-        $userRepo = $this->getDoctrine()->getRepository('UserBundle:User');
-
-        $user = $userRepo->find($user_id);
         $user->setEnabled(0);
 
         $em = $this->getDoctrine()->getEntityManager();
         $em->persist($user);
         $em->flush();
+
+        $this->addFlash(
+            'success',
+            'Utilisateur ' . $user->getUsername() . ' désactivé'
+        );
 
         return $this->redirectToRoute('intranet_user_homepage');
     }

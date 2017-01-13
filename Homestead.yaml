@@ -13,14 +13,15 @@ keys:
 
 folders:
     - map: "."
-      to: "/home/vagrant/ip-project"
+      to: "/home/vagrant/IP-project"
+      type: nfs
 
 sites:
     - map: www.ip-project.app
-      to: "/home/vagrant/ip-project/web"
+      to: "/home/vagrant/IP-project/web"
       type: symfony
-    - map: adminer.local
-      to: "/home/vagrant/ip-project/adminer"
+    - map: www.adminer.app
+      to: "/home/vagrant/IP-project/adminer"
 
 
 databases:
@@ -32,9 +33,9 @@ databases:
 #       client-id: foo
 #       client-token: bar
 
-# ports:
-#     - send: 50000
-#       to: 5000
+ports:
+    - send: 9000
+      to: 9000
 #     - send: 7777
 #       to: 777
 #       protocol: udp

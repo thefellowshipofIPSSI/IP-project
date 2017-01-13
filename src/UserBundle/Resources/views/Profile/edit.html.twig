@@ -1,0 +1,106 @@
+{% extends "::intranet.html.twig" %}
+
+{% block body %}
+
+    <div class="col-md-8 col-md-offset-2">
+        <div class="panel panel-default">
+            <div class="panel-heading text-center">
+                <h4 class="panel-title" >
+                    <a data-toggle="collapse" href="#your-infos" aria-expanded="true">
+                        Tes infos sur le site
+                    </a>
+                </h4>
+            </div>
+            <div  id="your-infos" class="panel-body">
+                {{ form_start(form) }}
+                {{ form_errors(form) }}
+                <div class="col-md-6">
+                    <div class="form-group">
+                        {{ form_label(form.username) }}
+                        {{ form_errors(form.username) }}
+                        {{ form_widget(form.username, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+
+                    <div class="form-group">
+                        {{ form_errors(form.password) }}
+                        {{ form_widget(form.password) }}
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        {{ form_label(form.profile.pseudo) }}
+                        {{ form_errors(form.profile.pseudo) }}
+                        {{ form_widget(form.profile.pseudo, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_label(form.email) }}
+                        {{ form_errors(form.email) }}
+                        {{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="panel-heading text-center">
+                <h4 class="panel-title" >
+                    <a data-toggle="collapse" href="#your-life" aria-expanded="true">
+                        Qui est-tu ?
+                    </a>
+                </h4>
+            </div>
+            <div id="your-life" class="panel-body collapse">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        {{ form_label(form.profile.firstname) }}
+                        {{ form_errors(form.profile.firstname) }}
+                        {{ form_widget(form.profile.firstname, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_label(form.profile.lastname) }}
+                        {{ form_errors(form.profile.lastname) }}
+                        {{ form_widget(form.profile.lastname, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_label(form.profile.birthDate) }}
+                        {{ form_errors(form.profile.birthDate) }}
+                        {{ form_widget(form.profile.birthDate, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        {{ form_label(form.profile.address) }}
+                        {{ form_errors(form.profile.address) }}
+                        {{ form_widget(form.profile.address, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                    <div class="form-group">
+                        {{ form_label(form.profile.phone) }}
+                        {{ form_errors(form.profile.phone) }}
+                        {{ form_widget(form.profile.phone, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                    <div class="form-group">
+                        <label>Activer / Désactiver votre compte</label>
+                        {{ form_errors(form.enabled) }}
+                        {{ form_widget(form.enabled, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                </div>
+
+                {# Group field is not available in profile edition #}
+                {{ form_widget(form.groups, { 'disabled': 'disabled', 'attr' : { 'class' : 'hidden' } }) }}
+
+            </div>
+            <div class="panel-footer">
+                <div class="form-group">
+                    {{ form_widget(form.save, {'attr': {'class': 'btn btn-primary'}}) }}
+                </div>
+            </div>
+
+            {{ form_end(form) }}
+        </div>
+
+    </div>
+
+
+
+
+{% endblock body %}

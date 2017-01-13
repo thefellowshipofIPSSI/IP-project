@@ -1,0 +1,70 @@
+{{ form_start(form) }}
+    <div class="form-group">
+        {{ form_row(form.name) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_row(form.contract) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_row(form.description) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_row(form.duration) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_row(form.location) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_row(form.salary) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_row(form.currency) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_row(form.beginDate) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_row(form.link) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_row(form.society) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_row(form.skills, { 'id': 'input-skills' } ) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_row(form.slug) }}
+    </div>
+
+
+
+
+{#<div class="form-group">#}
+    {#<input type="text" id="input-skills" name="arraySkills">#}
+{#</div>#}
+
+{{ form_end(form) }}
+
+{% block javascripts %}
+
+    <script type="text/javascript">
+        $("#input-skills").tagit({
+            autocomplete: {delay: 0, minLength: 0},
+            availableTags: {{ skills|raw }},
+            showAutocompleteOnFocus: true,
+            allowSpaces: true
+        });
+    </script>
+{% endblock %}
+

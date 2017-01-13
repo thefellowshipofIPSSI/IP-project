@@ -11,3 +11,9 @@ news_homepage:
 news_show:
     path:   /news/{slug}
     defaults:   { _controller: "IpssiBundle:News:show" }
+
+
+###### File #####
+file_upload:
+    path:   /file/upload
+    defaults:   { _controller: "IpssiBundle:File:upload" }

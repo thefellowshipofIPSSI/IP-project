@@ -1,21 +1,52 @@
+job:
+    resource: "@JobBundle/Resources/config/routing.yml"
+    prefix:   /
+
+hwi_oauth_redirect:
+    resource: "@HWIOAuthBundle/Resources/config/routing/redirect.xml"
+    prefix:   /connect
+
+hwi_oauth_connect:
+    resource: "@HWIOAuthBundle/Resources/config/routing/connect.xml"
+    prefix:   /connect
+
+hwi_oauth_login:
+    resource: "@HWIOAuthBundle/Resources/config/routing/login.xml"
+    prefix:   /login/google
+
 user:
     resource: "@UserBundle/Resources/config/routing.yml"
-    prefix:   /user
+    prefix:   /intranet
 
 fos_user:
     resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+
+fos_user_group:
+    resource: "@FOSUserBundle/Resources/config/routing/group.xml"
+    prefix: /group
     
 ipssi:
     resource: "@IpssiBundle/Resources/config/routing.yml"
     prefix:   /
 
+#intranet:
+#    resource: "@IntranetBundle/Resources/config/routing.yml"
+#    prefix:   /intranet
+
 intranet:
-    resource: "@IntranetBundle/Resources/config/routing.yml"
+    resource: "@IntranetBundle/Controller"
+    type: annotation
     prefix:   /intranet
 
-# Routing for Intranet
-#back:
-#    resource:   "@IpssiBundle/Controller/Back/"
-#    prefix:     /intranet
-#    type:       annotation
+google_login:
+    path: /login/check-google
 
+google_connect:
+    path: /connect/google
+
+sg_datatables_bundle:
+    resource: "@SgDatatablesBundle/Controller/"
+    type:     annotation
+
+fos_js_routing:
+    resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"

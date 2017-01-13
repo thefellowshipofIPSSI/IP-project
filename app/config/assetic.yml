@@ -69,3 +69,18 @@ assetic:
             inputs:
                 - "%kernel.root_dir%/../vendor/twbs/bootstrap/fonts/glyphicons-halflings-regular.woff"
             output: "fonts/glyphicons-halflings-regular.woff"
+
+        fileinput_js:
+            inputs:
+                - "%kernel.root_dir%/../vendor/kartik-v/bootstrap-fileinput/js/fileinput.min.js"
+            output: js/fileinput.min.js
+
+        fileinput_css:
+            inputs:
+                - "%kernel.root_dir%/../vendor/kartik-v/bootstrap-fileinput/css/fileinput.min.css"
+            output: css/fileinput.min.css
+
+        fileinput_theme:
+            inputs:
+                - "%kernel.root_dir%/../vendor/kartik-v/bootstrap-fileinput/themes/fa/theme.js"
+            output: js/fileinput-theme.js

@@ -10,6 +10,8 @@ use Ipssi\IntranetBundle\Entity\News;
 use Ipssi\IntranetBundle\Form\NewsType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Session\Session;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
 
 class NewsController extends Controller {
@@ -17,25 +19,29 @@ class NewsController extends Controller {
     /**
      * List all News in table
      * @return \Symfony\Component\HttpFoundation\Response
+     * @Route("/news", name="intranet_news_homepage")
+     * @Security("has_role('ROLE_REDACTEUR')")
      */
     public function indexAction() {
 
-        $newsRepo = $this->getDoctrine()->getRepository('IntranetBundle:News');
-
-        $allNews = $newsRepo->findAll();
-
+        $allNews = $this->get('intranet.repository.news')->findAll();
 
         return $this->render('IntranetBundle:News:index.html.twig', [
             'allNews' => $allNews
         ]);
     }
 
+
     /**
      * Create a new News
      * @return \Symfony\Component\HttpFoundation\Response
+     * @Route("/news/create", name="intranet_news_create")
+     * @Security("has_role('ROLE_REDACTEUR')")
      */
     public function createAction(Request $request) {
         $news = new News;
+
+        //$this->denyAccessUnlessGranted('create', $news);
 
         $form = $this->createForm(NewsType::class, $news);
         $form->add('save', SubmitType::class, [
@@ -47,8 +53,6 @@ class NewsController extends Controller {
 
         if($form->isSubmitted() && $form->isValid()) {
             $news = $form->getData();
-            $news->setUser($this->getUser());
-
             $news->setUser($this->getUser());
 
             $em = $this->getDoctrine()->getEntityManager();
@@ -72,15 +76,13 @@ class NewsController extends Controller {
 
     /**
      * Update existing News
-     * @param $news_id
+     * @param $news
      * @return \Symfony\Component\HttpFoundation\Response
+     * @Route("/news/{id}/update", name="intranet_news_update")
+     * @Security("is_granted('edit', news) or has_role('ROLE_SUPER_ADMIN')")
      */
-    public function updateAction($news_id, Request $request)
+    public function updateAction(Request $request, News $news)
     {
-        $newsRepo = $this->getDoctrine()->getRepository('IntranetBundle:News');
-
-        $news = $newsRepo->find($news_id);
-
         $form = $this->createForm(NewsType::class, $news);
         $form->add('save', SubmitType::class, [
             'label' => 'Modifier',
@@ -113,15 +115,13 @@ class NewsController extends Controller {
 
     /**
      * Delete a News
-     * @param $news_id
+     * @param $news
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @Route("/news/{id}/delete", name="intranet_news_delete")
+     * @Security("is_granted('edit', news) or has_role('ROLE_SUPER_ADMIN')")
      */
-    public function deleteAction($news_id)
+    public function deleteAction(News $news)
     {
-        $newsRepo = $this->getDoctrine()->getRepository('IntranetBundle:News');
-
-        $news = $newsRepo->find($news_id);
-
         $em = $this->getDoctrine()->getEntityManager();
         $em->remove($news);
         $em->flush();
@@ -137,16 +137,12 @@ class NewsController extends Controller {
 
     /**
      * Display a News
-     * @param $news_id
+     * @param $news
+     * @Route("/news/{id}/view", name="intranet_news_view")
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function viewAction($news_id)
+    public function viewAction(News $news)
     {
-        $newsRepo = $this->getDoctrine()->getRepository('IntranetBundle:News');
-
-        $news = $newsRepo->find($news_id);
-
-
         return $this->render('IntranetBundle:News:view.html.twig', [
             'news' => $news
         ]);
@@ -155,38 +151,46 @@ class NewsController extends Controller {
 
     /**
      * Make a News online
-     * @param $news_id
+     * @param $news
+     * @Route("/news/{id}/online", name="intranet_news_online")
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @Security("is_granted('edit', news) or has_role('ROLE_SUPER_ADMIN')")
      */
-    public function onlineAction($news_id)
+    public function onlineAction(News $news)
     {
-        $newsRepo = $this->getDoctrine()->getRepository('IntranetBundle:News');
-
-        $news = $newsRepo->find($news_id);
         $news->setStatus(1);
 
         $em = $this->getDoctrine()->getEntityManager();
         $em->persist($news);
         $em->flush();
 
+        $this->addFlash(
+            'success',
+            'Actualité ' . $news->getName() . ' mise en ligne'
+        );
+
         return $this->redirectToRoute('intranet_news_homepage');
     }
 
     /**
      * Make a News offline
-     * @param $news_id
+     * @param $news
+     * @Route("/news/{id}/offline", name="intranet_news_offline")
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @Security("is_granted('edit', news) or has_role('ROLE_SUPER_ADMIN')")
      */
-    public function offlineAction($news_id)
+    public function offlineAction(News $news)
     {
-        $newsRepo = $this->getDoctrine()->getRepository('IntranetBundle:News');
-
-        $news = $newsRepo->find($news_id);
         $news->setStatus(0);
 
         $em = $this->getDoctrine()->getEntityManager();
         $em->persist($news);
         $em->flush();
+
+        $this->addFlash(
+            'success',
+            'L\'Actualité ' . $news->getName() . ' n\'est plus visible sur le site'
+        );
 
         return $this->redirectToRoute('intranet_news_homepage');
     }

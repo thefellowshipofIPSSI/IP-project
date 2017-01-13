@@ -1,59 +1,43 @@
-<!-- current Route -->
-{% set currentRoute = app.request.attributes.get('_route') %}
+{% extends 'knp_menu.html.twig' %}
 
-<!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
-<div class="collapse navbar-collapse navbar-ex1-collapse">
-    <ul class="nav navbar-nav side-nav">
-        <li {% if currentRoute == 'intranet_homepage' %} class="active" {% endif %}>
-            <a href="{{ path('intranet_homepage') }}"><i class="fa fa-fw fa-dashboard"></i> Accueil</a>
-        </li>
-        <li {% if currentRoute == 'intranet_page_homepage' %} class="active" {% endif %}>
-            <a href="{{ path('intranet_page_homepage') }}"><i class="fa fa-fw fa-file"></i> Page</a>
-        </li>
-        <li {% if currentRoute == 'intranet_news_homepage' %} class="active" {% endif %}>
-            <a href="{{ path('intranet_news_homepage') }}"><i class="fa fa-fw fa-file"></i> Actualités</a>
-        </li>
-        <li>
-            <a href="javascript:;" data-toggle="collapse" data-target="#hr"><i class="fa fa-fw fa-user"></i> Ressources Humaines <i class="fa fa-fw fa-caret-down"></i></a>
-            <ul id="hr" class="collapse">
-                <li>
-                    <a href="{{ path('intranet_user_homepage') }}">Collaborateurs</a>
-                </li>
-                <li>
-                    <a href="#">Dropdown Item</a>
-                </li>
-            </ul>
-        </li>
-        <li>
-            <a href="tables.html"><i class="fa fa-fw fa-table"></i> Tables</a>
-        </li>
-        <li>
-            <a href="forms.html"><i class="fa fa-fw fa-edit"></i> Forms</a>
-        </li>
-        <li>
-            <a href="bootstrap-elements.html"><i class="fa fa-fw fa-desktop"></i> Bootstrap Elements</a>
-        </li>
-        <li>
-            <a href="bootstrap-grid.html"><i class="fa fa-fw fa-wrench"></i> Bootstrap Grid</a>
-        </li>
-        <li>
-            <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> Dropdown <i class="fa fa-fw fa-caret-down"></i></a>
-            <ul id="demo" class="collapse">
-                <li>
-                    <a href="#">Dropdown Item</a>
-                </li>
-                <li>
-                    <a href="#">Dropdown Item</a>
-                </li>
-            </ul>
-        </li>
-        <li>
-            <a href="blank-page.html"><i class="fa fa-fw fa-file"></i> Blank Page</a>
-        </li>
-        <li>
-            <a href="index-rtl.html"><i class="fa fa-fw fa-dashboard"></i> RTL Dashboard</a>
-        </li>
-    </ul>
-</div>
-<!-- /.navbar-collapse -->
+{% block item %}
+    {% import "knp_menu.html.twig" as macros %}
+    {% set childrens = item.children %}
+    {% if item.displayed %}
+        {% if childrens %}
+            <li>
+                <a href="javascript:;" data-toggle="collapse" data-target="#{{ item.attribute('target') }}" class aria-expanded="true">
+                    {% if item.attribute('icon') is not empty  %}
+                        <i class="fa fa-fw fa-{{ item.attribute('icon') }}"></i>
+                    {% endif %}
+                    {{ item.label }}
+                    {% if item.attribute('icon2') is not empty  %}
+                        <i class="fa fa-fw fa-{{ item.attribute('icon2') }}"></i>
+                    {% endif %}
+                </a>
+                <ul id="{{ item.attribute('target') }}" class="collapse">
+                    {% for children in childrens %}
+                        <li>
+                            <a href="{{ children.uri }}">
+                                {{ children.name }}
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </li>
+        {% else %}
+            <li>
+                <a href="{{ item.uri }}">
+                    {% if item.attribute('icon') is not empty  %}
+                        <i class="fa fa-fw fa-{{ item.attribute('icon') }}"></i>
+                    {% endif %}
+                    {{ item.label }}
+                    {% if item.attribute('icon2') is not empty  %}
+                        <i class="fa fa-fw fa-{{ item.attribute('icon2') }}"></i>
+                    {% endif %}
+                </a>
+            </li>
+        {% endif %}
+    {% endif %}
 
+{% endblock %}
