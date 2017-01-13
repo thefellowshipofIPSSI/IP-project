@@ -1,3 +1,7 @@
+job:
+    resource: "@JobBundle/Resources/config/routing.yml"
+    prefix:   /
+
 hwi_oauth_redirect:
     resource: "@HWIOAuthBundle/Resources/config/routing/redirect.xml"
     prefix:   /connect
@@ -12,7 +16,7 @@ hwi_oauth_login:
 
 user:
     resource: "@UserBundle/Resources/config/routing.yml"
-    prefix:   /
+    prefix:   /intranet
 
 fos_user:
     resource: "@FOSUserBundle/Resources/config/routing/all.xml"

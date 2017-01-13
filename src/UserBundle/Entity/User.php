@@ -57,9 +57,8 @@ class User extends BaseUser {
 
     /**
      * @ORM\OneToMany(targetEntity="Ipssi\IntranetBundle\Entity\Page", mappedBy="user")
-     * @ORM\JoinColumn(nullable=true)
      */
-    private $page;
+    private $pages;
 
 
     /**
@@ -67,6 +66,35 @@ class User extends BaseUser {
      * @ORM\JoinColumn(nullable=true)
      */
     private $news;
+
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Ipssi\JobBundle\Entity\Society", inversedBy="members")
+     * @@ORMJoinColumn(name="society_id", referencedColumnName="id", nullable=true)
+     */
+    private $society;
+
+
+    /**
+     * User skills
+     * @ORM\ManyToMany(targetEntity="Ipssi\JobBundle\Entity\Skill", inversedBy="users")
+     * @ORM\JoinTable(name="user_skills")
+     */
+    private $skills;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Ipssi\JobBundle\Entity\Candidacy", mappedBy="candidate")
+     */
+    private $candidacies;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Ipssi\JobBundle\Entity\CV", mappedBy="user")
+     */
+    private $cv;
+
+
+
+    /*****  A revoir ****/
 
     /**
      * @ORM\OneToMany(targetEntity="Ipssi\IntranetBundle\Entity\UserExpense", mappedBy="user")
@@ -92,41 +120,7 @@ class User extends BaseUser {
      */
     private $user_validation_cra;
 
-    /**
-     * @ORM\OneToMany(targetEntity="Ipssi\IntranetBundle\Entity\Job", mappedBy="user")
-     * @ORM\JoinColumn(nullable=true)
-     */
-    private $job;
 
-    /**
-     * @ORM\OneToMany(targetEntity="Ipssi\IntranetBundle\Entity\JobOffer", mappedBy="user")
-     * @ORM\JoinColumn(nullable=true)
-     */
-    private $job_offer;
-
-    /**
-     * @ORM\OneToMany(targetEntity="Ipssi\IntranetBundle\Entity\Skill", mappedBy="user")
-     * @ORM\JoinColumn(nullable=true)
-     */
-    private $skill;
-
-    /**
-     * @ORM\OneToMany(targetEntity="Ipssi\IntranetBundle\Entity\Candidacy", mappedBy="user")
-     * @ORM\JoinColumn(nullable=true)
-     */
-    private $candidacy;
-
-    /**
-     * @ORM\OneToMany(targetEntity="Ipssi\IntranetBundle\Entity\UserCV", mappedBy="user")
-     * @ORM\JoinColumn(nullable=true)
-     */
-    private $user_cv;
-
-    /**
-     * @ORM\OneToMany(targetEntity="Ipssi\IntranetBundle\Entity\UserCV", mappedBy="user_validation")
-     * @ORM\JoinColumn(nullable=true)
-     */
-    private $user_validation_cv;
 
     /**
      * @ORM\OneToMany(targetEntity="Ipssi\IntranetBundle\Entity\UserVacation", mappedBy="user")
@@ -149,9 +143,9 @@ class User extends BaseUser {
         $this->user_validation_expense = new ArrayCollection();
         $this->user_cra = new ArrayCollection();
         $this->user_validation_cra = new ArrayCollection();
-        $this->job = new ArrayCollection();
-        $this->job_offer = new ArrayCollection();
-        $this->skill = new ArrayCollection();
+        $this->jobs = new ArrayCollection();
+        $this->job_offers = new ArrayCollection();
+        $this->skills = new ArrayCollection();
         $this->candidacy = new ArrayCollection();
         $this->user_cv = new ArrayCollection();
         $this->user_validation_cv = new ArrayCollection();
@@ -208,6 +202,8 @@ class User extends BaseUser {
     {
         return $this->google_access_token;
     }
+
+
 
     /**
      * Set profile
@@ -266,7 +262,7 @@ class User extends BaseUser {
      */
     public function addPage(\Ipssi\IntranetBundle\Entity\Page $page)
     {
-        $this->page[] = $page;
+        $this->pages[] = $page;
 
         return $this;
     }
@@ -278,17 +274,17 @@ class User extends BaseUser {
      */
     public function removePage(\Ipssi\IntranetBundle\Entity\Page $page)
     {
-        $this->page->removeElement($page);
+        $this->pages->removeElement($page);
     }
 
     /**
-     * Get page
+     * Get pages
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getPage()
+    public function getPages()
     {
-        return $this->page;
+        return $this->pages;
     }
 
     /**
@@ -323,6 +319,132 @@ class User extends BaseUser {
     public function getNews()
     {
         return $this->news;
+    }
+
+    /**
+     * Set society
+     *
+     * @param \Ipssi\JobBundle\Entity\Society $society
+     *
+     * @return User
+     */
+    public function setSociety(\Ipssi\JobBundle\Entity\Society $society = null)
+    {
+        $this->society = $society;
+
+        return $this;
+    }
+
+    /**
+     * Get society
+     *
+     * @return \Ipssi\JobBundle\Entity\Society
+     */
+    public function getSociety()
+    {
+        return $this->society;
+    }
+
+    /**
+     * Add skill
+     *
+     * @param \Ipssi\JobBundle\Entity\Skill $skill
+     *
+     * @return User
+     */
+    public function addSkill(\Ipssi\JobBundle\Entity\Skill $skill)
+    {
+        $this->skills[] = $skill;
+
+        return $this;
+    }
+
+    /**
+     * Remove skill
+     *
+     * @param \Ipssi\JobBundle\Entity\Skill $skill
+     */
+    public function removeSkill(\Ipssi\JobBundle\Entity\Skill $skill)
+    {
+        $this->skills->removeElement($skill);
+    }
+
+    /**
+     * Get skills
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getSkills()
+    {
+        return $this->skills;
+    }
+
+    /**
+     * Add candidacy
+     *
+     * @param \Ipssi\JobBundle\Entity\Candidacy $candidacy
+     *
+     * @return User
+     */
+    public function addCandidacy(\Ipssi\JobBundle\Entity\Candidacy $candidacy)
+    {
+        $this->candidacies[] = $candidacy;
+
+        return $this;
+    }
+
+    /**
+     * Remove candidacy
+     *
+     * @param \Ipssi\JobBundle\Entity\Candidacy $candidacy
+     */
+    public function removeCandidacy(\Ipssi\JobBundle\Entity\Candidacy $candidacy)
+    {
+        $this->candidacies->removeElement($candidacy);
+    }
+
+    /**
+     * Get candidacies
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getCandidacies()
+    {
+        return $this->candidacies;
+    }
+
+    /**
+     * Add cv
+     *
+     * @param \Ipssi\JobBundle\Entity\CV $cv
+     *
+     * @return User
+     */
+    public function addCv(\Ipssi\JobBundle\Entity\CV $cv)
+    {
+        $this->cv[] = $cv;
+
+        return $this;
+    }
+
+    /**
+     * Remove cv
+     *
+     * @param \Ipssi\JobBundle\Entity\CV $cv
+     */
+    public function removeCv(\Ipssi\JobBundle\Entity\CV $cv)
+    {
+        $this->cv->removeElement($cv);
+    }
+
+    /**
+     * Get cv
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getCv()
+    {
+        return $this->cv;
     }
 
     /**
@@ -459,210 +581,6 @@ class User extends BaseUser {
     public function getUserValidationCra()
     {
         return $this->user_validation_cra;
-    }
-
-    /**
-     * Add job
-     *
-     * @param \Ipssi\IntranetBundle\Entity\Job $job
-     *
-     * @return User
-     */
-    public function addJob(\Ipssi\IntranetBundle\Entity\Job $job)
-    {
-        $this->job[] = $job;
-
-        return $this;
-    }
-
-    /**
-     * Remove job
-     *
-     * @param \Ipssi\IntranetBundle\Entity\Job $job
-     */
-    public function removeJob(\Ipssi\IntranetBundle\Entity\Job $job)
-    {
-        $this->job->removeElement($job);
-    }
-
-    /**
-     * Get job
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getJob()
-    {
-        return $this->job;
-    }
-
-    /**
-     * Add jobOffer
-     *
-     * @param \Ipssi\IntranetBundle\Entity\JobOffer $jobOffer
-     *
-     * @return User
-     */
-    public function addJobOffer(\Ipssi\IntranetBundle\Entity\JobOffer $jobOffer)
-    {
-        $this->job_offer[] = $jobOffer;
-
-        return $this;
-    }
-
-    /**
-     * Remove jobOffer
-     *
-     * @param \Ipssi\IntranetBundle\Entity\JobOffer $jobOffer
-     */
-    public function removeJobOffer(\Ipssi\IntranetBundle\Entity\JobOffer $jobOffer)
-    {
-        $this->job_offer->removeElement($jobOffer);
-    }
-
-    /**
-     * Get jobOffer
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getJobOffer()
-    {
-        return $this->job_offer;
-    }
-
-    /**
-     * Add skill
-     *
-     * @param \Ipssi\IntranetBundle\Entity\Skill $skill
-     *
-     * @return User
-     */
-    public function addSkill(\Ipssi\IntranetBundle\Entity\Skill $skill)
-    {
-        $this->skill[] = $skill;
-
-        return $this;
-    }
-
-    /**
-     * Remove skill
-     *
-     * @param \Ipssi\IntranetBundle\Entity\Skill $skill
-     */
-    public function removeSkill(\Ipssi\IntranetBundle\Entity\Skill $skill)
-    {
-        $this->skill->removeElement($skill);
-    }
-
-    /**
-     * Get skill
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getSkill()
-    {
-        return $this->skill;
-    }
-
-    /**
-     * Add candidacy
-     *
-     * @param \Ipssi\IntranetBundle\Entity\Candidacy $candidacy
-     *
-     * @return User
-     */
-    public function addCandidacy(\Ipssi\IntranetBundle\Entity\Candidacy $candidacy)
-    {
-        $this->candidacy[] = $candidacy;
-
-        return $this;
-    }
-
-    /**
-     * Remove candidacy
-     *
-     * @param \Ipssi\IntranetBundle\Entity\Candidacy $candidacy
-     */
-    public function removeCandidacy(\Ipssi\IntranetBundle\Entity\Candidacy $candidacy)
-    {
-        $this->candidacy->removeElement($candidacy);
-    }
-
-    /**
-     * Get candidacy
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getCandidacy()
-    {
-        return $this->candidacy;
-    }
-
-    /**
-     * Add userCv
-     *
-     * @param \Ipssi\IntranetBundle\Entity\UserCV $userCv
-     *
-     * @return User
-     */
-    public function addUserCv(\Ipssi\IntranetBundle\Entity\UserCV $userCv)
-    {
-        $this->user_cv[] = $userCv;
-
-        return $this;
-    }
-
-    /**
-     * Remove userCv
-     *
-     * @param \Ipssi\IntranetBundle\Entity\UserCV $userCv
-     */
-    public function removeUserCv(\Ipssi\IntranetBundle\Entity\UserCV $userCv)
-    {
-        $this->user_cv->removeElement($userCv);
-    }
-
-    /**
-     * Get userCv
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getUserCv()
-    {
-        return $this->user_cv;
-    }
-
-    /**
-     * Add userValidationCv
-     *
-     * @param \Ipssi\IntranetBundle\Entity\UserCV $userValidationCv
-     *
-     * @return User
-     */
-    public function addUserValidationCv(\Ipssi\IntranetBundle\Entity\UserCV $userValidationCv)
-    {
-        $this->user_validation_cv[] = $userValidationCv;
-
-        return $this;
-    }
-
-    /**
-     * Remove userValidationCv
-     *
-     * @param \Ipssi\IntranetBundle\Entity\UserCV $userValidationCv
-     */
-    public function removeUserValidationCv(\Ipssi\IntranetBundle\Entity\UserCV $userValidationCv)
-    {
-        $this->user_validation_cv->removeElement($userValidationCv);
-    }
-
-    /**
-     * Get userValidationCv
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getUserValidationCv()
-    {
-        return $this->user_validation_cv;
     }
 
     /**

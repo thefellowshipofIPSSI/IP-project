@@ -1,0 +1,11 @@
+offer_homepage:
+    path:     /offres
+    defaults: { _controller: JobBundle:App/Offer:index }
+
+offer_show:
+    path:     /offre/{slug}
+    defaults: { _controller: JobBundle:App/Offer:show }
+
+offer_candidate:
+    path:     /offre/{slug}/postuler
+    defaults: { _controller: JobBundle:App/Offer:candidate }

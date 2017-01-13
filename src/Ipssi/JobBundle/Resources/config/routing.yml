@@ -1,0 +1,8 @@
+app:
+    resource: "@JobBundle/Resources/config/App/routing.yml"
+    prefix:   /
+
+
+intranet:
+    resource: "@JobBundle/Resources/config/Intranet/routing.yml"
+    prefix:   /intranet

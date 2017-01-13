@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Profile
  *
  * @ORM\Table(name="user_profile")
- * @ORM\Entity(repositoryClass="EL\UserBundle\Repository\ProfileRepository")
+ * @ORM\Entity(repositoryClass="UserBundle\Repository\ProfileRepository")
  * @ORM\HasLifecycleCallbacks()
  */
 class Profile
@@ -68,6 +68,22 @@ class Profile
      * @ORM\Column(name="address", type="string", length=255, nullable=true)
      */
     private $address;
+
+    /**
+     * @ORM\Column(name="zipcode", type="string", length=10, nullable=true)
+     */
+    private $zipcode;
+
+    /**
+     * @ORM\Column(name="city", type="string", length=10, nullable=true)
+     */
+    private $city;
+
+    /**
+     * @ORM\Column(name="country", type="string", length=20, nullable=true)
+     */
+    private $country;
+
 
     /**
      * @var Date
@@ -369,4 +385,77 @@ class Profile
     {
         return $this->user;
     }
+
+    /**
+     * Set zipcode
+     *
+     * @param string $zipcode
+     *
+     * @return Profile
+     */
+    public function setZipcode($zipcode)
+    {
+        $this->zipcode = $zipcode;
+
+        return $this;
+    }
+
+    /**
+     * Get zipcode
+     *
+     * @return string
+     */
+    public function getZipcode()
+    {
+        return $this->zipcode;
+    }
+
+    /**
+     * Set city
+     *
+     * @param string $city
+     *
+     * @return Profile
+     */
+    public function setCity($city)
+    {
+        $this->city = $city;
+
+        return $this;
+    }
+
+    /**
+     * Get city
+     *
+     * @return string
+     */
+    public function getCity()
+    {
+        return $this->city;
+    }
+
+    /**
+     * Set country
+     *
+     * @param string $country
+     *
+     * @return Profile
+     */
+    public function setCountry($country)
+    {
+        $this->country = $country;
+
+        return $this;
+    }
+
+    /**
+     * Get country
+     *
+     * @return string
+     */
+    public function getCountry()
+    {
+        return $this->country;
+    }
+
 }
