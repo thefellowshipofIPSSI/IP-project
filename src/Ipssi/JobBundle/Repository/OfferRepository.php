@@ -17,7 +17,7 @@ class OfferRepository extends EntityRepository implements FrontRepositoryInterac
 
     public function findBySlug($slug)
     {
-        return $this->findOneBy(['slug' => $slug]);
+        return $this->findOneBy(['slug' => $slug, 'status' => 1]);
     }
 
 }

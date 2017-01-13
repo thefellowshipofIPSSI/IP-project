@@ -14,6 +14,7 @@ namespace UserBundle\Controller;
 use Ipssi\IpssiBundle\Entity\File;
 use UserBundle\Entity\Newsletter;
 
+use UserBundle\Entity\Profile;
 use UserBundle\Form\UserType;
 use FOS\UserBundle\FOSUserEvents;
 use FOS\UserBundle\Event\FormEvent;

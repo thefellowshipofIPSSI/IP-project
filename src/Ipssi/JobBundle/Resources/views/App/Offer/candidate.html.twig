@@ -1,0 +1,38 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}
+    Postuler à l'offre : {{ offer.name }}
+{% endblock %}
+
+{% block headerContainer %}
+
+    <div class="container">
+
+
+        <ol class="breadcrumb text-left">
+            <li>
+                <i class="fa fa-home"></i>  <a href="{{ path('ipssi_homepage') }}">Accueil</a>
+            </li>
+            <li>
+                <a href="{{ path('offer_homepage') }}">Offres</a>
+            </li>
+            <li class="active">
+                <i class="fa fa-eye"></i> Postuler à : {{ offer.name }}
+            </li>
+        </ol>
+    </div>
+
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="col-lg-12">
+            <div class="row">
+
+                {% include('JobBundle:App/Offer:formCandidate.html.twig') %}
+
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

@@ -83,6 +83,12 @@ class Candidacy
     private $candidate;
 
 
+    /**
+     * @ORM\OneToOne(targetEntity="Ipssi\JobBundle\Entity\CV")
+     * @ORM\JoinColumn(name="cv_id", referencedColumnName="id")
+     */
+    private $cv;
+
 
     /**
      * Before persist or update, call the updatedTimestamps() function.
@@ -304,14 +310,16 @@ class Candidacy
         return $this->offer;
     }
 
+
+
     /**
      * Set candidate
      *
-     * @param \Ipssi\JobBundle\Entity\UserBundle $candidate
+     * @param \UserBundle\Entity\User $candidate
      *
      * @return Candidacy
      */
-    public function setCandidate(\Ipssi\JobBundle\Entity\UserBundle $candidate = null)
+    public function setCandidate(\UserBundle\Entity\User $candidate = null)
     {
         $this->candidate = $candidate;
 
@@ -321,10 +329,35 @@ class Candidacy
     /**
      * Get candidate
      *
-     * @return \Ipssi\JobBundle\Entity\UserBundle
+     * @return \UserBundle\Entity\User
      */
     public function getCandidate()
     {
         return $this->candidate;
+    }
+
+
+    /**
+     * Set cv
+     *
+     * @param \Ipssi\JobBundle\Entity\CV $cv
+     *
+     * @return Candidacy
+     */
+    public function setCv(\Ipssi\JobBundle\Entity\CV $cv = null)
+    {
+        $this->cv = $cv;
+
+        return $this;
+    }
+
+    /**
+     * Get cv
+     *
+     * @return \Ipssi\JobBundle\Entity\CV
+     */
+    public function getCv()
+    {
+        return $this->cv;
     }
 }

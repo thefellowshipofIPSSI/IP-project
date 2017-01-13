@@ -84,13 +84,11 @@ class User extends BaseUser {
 
     /**
      * @ORM\OneToMany(targetEntity="Ipssi\JobBundle\Entity\Candidacy", mappedBy="candidate")
-     * @ORM\JoinColumn(nullable=true)
      */
     private $candidacies;
 
     /**
      * @ORM\OneToMany(targetEntity="Ipssi\JobBundle\Entity\CV", mappedBy="user")
-     * @ORM\JoinColumn(nullable=true)
      */
     private $cv;
 
