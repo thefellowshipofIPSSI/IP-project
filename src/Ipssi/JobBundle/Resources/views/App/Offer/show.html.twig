@@ -37,17 +37,19 @@
 
             {# If the user already postulated #}
             {% set candidate = false %}
-            {% for candidacy in app.user.candidacies %}
-                {% if offer == candidacy.offer %}
-                    {% set candidate = true %}
+            {% if app.user.candidacies is defined %}
+                {% for candidacy in app.user.candidacies %}
+                    {% if offer == candidacy.offer %}
+                        {% set candidate = true %}
 
-                    <div class="alert alert-success" role="alert">
-                        Vous avez déjà postulé à cette offre
-                    </div>
+                        <div class="alert alert-success" role="alert">
+                            Vous avez déjà postulé à cette offre
+                        </div>
 
-                    <hr>
-                {% endif %}
-            {% endfor %}
+                        <hr>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
 
             <!-- Page Content -->
 
