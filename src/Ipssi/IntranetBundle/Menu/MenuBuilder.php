@@ -5,6 +5,8 @@ use Knp\Menu\FactoryInterface;
 use Knp\Menu\ItemInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use JMS\SecurityExtraBundle\Metadata\Driver\AnnotationDriver;
+
 use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
@@ -112,13 +114,14 @@ class MenuBuilder
             if ($authorizationChecker->isGranted('ROLE_VIEW_JOBOFFER')
                 or $authorizationChecker->isGranted('ROLE_RH')
             ) {
-                $menu['RH']->addChild('Offres de poste', array('route' => 'intranet_job_offer_homepage'));
+                $menu['RH']->addChild('Offres de poste', array('route' => 'intranet_offers'));
             }
 
             if ($authorizationChecker->isGranted('ROLE_EDIT_CANDIDACY')
                 or $authorizationChecker->isGranted('ROLE_RH')
             ) {
-                $menu['RH']->addChild('Candidatures', array('route' => 'intranet_homepage'));
+                $menu['RH']->addChild('Entreprises partenaires', array('route' => 'intranet_societies'));
+                $menu['RH']->addChild('Candidatures', array('route' => 'intranet_candidacies'));
             }
 
             if ($authorizationChecker->isGranted('ROLE_RH')
@@ -146,8 +149,8 @@ class MenuBuilder
             $menu['Admin']->addChild('Note de frais', array('route' => 'intranet_expense_homepage'));
             $menu['Admin']->addChild('Demande de congés', array('route' => 'intranet_vacation_homepage'));
     //            $menu['Admin']->addChild('CVthèque', array('route' => 'intranet_cv_homepage'));
-            $menu['Admin']->addChild('Postes', array('route' => 'intranet_job_homepage'));
-            $menu['Admin']->addChild('Compétences', array('route' => 'intranet_skill_homepage'));
+            $menu['Admin']->addChild('Postes', array('route' => 'intranet_offers'));
+            $menu['Admin']->addChild('Compétences', array('route' => 'intranet_skills'));
         }
         return $menu;
     }

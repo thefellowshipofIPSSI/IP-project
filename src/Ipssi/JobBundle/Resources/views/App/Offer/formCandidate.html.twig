@@ -1,0 +1,90 @@
+{{ form_start(form) }}
+
+<div class="col-md-4">
+    <div class="form-group">
+        {{ form_row(form.profile.firstname, {'attr': {'value': user.profile.firstname, 'required': 'true'}}) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_row(form.profile.lastname, {'attr': {'value': user.profile.lastname, 'required': 'true'}}) }}
+    </div>
+
+    <div class="form-group">
+        <label>Date de naissance</label>
+        {{ form_widget(form.profile.birthDate, {'attr': {'value': user.profile.birthDate|date('d/m/Y'), 'required': 'true'}}) }}
+    </div>
+
+    <div class="form-group">
+        <label>Adresse</label>
+        {{ form_widget(form.profile.address, {'attr': {'value': user.profile.address, 'required': 'true'}}) }}
+    </div>
+
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label>Code postal</label>
+                {{ form_widget(form.profile.zipcode, {'attr': {'value': user.profile.zipcode, 'required': 'true'}}) }}
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="form-group">
+                <label>Ville</label>
+                {{ form_widget(form.profile.city, {'attr': {'value': user.profile.city, 'required': 'true'}}) }}
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label>Pays</label>
+        {{ form_widget(form.profile.country, {'attr': {'value': user.profile.country, 'required': 'true'}}) }}
+    </div>
+
+
+    <div class="form-group">
+        <label>Numéro de téléphone</label>
+        {{ form_widget(form.profile.phone, {'attr': {'value': user.profile.phone, 'required': 'true'}}) }}
+    </div>
+
+
+</div>
+
+<div class="col-md-8">
+    <div class="form-group">
+        {{ form_row(form.content) }}
+    </div>
+
+    <hr>
+
+    <div class="form-group">
+        {{ form_widget(form.cv.file.file, { 'id': 'input-cv' }) }}
+    </div>
+
+</div>
+
+
+<div class="container">
+    <div class="form-group">
+        {{ form_row(form.submit, {'attr': {'class': 'btn btn-block btn-success'}}) }}
+    </div>
+</div>
+
+{{ form_end(form) }}
+
+
+{% block javascripts %}
+
+    <script type="text/javascript">
+        $("#input-cv").fileinput({
+            theme: "fa",
+            showRemove: true,
+            showUpload: false,
+            maxFileCount: 1,
+            allowedFileTypes: ["pdf"],
+            browseClass: "btn btn-primary btn-block",
+            browseLabel: "Envoyer son CV",
+            showCaption: false,
+        })
+
+
+    </script>
+{% endblock %}

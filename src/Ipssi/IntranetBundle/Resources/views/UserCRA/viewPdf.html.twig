@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    {% block stylesheets %}
+        <!-- Bootstrap Core CSS -->
+        <link href="{{ app.request.schemeAndHttpHost ~ asset('css/bootstrap.min.css') }}" rel="stylesheet">
+        <!-- Custom Fonts -->
+        <link href="{{ app.request.schemeAndHttpHost ~ asset('font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
+    {% endblock %}
+
+</head>
+<body>
+<div id="wrapper">
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <!-- Page Heading -->
+            <div class="row">
+                {% block headerContainer %}
+                    <div class="col-lg-12">
+                        <h1 class="page-header">
+                            Compte rendu d'activité
+                            <small>{{ userCRA.projectName }}</small>
+                        </h1>
+                    </div>
+                {% endblock %}
+            </div>
+            <!-- CONTENT -->
+            {% block body %}
+
+                <div class="col-lg-12">
+
+                    <!-- Title -->
+                    <h1>Projet : {{ userCRA.projectName|capitalize }}</h1>
+
+                    <!-- Author -->
+                    <p class="lead">
+                        par {{ userCRA.user.username }} le {{ userCRA.creationDate|date('d/m/Y') }} à {{ userCRA.creationDate|date('H:i') }}
+                    </p>
+
+                    <hr>
+
+                    <!-- Page Content -->
+                    <p>Client : {{ userCRA.client }}</p>
+                    <p>Projet : {{ userCRA.projectName }}</p>
+                    <p>Compte rendu d'activité : {{ userCRA.activityReport }}</p>
+                    <p>Date de début : {{ userCRA.beginDate|date('d/m/Y') }}</p>
+                    <p>Date de fin : {{ userCRA.endDate|date('d/m/Y') }}</p>
+                    <p>Nombre d'accident avec arrêt : {{ userCRA.nbLostTimeAccident }}</p>
+                    <p>Nombre d'accient sans arrêt : {{ userCRA.nbNoneLostTimeAccident }}</p>
+                    <p>Nombre d'accident de trajet : {{ userCRA.nbTravelAccident }}</p>
+                    <p>Nombre de jours d'arrêt maladie : {{ userCRA.nbSickDay }}</p>
+                    <p>Nombre de jours de congés : {{ userCRA.nbVacancyDay }}</p>
+                    <p>Satisfaction du client : {{ userCRA.clientSatisfaction }}</p>
+                    <p>Satisfaction du consultant : {{ userCRA.consultantSatisfaction }}</p>
+                    <p>Points à améliorer : {{ userCRA.ameliorationPoint }}</p>
+                    <p>Activités restant à éffectuer : {{ userCRA.leftActivity }}</p>
+                    <p>Commentaires : {{ userCRA.comments }}</p>
+                </div>
+
+            {% endblock %}
+            <!-- END CONTENT -->
+        </div>
+    </div>
+    <!-- /#wrapper -->
+</div>
+</body>
+</html>

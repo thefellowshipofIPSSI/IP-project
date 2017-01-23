@@ -212,9 +212,7 @@ class UserCRA
      */
     public function isCreator(User $user = null)
     {
-//        dump($user);
-//        die();
-        if ($user->getId() === $this->getUser()) {
+        if ($user->getId() === $this->getUser()->getId()) {
             return true;
         } else {
             return false;

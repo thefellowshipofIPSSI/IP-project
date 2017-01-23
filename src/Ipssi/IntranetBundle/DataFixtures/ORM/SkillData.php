@@ -5,23 +5,37 @@ namespace Ipssi\IntranetBundle\DataFixtures\ORM;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
-use Ipssi\IntranetBundle\Entity\Skill;
+use Ipssi\JobBundle\Entity\Skill;
+use Ipssi\JobBundle\Entity\SkillType;
 
 class SkillData extends AbstractFixture implements OrderedFixtureInterface
 {
     public function load(ObjectManager $manager)
     {
+
+        $skillType = new SkillType();
+        $skillType->setName('Informatique');
+
+
+        $skillType2 = new SkillType();
+        $skillType2->setName('Organisation');
+
+
         $skill = new Skill();
-        $skill->setTitle('Php');
-        $skill->setUser($this->getReference('admin-user'));
+        $skill->setName('Php');
+        $skill->setType($skillType);
 
         $skill2 = new Skill();
-        $skill2->setTitle('SQL');
-        $skill2->setUser($this->getReference('admin-user'));
+        $skill2->setName('SQL');
+        $skill2->setType($skillType);
 
         $skill3 = new Skill();
-        $skill3->setTitle('Symfony3');
-        $skill3->setUser($this->getReference('admin-user'));
+        $skill3->setName('Symfony3');
+        $skill3->setType($skillType);
+
+
+        $manager->persist($skillType);
+        $manager->persist($skillType2);
 
         $manager->persist($skill);
         $manager->persist($skill2);

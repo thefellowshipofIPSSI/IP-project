@@ -12,7 +12,7 @@
                     <div class="left col-md-6">
                         <div class="row">
 
-                            {{ form_start(form, {'attr': { 'class': 'form-horizontal well' }, 'action': path('intranet_user_change_avatar')}) }}
+                            {{ form_start(form, {'attr': { 'class': 'form-horizontal well' }, 'action': path('user_change_avatar')}) }}
                             <!-- Choix de l'avatar -->
                             <div class="row">
                                 <div class="col-xs-4 col-xs-offset-1">
@@ -62,10 +62,10 @@
     <script type="text/javascript">
         $("#input-file").fileinput({
             theme: "fa",
-            uploadUrl: "{{ path('intranet_user_upload_avatar') }}"
+            uploadUrl: "{{ path('user_upload_avatar') }}"
         }).on('fileuploaded', function(e, data, index) {
             console.log('fichier uploadé');
-            window.location = "{{ path('intranet_user_profile') }}"
+            window.location = "{{ path('user_profile') }}"
         });
 
 

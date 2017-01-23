@@ -28,6 +28,9 @@
             <thead>
             <tr>
                 <th>#</th>
+                {% if is_granted('ROLE_CREATE_EXPENSE') == false %}
+                    <th>Utilisateur</th>
+                {% endif %}
                 <th>Date</th>
                 <th>Titre</th>
                 <th>Statut</th>
@@ -38,6 +41,9 @@
             {% for userExpense in allUserExpenses %}
             <tr>
                 <td>{{ userExpense.id }}</td>
+                {% if is_granted('ROLE_CREATE_EXPENSE') == false %}
+                    <td>{{ userExpense.user.username }}</td>
+                {% endif %}
                 <td>{{ userExpense.creationDate|date('d/m/Y') }}</td>
                 <td>{{ userExpense.title }}</td>
                 <td>
@@ -51,7 +57,7 @@
                     <a href="{{ path('intranet_expense_view', {'id': userExpense.id}) }}" class="fa fa-eye" title="Aperçu"></a>
                     <a href="{{ path('intranet_expense_update', {'id': userExpense.id}) }}" class="fa fa-pencil-square-o" title="Modifier"></a>
                     <a href="{{ path('intranet_expense_delete', {'id': userExpense.id}) }}" class="fa fa-trash-o" title="Supprimer"></a>
-                    <a href="#" class="fa fa-download" title="Télécharger le .csv"></a>
+                    <a href="{{ path('intranet_expense_view_pdf', {'id': userExpense.id}) }}" class="fa fa-download" title="Télécharger le .pdf"></a>
                     {% if userExpense.status == 0 %}
                         <a href="{{ path('intranet_expense_online', {'id': userExpense.id}) }}" class="fa fa-toggle-off pull-right" title="Mettre en ligne"></a>
                     {% else %}

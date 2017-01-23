@@ -6,6 +6,7 @@ imports:
     - { resource: "assetic.yml" }    
     - { resource: "@IntranetBundle/Resources/config/services.yml" }
     - { resource: "@UserBundle/Resources/config/services.yml" }
+    - { resource: "@JobBundle/Resources/config/services.yml" }
 
 # Put parameters here that don't need to change on each machine where the app is deployed
 # http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
@@ -113,3 +114,17 @@ hwi_oauth:
             client_id:           "%google_app_id%"
             client_secret:       "%google_app_secret%"
             scope:               "https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile https://mail.google.com/"
+
+knp_snappy:
+    pdf:
+        enabled:    true
+        binary:     '../vendor/h4cc/wkhtmltopdf-amd64/bin/wkhtmltopdf-amd64'
+        options:    []
+
+
+
+doctrine_migrations:
+    dir_name: "%kernel.root_dir%/DoctrineMigrations"
+    namespace: Application\Migrations
+    table_name: migration_versions
+    name: Application Migrations

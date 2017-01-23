@@ -18,7 +18,7 @@ class SecurityController extends BaseController
     {
         // Si l'utilisateur est loggé, on redirige vers l'index du site
         if( $this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY') ){
-            return $this->redirectToRoute('site_homepage');
+            return $this->redirectToRoute('ipssi_homepage');
         }
 
         /** @var $session \Symfony\Component\HttpFoundation\Session\Session */

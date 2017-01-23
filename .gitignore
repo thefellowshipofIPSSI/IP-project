@@ -19,3 +19,6 @@ devbox.box
 .vagrant/
 /nbproject/private/
 nbproject/
+!/web/uploads/
+/web/uploads/*
+*~

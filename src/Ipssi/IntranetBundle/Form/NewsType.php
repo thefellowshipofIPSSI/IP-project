@@ -9,7 +9,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-
+use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 
 class NewsType extends AbstractType
 {
@@ -23,7 +23,11 @@ class NewsType extends AbstractType
             ->add('name', TextType::class, ['attr' => ['class' => 'form-control']])
             ->add('title', TextType::class, ['attr' => ['class' => 'form-control']])
             ->add('resume', TextAreaType::class, ['attr' => ['class' => 'form-control']])
-            ->add('content', TextAreaType::class, ['attr' => ['class' => 'form-control']])
+            ->add('content', CKEditorType::class,  [
+                'config' => [
+                    'uiColor' => '#ffffff',
+                    //...
+                ]])
             ->add('slug', TextType::class, ['attr' => ['class' => 'form-control']])
             ->add('metaDescription', TextAreaType::class, ['attr' => ['class' => 'form-control']])
             ->add('metaTitle', TextType::class, ['attr' => ['class' => 'form-control']]);

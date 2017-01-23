@@ -3,6 +3,8 @@
 namespace Ipssi\IntranetBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use UserBundle\Entity\User;
+
 
 /**
  * UserExpense
@@ -113,6 +115,20 @@ class UserExpense
         {
             $this->setCreationDate(new \DateTime('now'));
             $this->setStatus(0);
+        }
+    }
+
+    /**
+     * Is the given User the creator
+     *
+     * @return bool
+     */
+    public function isCreator(User $user = null)
+    {
+        if ($user->getId() === $this->getUser()->getId()) {
+            return true;
+        } else {
+            return false;
         }
     }
 
