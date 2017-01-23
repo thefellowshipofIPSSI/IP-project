@@ -23,11 +23,15 @@
     {# Display only cra's user if he has ROLE_CREATE_CRA  #}
     {% if is_granted('ROLE_CREATE_CRA') %}
         {% for userCRA in allUserCRAs %}
-            {% if userCRA.isCreator(app.user) %}
-                {{ allUserCRAs|slice(userCRA) }}
+            {% if userCRA.isCreator(app.user) == false %}
+                {{ dump(allUserCRAs) }}
+                {{ dump(loop.index) }}
+                {{ allUserCRAs|slice(loop.index) }}
             {% endif %}
         {% endfor %}
     {% endif %}
+
+
 
     <a href="{{ path('intranet_cra_create') }}" class="btn btn-primary" style="margin-bottom:10px;">Nouveau compte rendu d'activité</a>
 
