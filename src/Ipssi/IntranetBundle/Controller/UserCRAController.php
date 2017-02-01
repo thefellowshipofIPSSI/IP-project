@@ -51,6 +51,7 @@ class UserCRAController extends Controller {
         ));
     }
 
+
     /**
      * @Route("/cra/results", name="intranet_cra_results")
      */
