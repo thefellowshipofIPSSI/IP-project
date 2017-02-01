@@ -22,3 +22,14 @@ nbproject/
 !/web/uploads/
 /web/uploads/*
 *~
+.DS_Store
+src/.DS_Store
+src/Ipssi/.DS_Store
+src/Ipssi/IpssiBundle/.DS_Store
+src/Ipssi/IpssiBundle/Resources/.DS_Store
+src/Ipssi/IpssiBundle/Resources/views/.DS_Store
+src/UserBundle/.DS_Store
+src/UserBundle/Resources/.DS_Store
+src/UserBundle/Resources/views/.DS_Store
+var/cache/
+var/logs/
