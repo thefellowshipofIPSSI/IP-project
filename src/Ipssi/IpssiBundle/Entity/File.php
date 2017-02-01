@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\File\File as BaseFile;
  * File
  *
  * @ORM\Table(name="file")
- * @ORM\Entity(repositoryClass="EL\AppBundle\Repository\FileRepository")
+ * @ORM\Entity(repositoryClass="Ipssi\IpssiBundle\Repository\FileRepository")
  * @ORM\HasLifecycleCallbacks
  */
 class File

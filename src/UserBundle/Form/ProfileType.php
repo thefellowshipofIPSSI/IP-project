@@ -13,10 +13,14 @@ class ProfileType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder
-            ->add('pseudo', TextType::class, array(
+
+        if(!$options['candidacy']) {
+            $builder->add('pseudo', TextType::class, array(
                 'required' => false
-            ))
+            ));
+        }
+
+        $builder
             ->add('firstname', TextType::class, [
                 'attr' => ['class' => 'form-control'],
                 'label' => 'Prénom'
@@ -28,6 +32,21 @@ class ProfileType extends AbstractType
             ->add('address', TextType::class, [
                 'attr' => ['class' => 'form-control', 'required' => false],
                 'label' => 'Adresse du collaborateur (facultatif)',
+                'required' => false
+            ])
+            ->add('zipcode', TextType::class, [
+                'attr' => ['class' => 'form-control', 'required' => false],
+                'label' => 'Code postal (facultatif)',
+                'required' => false
+            ])
+            ->add('city', TextType::class, [
+                'attr' => ['class' => 'form-control', 'required' => false],
+                'label' => 'Ville (facultatif)',
+                'required' => false
+            ])
+            ->add('country', TextType::class, [
+                'attr' => ['class' => 'form-control', 'required' => false],
+                'label' => 'Pays (facultatif)',
                 'required' => false
             ])
             ->add('phone', TextType::class, [
@@ -49,6 +68,7 @@ class ProfileType extends AbstractType
     {
         $resolver->setDefaults(array(
             'data_class' => 'UserBundle\Entity\Profile',
+            'candidacy' => false
         ));
     }
 }

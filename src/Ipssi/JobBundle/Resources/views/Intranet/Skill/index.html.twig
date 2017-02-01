@@ -1,0 +1,79 @@
+{% extends "intranet.html.twig" %}
+
+{% block title %} Compétences {% endblock %}
+
+{% block headerContainer %}
+    <div class="col-lg-12">
+        <h1 class="page-header">
+            Compétences
+        </h1>
+        <ol class="breadcrumb">
+            <li>
+                <i class="fa fa-home"></i>  <a href="{{ path('intranet_homepage') }}">Accueil</a>
+            </li>
+            <li class="active">
+                <i class="fa fa-eye"></i> Compétences
+            </li>
+        </ol>
+    </div>
+{% endblock %}
+
+{% block body %}
+
+    <a href="{{ path('intranet_skill_create') }}" class="btn btn-primary" style="margin-bottom:10px;">Nouvelle Compétence</a>
+    <a href="{{ path('intranet_skill_type_create') }}" class="btn btn-primary" style="margin-bottom:10px;">Nouvelle Catégorie</a>
+    <div class="container">
+        <hr>
+
+        <div class="row">
+            {% for skillType in skillTypes %}
+                <div class="col-md-4">
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            <a href="{{ path('intranet_skill_type_update', { 'skillType': skillType.id }) }}" style="text-align: right;" title="Modifier">Catégorie : {{ skillType.name | capitalize }}</a>
+                        </div>
+
+                        <div class="list-group">
+                            {% if skillType.skills|length > 0 %}
+                                {% for skill in skillType.skills %}
+
+                                    <a href="#" class="list-group-item" title="{{ skill.offers|length }} offre{% if skill.offers|length > 1 %}s{% endif %} liée{% if skill.offers|length > 1 %}s{% endif %} à la compétence {{ skill.name|capitalize }}"><span class="badge">{{ skill.offers|length }}</span> {{ skill.name }}</a>
+
+                                {% endfor %}
+                            {% else %}
+
+                                <li class="list-group-item">Pas encore de compétence liée</li>
+
+                            {% endif %}
+                        </div>
+
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+        <hr>
+
+        {% if orphanSkills|length > 0 %}
+        <div class="row">
+            <div class="col-md-4">
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        Compétences non classées
+                    </div>
+
+                    <div class="list-group">
+                        {% for skill in orphanSkills %}
+
+                            <a href="#" class="list-group-item" title="{{ skill.offers|length }} offre{% if skill.offers|length > 1 %}s{% endif %} liée{% if skill.offers|length > 1 %}s{% endif %} à la compétence {{ skill.name|capitalize }}"><span class="badge">{{ skill.offers|length }}</span> {{ skill.name }}</a>
+
+                        {% endfor %}
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
+    </div>
+{% endblock %}

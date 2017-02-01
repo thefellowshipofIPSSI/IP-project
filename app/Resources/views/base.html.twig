@@ -26,6 +26,7 @@
                     <ul class="nav navbar-nav navbar-left">
                         <li><a href="{{ path('ipssi_homepage') }}">Home</a></li>
                         <li><a href="{{ path('news_homepage') }}">Actualités</a></li>
+                        <li><a href="{{ path('offer_homepage') }}">Offres d'emploi</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li class="dropdown">
@@ -34,7 +35,7 @@
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Bonjour, {{ app.user }}<span class="caret"></span></a>                                
                             <ul class="dropdown-menu" role="menu">
                             <li><a href="{{ path('intranet_homepage') }}">Intranet</a></li>
-                            <li><a href="{{ path('intranet_user_profile') }}">Profil</a></li>
+                            <li><a href="{{ path('user_profile') }}">Profil</a></li>
                             <li><a href="{{ path('fos_user_security_logout') }}">Déconnexion</a></li>
                             </ul>
                             {% else %}

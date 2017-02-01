@@ -85,6 +85,9 @@
                     </div>
                 </div>
 
+                {# Group field is not available in profile edition #}
+                {{ form_widget(form.groups, { 'disabled': 'disabled', 'attr' : { 'class' : 'hidden' } }) }}
+
             </div>
             <div class="panel-footer">
                 <div class="form-group">

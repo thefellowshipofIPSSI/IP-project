@@ -1,0 +1,29 @@
+{% extends 'intranet.html.twig' %}
+
+{% block title %} Offres {% endblock %}
+
+{% block headerContainer %}
+    <div class="col-lg-12">
+        <h1 class="page-header">
+            Offres
+            <small>Modification</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li>
+                <i class="fa fa-home"></i>  <a href="{{ path('intranet_homepage') }}">Accueil</a>
+            </li>
+            <li class="active">
+                <a href="{{ path('intranet_offers') }}">Offres</a>
+            </li>
+            <li class="active">
+                <i class="fa fa-eye"></i> Modifier : {{ offer.name }}
+            </li>
+        </ol>
+    </div>
+{% endblock %}
+
+{% block body %}
+
+    {% include('JobBundle:Intranet/Offer:form.html.twig') %}
+    
+{% endblock %}

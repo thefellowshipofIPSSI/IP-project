@@ -20,17 +20,45 @@
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/7.1.0/css/bootstrap-slider.min.css">
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" />
 
+
+            <!-- jQuery -->
+            <script src="{{ asset('js/jquery.js') }}"></script>
+
+            <!-- Bootstrap Core JavaScript -->
+            <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+
             <!-- Bootstrap Core CSS -->
-            {#<link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">#}
+            <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
+
+            <!-- Theme CSS -->
+            <link href="{{ asset('css/sb-admin.css') }}" rel="stylesheet">
 
             <!-- Custom CSS -->
-            <link href="{{ asset('css/sb-admin.css') }}" rel="stylesheet">
+            <link href="{{ asset('css/intranet.css') }}" rel="stylesheet">
+
 
             <!-- Morris Charts CSS -->
             <link href="{{ asset('css/plugins/morris.css') }}" rel="stylesheet">
 
+            <link rel="stylesheet" href="{{ asset('css/utils.css') }}">
+
+
             <!-- Custom Fonts -->
-            {#<link href="{{ asset('font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">#}
+            <link href="{{ asset('font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
+
+            <link rel="stylesheet" href="{{ asset('css/fileinput.min.css') }}">
+            <script src="{{ asset('js/fileinput.min.js') }}"></script>
+            <script src="{{ asset('js/fileinput-theme.js') }}"></script>
+
+
+            <!-- Jquery UI -->
+            <link rel="stylesheet" href="{{ asset('css/plugins/jui/jquery-ui.min.css') }}">
+            <script src="{{ asset('js/plugins/jui/jquery-ui.min.js') }}"></script>
+
+
+            <!-- Jquery Tag It ! -->
+            <link rel="stylesheet" href="{{ asset('css/plugins/tagit/jquery.tagit.css') }}">
+            <script src="{{ asset('js/plugins/tagit/jquery.tagit.min.js') }}"></script>
 
 
 
@@ -120,6 +148,12 @@
         </div>
 
         {% block javascripts %}
+
+
+            <!-- Morris Charts JavaScript -->
+            <script src="{{ asset('js/plugins/morris/raphael.min.js') }}"></script>
+            {#<script src="{{ asset('js/plugins/morris/morris.min.js') }}"></script>#}
+            {#<script src="{{ asset('js/plugins/morris/morris-data.js') }}"></script>#}
 
         {% endblock %}
 

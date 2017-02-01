@@ -41,8 +41,6 @@ class NewsController extends Controller {
     public function createAction(Request $request) {
         $news = new News;
 
-        //$this->denyAccessUnlessGranted('create', $news);
-
         $form = $this->createForm(NewsType::class, $news);
         $form->add('save', SubmitType::class, [
             'label' => 'Créer',

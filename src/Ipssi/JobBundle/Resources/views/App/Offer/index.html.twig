@@ -1,0 +1,51 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}
+    IPSSI - Offres
+{% endblock %}
+
+{% block headerContainer %}
+
+    <h2>Offres d'IPSSI</h2>
+
+
+{% endblock %}
+
+
+{% block body %}
+
+
+    <div class="container">
+        <hr>
+
+        <div class="row">
+            {% for offer in offers %}
+            <div class="col-md-4">
+                <div class="card">
+
+                    {% if offer.society.logo is not null %}
+
+                        <div class="card-image">
+                            <img  src="{{ asset(offer.society.logo.webPath) }}" height="200" style="margin:auto;">
+                        </div>
+
+                        <hr>
+
+                    {% endif %}
+
+                    <span class="card-title">{{ offer.name }}</span>
+
+                    <div class="card-content">
+                        <p>{{ offer.description|slice(1,200) }}</p>
+                    </div>
+
+                    <div class="card-action">
+                        <a href="{{ path('offer_show', {'slug': offer.slug}) }}">Lire</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+{% endblock %}
