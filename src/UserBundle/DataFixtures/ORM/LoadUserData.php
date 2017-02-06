@@ -25,7 +25,6 @@ class LoadUserData extends AbstractFixture implements ContainerAwareInterface, O
     {
         $encoder = $this->container->get('security.password_encoder');
 
-
         $user = new User();
         $user->setUsername('admin');
         $user->setUsernameCanonical('admin');

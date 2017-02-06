@@ -39,11 +39,11 @@
                             <li><a href="{{ path('fos_user_security_logout') }}">Déconnexion</a></li>
                             </ul>
                             {% else %}
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Mon IPSSI &nbsp;<span class="caret"></span></a>
-                            <ul class="dropdown-menu" role="menu">
-                                <li><a href="{{ path('fos_user_registration_register') }}">Inscription</a></li>
-                                <li><a href="{{ path('fos_user_security_login') }}">Connexion</a></li>
-                            </ul>
+                            <a href="{{ path('fos_user_security_login') }}" role="button" >Mon IPSSI &nbsp</a>
+                            {#<ul class="dropdown-menu" role="menu">#}
+                                {#<li><a href="{{ path('fos_user_registration_register') }}">Inscription</a></li>#}
+                                {#<li><a href="{{ path('fos_user_security_login') }}">Connexion</a></li>#}
+                            {#</ul>#}
 
 
                         {% endif %}

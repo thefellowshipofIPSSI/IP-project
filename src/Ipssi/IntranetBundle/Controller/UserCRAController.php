@@ -28,21 +28,6 @@ class UserCRAController extends Controller {
      */
     public function indexAction() {
 
-//        $allUserCRAs = $this->get('intranet.repository.cra')->findAll();
-//
-//        //Display only user's cra if ROLE_CREATE_CRA
-//        if ($this->get('security.authorization_checker')->isGranted('ROLE_CREATE_CRA')) {
-//            foreach ($allUserCRAs as $key => $userCRA) {
-//                if ($userCRA->isCreator($this->getUser()) == false) {
-//                    unset($allUserCRAs[$key]);
-//                }
-//            }
-//        }
-//
-//        return $this->render('IntranetBundle:UserCRA:index.html.twig', [
-//            'allUserCRAs' => $allUserCRAs
-//        ]);
-
         $datatable = $this->get('app.datatable.usercra');
         $datatable->buildDatatable();
 
@@ -51,29 +36,27 @@ class UserCRAController extends Controller {
         ));
     }
 
-
     /**
-     * @Route("/cra/results", name="intranet_cra_results")
+     * @Route("/cra/results", name="intranet_cra_results", options={"expose"=true})
      */
     public function indexResultsAction()
     {
         $datatable = $this->get('app.datatable.usercra');
         $datatable->buildDatatable();
 
-
         $query = $this->get('sg_datatables.query')->getQueryFrom($datatable);
 
         //Display only user's cra if ROLE_CREATE_CRA
-//        if ($this->get('security.authorization_checker')->isGranted('ROLE_CREATE_CRA')) {
-//            $query->buildQuery();
-//            $qb = $query->getQuery();
-//
-//            $qb->andWhere("userCRA. = 11");
-//        }
-//
+        if ($this->get('security.authorization_checker')->isGranted('ROLE_CREATE_CRA')) {
+            $query->buildQuery();
+            $qb = $query->getQuery();
+            $user = $this->getUser()->getId();
+            $qb->andWhere("user_cra.user = " . $user);
 
-
-        return $query->getResponse();
+            return $query->getResponse(false);
+        } else {
+            return $query->getResponse();
+        }
     }
 
     /**
@@ -123,8 +106,7 @@ class UserCRAController extends Controller {
      * @Route("/cra/{id}/update", name="intranet_cra_update", options={"expose"=true})
      * @Security("is_granted('edit', userCRA)")
      */
-    public function updateAction(UserCRA $userCRA, Request $request)
-    {
+    public function updateAction(UserCRA $userCRA, Request $request) {
         $form = $this->createForm(UserCRAType::class, $userCRA);
         $form->add('save', SubmitType::class, [
             'label' => 'Modifier',
@@ -162,8 +144,7 @@ class UserCRAController extends Controller {
      * @Route("/cra/{id}/delete", name="intranet_cra_delete", options={"expose"=true})
      * @Security("is_granted('edit', userCRA)")
      */
-    public function deleteAction(UserCRA $userCRA)
-    {
+    public function deleteAction(UserCRA $userCRA) {
         $em = $this->getDoctrine()->getEntityManager();
         $em->remove($userCRA);
         $em->flush();
@@ -197,8 +178,7 @@ class UserCRAController extends Controller {
      * @Route("/cra/{id}/viewpdf", name="intranet_cra_view_pdf", options={"expose"=true})
      * @Security("is_granted('edit', userCRA)")
      */
-    public function viewpdfAction(UserCRA $userCRA)
-    {
+    public function viewpdfAction(UserCRA $userCRA) {
         $html = $this->renderView('IntranetBundle:UserCRA:viewPdf.html.twig', [
             'userCRA'  => $userCRA
         ]);
@@ -222,8 +202,7 @@ class UserCRAController extends Controller {
      * @Route("/cra/{id}/online", name="intranet_cra_online", options={"expose"=true})
      * @Security("is_granted('edit', userCRA)")
      */
-    public function onlineAction(UserCRA $userCRA)
-    {
+    public function onlineAction(UserCRA $userCRA) {
         $userCRA->setStatus(1);
 
         $em = $this->getDoctrine()->getEntityManager();

@@ -1,16 +1,16 @@
 <?php
 
-namespace Ipssi\IntranetBundle\Datatables;
+namespace UserBundle\Datatables;
 
 use Sg\DatatablesBundle\Datatable\View\AbstractDatatableView;
 use Sg\DatatablesBundle\Datatable\View\Style;
 
 /**
- * Class UserCRADatatable
+ * Class UserDatatable
  *
- * @package Ipssi\IntranetBundle\Datatables
+ * @package UserBundle\Datatables
  */
-class UserCRADatatable extends AbstractDatatableView
+class UserDatatable extends AbstractDatatableView
 {
     /**
      * {@inheritdoc}
@@ -22,7 +22,7 @@ class UserCRADatatable extends AbstractDatatableView
             'end_html' => '<hr></div></div>',
             'actions' => array(
                 array(
-                    'route' => $this->router->generate('intranet_cra_create'),
+                    'route' => $this->router->generate('intranet_user_create'),
                     'label' => $this->translator->trans('datatables.actions.new'),
                     'icon' => 'glyphicon glyphicon-plus',
                     'attributes' => array(
@@ -79,7 +79,7 @@ class UserCRADatatable extends AbstractDatatableView
         ));
 
         $this->ajax->set(array(
-            'url' => $this->router->generate('intranet_cra_results'),
+            'url' => $this->router->generate('intranet_user_results'),
             'type' => 'POST',
             'pipeline' => 0
         ));
@@ -109,94 +109,112 @@ class UserCRADatatable extends AbstractDatatableView
 
         $this->columnBuilder
             ->add('id', 'column', array(
-                'title' => 'Ref',
+                'title' => 'Id',
             ))
-            ->add('creationDate', 'datetime', array(
-                'title' => 'Création',
+            ->add('email', 'column', array(
+                'title' => 'Email',
             ))
-//            ->add('modificationDate', 'datetime', array(
-//                'title' => 'ModificationDate',
+//            ->add('google_id', 'column', array(
+//                'title' => 'Google_id',
 //            ))
-            ->add('projectName', 'column', array(
-                'title' => 'Projet',
+//            ->add('google_access_token', 'column', array(
+//                'title' => 'Google_access_token',
+//            ))
+//            ->add('profile.id', 'column', array(
+//                'title' => 'Profile Id',
+//            ))
+            ->add('profile.pseudo', 'column', array(
+                'title' => 'Pseudo',
             ))
-            ->add('client', 'column', array(
-                'title' => 'Client',
+//            ->add('profile.gravatar', 'column', array(
+//                'title' => 'Profile Gravatar',
+//            ))
+            ->add('profile.firstname', 'column', array(
+                'title' => 'Prénom',
             ))
-//            ->add('activityReport', 'column', array(
-//                'title' => 'ActivityReport',
-//            ))
-            ->add('beginDate', 'datetime', array(
-                'title' => 'Début',
+            ->add('profile.lastname', 'column', array(
+                'title' => 'Nom',
             ))
-            ->add('endDate', 'datetime', array(
-                'title' => 'Fin',
-            ))
-            ->add('status', 'column', array(
-                'title' => 'Statut',
-            ))
-//            ->add('nbLostTimeAccident', 'column', array(
-//                'title' => 'NbLostTimeAccident',
+//            ->add('groups.name', 'column', array(
+//                'title' => 'Groupe',
 //            ))
-//            ->add('nbNoneLostTimeAccident', 'column', array(
-//                'title' => 'NbNoneLostTimeAccident',
+//            ->add('profile.phone', 'column', array(
+//                'title' => 'Profile Phone',
 //            ))
-//            ->add('nbTravelAccident', 'column', array(
-//                'title' => 'NbTravelAccident',
+//            ->add('profile.address', 'column', array(
+//                'title' => 'Profile Address',
 //            ))
-//            ->add('nbSickDay', 'column', array(
-//                'title' => 'NbSickDay',
+//            ->add('profile.zipcode', 'column', array(
+//                'title' => 'Profile Zipcode',
 //            ))
-//            ->add('nbVacancyDay', 'column', array(
-//                'title' => 'NbVacancyDay',
+//            ->add('profile.city', 'column', array(
+//                'title' => 'Profile City',
 //            ))
-//            ->add('clientSatisfaction', 'column', array(
-//                'title' => 'ClientSatisfaction',
+//            ->add('profile.country', 'column', array(
+//                'title' => 'Profile Country',
 //            ))
-//            ->add('consultantSatisfaction', 'column', array(
-//                'title' => 'ConsultantSatisfaction',
+//            ->add('profile.birthDate', 'column', array(
+//                'title' => 'Profile BirthDate',
 //            ))
-//            ->add('ameliorationPoint', 'column', array(
-//                'title' => 'AmeliorationPoint',
+//            ->add('profile.other', 'column', array(
+//                'title' => 'Profile Other',
 //            ))
-//            ->add('leftActivity', 'column', array(
-//                'title' => 'LeftActivity',
+//            ->add('newsletter.id', 'column', array(
+//                'title' => 'Newsletter Id',
 //            ))
-//            ->add('comments', 'column', array(
-//                'title' => 'Comments',
+//            ->add('newsletter.email', 'column', array(
+//                'title' => 'Newsletter Email',
 //            ))
-//            ->add('client_validation', 'column', array(
-//                'title' => 'Client_validation',
+//            ->add('newsletter.enabled', 'column', array(
+//                'title' => 'Newsletter Enabled',
 //            ))
-//            ->add('client_validation_date', 'datetime', array(
-//                'title' => 'Client_validation_date',
+//            ->add('newsletter.createdAt', 'column', array(
+//                'title' => 'Newsletter CreatedAt',
 //            ))
-            ->add('user.username', 'column', array(
-                'title' => 'Utilisateur',
-                'add_if' => function() {
-                    return $this->authorizationChecker->isGranted('ROLE_ADMIN');
-                },
-            ))
-//            ->add('user.google_id', 'column', array(
-//                'title' => 'User Google_id',
+//            ->add('newsletter.updatedAt', 'column', array(
+//                'title' => 'Newsletter UpdatedAt',
 //            ))
-//            ->add('user.google_access_token', 'column', array(
-//                'title' => 'User Google_access_token',
+//            ->add('society.id', 'column', array(
+//                'title' => 'Society Id',
 //            ))
-//            ->add('user_validation.id', 'column', array(
-//                'title' => 'User_validation Id',
+//            ->add('society.name', 'column', array(
+//                'title' => 'Society Name',
 //            ))
-//            ->add('user_validation.google_id', 'column', array(
-//                'title' => 'User_validation Google_id',
+//            ->add('society.address', 'column', array(
+//                'title' => 'Society Address',
 //            ))
-//            ->add('user_validation.google_access_token', 'column', array(
-//                'title' => 'User_validation Google_access_token',
+//            ->add('society.zipcode', 'column', array(
+//                'title' => 'Society Zipcode',
+//            ))
+//            ->add('society.city', 'column', array(
+//                'title' => 'Society City',
+//            ))
+//            ->add('society.email', 'column', array(
+//                'title' => 'Society Email',
+//            ))
+//            ->add('society.primaryPhone', 'column', array(
+//                'title' => 'Society PrimaryPhone',
+//            ))
+//            ->add('society.secondaryPhone', 'column', array(
+//                'title' => 'Society SecondaryPhone',
+//            ))
+//            ->add('society.country', 'column', array(
+//                'title' => 'Society Country',
+//            ))
+//            ->add('society.presentation', 'column', array(
+//                'title' => 'Society Presentation',
+//            ))
+//            ->add('society.createdAt', 'column', array(
+//                'title' => 'Society CreatedAt',
+//            ))
+//            ->add('society.updatedAt', 'column', array(
+//                'title' => 'Society UpdatedAt',
 //            ))
             ->add(null, 'action', array(
                 'title' => $this->translator->trans('datatables.actions.title'),
                 'actions' => array(
                     array(
-                        'route' => 'intranet_cra_view',
+                        'route' => 'intranet_user_view',
                         'route_parameters' => array(
                             'id' => 'id'
                         ),
@@ -210,7 +228,7 @@ class UserCRADatatable extends AbstractDatatableView
                         ),
                     ),
                     array(
-                        'route' => 'intranet_cra_update',
+                        'route' => 'intranet_user_update',
                         'route_parameters' => array(
                             'id' => 'id'
                         ),
@@ -224,7 +242,7 @@ class UserCRADatatable extends AbstractDatatableView
                         ),
                     ),
                     array(
-                        'route' => 'intranet_cra_delete',
+                        'route' => 'intranet_user_delete',
                         'route_parameters' => array(
                             'id' => 'id'
                         ),
@@ -247,7 +265,7 @@ class UserCRADatatable extends AbstractDatatableView
      */
     public function getEntity()
     {
-        return 'Ipssi\IntranetBundle\Entity\UserCRA';
+        return 'UserBundle\Entity\User';
     }
 
     /**
@@ -255,6 +273,6 @@ class UserCRADatatable extends AbstractDatatableView
      */
     public function getName()
     {
-        return 'usercra_datatable';
+        return 'user_datatable';
     }
 }

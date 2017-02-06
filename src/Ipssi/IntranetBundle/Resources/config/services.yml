@@ -109,32 +109,32 @@ services:
 #               - { name: security.voter }
 
     intranet.job_offer_voter:
-            class:      Ipssi\IntranetBundle\Security\JobOfferVoter
-            arguments: ['@security.access.decision_manager']
-            public:     false
-            tags:
-               - { name: security.voter }
+        class:      Ipssi\IntranetBundle\Security\JobOfferVoter
+        arguments: ['@security.access.decision_manager']
+        public:     false
+        tags:
+           - { name: security.voter }
 
     intranet.job_voter:
-            class:      Ipssi\IntranetBundle\Security\JobVoter
-            arguments: ['@security.access.decision_manager']
-            public:     false
-            tags:
-               - { name: security.voter }
+        class:      Ipssi\IntranetBundle\Security\JobVoter
+        arguments: ['@security.access.decision_manager']
+        public:     false
+        tags:
+           - { name: security.voter }
 
     intranet.skill_voter:
-            class:      Ipssi\IntranetBundle\Security\SkillVoter
-            arguments: ['@security.access.decision_manager']
-            public:     false
-            tags:
-               - { name: security.voter }
+        class:      Ipssi\IntranetBundle\Security\SkillVoter
+        arguments: ['@security.access.decision_manager']
+        public:     false
+        tags:
+           - { name: security.voter }
 
     intranet.society_voter:
-                class:      Ipssi\IntranetBundle\Security\SocietyVoter
-                arguments: ['@security.access.decision_manager']
-                public:     false
-                tags:
-                   - { name: security.voter }
+        class:      Ipssi\IntranetBundle\Security\SocietyVoter
+        arguments: ['@security.access.decision_manager']
+        public:     false
+        tags:
+           - { name: security.voter }
 
 #    intranet.user_cv_voter:
 #                class:      Ipssi\IntranetBundle\Security\UserCVVoter
@@ -144,20 +144,36 @@ services:
 #                   - { name: security.voter }
 
     intranet.user_expense_voter:
-                class:      Ipssi\IntranetBundle\Security\UserExpenseVoter
-                arguments: ['@security.access.decision_manager']
-                public:     false
-                tags:
-                   - { name: security.voter }
+        class:      Ipssi\IntranetBundle\Security\UserExpenseVoter
+        arguments: ['@security.access.decision_manager']
+        public:     false
+        tags:
+           - { name: security.voter }
 
     intranet.user_vacation_voter:
-                class:      Ipssi\IntranetBundle\Security\UserVacationVoter
-                arguments: ['@security.access.decision_manager']
-                public:     false
-                tags:
-                   - { name: security.voter }
+        class:      Ipssi\IntranetBundle\Security\UserVacationVoter
+        arguments: ['@security.access.decision_manager']
+        public:     false
+        tags:
+           - { name: security.voter }
 
     #-----------------------DATATABLES---------------------------------------------
     app.datatable.usercra:
-                class: Ipssi\IntranetBundle\Datatables\UserCRADatatable
-                parent: sg_datatables.datatable.abstract
+        class: Ipssi\IntranetBundle\Datatables\UserCRADatatable
+        parent: sg_datatables.datatable.abstract
+
+    app.datatable.news:
+        class: Ipssi\IntranetBundle\Datatables\NewsDatatable
+        parent: sg_datatables.datatable.abstract
+
+    app.datatable.page:
+        class: Ipssi\IntranetBundle\Datatables\PageDatatable
+        parent: sg_datatables.datatable.abstract
+
+    app.datatable.userexpense:
+        class: Ipssi\IntranetBundle\Datatables\UserExpenseDatatable
+        parent: sg_datatables.datatable.abstract
+
+    app.datatable.uservacation:
+        class: Ipssi\IntranetBundle\Datatables\UserVacationDatatable
+        parent: sg_datatables.datatable.abstract

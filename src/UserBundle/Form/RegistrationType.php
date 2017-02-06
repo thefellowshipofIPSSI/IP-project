@@ -24,7 +24,7 @@ class RegistrationType extends AbstractType
             ->add('username', null, array('label' => 'form.username', 'translation_domain' => 'FOSUserBundle'))
             ->add('plainPassword', RepeatedType::class, array(
                 'type' => PasswordType::class,
-                'invalid_message' => 'Tu as dû te tromper dans la réécriture ;)',
+                'invalid_message' => 'Erreur dans la réécriture ;)',
                 'options' => array('attr' => array('class' => 'password-field form-group form-control')),
                 'first_options'  => array('label' => 'Mot de passe'),
                 'second_options' => array('label' => 'Confirmation'),

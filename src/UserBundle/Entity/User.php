@@ -42,24 +42,20 @@ class User extends BaseUser {
      */
     protected $groups;
 
-
     /**
      * @ORM\OneToOne(targetEntity="UserBundle\Entity\Profile", mappedBy="user", cascade="persist")
      */
     private $profile;
-
 
     /**
      * @ORM\OneToOne(targetEntity="UserBundle\Entity\Newsletter", mappedBy="user")
      */
     private $newsletter;
 
-
     /**
      * @ORM\OneToMany(targetEntity="Ipssi\IntranetBundle\Entity\Page", mappedBy="user")
      */
     private $pages;
-
 
     /**
      * @ORM\OneToMany(targetEntity="Ipssi\IntranetBundle\Entity\News", mappedBy="user")
@@ -67,13 +63,11 @@ class User extends BaseUser {
      */
     private $news;
 
-
     /**
      * @ORM\ManyToOne(targetEntity="Ipssi\JobBundle\Entity\Society", inversedBy="members")
      * @@ORMJoinColumn(name="society_id", referencedColumnName="id", nullable=true)
      */
     private $society;
-
 
     /**
      * User skills
@@ -91,7 +85,6 @@ class User extends BaseUser {
      * @ORM\OneToMany(targetEntity="Ipssi\JobBundle\Entity\CV", mappedBy="user")
      */
     private $cv;
-
 
 
     /*****  A revoir ****/
@@ -119,8 +112,6 @@ class User extends BaseUser {
      * @ORM\JoinColumn(nullable=true)
      */
     private $user_validation_cra;
-
-
 
     /**
      * @ORM\OneToMany(targetEntity="Ipssi\IntranetBundle\Entity\UserVacation", mappedBy="user")
@@ -151,6 +142,7 @@ class User extends BaseUser {
         $this->user_validation_cv = new ArrayCollection();
         $this->user_vacation = new ArrayCollection();
         $this->user_validation_vacation = new ArrayCollection();
+        $this->groups = new ArrayCollection();
     }
 
 

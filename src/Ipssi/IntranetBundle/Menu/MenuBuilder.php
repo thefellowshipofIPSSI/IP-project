@@ -73,59 +73,59 @@ class MenuBuilder
         }
 
         if ($authorizationChecker->isGranted('ROLE_CREATE_CRA')
-            or $authorizationChecker->isGranted('ROLE_EDIT_CRA')
-            or $authorizationChecker->isGranted('ROLE_CREATE_VACATION')
-            or $authorizationChecker->isGranted('ROLE_EDIT_VACATION')
-            or $authorizationChecker->isGranted('ROLE_CREATE_EXPENSE')
-            or $authorizationChecker->isGranted('ROLE_EDIT_CV')
-            or $authorizationChecker->isGranted('ROLE_VIEW_JOBOFFER')
-            or $authorizationChecker->isGranted('ROLE_EDIT_CANDIDACY')
-            or $authorizationChecker->isGranted('ROLE_VIEW_USER')
-            or $authorizationChecker->isGranted('ROLE_RH')) {
+            || $authorizationChecker->isGranted('ROLE_EDIT_CRA')
+            || $authorizationChecker->isGranted('ROLE_CREATE_VACATION')
+            || $authorizationChecker->isGranted('ROLE_EDIT_VACATION')
+            || $authorizationChecker->isGranted('ROLE_CREATE_EXPENSE')
+            || $authorizationChecker->isGranted('ROLE_EDIT_CV')
+            || $authorizationChecker->isGranted('ROLE_VIEW_JOBOFFER')
+            || $authorizationChecker->isGranted('ROLE_EDIT_CANDIDACY')
+            || $authorizationChecker->isGranted('ROLE_VIEW_USER')
+            || $authorizationChecker->isGranted('ROLE_RH')) {
             $menu->addChild('RH', array('label' => 'Ressources Humaines '))
                 ->setAttribute('icon', 'group')
                 ->setAttribute('icon2', 'caret-down')
                 ->setAttribute('target', 'rh');
             if ($authorizationChecker->isGranted('ROLE_CREATE_CRA')
-                or $authorizationChecker->isGranted('ROLE_EDIT_CRA')
-                or $authorizationChecker->isGranted('ROLE_RH')
+                || $authorizationChecker->isGranted('ROLE_EDIT_CRA')
+                || $authorizationChecker->isGranted('ROLE_RH')
             ) {
                 $menu['RH']->addChild('Compte rendu d\'activité', array('route' => 'intranet_cra_homepage'));
             }
             if ($authorizationChecker->isGranted('ROLE_CREATE_EXPENSE')
-                or $authorizationChecker->isGranted('ROLE_RH')
+                || $authorizationChecker->isGranted('ROLE_RH')
             ) {
                 $menu['RH']->addChild('Note de frais', array('route' => 'intranet_expense_homepage'));
             }
 
             if ($authorizationChecker->isGranted('ROLE_CREATE_VACATION')
-                or $authorizationChecker->isGranted('ROLE_EDIT_VACATION')
-                or $authorizationChecker->isGranted('ROLE_RH')
+                || $authorizationChecker->isGranted('ROLE_EDIT_VACATION')
+                || $authorizationChecker->isGranted('ROLE_RH')
             ) {
                 $menu['RH']->addChild('Demande de congés', array('route' => 'intranet_vacation_homepage'));
             }
 
             if ($authorizationChecker->isGranted('ROLE_EDIT_CV')
-                or $authorizationChecker->isGranted('ROLE_RH')
+                || $authorizationChecker->isGranted('ROLE_RH')
             ) {
                 $menu['RH']->addChild('CVthèque', array('route' => 'intranet_homepage'));
             }
 
             if ($authorizationChecker->isGranted('ROLE_VIEW_JOBOFFER')
-                or $authorizationChecker->isGranted('ROLE_RH')
+                || $authorizationChecker->isGranted('ROLE_RH')
             ) {
                 $menu['RH']->addChild('Offres de poste', array('route' => 'intranet_offers'));
             }
 
             if ($authorizationChecker->isGranted('ROLE_EDIT_CANDIDACY')
-                or $authorizationChecker->isGranted('ROLE_RH')
+                || $authorizationChecker->isGranted('ROLE_RH')
             ) {
                 $menu['RH']->addChild('Entreprises partenaires', array('route' => 'intranet_societies'));
                 $menu['RH']->addChild('Candidatures', array('route' => 'intranet_candidacies'));
             }
 
             if ($authorizationChecker->isGranted('ROLE_RH')
-                or $authorizationChecker->isGranted('ROLE_VIEW_USER')
+                || $authorizationChecker->isGranted('ROLE_VIEW_USER')
             ) {
                 $menu['RH']->addChild('Collaborateurs', array('route' => 'intranet_user_homepage'));
             }

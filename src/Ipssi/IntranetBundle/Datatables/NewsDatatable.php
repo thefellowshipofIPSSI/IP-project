@@ -6,11 +6,11 @@ use Sg\DatatablesBundle\Datatable\View\AbstractDatatableView;
 use Sg\DatatablesBundle\Datatable\View\Style;
 
 /**
- * Class UserCRADatatable
+ * Class NewsDatatable
  *
  * @package Ipssi\IntranetBundle\Datatables
  */
-class UserCRADatatable extends AbstractDatatableView
+class NewsDatatable extends AbstractDatatableView
 {
     /**
      * {@inheritdoc}
@@ -22,7 +22,7 @@ class UserCRADatatable extends AbstractDatatableView
             'end_html' => '<hr></div></div>',
             'actions' => array(
                 array(
-                    'route' => $this->router->generate('intranet_cra_create'),
+                    'route' => $this->router->generate('intranet_news_create'),
                     'label' => $this->translator->trans('datatables.actions.new'),
                     'icon' => 'glyphicon glyphicon-plus',
                     'attributes' => array(
@@ -50,27 +50,27 @@ class UserCRADatatable extends AbstractDatatableView
             'scroll_y' => '',
             'scroll_x' => false,
             'extensions' => array(
-                'buttons' =>
-                    array(
-                        'colvis',
-                        'excel',
-                        'pdf' => array(
-                            'extend' => 'pdf',
-                            'exportOptions' => array(
-                                // show only the following columns:
-                                'columns' => array(
-                                    '0', // title column
-                                    '1', // title column
-                                    '2', // title column
-                                    '3', // visible column
-                                    '4', // visible column
-                                    '5', // publishedAt column
-                                    '6', // updatedAt column
-                                    '7', // createdBy column
-                                )
-                            )
-                        ),
-                    ),
+//                'buttons' =>
+//                    array(
+//                        'colvis',
+//                        'excel',
+//                        'pdf' => array(
+//                            'extend' => 'pdf',
+//                            'exportOptions' => array(
+//                                // show only the following columns:
+//                                'columns' => array(
+//                                    '0', // title column
+//                                    '1', // title column
+//                                    '2', // title column
+//                                    '3', // visible column
+//                                    '4', // visible column
+//                                    '5', // publishedAt column
+//                                    '6', // updatedAt column
+//                                    '7', // createdBy column
+//                                )
+//                            )
+//                        ),
+//                    ),
                 'responsive' => true,
                 'fixedHeader' => true,
             ),
@@ -79,7 +79,7 @@ class UserCRADatatable extends AbstractDatatableView
         ));
 
         $this->ajax->set(array(
-            'url' => $this->router->generate('intranet_cra_results'),
+            'url' => $this->router->generate('intranet_news_results'),
             'type' => 'POST',
             'pipeline' => 0
         ));
@@ -109,73 +109,40 @@ class UserCRADatatable extends AbstractDatatableView
 
         $this->columnBuilder
             ->add('id', 'column', array(
-                'title' => 'Ref',
+                'title' => 'Id',
+            ))
+            ->add('name', 'column', array(
+                'title' => 'Name',
             ))
             ->add('creationDate', 'datetime', array(
-                'title' => 'Création',
+                'title' => 'CreationDate',
             ))
 //            ->add('modificationDate', 'datetime', array(
 //                'title' => 'ModificationDate',
 //            ))
-            ->add('projectName', 'column', array(
-                'title' => 'Projet',
+            ->add('title', 'column', array(
+                'title' => 'Title',
             ))
-            ->add('client', 'column', array(
-                'title' => 'Client',
-            ))
-//            ->add('activityReport', 'column', array(
-//                'title' => 'ActivityReport',
+//            ->add('resume', 'column', array(
+//                'title' => 'Resume',
 //            ))
-            ->add('beginDate', 'datetime', array(
-                'title' => 'Début',
-            ))
-            ->add('endDate', 'datetime', array(
-                'title' => 'Fin',
+//            ->add('content', 'column', array(
+//                'title' => 'Content',
+//            ))
+            ->add('slug', 'column', array(
+                'title' => 'Slug',
             ))
             ->add('status', 'column', array(
-                'title' => 'Statut',
+                'title' => 'Status',
             ))
-//            ->add('nbLostTimeAccident', 'column', array(
-//                'title' => 'NbLostTimeAccident',
+//            ->add('metaDescription', 'column', array(
+//                'title' => 'MetaDescription',
 //            ))
-//            ->add('nbNoneLostTimeAccident', 'column', array(
-//                'title' => 'NbNoneLostTimeAccident',
-//            ))
-//            ->add('nbTravelAccident', 'column', array(
-//                'title' => 'NbTravelAccident',
-//            ))
-//            ->add('nbSickDay', 'column', array(
-//                'title' => 'NbSickDay',
-//            ))
-//            ->add('nbVacancyDay', 'column', array(
-//                'title' => 'NbVacancyDay',
-//            ))
-//            ->add('clientSatisfaction', 'column', array(
-//                'title' => 'ClientSatisfaction',
-//            ))
-//            ->add('consultantSatisfaction', 'column', array(
-//                'title' => 'ConsultantSatisfaction',
-//            ))
-//            ->add('ameliorationPoint', 'column', array(
-//                'title' => 'AmeliorationPoint',
-//            ))
-//            ->add('leftActivity', 'column', array(
-//                'title' => 'LeftActivity',
-//            ))
-//            ->add('comments', 'column', array(
-//                'title' => 'Comments',
-//            ))
-//            ->add('client_validation', 'column', array(
-//                'title' => 'Client_validation',
-//            ))
-//            ->add('client_validation_date', 'datetime', array(
-//                'title' => 'Client_validation_date',
+//            ->add('metaTitle', 'column', array(
+//                'title' => 'MetaTitle',
 //            ))
             ->add('user.username', 'column', array(
                 'title' => 'Utilisateur',
-                'add_if' => function() {
-                    return $this->authorizationChecker->isGranted('ROLE_ADMIN');
-                },
             ))
 //            ->add('user.google_id', 'column', array(
 //                'title' => 'User Google_id',
@@ -183,20 +150,11 @@ class UserCRADatatable extends AbstractDatatableView
 //            ->add('user.google_access_token', 'column', array(
 //                'title' => 'User Google_access_token',
 //            ))
-//            ->add('user_validation.id', 'column', array(
-//                'title' => 'User_validation Id',
-//            ))
-//            ->add('user_validation.google_id', 'column', array(
-//                'title' => 'User_validation Google_id',
-//            ))
-//            ->add('user_validation.google_access_token', 'column', array(
-//                'title' => 'User_validation Google_access_token',
-//            ))
             ->add(null, 'action', array(
                 'title' => $this->translator->trans('datatables.actions.title'),
                 'actions' => array(
                     array(
-                        'route' => 'intranet_cra_view',
+                        'route' => 'intranet_news_view',
                         'route_parameters' => array(
                             'id' => 'id'
                         ),
@@ -210,7 +168,7 @@ class UserCRADatatable extends AbstractDatatableView
                         ),
                     ),
                     array(
-                        'route' => 'intranet_cra_update',
+                        'route' => 'intranet_news_update',
                         'route_parameters' => array(
                             'id' => 'id'
                         ),
@@ -224,7 +182,7 @@ class UserCRADatatable extends AbstractDatatableView
                         ),
                     ),
                     array(
-                        'route' => 'intranet_cra_delete',
+                        'route' => 'intranet_news_delete',
                         'route_parameters' => array(
                             'id' => 'id'
                         ),
@@ -247,7 +205,7 @@ class UserCRADatatable extends AbstractDatatableView
      */
     public function getEntity()
     {
-        return 'Ipssi\IntranetBundle\Entity\UserCRA';
+        return 'Ipssi\IntranetBundle\Entity\News';
     }
 
     /**
@@ -255,6 +213,6 @@ class UserCRADatatable extends AbstractDatatableView
      */
     public function getName()
     {
-        return 'usercra_datatable';
+        return 'news_datatable';
     }
 }

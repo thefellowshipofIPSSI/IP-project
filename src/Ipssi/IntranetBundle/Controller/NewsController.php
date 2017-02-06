@@ -24,18 +24,31 @@ class NewsController extends Controller {
      */
     public function indexAction() {
 
-        $allNews = $this->get('intranet.repository.news')->findAll();
+        $datatable = $this->get('app.datatable.news');
+        $datatable->buildDatatable();
 
-        return $this->render('IntranetBundle:News:index.html.twig', [
-            'allNews' => $allNews
-        ]);
+        return $this->render('IntranetBundle:News:index.html.twig', array(
+            'datatable' => $datatable,
+        ));
+    }
+
+    /**
+     * @Route("/news/results", name="intranet_news_results")
+     */
+    public function indexResultsAction() {
+        $datatable = $this->get('app.datatable.news');
+        $datatable->buildDatatable();
+
+        $query = $this->get('sg_datatables.query')->getQueryFrom($datatable);
+
+        return $query->getResponse();
     }
 
 
     /**
      * Create a new News
      * @return \Symfony\Component\HttpFoundation\Response
-     * @Route("/news/create", name="intranet_news_create")
+     * @Route("/news/create", name="intranet_news_create", options={"expose"=true})
      * @Security("has_role('ROLE_REDACTEUR')")
      */
     public function createAction(Request $request) {
@@ -76,7 +89,7 @@ class NewsController extends Controller {
      * Update existing News
      * @param $news
      * @return \Symfony\Component\HttpFoundation\Response
-     * @Route("/news/{id}/update", name="intranet_news_update")
+     * @Route("/news/{id}/update", name="intranet_news_update", options={"expose"=true})
      * @Security("is_granted('edit', news) or has_role('ROLE_SUPER_ADMIN')")
      */
     public function updateAction(Request $request, News $news)
@@ -115,7 +128,7 @@ class NewsController extends Controller {
      * Delete a News
      * @param $news
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
-     * @Route("/news/{id}/delete", name="intranet_news_delete")
+     * @Route("/news/{id}/delete", name="intranet_news_delete", options={"expose"=true})
      * @Security("is_granted('edit', news) or has_role('ROLE_SUPER_ADMIN')")
      */
     public function deleteAction(News $news)
@@ -136,7 +149,7 @@ class NewsController extends Controller {
     /**
      * Display a News
      * @param $news
-     * @Route("/news/{id}/view", name="intranet_news_view")
+     * @Route("/news/{id}/view", name="intranet_news_view", options={"expose"=true})
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function viewAction(News $news)
@@ -150,7 +163,7 @@ class NewsController extends Controller {
     /**
      * Make a News online
      * @param $news
-     * @Route("/news/{id}/online", name="intranet_news_online")
+     * @Route("/news/{id}/online", name="intranet_news_online", options={"expose"=true})
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      * @Security("is_granted('edit', news) or has_role('ROLE_SUPER_ADMIN')")
      */
@@ -173,7 +186,7 @@ class NewsController extends Controller {
     /**
      * Make a News offline
      * @param $news
-     * @Route("/news/{id}/offline", name="intranet_news_offline")
+     * @Route("/news/{id}/offline", name="intranet_news_offline", options={"expose"=true})
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      * @Security("is_granted('edit', news) or has_role('ROLE_SUPER_ADMIN')")
      */

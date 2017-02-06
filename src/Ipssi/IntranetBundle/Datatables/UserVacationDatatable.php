@@ -6,11 +6,11 @@ use Sg\DatatablesBundle\Datatable\View\AbstractDatatableView;
 use Sg\DatatablesBundle\Datatable\View\Style;
 
 /**
- * Class UserCRADatatable
+ * Class UserVacationDatatable
  *
  * @package Ipssi\IntranetBundle\Datatables
  */
-class UserCRADatatable extends AbstractDatatableView
+class UserVacationDatatable extends AbstractDatatableView
 {
     /**
      * {@inheritdoc}
@@ -22,7 +22,7 @@ class UserCRADatatable extends AbstractDatatableView
             'end_html' => '<hr></div></div>',
             'actions' => array(
                 array(
-                    'route' => $this->router->generate('intranet_cra_create'),
+                    'route' => $this->router->generate('intranet_vacation_create'),
                     'label' => $this->translator->trans('datatables.actions.new'),
                     'icon' => 'glyphicon glyphicon-plus',
                     'attributes' => array(
@@ -79,7 +79,7 @@ class UserCRADatatable extends AbstractDatatableView
         ));
 
         $this->ajax->set(array(
-            'url' => $this->router->generate('intranet_cra_results'),
+            'url' => $this->router->generate('intranet_vacation_results'),
             'type' => 'POST',
             'pipeline' => 0
         ));
@@ -109,7 +109,7 @@ class UserCRADatatable extends AbstractDatatableView
 
         $this->columnBuilder
             ->add('id', 'column', array(
-                'title' => 'Ref',
+                'title' => 'Id',
             ))
             ->add('creationDate', 'datetime', array(
                 'title' => 'Création',
@@ -117,60 +117,21 @@ class UserCRADatatable extends AbstractDatatableView
 //            ->add('modificationDate', 'datetime', array(
 //                'title' => 'ModificationDate',
 //            ))
-            ->add('projectName', 'column', array(
-                'title' => 'Projet',
-            ))
-            ->add('client', 'column', array(
-                'title' => 'Client',
-            ))
-//            ->add('activityReport', 'column', array(
-//                'title' => 'ActivityReport',
-//            ))
             ->add('beginDate', 'datetime', array(
                 'title' => 'Début',
             ))
             ->add('endDate', 'datetime', array(
                 'title' => 'Fin',
             ))
-            ->add('status', 'column', array(
-                'title' => 'Statut',
+            ->add('nbDays', 'column', array(
+                'title' => 'Nombre de J',
             ))
-//            ->add('nbLostTimeAccident', 'column', array(
-//                'title' => 'NbLostTimeAccident',
+//            ->add('comment', 'column', array(
+//                'title' => 'Comment',
 //            ))
-//            ->add('nbNoneLostTimeAccident', 'column', array(
-//                'title' => 'NbNoneLostTimeAccident',
-//            ))
-//            ->add('nbTravelAccident', 'column', array(
-//                'title' => 'NbTravelAccident',
-//            ))
-//            ->add('nbSickDay', 'column', array(
-//                'title' => 'NbSickDay',
-//            ))
-//            ->add('nbVacancyDay', 'column', array(
-//                'title' => 'NbVacancyDay',
-//            ))
-//            ->add('clientSatisfaction', 'column', array(
-//                'title' => 'ClientSatisfaction',
-//            ))
-//            ->add('consultantSatisfaction', 'column', array(
-//                'title' => 'ConsultantSatisfaction',
-//            ))
-//            ->add('ameliorationPoint', 'column', array(
-//                'title' => 'AmeliorationPoint',
-//            ))
-//            ->add('leftActivity', 'column', array(
-//                'title' => 'LeftActivity',
-//            ))
-//            ->add('comments', 'column', array(
-//                'title' => 'Comments',
-//            ))
-//            ->add('client_validation', 'column', array(
-//                'title' => 'Client_validation',
-//            ))
-//            ->add('client_validation_date', 'datetime', array(
-//                'title' => 'Client_validation_date',
-//            ))
+            ->add('status', 'column', array(
+                'title' => 'StatuT',
+            ))
             ->add('user.username', 'column', array(
                 'title' => 'Utilisateur',
                 'add_if' => function() {
@@ -196,7 +157,7 @@ class UserCRADatatable extends AbstractDatatableView
                 'title' => $this->translator->trans('datatables.actions.title'),
                 'actions' => array(
                     array(
-                        'route' => 'intranet_cra_view',
+                        'route' => 'intranet_vacation_view',
                         'route_parameters' => array(
                             'id' => 'id'
                         ),
@@ -210,7 +171,7 @@ class UserCRADatatable extends AbstractDatatableView
                         ),
                     ),
                     array(
-                        'route' => 'intranet_cra_update',
+                        'route' => 'intranet_vacation_update',
                         'route_parameters' => array(
                             'id' => 'id'
                         ),
@@ -224,7 +185,7 @@ class UserCRADatatable extends AbstractDatatableView
                         ),
                     ),
                     array(
-                        'route' => 'intranet_cra_delete',
+                        'route' => 'intranet_vacation_delete',
                         'route_parameters' => array(
                             'id' => 'id'
                         ),
@@ -247,7 +208,7 @@ class UserCRADatatable extends AbstractDatatableView
      */
     public function getEntity()
     {
-        return 'Ipssi\IntranetBundle\Entity\UserCRA';
+        return 'Ipssi\IntranetBundle\Entity\UserVacation';
     }
 
     /**
@@ -255,6 +216,6 @@ class UserCRADatatable extends AbstractDatatableView
      */
     public function getName()
     {
-        return 'usercra_datatable';
+        return 'uservacation_datatable';
     }
 }

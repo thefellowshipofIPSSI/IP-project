@@ -60,16 +60,16 @@ class AppKernel extends Kernel
 
     public function getCacheDir()
     {
-        return dirname(__DIR__).'/var/cache/'.$this->getEnvironment();
+        //return dirname(__DIR__).'/var/cache/'.$this->getEnvironment();
         //Override the cache Directory to improve vagrant speed
-        //return dirname(__DIR__).'/../IP-project_var/var/cache/'.$this->getEnvironment();
+        return dirname(__DIR__).'/../IP-project_var/var/cache/'.$this->getEnvironment();
     }
 
     public function getLogDir()
     {
-        return dirname(__DIR__).'/var/logs';
+        //return dirname(__DIR__).'/var/logs';
         //Override the log Directory to improve vagrant speed
-        //return dirname(__DIR__).'/../IP-project_var/var/logs';
+        return dirname(__DIR__).'/../IP-project_var/var/logs';
     }
 
     public function registerContainerConfiguration(LoaderInterface $loader)

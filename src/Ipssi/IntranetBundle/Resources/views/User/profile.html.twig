@@ -26,7 +26,11 @@
 
     <div class="col-lg-12">
         <p>Username : {{ user.username }}</p>
-        <p>Prénom : {{ user.firstname }}</p>
-        <p>Nom : {{ user.lastname }}</p>
+        <p>Prénom : {{ user.profile.firstname }}</p>
+        <p>Nom : {{ user.profile.lastname }}</p>
+        <p>Groupe :
+            {% for group in user.groups %}
+                {{group.name}}
+            {% endfor %}</p>
     </div>
 {% endblock %}

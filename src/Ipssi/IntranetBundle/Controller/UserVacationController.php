@@ -25,26 +25,56 @@ class UserVacationController extends Controller {
      */
     public function indexAction() {
 
-        $allUserVacations = $this->get('intranet.repository.vacation')->findAll();
+//        $allUserVacations = $this->get('intranet.repository.vacation')->findAll();
+//
+//        //Display only user's cra if ROLE_CREATE_VACATION
+//        if ($this->get('security.authorization_checker')->isGranted('ROLE_CREATE_VACATION')) {
+//            foreach ($allUserVacations as $key => $userVacation) {
+//                if ($userVacation->isCreator($this->getUser()) == false) {
+//                    unset($allUserVacations[$key]);
+//                }
+//            }
+//        }
+//
+//        return $this->render('IntranetBundle:UserVacation:index.html.twig', [
+//            'allUserVacations' => $allUserVacations
+//        ]);
 
-        //Display only user's cra if ROLE_CREATE_VACATION
+        $datatable = $this->get('app.datatable.uservacation');
+        $datatable->buildDatatable();
+
+        return $this->render('IntranetBundle:UserVacation:index.html.twig', array(
+            'datatable' => $datatable,
+        ));
+    }
+
+    /**
+     * @Route("/vacation/results", name="intranet_vacation_results", options={"expose"=true})
+     */
+    public function indexResultsAction()
+    {
+        $datatable = $this->get('app.datatable.uservacation');
+        $datatable->buildDatatable();
+
+        $query = $this->get('sg_datatables.query')->getQueryFrom($datatable);
+
+        //Display only user's vacation if ROLE_CREATE_VACATION
         if ($this->get('security.authorization_checker')->isGranted('ROLE_CREATE_VACATION')) {
-            foreach ($allUserVacations as $key => $userVacation) {
-                if ($userVacation->isCreator($this->getUser()) == false) {
-                    unset($allUserVacations[$key]);
-                }
-            }
-        }
+            $query->buildQuery();
+            $qb = $query->getQuery();
+            $user = $this->getUser()->getId();
+            $qb->andWhere("user_vacation.user = " . $user);
 
-        return $this->render('IntranetBundle:UserVacation:index.html.twig', [
-            'allUserVacations' => $allUserVacations
-        ]);
+            return $query->getResponse(false);
+        } else {
+            return $query->getResponse();
+        }
     }
 
     /**
      * Create a new Vacation
      * @return \Symfony\Component\HttpFoundation\Response
-     * @Route("/vacation/create", name="intranet_vacation_create")
+     * @Route("/vacation/create", name="intranet_vacation_create", options={"expose"=true})
      * @Security("has_role('ROLE_RH') or has_role('ROLE_EDIT_VACATION') or has_role('ROLE_CREATE_VACATION')")
      */
     public function createAction(Request $request) {
@@ -85,7 +115,7 @@ class UserVacationController extends Controller {
      * Update existing Vacation
      * @param $userVacation
      * @return \Symfony\Component\HttpFoundation\Response
-     * @Route("/vacation/{id}/update", name="intranet_vacation_update")
+     * @Route("/vacation/{id}/update", name="intranet_vacation_update", options={"expose"=true})
      * @Security("is_granted('edit', userVacation)")
      */
     public function updateAction(UserVacation $userVacation, Request $request)
@@ -124,7 +154,7 @@ class UserVacationController extends Controller {
      * Delete a Vacation
      * @param $userVacation
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
-     * @Route("/vacation/{id}/delete", name="intranet_vacation_delete")
+     * @Route("/vacation/{id}/delete", name="intranet_vacation_delete", options={"expose"=true})
      * @Security("is_granted('edit', userVacation)")
      */
     public function deleteAction(UserVacation $userVacation)
@@ -146,7 +176,7 @@ class UserVacationController extends Controller {
      * Display a Vacation
      * @param $userVacation
      * @return \Symfony\Component\HttpFoundation\Response
-     * @Route("/vacation/{id}/view", name="intranet_vacation_view")
+     * @Route("/vacation/{id}/view", name="intranet_vacation_view", options={"expose"=true})
      * @Security("is_granted('edit', userVacation)")
      */
     public function viewAction(UserVacation $userVacation)
@@ -160,7 +190,7 @@ class UserVacationController extends Controller {
      * Display a vacation's pdf
      * @param $userVacation
      * @return \Symfony\Component\HttpFoundation\Response
-     * @Route("/vacation/{id}/viewpdf", name="intranet_vacation_view_pdf")
+     * @Route("/vacation/{id}/viewpdf", name="intranet_vacation_view_pdf", options={"expose"=true})
      * @Security("is_granted('edit', userVacation)")
      */
     public function viewPdfAction(UserVacation $userVacation)
@@ -186,7 +216,7 @@ class UserVacationController extends Controller {
      * Make a Vacation online
      * @param $userVacation
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
-     * @Route("/vacation/{id}/online", name="intranet_vacation_online")
+     * @Route("/vacation/{id}/online", name="intranet_vacation_online", options={"expose"=true})
      * @Security("is_granted('edit', userVacation)")
      */
     public function onlineAction(UserVacation $userVacation)
@@ -209,7 +239,7 @@ class UserVacationController extends Controller {
      * Make a Vacation offline
      * @param $userVacation
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
-     * @Route("/vacation/{id}/offline", name="intranet_vacation_offline")
+     * @Route("/vacation/{id}/offline", name="intranet_vacation_offline", options={"expose"=true})
      * @Security("is_granted('edit', userVacation)")
      */
     public function offlineAction(UserVacation $userVacation)

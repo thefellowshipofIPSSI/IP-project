@@ -10,33 +10,33 @@ user_register:
 
 ###################  Profil ###########################
 user_profile:
-    path:       /profil
+    path:       /intranet/profil
     defaults:   { _controller: UserBundle:Profile:show }
 
 user_profile_public:
-    path:       /profil/{pseudo}
+    path:       /intranet/profil/{pseudo}
     defaults:   { _controller: UserBundle:Profile:publicProfile }
 
 user_profile_edit:
-    path:       /user/edit
+    path:       /intranet/user/edit
     defaults:   { _controller: UserBundle:Profile:edit }
 
 
 ####################  Avatar ###########################
 user_change_avatar:
-    path:       /change-avatar
+    path:       /intranet/change-avatar
     defaults:   { _controller: UserBundle:Profile:changeAvatar }
 
 user_upload_avatar:
-    path:       /upload-avatar
+    path:       /intranet/upload-avatar
     defaults:   { _controller: UserBundle:Profile:uploadAvatar }
 
 
 ###################  Newsletter ###########################
 user_subscribe:
-    path:       /subscribe
+    path:       /intranet/subscribe
     defaults:   { _controller: UserBundle:Profile:subscribe }
 
 user_unsubscribe:
-    path:       /unsubscribe
+    path:       /intranet/unsubscribe
     defaults:   { _controller: UserBundle:Profile:unsubscribe }

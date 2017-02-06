@@ -25,26 +25,57 @@ class UserExpenseController extends Controller {
      */
     public function indexAction() {
 
-        $allUserExpenses = $this->get('intranet.repository.expense')->findAll();
+//        $allUserExpenses = $this->get('intranet.repository.expense')->findAll();
+//
+//        //Display only user's cra if ROLE_CREATE_EXPENSE
+//        if ($this->get('security.authorization_checker')->isGranted('ROLE_CREATE_EXPENSE')) {
+//            foreach ($allUserExpenses as $key => $userExpense) {
+//                if ($userExpense->isCreator($this->getUser()) == false) {
+//                    unset($allUserExpenses[$key]);
+//                }
+//            }
+//        }
+//
+//        return $this->render('IntranetBundle:UserExpense:index.html.twig', [
+//            'allUserExpenses' => $allUserExpenses
+//        ]);
 
-        //Display only user's cra if ROLE_CREATE_EXPENSE
+        $datatable = $this->get('app.datatable.userexpense');
+        $datatable->buildDatatable();
+
+        return $this->render('IntranetBundle:UserExpense:index.html.twig', array(
+            'datatable' => $datatable,
+        ));
+
+    }
+
+    /**
+     * @Route("/expense/results", name="intranet_expense_results", options={"expose"=true})
+     */
+    public function indexResultsAction()
+    {
+        $datatable = $this->get('app.datatable.userexpense');
+        $datatable->buildDatatable();
+
+        $query = $this->get('sg_datatables.query')->getQueryFrom($datatable);
+
+        //Display only user's expense if ROLE_CREATE_EXPENSE
         if ($this->get('security.authorization_checker')->isGranted('ROLE_CREATE_EXPENSE')) {
-            foreach ($allUserExpenses as $key => $userExpense) {
-                if ($userExpense->isCreator($this->getUser()) == false) {
-                    unset($allUserExpenses[$key]);
-                }
-            }
-        }
+            $query->buildQuery();
+            $qb = $query->getQuery();
+            $user = $this->getUser()->getId();
+            $qb->andWhere("user_expense.user = " . $user);
 
-        return $this->render('IntranetBundle:UserExpense:index.html.twig', [
-            'allUserExpenses' => $allUserExpenses
-        ]);
+            return $query->getResponse(false);
+        } else {
+            return $query->getResponse();
+        }
     }
 
     /**
      * Create a new Expense
      * @return \Symfony\Component\HttpFoundation\Response
-     * @Route("/expense/create", name="intranet_expense_create")
+     * @Route("/expense/create", name="intranet_expense_create", options={"expose"=true})
      * @Security("has_role('ROLE_RH') or has_role('ROLE_CREATE_EXPENSE')")
      */
     public function createAction(Request $request) {
@@ -85,7 +116,7 @@ class UserExpenseController extends Controller {
      * Update existing Expense
      * @param $userExpense
      * @return \Symfony\Component\HttpFoundation\Response
-     * @Route("/expense/{id}/update", name="intranet_expense_update")
+     * @Route("/expense/{id}/update", name="intranet_expense_update", options={"expose"=true})
      * @Security("is_granted('edit', userExpense)")
      */
     public function updateAction(UserExpense $userExpense, Request $request)
@@ -124,7 +155,7 @@ class UserExpenseController extends Controller {
      * Delete a Expense
      * @param $userExpense
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
-     * @Route("/expense/{id}/delete", name="intranet_expense_delete")
+     * @Route("/expense/{id}/delete", name="intranet_expense_delete", options={"expose"=true})
      * @Security("is_granted('edit', userExpense)")
      */
     public function deleteAction(UserExpense $userExpense)
@@ -146,7 +177,7 @@ class UserExpenseController extends Controller {
      * Display an Expense
      * @param $userExpense
      * @return \Symfony\Component\HttpFoundation\Response
-     * @Route("/expense/{id}/view", name="intranet_expense_view")
+     * @Route("/expense/{id}/view", name="intranet_expense_view", options={"expose"=true})
      * @Security("is_granted('edit', userExpense)")
      */
     public function viewAction(UserExpense $userExpense)
@@ -164,7 +195,7 @@ class UserExpenseController extends Controller {
      * Display a expense's pdf
      * @param $userExpense
      * @return \Symfony\Component\HttpFoundation\Response
-     * @Route("/expense/{id}/viewpdf", name="intranet_expense_view_pdf")
+     * @Route("/expense/{id}/viewpdf", name="intranet_expense_view_pdf", options={"expose"=true})
      * @Security("is_granted('edit', userExpense)")
      */
     public function viewpdfAction(UserExpense $userExpense)
@@ -194,7 +225,7 @@ class UserExpenseController extends Controller {
      * Make a Expense online
      * @param $userExpense
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
-     * @Route("/expense/{id}/online", name="intranet_expense_online")
+     * @Route("/expense/{id}/online", name="intranet_expense_online", options={"expose"=true})
      * @Security("is_granted('edit', userExpense)")
      */
     public function onlineAction(UserExpense $userExpense)
@@ -217,7 +248,7 @@ class UserExpenseController extends Controller {
      * Make a Expense offline
      * @param $userExpense
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
-     * @Route("/expense/{id}/offline", name="intranet_expense_offline")
+     * @Route("/expense/{id}/offline", name="intranet_expense_offline", options={"expose"=true})
      * @Security("is_granted('edit', userExpense)")
      */
     public function offlineAction(UserExpense $userExpense)

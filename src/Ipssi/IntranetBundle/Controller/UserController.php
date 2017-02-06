@@ -23,11 +23,31 @@ class UserController extends Controller
      */
     public function indexAction()
     {
-        $allUsers = $this->get('user.repository.user')->findAll();
+//        $allUsers = $this->get('user.repository.user')->findAll();
+//
+//        return $this->render('IntranetBundle:User:index.html.twig', [
+//            'allUsers' => $allUsers
+//        ]);
 
-        return $this->render('IntranetBundle:User:index.html.twig', [
-            'allUsers' => $allUsers
-        ]);
+        $datatable = $this->get('user.datatable.user');
+        $datatable->buildDatatable();
+
+        return $this->render('IntranetBundle:User:index.html.twig', array(
+            'datatable' => $datatable,
+        ));
+    }
+
+    /**
+     * @Route("/user/results", name="intranet_user_results", options={"expose"=true})
+     */
+    public function indexResultsAction()
+    {
+        $datatable = $this->get('user.datatable.user');
+        $datatable->buildDatatable();
+
+        $query = $this->get('sg_datatables.query')->getQueryFrom($datatable);
+
+        return $query->getResponse();
     }
 
 
@@ -52,7 +72,7 @@ class UserController extends Controller
      * Create new User
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
-     * @Route("/user/create", name="intranet_user_create")
+     * @Route("/user/create", name="intranet_user_create", options={"expose"=true})
      * @Security("has_role('ROLE_RH')")
      */
     public function createAction(Request $request)
@@ -98,7 +118,7 @@ class UserController extends Controller
      * Update an User
      * @param $user
      * @param Request $request
-     * @Route("/user/{id}/update", name="intranet_user_update")
+     * @Route("/user/{id}/update", name="intranet_user_update", options={"expose"=true})
      * @Security("has_role('ROLE_RH')")
      */
     public function updateAction(User $user, Request $request)
@@ -143,7 +163,7 @@ class UserController extends Controller
      * Delete an User
      * @param $user
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
-     * @Route("/user/{id}/delete", name="intranet_user_delete")
+     * @Route("/user/{id}/delete", name="intranet_user_delete", options={"expose"=true})
      * @Security("has_role('ROLE_RH')")
      */
     public function deleteAction(User $user)
@@ -175,7 +195,7 @@ class UserController extends Controller
      * Display an User
      * @param $user
      * @return \Symfony\Component\HttpFoundation\Response
-     * @Route("/user/{id}/view", name="intranet_user_view")
+     * @Route("/user/{id}/view", name="intranet_user_view", options={"expose"=true})
      * @Security("has_role('ROLE_RH')")
      */
     public function viewAction(User $user)
@@ -189,7 +209,7 @@ class UserController extends Controller
      * Enable an User
      * @param $user
      * @return \Symfony\Component\HttpFoundation\Response
-     * @Route("/user/{id}/online", name="intranet_user_enable")
+     * @Route("/user/{id}/online", name="intranet_user_enable", options={"expose"=true})
      * @Security("has_role('ROLE_RH')")
      */
     public function enableAction(User $user)
@@ -213,7 +233,7 @@ class UserController extends Controller
      * Disable an User
      * @param $user
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
-     * @Route("/user/{id}/offline", name="intranet_user_disable")
+     * @Route("/user/{id}/offline", name="intranet_user_disable", options={"expose"=true})
      * @Security("has_role('ROLE_RH')")
      */
     public function disableAction(User $user)

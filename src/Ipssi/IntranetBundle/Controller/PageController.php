@@ -22,17 +22,30 @@ class PageController extends Controller {
      */
     public function indexAction() {
 
-        $allPages = $this->get('intranet.repository.page')->findAll();
+        $datatable = $this->get('app.datatable.page');
+        $datatable->buildDatatable();
 
-        return $this->render('IntranetBundle:Page:index.html.twig', [
-            'allPages' => $allPages
-        ]);
+        return $this->render('IntranetBundle:Page:index.html.twig', array(
+            'datatable' => $datatable,
+        ));
+    }
+
+    /**
+     * @Route("/page/results", name="intranet_page_results", options={"expose"=true})
+     */
+    public function indexResultsAction() {
+        $datatable = $this->get('app.datatable.page');
+        $datatable->buildDatatable();
+
+        $query = $this->get('sg_datatables.query')->getQueryFrom($datatable);
+
+        return $query->getResponse();
     }
 
     /**
      * Create a new Page
      * @return \Symfony\Component\HttpFoundation\Response
-     * @Route("/page/create", name="intranet_page_create")
+     * @Route("/page/create", name="intranet_page_create", options={"expose"=true})
      * @Security("has_role('ROLE_REDACTEUR')")
      */
     public function createAction(Request $request) {
@@ -73,7 +86,7 @@ class PageController extends Controller {
      * Update existing Page
      * @param $page
      * @return \Symfony\Component\HttpFoundation\Response
-     * @Route("/page/{id}/update", name="intranet_page_update")
+     * @Route("/page/{id}/update", name="intranet_page_update", options={"expose"=true})
      * @Security("is_granted('edit', page) or has_role('ROLE_SUPER_ADMIN')")
      */
     public function updateAction(Page $page, Request $request)
@@ -112,7 +125,7 @@ class PageController extends Controller {
      * Delete a Page
      * @param $page
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
-     * @Route("/page/{id}/delete", name="intranet_page_delete")
+     * @Route("/page/{id}/delete", name="intranet_page_delete", options={"expose"=true})
      * @Security("is_granted('edit', page) or has_role('ROLE_SUPER_ADMIN')")
      */
     public function deleteAction(Page $page)
@@ -134,7 +147,7 @@ class PageController extends Controller {
      * Display a Page
      * @param $page
      * @return \Symfony\Component\HttpFoundation\Response
-     * @Route("/page/{id}/view", name="intranet_page_view")
+     * @Route("/page/{id}/view", name="intranet_page_view", options={"expose"=true})
      */
     public function viewAction(Page $page)
     {
@@ -149,7 +162,7 @@ class PageController extends Controller {
      * Make a Page online
      * @param $page
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
-     * @Route("/page/{id}/online", name="intranet_page_online")
+     * @Route("/page/{id}/online", name="intranet_page_online", options={"expose"=true})
      * @Security("is_granted('edit', page) or has_role('ROLE_SUPER_ADMIN')")
      */
     public function onlineAction(Page $page)
@@ -172,7 +185,7 @@ class PageController extends Controller {
      * Make a Page offline
      * @param $page
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
-     * @Route("/page/{id}/offline", name="intranet_page_offline")
+     * @Route("/page/{id}/offline", name="intranet_page_offline", options={"expose"=true})
      * @Security("is_granted('edit', page) or has_role('ROLE_SUPER_ADMIN')")
      */
     public function offlineAction(Page $page)

@@ -57,7 +57,6 @@ class RegistrationController extends BaseController
 
         if ($form->isValid()) {
 
-
             $event = new FormEvent($form, $request);
             $dispatcher->dispatch(FOSUserEvents::REGISTRATION_SUCCESS, $event);
 
@@ -81,9 +80,6 @@ class RegistrationController extends BaseController
         } else {
             // Redirect register to login : same view
             if(strstr($request->getPathInfo(), 'register')) {
-
-
-
                 return $this->redirectToRoute('user_login', array(),301);
             }
         }
@@ -93,7 +89,6 @@ class RegistrationController extends BaseController
         ));
 
     }
-
 
     /**
      * Tell the user to check his email provider

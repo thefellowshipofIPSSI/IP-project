@@ -4,6 +4,8 @@ namespace UserBundle\Security\Core\User;
 use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
 use HWI\Bundle\OAuthBundle\Security\Core\User\FOSUBUserProvider as BaseClass;
 use Symfony\Component\Security\Core\User\UserInterface;
+use UserBundle\Entity\Profile;
+
 
 class FOSUBUserProvider extends BaseClass
 {
@@ -33,6 +35,7 @@ class FOSUBUserProvider extends BaseClass
         $user->$setter_token($response->getAccessToken());
         $this->userManager->updateUser($user);
     }
+
     /**
      * {@inheritdoc}
      */
@@ -45,6 +48,7 @@ class FOSUBUserProvider extends BaseClass
         $email = $response->getEmail();
 
         $user = $this->userManager->findUserBy(array($this->getProperty($response) => $username));
+
         //when the user is registrating
         if (null === $user) {
             $service = $response->getResourceOwner()->getName();
@@ -64,9 +68,22 @@ class FOSUBUserProvider extends BaseClass
             //@TODO encode password
             $user->setPassword($username);
             $user->setEnabled(true);
+
+            $profile = new Profile();
+            $profile->setGravatar(1);
+            $profile->setFirstname($firstname);
+            $profile->setLastname($lastname);
+            $profile->setPseudo($firstname.$lastname);
+            $profile->setOther('Comtpte créé avec Google');
+            $user->setProfile($profile);
+
+            $profile->setUser($user);
+
             $this->userManager->updateUser($user);
+
             return $user;
         }
+
         //if user exists - go with the HWIOAuth way
         $user = parent::loadUserByOAuthUserResponse($response);
         $serviceName = $response->getResourceOwner()->getName();

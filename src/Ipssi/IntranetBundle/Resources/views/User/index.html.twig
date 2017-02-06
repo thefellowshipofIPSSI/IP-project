@@ -2,6 +2,21 @@
 
 {% block title %} Utilisateurs IPSSI {% endblock %}
 
+{% block head_javascripts %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment-with-locales.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-daterangepicker/2.1.20/daterangepicker.min.js"></script>
+    <script src="https://cdn.datatables.net/u/bs/jszip-2.5.0,pdfmake-0.1.18,dt-1.10.12,b-1.2.1,b-colvis-1.2.1,b-flash-1.2.1,b-html5-1.2.1,b-print-1.2.1,r-2.1.0/datatables.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.1/bootstrap3-editable/js/bootstrap-editable.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/featherlight/1.4.1/featherlight.min.js"></script>
+    <script src="https://raw.githubusercontent.com/bartaz/sandbox.js/master/jquery.highlight.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/7.1.0/bootstrap-slider.min.js"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.full.min.js'></script>
+    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', {'callback': 'fos.Router.setData'}) }}"></script>
+{% endblock %}
+
 {% block headerContainer %}
     <div class="col-lg-12">
         <h1 class="page-header">
@@ -19,58 +34,61 @@
 {% endblock %}
 
 {% block body %}
-    {% if is_granted('ROLE_RH') %}
-        <a href="{{ path('intranet_user_create') }}" class="btn btn-primary" style="margin-bottom:10px;">Ajouter un utilisateur</a>
-    {% endif %}
-    <div class="table-responsive">
-        <table class="table table-bordered table-hover">
-            <thead>
-            <tr>
-                <th>#</th>
-                <th>Login</th>
-                <th>email</th>
-                <th>Statut</th>
-                <th>Groupe</th>
-                {% if is_granted('ROLE_RH') %}
-                    <th>Actions</th>
-                {% endif %}
-            </tr>
-            </thead>
-            <tbody>
-            {% for user in allUsers %}
-                <tr>
-                    <td>{{ user.id }}</td>
-                    <td>{{ user.username }}</td>
-                    <td>{{ user.email }}</td>
-                    <td>
-                        {% if user.enabled == 0 %}
-                            Compte désactivé
-                        {% else %}
-                            Compte activé
-                        {% endif %}
-                    </td>
-                    <td>
+    {#{% if is_granted('ROLE_RH') %}#}
+        {#<a href="{{ path('intranet_user_create') }}" class="btn btn-primary" style="margin-bottom:10px;">Ajouter un utilisateur</a>#}
+    {#{% endif %}#}
+    {#<div class="table-responsive">#}
+        {#<table class="table table-bordered table-hover">#}
+            {#<thead>#}
+            {#<tr>#}
+                {#<th>#</th>#}
+                {#<th>Login</th>#}
+                {#<th>email</th>#}
+                {#<th>Statut</th>#}
+                {#<th>Groupe</th>#}
+                {#{% if is_granted('ROLE_RH') %}#}
+                    {#<th>Actions</th>#}
+                {#{% endif %}#}
+            {#</tr>#}
+            {#</thead>#}
+            {#<tbody>#}
+            {#{% for user in allUsers %}#}
+                {#<tr>#}
+                    {#<td>{{ user.id }}</td>#}
+                    {#<td>{{ user.username }}</td>#}
+                    {#<td>{{ user.email }}</td>#}
+                    {#<td>#}
+                        {#{% if user.enabled == 0 %}#}
+                            {#Compte désactivé#}
+                        {#{% else %}#}
+                            {#Compte activé#}
+                        {#{% endif %}#}
+                    {#</td>#}
+                    {#<td>#}
                         {#{{ dump(user.group) }}#}
-                        {% for group in user.groups %}
-                            <p>{{group.name}}</p>
-                        {% endfor %}
-                    </td>
-                    {% if is_granted('ROLE_RH') %}
-                        <td>
-                            <a href="{{ path('user_profile_public', {'pseudo': user.profile.pseudo}) }}" class="fa fa-eye" title="Aperçu"></a>
-                            <a href="{{ path('intranet_user_update', {'id': user.id}) }}" class="fa fa-pencil-square-o" title="Modifier"></a>
-                            <a href="{{ path('intranet_user_delete', {'id': user.id}) }}" class="fa fa-trash-o" title="Supprimer"></a>
-                            {% if user.enabled == 0 %}
-                                <a href="{{ path('intranet_user_enable', {'id': user.id}) }}" class="fa fa-toggle-off" title="Activer"></a>
-                            {% else %}
-                                <a href="{{ path('intranet_user_disable', {'id': user.id}) }}" class="fa fa-toggle-on" title="Désactiver"></a>
-                            {% endif %}
-                        </td>
-                    {% endif %}
-                </tr>
-            {% endfor %}
+                        {#{% for group in user.groups %}#}
+                            {#<p>{{group.name}}</p>#}
+                        {#{% endfor %}#}
+                    {#</td>#}
+                    {#{% if is_granted('ROLE_RH') %}#}
+                        {#<td>#}
+                            {#<a href="{{ path('user_profile_public', {'pseudo': user.profile.pseudo}) }}" class="fa fa-eye" title="Aperçu"></a>#}
+                            {#<a href="{{ path('intranet_user_update', {'id': user.id}) }}" class="fa fa-pencil-square-o" title="Modifier"></a>#}
+                            {#<a href="{{ path('intranet_user_delete', {'id': user.id}) }}" class="fa fa-trash-o" title="Supprimer"></a>#}
+                            {#{% if user.enabled == 0 %}#}
+                                {#<a href="{{ path('intranet_user_enable', {'id': user.id}) }}" class="fa fa-toggle-off" title="Activer"></a>#}
+                            {#{% else %}#}
+                                {#<a href="{{ path('intranet_user_disable', {'id': user.id}) }}" class="fa fa-toggle-on" title="Désactiver"></a>#}
+                            {#{% endif %}#}
+                        {#</td>#}
+                    {#{% endif %}#}
+                {#</tr>#}
+            {#{% endfor %}#}
 
-            </tbody>
-        </table>
-    </div>
+            {#</tbody>#}
+        {#</table>#}
+    {#</div>#}
+
+    {{ datatable_render(datatable) }}
+
 {% endblock %}

@@ -2,6 +2,21 @@
 
 {% block title %} Actualités {% endblock %}
 
+{% block head_javascripts %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment-with-locales.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-daterangepicker/2.1.20/daterangepicker.min.js"></script>
+    <script src="https://cdn.datatables.net/u/bs/jszip-2.5.0,pdfmake-0.1.18,dt-1.10.12,b-1.2.1,b-colvis-1.2.1,b-flash-1.2.1,b-html5-1.2.1,b-print-1.2.1,r-2.1.0/datatables.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.1/bootstrap3-editable/js/bootstrap-editable.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/featherlight/1.4.1/featherlight.min.js"></script>
+    <script src="https://raw.githubusercontent.com/bartaz/sandbox.js/master/jquery.highlight.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/7.1.0/bootstrap-slider.min.js"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.full.min.js'></script>
+    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', {'callback': 'fos.Router.setData'}) }}"></script>
+{% endblock %}
+
 {% block headerContainer %}
     <div class="col-lg-12">
         <h1 class="page-header">
@@ -18,49 +33,54 @@
     </div>
 {% endblock %}
 
+
+
 {% block body %}
 
-    <a href="{{ path('intranet_news_create') }}" class="btn btn-primary" style="margin-bottom:10px;">Nouvelle Actualité</a>
-    <div class="table-responsive">
-        <table class="table table-bordered table-hover">
-            <thead>
-            <tr>
-                <th>#</th>
-                <th>Nom</th>
-                <th>URL</th>
-                <th>Créé par</th>
-                <th>Statut</th>
-                <th>Actions</th>
-            </tr>
-            </thead>
-            <tbody>
-                {% for news in allNews %}
-                <tr>
-                    <td>{{ news.id }}</td>
-                    <td>{{ news.name }}</td>
-                    <td>{{ news.slug }}</td>
-                    <td>{{ news.getUser.usernameCanonical }}</td>
-                    <td>
-                        {% if news.status == 0 %}
-                            Hors ligne
-                        {% else %}
-                            En ligne
-                        {% endif %}
-                    </td>
-                    <td>
-                        <a href="{{ path('intranet_news_view', {'id': news.id}) }}" class="fa fa-eye" title="Aperçu"></a>
-                        <a href="{{ path('intranet_news_update', {'id': news.id}) }}" class="fa fa-pencil-square-o" title="Modifier"></a>
-                        <a href="{{ path('intranet_news_delete', {'id': news.id}) }}" class="fa fa-trash-o" title="Supprimer"></a>
-                        {% if news.status == 0 %}
-                            <a href="{{ path('intranet_news_online', {'id': news.id}) }}" class="fa fa-toggle-off" title="Mettre en ligne"></a>
-                        {% else %}
-                            <a href="{{ path('intranet_news_offline', {'id': news.id}) }}" class="fa fa-toggle-on" title="Mettre hors ligne"></a>
-                        {% endif %}
-                    </td>
-                </tr>
-                {% endfor %}
+    {#<a href="{{ path('intranet_news_create') }}" class="btn btn-primary" style="margin-bottom:10px;">Nouvelle Actualité</a>#}
+    {#<div class="table-responsive">#}
+        {#<table class="table table-bordered table-hover">#}
+            {#<thead>#}
+            {#<tr>#}
+                {#<th>#</th>#}
+                {#<th>Nom</th>#}
+                {#<th>URL</th>#}
+                {#<th>Créé par</th>#}
+                {#<th>Statut</th>#}
+                {#<th>Actions</th>#}
+            {#</tr>#}
+            {#</thead>#}
+            {#<tbody>#}
+                {#{% for news in allNews %}#}
+                {#<tr>#}
+                    {#<td>{{ news.id }}</td>#}
+                    {#<td>{{ news.name }}</td>#}
+                    {#<td>{{ news.slug }}</td>#}
+                    {#<td>{{ news.getUser.usernameCanonical }}</td>#}
+                    {#<td>#}
+                        {#{% if news.status == 0 %}#}
+                            {#Hors ligne#}
+                        {#{% else %}#}
+                            {#En ligne#}
+                        {#{% endif %}#}
+                    {#</td>#}
+                    {#<td>#}
+                        {#<a href="{{ path('intranet_news_view', {'id': news.id}) }}" class="fa fa-eye" title="Aperçu"></a>#}
+                        {#<a href="{{ path('intranet_news_update', {'id': news.id}) }}" class="fa fa-pencil-square-o" title="Modifier"></a>#}
+                        {#<a href="{{ path('intranet_news_delete', {'id': news.id}) }}" class="fa fa-trash-o" title="Supprimer"></a>#}
+                        {#{% if news.status == 0 %}#}
+                            {#<a href="{{ path('intranet_news_online', {'id': news.id}) }}" class="fa fa-toggle-off" title="Mettre en ligne"></a>#}
+                        {#{% else %}#}
+                            {#<a href="{{ path('intranet_news_offline', {'id': news.id}) }}" class="fa fa-toggle-on" title="Mettre hors ligne"></a>#}
+                        {#{% endif %}#}
+                    {#</td>#}
+                {#</tr>#}
+                {#{% endfor %}#}
 
-            </tbody>
-        </table>
-    </div>
+            {#</tbody>#}
+        {#</table>#}
+    {#</div>#}
+
+    {{ datatable_render(datatable) }}
+
 {% endblock %}
