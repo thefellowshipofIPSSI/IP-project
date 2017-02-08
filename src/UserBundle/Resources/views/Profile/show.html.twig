@@ -87,6 +87,30 @@
                 </div>
             </div>
         </div>
+
+        <div id="your-universe" class="panel-body">
+            <div class="row">
+                <h4>Vos CV</h4>
+                <div class="col-md-12">
+                    <table class="table table-user-information">
+                        <tbody>
+                            {% for cV in cvs %}
+                                <tr>
+                                    <td>
+                                        <a href="{{ vich_uploader_asset(cV, 'cvFile') }}">CV {{ cV.createdAt|date('d-m-Y') }}</a> - <a href="{{ path('cv_edit', { 'id': cV.id }) }}">Modifier</a> - <a href="{{ path('cv_delete', { 'id': cV.id }) }}">Supprimer</a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+
+
+
+
     </div>
     <div class="panel-footer text-center">
         <div class="profil-actions btn-group">
@@ -94,7 +118,7 @@
                 Modifier votre avatar
             </a>
             <a class="btn btn-success" href="{{ path('user_profile_edit') }}">Modifier vos infos</a>
-            <a class="btn btn-success" href="{{ path('cv_index') }}">Mes CV</a>
+            <a class="btn btn-success" href="{{ path('cv_new') }}">Ajouter un CV</a>
         </div>
     </div>
 

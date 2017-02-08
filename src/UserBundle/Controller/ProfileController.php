@@ -49,8 +49,12 @@ class ProfileController extends BaseController
             throw new AccessDeniedException('This user does not have access to this section.');
         }
 
+        $em = $this->getDoctrine()->getManager();
+        $cVs = $em->getRepository('JobBundle:CV')->findBy(['user' => $this->getUser()->getId()]);
+
         return $this->render('UserBundle:Profile:show.html.twig', [
-            'user' => $user
+            'user' => $user,
+            'cvs' => $cVs,
         ]);
     }
 

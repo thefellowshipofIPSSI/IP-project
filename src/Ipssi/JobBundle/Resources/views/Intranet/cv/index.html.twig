@@ -20,7 +20,7 @@
 
 {% block body %}
 
-    <a href="{{ path('intranet_society_create') }}" class="btn btn-primary" style="margin-bottom:10px;">Nouveau CV</a>
+    <a href="{{ path('cv_new') }}" class="btn btn-primary" style="margin-bottom:10px;">Nouveau CV</a>
     <div class="container">
         <hr>
 
@@ -29,7 +29,7 @@
                 <tr>
                     <td><a href="{{ path('cv_show', { 'id': cV.id }) }}">{{ cV.id }}</a></td>
                     <td>
-                        <img src="{{ vich_uploader_asset(cV, 'cvFile') }}" />
+                        <a href="{{ vich_uploader_asset(cV, 'cvFile') }}">CV</a>
                     </td>
                     <td>{% if cV.createdAt %}{{ cV.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
                     <td>{% if cV.updatedAt %}{{ cV.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
@@ -75,51 +75,4 @@
             {#{% endfor %}#}
         </div>
     </div>
-{% endblock %}
-
-
-
-
-{% extends 'base.html.twig' %}
-
-{% block body %}
-    <h1>Cvs list</h1>
-
-    <table>
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Cvname</th>
-                <th>Createdat</th>
-                <th>Updatedat</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for cV in cVs %}
-            <tr>
-                <td><a href="{{ path('cv_show', { 'id': cV.id }) }}">{{ cV.id }}</a></td>
-                <td>{{ cV.cvName }}</td>
-                <td>{% if cV.createdAt %}{{ cV.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{% if cV.updatedAt %}{{ cV.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('cv_show', { 'id': cV.id }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('cv_edit', { 'id': cV.id }) }}">edit</a>
-                        </li>
-                    </ul>
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <ul>
-        <li>
-            <a href="{{ path('cv_new') }}">Create a new cV</a>
-        </li>
-    </ul>
 {% endblock %}

@@ -104,3 +104,24 @@ intranet_skill_update:
 intranet_skill_delete:
     path:     /administration/competence/supprimer/{skill}
     defaults: { _controller: JobBundle:Intranet/Skill:delete }
+
+# cv
+cv_index:
+    path:     /cv/
+    defaults: { _controller: JobBundle:Intranet/CV:index }
+
+cv_new:
+    path:     /cv/new
+    defaults: { _controller: JobBundle:Intranet/CV:new }
+
+cv_show:
+    path:     /cv/{id}
+    defaults: { _controller: JobBundle:Intranet/CV:show }
+
+cv_edit:
+    path:     /cv/{id}/edit
+    defaults: { _controller: JobBundle:Intranet/CV:edit }
+
+cv_delete:
+    path:     /cv/{id}/delete
+    defaults: { _controller: JobBundle:Intranet/CV:delete }

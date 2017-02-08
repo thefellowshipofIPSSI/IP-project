@@ -61,11 +61,17 @@ class CV
     private $updatedAt;
 
     /**
+     * @ORM\Column(type="boolean", options={"default" : 0})
+     *
+     * @var string
+     */
+    private $valid;
+
+    /**
      * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User", inversedBy="cv")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     private $user;
-
 
 
     /**
@@ -81,6 +87,10 @@ class CV
         if($this->getCreatedAt() == null)
         {
             $this->setCreatedAt(new \DateTime('now'));
+        }
+        if($this->getValid() == null)
+        {
+            $this->setValid(0);
         }
     }
 
@@ -211,5 +221,29 @@ class CV
     public function getCvName()
     {
         return $this->cvName;
+    }
+
+    /**
+     * Set valid
+     *
+     * @param boolean $valid
+     *
+     * @return CV
+     */
+    public function setValid($valid)
+    {
+        $this->valid = $valid;
+
+        return $this;
+    }
+
+    /**
+     * Get valid
+     *
+     * @return boolean
+     */
+    public function getValid()
+    {
+        return $this->valid;
     }
 }

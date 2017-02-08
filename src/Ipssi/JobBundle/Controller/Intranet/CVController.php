@@ -5,21 +5,17 @@ namespace Ipssi\JobBundle\Controller\Intranet;
 use Ipssi\JobBundle\Entity\CV;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 
 
 /**
  * Cv controller.
- *
- * @Route("intranet/cv")
  */
 class CVController extends Controller
 {
     /**
      * Lists all cV entities.
      *
-     * @Route("/", name="cv_index")
      * @Method("GET")
      */
     public function indexAction()
@@ -28,7 +24,7 @@ class CVController extends Controller
 
         $cVs = $em->getRepository('JobBundle:CV')->findAll();
 
-        return $this->render('JobBundle:Intranet/cv/index.html.twig', array(
+        return $this->render('JobBundle:Intranet/cv:index.html.twig', array(
             'cVs' => $cVs,
         ));
     }
@@ -36,7 +32,6 @@ class CVController extends Controller
     /**
      * Creates a new cV entity.
      *
-     * @Route("/new", name="cv_new")
      * @Method({"GET", "POST"})
      */
     public function newAction(Request $request)
@@ -47,13 +42,15 @@ class CVController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+
+            $cV->setUser($this->getUser());
             $em->persist($cV);
             $em->flush($cV);
 
-            return $this->redirectToRoute('cv_show', array('id' => $cV->getId()));
+            return $this->redirectToRoute('user_profile');
         }
 
-        return $this->render('JobBundle:Intranet/cv/new.html.twig', array(
+        return $this->render('JobBundle:Intranet/cv:new.html.twig', array(
             'cV' => $cV,
             'form' => $form->createView(),
         ));
@@ -62,14 +59,13 @@ class CVController extends Controller
     /**
      * Finds and displays a cV entity.
      *
-     * @Route("/{id}", name="cv_show")
      * @Method("GET")
      */
     public function showAction(CV $cV)
     {
         $deleteForm = $this->createDeleteForm($cV);
 
-        return $this->render('JobBundle:Intranet/cv/show.html.twig', array(
+        return $this->render('JobBundle:Intranet/cv:show.html.twig', array(
             'cV' => $cV,
             'delete_form' => $deleteForm->createView(),
         ));
@@ -78,7 +74,6 @@ class CVController extends Controller
     /**
      * Displays a form to edit an existing cV entity.
      *
-     * @Route("/{id}/edit", name="cv_edit")
      * @Method({"GET", "POST"})
      */
     public function editAction(Request $request, CV $cV)
@@ -90,12 +85,12 @@ class CVController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('cv_edit', array('id' => $cV->getId()));
+            return $this->redirectToRoute('user_profile');
         }
 
-        return $this->render('JobBundle:Intranet/cv/edit.html.twig', array(
+        return $this->render('JobBundle:Intranet/cv:edit.html.twig', array(
             'cV' => $cV,
-            'edit_form' => $editForm->createView(),
+            'form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         ));
     }
@@ -103,21 +98,20 @@ class CVController extends Controller
     /**
      * Deletes a cV entity.
      *
-     * @Route("/{id}", name="cv_delete")
      * @Method("DELETE")
      */
-    public function deleteAction(Request $request, CV $cV)
+    public function deleteAction(CV $cV)
     {
-        $form = $this->createDeleteForm($cV);
-        $form->handleRequest($request);
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($cV);
+        $em->flush();
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->remove($cV);
-            $em->flush($cV);
-        }
+        $this->addFlash(
+            'success',
+            'Cv supprimé !'
+        );
 
-        return $this->redirectToRoute('cv_index');
+        return $this->redirectToRoute('user_profile');
     }
 
     /**
