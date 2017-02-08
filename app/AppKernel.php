@@ -27,6 +27,8 @@ class AppKernel extends Kernel
             new JMS\DiExtraBundle\JMSDiExtraBundle($this),
             new JMS\SerializerBundle\JMSSerializerBundle(),
 //            new JMS\SecurityExtraBundle\JMSSecurityExtraBundle(),
+            new Vich\UploaderBundle\VichUploaderBundle(),
+
 
 
             // Project Bundles

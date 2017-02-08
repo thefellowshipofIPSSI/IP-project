@@ -1,3 +1,7 @@
+job_cv:
+    resource: "@JobBundle/Controller/CVController.php"
+    type:     annotation
+
 job:
     resource: "@JobBundle/Resources/config/routing.yml"
     prefix:   /

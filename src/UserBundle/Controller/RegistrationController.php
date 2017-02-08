@@ -61,8 +61,14 @@ class RegistrationController extends BaseController
             $dispatcher->dispatch(FOSUserEvents::REGISTRATION_SUCCESS, $event);
 
             $em = $this->getDoctrine()->getManager();
+            
+            
+
 
             $userManager->updateUser($user);
+
+//            dump($user);
+//            die();
             $profile = new Profile();
             $profile->setUser($user);
 

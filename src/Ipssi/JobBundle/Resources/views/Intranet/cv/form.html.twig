@@ -1,0 +1,28 @@
+{{ form_start(form}) }}
+{{ form_widget(form.cvFile) }}
+
+<div class="form-group">
+    {#{{ form_widget(form.save, {'attr': {'class': 'btn btn-primary'}}) }}#}
+    {{ form_widget(form.save, {'label':'Sauvegarder'}) }}
+
+</div>
+{{ form_end(form) }}
+
+
+{% block javascripts %}
+
+    <script type="text/javascript">
+        $("#input-file").fileinput({
+            theme: "fa",
+            showRemove: true,
+            showUpload: false,
+            maxFileCount: 1,
+            allowedFileTypes: ["image"]
+        })
+
+
+    </script>
+{% endblock %}
+
+
+

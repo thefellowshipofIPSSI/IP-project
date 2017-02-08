@@ -1,0 +1,38 @@
+{% extends 'intranet.html.twig' %}
+
+{% block title %} CV {% endblock %}
+
+{% block headerContainer %}
+    <div class="col-lg-12">
+        <h1 class="page-header">
+            CV
+            <small>Détails</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li>
+                <i class="fa fa-home"></i>  <a href="{{ path('intranet_homepage') }}">Accueil</a>
+            </li>
+            <li class="active">
+                <a href="{{ path('intranet_societies') }}">CV</a>
+            </li>
+            <li class="active">
+                <i class="fa fa-eye"></i> Détails CV
+            </li>
+        </ol>
+    </div>
+{% endblock %}
+
+{% block body %}
+
+    <div class="col-lg-12">
+
+
+        <img src="{{ vich_uploader_asset(cV, 'cvFile') }}" />
+
+
+        <br><br><br>
+        <a href="{{ path('cv_edit', {'id': cV.id}) }}" class="btn btn-primary" style="margin-bottom:10px;">Modifier</a>
+
+    </div>
+
+{% endblock %}
