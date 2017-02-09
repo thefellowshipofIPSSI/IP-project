@@ -59,6 +59,11 @@ intranet_offer_delete:
     path:     /offres-de-poste/supprimer/{offer}
     defaults: { _controller: JobBundle:Intranet/Offer:delete }
 
+
+intranet_offer_publish:
+    path:     /offres-de-poste/publier/{offer}
+    defaults: { _controller: JobBundle:Intranet/Offer:publish }
+
 ############# Skills ################
 intranet_skills:
     path:     /administration/competences

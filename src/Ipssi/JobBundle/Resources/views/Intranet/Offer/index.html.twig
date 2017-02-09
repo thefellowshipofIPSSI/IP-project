@@ -48,11 +48,35 @@
                         <div class="card-action">
                             <a href="{{ path('intranet_offer_view', {'offer': offer.id}) }}" class="fa fa-eye"></a>
                             <a href="{{ path('intranet_offer_update', {'offer': offer.id}) }}" class="fa fa-edit"></a>
-                            <a href="{{ path('intranet_offer_delete', {'offer': offer.id}) }}" class="fa fa-trash" onClick="return confirm('Supprimer la société ?')"></a>
+                            <a href="{{ path('intranet_offer_delete', {'offer': offer.id}) }}" class="fa fa-trash " onClick="return confirm('Supprimer l\'offre ?')"></a>
+                            <a href="{{ path('intranet_offer_publish', {'offer': offer.id}) }}" class="fa fa-envelope" onclick="return sweetAlert()"></a>
                         </div>
                     </div>
                 </div>
             {% endfor %}
         </div>
     </div>
+{% endblock %}
+
+{% block customJavascripts %}
+
+    <script type="text/javascript">
+
+        function sweetAlert() {
+
+
+
+                swal({
+                    title: "Publier l'offre ?",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#1fad2f",
+                    confirmButtonText: "Mettre en ligne",
+                    cancelButtonText: "Annuler",
+                    closeOnConfirm: false
+                })
+        }
+
+    </script>
+
 {% endblock %}

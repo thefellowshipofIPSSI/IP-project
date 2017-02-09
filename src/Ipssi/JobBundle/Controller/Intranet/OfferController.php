@@ -171,4 +171,27 @@ class OfferController extends Controller
         return $this->redirectToRoute('intranet_offers');
     }
 
+
+    public function publishAction($offer)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        // Get current offer and delete it
+        $offer = $em->getRepository('JobBundle:Offer')->find($offer);
+
+        $offer->setStatus(1);
+
+        $em->persist($offer);
+        $em->flush();
+
+
+        $this->addFlash(
+            'success',
+            'Offre mise en ligne'
+        );
+
+        return $this->redirectToRoute('intranet_offers');
+
+    }
+
 }
