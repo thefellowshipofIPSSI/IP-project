@@ -110,18 +110,32 @@ cv_index:
     path:     /cv/
     defaults: { _controller: JobBundle:Intranet/CV:index }
 
+cv_results:
+    path:     /cv/results
+    defaults: { _controller: JobBundle:Intranet/CV:index }
+    options:
+        expose: true
+
 cv_new:
     path:     /cv/new
     defaults: { _controller: JobBundle:Intranet/CV:new }
+    options:
+        expose: true
 
 cv_show:
     path:     /cv/{id}
     defaults: { _controller: JobBundle:Intranet/CV:show }
+    options:
+        expose: true
 
 cv_edit:
     path:     /cv/{id}/edit
     defaults: { _controller: JobBundle:Intranet/CV:edit }
+    options:
+        expose: true
 
 cv_delete:
     path:     /cv/{id}/delete
     defaults: { _controller: JobBundle:Intranet/CV:delete }
+    options:
+        expose: true

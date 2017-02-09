@@ -108,7 +108,7 @@ class MenuBuilder
             if ($authorizationChecker->isGranted('ROLE_EDIT_CV')
                 || $authorizationChecker->isGranted('ROLE_RH')
             ) {
-                $menu['RH']->addChild('CVthèque', array('route' => 'intranet_homepage'));
+                $menu['RH']->addChild('CVthèque', array('route' => 'cv_index'));
             }
 
             if ($authorizationChecker->isGranted('ROLE_VIEW_JOBOFFER')

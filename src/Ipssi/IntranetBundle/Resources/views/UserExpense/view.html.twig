@@ -78,6 +78,10 @@
     </div>
     <br><br><br>
     <a href="{{ path('intranet_expense_update', {'id': userExpense.id}) }}" class="btn btn-primary" style="margin-bottom:10px;">Modifier</a>
+    {% if is_granted('ROLE_ALL_EXPENSE') %}
+        <a href="{{ path('intranet_expense_online', {'id': userExpense.id}) }}" class="btn btn-success" style="margin-bottom:10px;">Valider</a>
+        <a href="{{ path('intranet_expense_offline', {'id': userExpense.id}) }}" class="btn btn-danger" style="margin-bottom:10px;">Refuser</a>
+    {% endif %}
 
 
 {% endblock %}

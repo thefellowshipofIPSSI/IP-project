@@ -2,3 +2,7 @@ services:
 #    job.example:
 #        class: JobBundle\Example
 #        arguments: ["@service_id", "plain_value", "%parameter%"]
+
+  app.datatable.cv:
+          class: Ipssi\JobBundle\Datatables\CVDatatable
+          parent: sg_datatables.datatable.abstract

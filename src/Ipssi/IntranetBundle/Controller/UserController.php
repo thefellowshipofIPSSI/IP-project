@@ -50,7 +50,6 @@ class UserController extends Controller
         return $query->getResponse();
     }
 
-
     /**
      * Profile of a user
      * @param $user_id

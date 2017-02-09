@@ -17,7 +17,8 @@ use Symfony\Component\HttpFoundation\Response;
 
 
 
-class UserCRAController extends Controller {
+class UserCRAController extends Controller
+{
 
     /**
      * List all CRA in table
@@ -204,6 +205,7 @@ class UserCRAController extends Controller {
      */
     public function onlineAction(UserCRA $userCRA) {
         $userCRA->setStatus(1);
+        $userCRA->setUserValidation($this->getUser());
 
         $em = $this->getDoctrine()->getEntityManager();
         $em->persist($userCRA);
@@ -211,7 +213,7 @@ class UserCRAController extends Controller {
 
         $this->addFlash(
             'success',
-            'Compte rendu d\'activité ' . $userCRA->getProjectName() . ' mis en ligne'
+            'Compte rendu d\'activité ' . $userCRA->getProjectName() . ' validé'
         );
 
         return $this->redirectToRoute('intranet_cra_homepage');
@@ -226,7 +228,9 @@ class UserCRAController extends Controller {
      */
     public function offlineAction(UserCRA $userCRA)
     {
-        $userCRA->setStatus(0);
+        $userCRA->setStatus(2);
+        $userCRA->setUserValidation($this->getUser());
+
 
         $em = $this->getDoctrine()->getEntityManager();
         $em->persist($userCRA);
@@ -234,7 +238,7 @@ class UserCRAController extends Controller {
 
         $this->addFlash(
             'success',
-            'Le compte rendu d\'activité ' . $userCRA->getProjectName() . ' n\'est plus visible sur le site !'
+            'Le compte rendu d\'activité ' . $userCRA->getProjectName() . ' refusé'
         );
 
         return $this->redirectToRoute('intranet_cra_homepage');

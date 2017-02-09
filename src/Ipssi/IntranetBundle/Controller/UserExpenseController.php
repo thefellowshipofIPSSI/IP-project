@@ -231,6 +231,8 @@ class UserExpenseController extends Controller {
     public function onlineAction(UserExpense $userExpense)
     {
         $userExpense->setStatus(1);
+        $userExpense->setUserValidation($this->getUser());
+
 
         $em = $this->getDoctrine()->getEntityManager();
         $em->persist($userExpense);
@@ -238,7 +240,7 @@ class UserExpenseController extends Controller {
 
         $this->addFlash(
             'success',
-            'Note de frais du ' . $userExpense->getCreationDate()->format('d-m-Y H:i:s') . ' mis en ligne'
+            'Note de frais du ' . $userExpense->getCreationDate()->format('d-m-Y H:i:s') . ' validé'
         );
 
         return $this->redirectToRoute('intranet_expense_homepage');
@@ -253,7 +255,8 @@ class UserExpenseController extends Controller {
      */
     public function offlineAction(UserExpense $userExpense)
     {
-        $userExpense->setStatus(0);
+        $userExpense->setStatus(2);
+        $userExpense->setUserValidation($this->getUser());
 
         $em = $this->getDoctrine()->getEntityManager();
         $em->persist($userExpense);
@@ -261,7 +264,7 @@ class UserExpenseController extends Controller {
 
         $this->addFlash(
             'success',
-            'Note de frais du ' . $userExpense->getCreationDate()->format('d-m-Y H:i:s') . ' n\'est plus visible sur le site !'
+            'Note de frais du ' . $userExpense->getCreationDate()->format('d-m-Y H:i:s') . ' refusé'
         );
 
         return $this->redirectToRoute('intranet_expense_homepage');

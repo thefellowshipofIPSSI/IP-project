@@ -20,13 +20,30 @@ class CVController extends Controller
      */
     public function indexAction()
     {
-        $em = $this->getDoctrine()->getManager();
+//        $em = $this->getDoctrine()->getManager();
+//
+//        $cVs = $em->getRepository('JobBundle:CV')->findAll();
+//
+//        return $this->render('JobBundle:Intranet/cv:index.html.twig', array(
+//            'cVs' => $cVs,
+//        ));
 
-        $cVs = $em->getRepository('JobBundle:CV')->findAll();
+        $datatable = $this->get('app.datatable.cv');
+        $datatable->buildDatatable();
 
         return $this->render('JobBundle:Intranet/cv:index.html.twig', array(
-            'cVs' => $cVs,
+            'datatable' => $datatable,
         ));
+    }
+
+    public function indexResultsAction()
+    {
+        $datatable = $this->get('app.datatable.cv');
+        $datatable->buildDatatable();
+
+        $query = $this->get('sg_datatables.query')->getQueryFrom($datatable);
+
+        return $query->getResponse();
     }
 
     /**

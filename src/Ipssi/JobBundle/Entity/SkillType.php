@@ -40,7 +40,6 @@ class SkillType
      */
     private $createdAt;
 
-
     /**
      * @ORM\OneToMany(targetEntity="Skill", mappedBy="type", cascade={"persist"})
      */

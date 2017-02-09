@@ -222,6 +222,7 @@ class UserVacationController extends Controller {
     public function onlineAction(UserVacation $userVacation)
     {
         $userVacation->setStatus(1);
+        $userVacation->setUserValidation($this->getUser());
 
         $em = $this->getDoctrine()->getEntityManager();
         $em->persist($userVacation);
@@ -244,7 +245,8 @@ class UserVacationController extends Controller {
      */
     public function offlineAction(UserVacation $userVacation)
     {
-        $userVacation->setStatus(0);
+        $userVacation->setStatus(2);
+        $userVacation->setUserValidation($this->getUser());
 
         $em = $this->getDoctrine()->getEntityManager();
         $em->persist($userVacation);

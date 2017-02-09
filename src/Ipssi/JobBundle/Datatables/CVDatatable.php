@@ -1,40 +1,22 @@
 <?php
 
-namespace Ipssi\IntranetBundle\Datatables;
+namespace Ipssi\JobBundle\Datatables;
 
 use Sg\DatatablesBundle\Datatable\View\AbstractDatatableView;
 use Sg\DatatablesBundle\Datatable\View\Style;
 
 /**
- * Class UserVacationDatatable
+ * Class CVDatatable
  *
- * @package Ipssi\IntranetBundle\Datatables
+ * @package Ipssi\JobBundle\Datatables
  */
-class UserVacationDatatable extends AbstractDatatableView
+class CVDatatable extends AbstractDatatableView
 {
     /**
      * {@inheritdoc}
      */
     public function buildDatatable(array $options = array())
     {
-        $this->topActions->set(array(
-            'start_html' => '<div class="row"><div class="col-sm-3">',
-            'end_html' => '<hr></div></div>',
-            'actions' => array(
-                array(
-                    'route' => $this->router->generate('intranet_vacation_create'),
-                    'label' => $this->translator->trans('datatables.actions.new'),
-                    'icon' => 'glyphicon glyphicon-plus',
-                    'attributes' => array(
-                        'rel' => 'tooltip',
-                        'title' => $this->translator->trans('datatables.actions.new'),
-                        'class' => 'btn btn-primary',
-                        'role' => 'button'
-                    ),
-                )
-            )
-        ));
-
         $this->features->set(array(
             'auto_width' => true,
             'defer_render' => false,
@@ -79,7 +61,7 @@ class UserVacationDatatable extends AbstractDatatableView
         ));
 
         $this->ajax->set(array(
-            'url' => $this->router->generate('intranet_vacation_results'),
+            'url' => $this->router->generate('cv_results'),
             'type' => 'POST',
             'pipeline' => 0
         ));
@@ -111,32 +93,20 @@ class UserVacationDatatable extends AbstractDatatableView
             ->add('id', 'column', array(
                 'title' => 'Id',
             ))
-            ->add('creationDate', 'datetime', array(
+//            ->add('cvName', 'column', array(
+//                'title' => 'CvName',
+//            ))
+            ->add('createdAt', 'datetime', array(
                 'title' => 'Création',
-            ))
-//            ->add('modificationDate', 'datetime', array(
-//                'title' => 'ModificationDate',
-//            ))
-            ->add('beginDate', 'datetime', array(
-                'title' => 'Début',
-            ))
-            ->add('endDate', 'datetime', array(
-                'title' => 'Fin',
-            ))
-            ->add('nbDays', 'column', array(
-                'title' => 'Nb jours',
-            ))
-//            ->add('comment', 'column', array(
-//                'title' => 'Comment',
-//            ))
-            ->add('status', 'column', array(
-                'title' => 'Statut',
             ))
             ->add('user.username', 'column', array(
                 'title' => 'Utilisateur',
-                'add_if' => function() {
-                    return $this->authorizationChecker->isGranted('ROLE_ADMIN');
-                },
+            ))
+//            ->add('updatedAt', 'datetime', array(
+//                'title' => 'UpdatedAt',
+//            ))
+            ->add('valid', 'boolean', array(
+                'title' => 'Validation',
             ))
 //            ->add('user.google_id', 'column', array(
 //                'title' => 'User Google_id',
@@ -144,20 +114,11 @@ class UserVacationDatatable extends AbstractDatatableView
 //            ->add('user.google_access_token', 'column', array(
 //                'title' => 'User Google_access_token',
 //            ))
-//            ->add('user_validation.id', 'column', array(
-//                'title' => 'User_validation Id',
-//            ))
-//            ->add('user_validation.google_id', 'column', array(
-//                'title' => 'User_validation Google_id',
-//            ))
-//            ->add('user_validation.google_access_token', 'column', array(
-//                'title' => 'User_validation Google_access_token',
-//            ))
             ->add(null, 'action', array(
                 'title' => $this->translator->trans('datatables.actions.title'),
                 'actions' => array(
                     array(
-                        'route' => 'intranet_vacation_view',
+                        'route' => 'cv_show',
                         'route_parameters' => array(
                             'id' => 'id'
                         ),
@@ -171,7 +132,7 @@ class UserVacationDatatable extends AbstractDatatableView
                         ),
                     ),
                     array(
-                        'route' => 'intranet_vacation_update',
+                        'route' => 'cv_edit',
                         'route_parameters' => array(
                             'id' => 'id'
                         ),
@@ -185,7 +146,7 @@ class UserVacationDatatable extends AbstractDatatableView
                         ),
                     ),
                     array(
-                        'route' => 'intranet_vacation_delete',
+                        'route' => 'cv_delete',
                         'route_parameters' => array(
                             'id' => 'id'
                         ),
@@ -208,7 +169,7 @@ class UserVacationDatatable extends AbstractDatatableView
      */
     public function getEntity()
     {
-        return 'Ipssi\IntranetBundle\Entity\UserVacation';
+        return 'Ipssi\JobBundle\Entity\CV';
     }
 
     /**
@@ -216,6 +177,6 @@ class UserVacationDatatable extends AbstractDatatableView
      */
     public function getName()
     {
-        return 'uservacation_datatable';
+        return 'cv_datatable';
     }
 }
