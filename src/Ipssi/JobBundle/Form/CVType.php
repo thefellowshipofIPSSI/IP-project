@@ -26,7 +26,11 @@ class CVType extends AbstractType
                     'accept'=>'application/pdf',
                     'data-buttonText'=>"Selectionner votre fichier"]
             ])
-        ->add('save', SubmitType::class);
+        ->add('save', SubmitType::class, [
+            'attr' => [
+                'class' => 'btn btn-primary'
+            ]
+        ]);
 
     }
     

@@ -90,22 +90,24 @@
 
         <div id="your-universe" class="panel-body">
             <div class="row">
-                <h4>Vos CV</h4>
                 <div class="col-md-12">
-                    <table class="table table-user-information">
-                        <tbody>
-                            {% for cV in cvs %}
-                                <tr>
-                                    <td>
-                                        <a href="{{ vich_uploader_asset(cV, 'cvFile') }}">CV {{ cV.createdAt|date('d-m-Y') }}</a> - <a href="{{ path('cv_edit', { 'id': cV.id }) }}">Modifier</a> - <a href="{{ path('cv_delete', { 'id': cV.id }) }}">Supprimer</a>
-                                    </td>
-                                </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
+                    {% if cvs is defined and cvs is not empty %}
+                        <h4>Vos CV</h4>
+
+                        <table class="table table-user-information">
+                            <tbody>
+                                {% for cV in cvs %}
+                                    <tr>
+                                        <td>
+                                            <a href="{{ vich_uploader_asset(cV, 'cvFile') }}">CV {{ cV.createdAt|date('d-m-Y') }}</a> - <a href="{{ path('cv_delete', { 'id': cV.id }) }}">Supprimer</a>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    {% endif %}
                 </div>
             </div>
-
         </div>
 
 

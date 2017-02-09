@@ -1,11 +1,14 @@
 {{ form_start(form) }}
-{{ form_widget(form.cvFile) }}
-
-<div class="form-group">
-    {#{{ form_widget(form.save, {'attr': {'class': 'btn btn-primary'}}) }}#}
-    {{ form_widget(form.save, {'label':'Sauvegarder'}) }}
-
-</div>
+    <div class="row">
+        <div class="form-group col-lg-6">
+            {{ form_widget(form.cvFile) }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group">
+            {{ form_widget(form.save, {'label':'Sauvegarder'}) }}
+        </div>
+    </div>
 {{ form_end(form) }}
 
 
@@ -14,13 +17,12 @@
     <script type="text/javascript">
         $("#ipssi_jobbundle_cv_cvFile_file").fileinput({
             theme: "fa",
+            language: "fr",
             showRemove: true,
             showUpload: false,
             maxFileCount: 1,
-            allowedFileTypes: ["image"]
+            allowedFileTypes: ["application/pdf"]
         })
-
-
     </script>
 {% endblock %}
 

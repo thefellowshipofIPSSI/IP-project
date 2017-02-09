@@ -61,7 +61,6 @@ class DefaultController extends Controller
                 'cras' => $cras,
                 'expenses' => $expenses,
                 'vacations' => $vacations,
-//                'users' => $users,
             ]);
 
         } else if ($this->get('security.authorization_checker')->isGranted('ROLE_REDACTEUR')) {
