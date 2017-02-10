@@ -45,10 +45,6 @@ class CVDatatable extends AbstractDatatableView
                                     '1', // title column
                                     '2', // title column
                                     '3', // visible column
-                                    '4', // visible column
-                                    '5', // publishedAt column
-                                    '6', // updatedAt column
-                                    '7', // createdBy column
                                 )
                             )
                         ),
