@@ -67,7 +67,7 @@ class UserVacation
     private $comment;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Ipssi\IntranetBundle\Entity\Statut", inversedBy="userExpense")
+     * @ORM\ManyToOne(targetEntity="Ipssi\IntranetBundle\Entity\Statut", inversedBy="userVacation")
      * @ORM\JoinColumn(name="statut_id", referencedColumnName="id")
      */
     private $statut;
@@ -325,7 +325,7 @@ class UserVacation
      *
      * @return UserVacation
      */
-    public function setStatut(\Ipssi\IntranetBundle\Entity\Statut $statut)
+    public function setStatut(\Ipssi\IntranetBundle\Entity\Statut $statut = null)
     {
         $this->statut = $statut;
 
