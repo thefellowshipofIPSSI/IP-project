@@ -71,9 +71,26 @@ intranet_candidacies:
     path:     /candidatures
     defaults: { _controller: JobBundle:Intranet/Candidacy:index }
 
+
+intranet_candidacy_results:
+    path:     /candidatures/results
+    defaults: { _controller: JobBundle:Intranet/Candidacy:candidaciesResults }
+
+
 intranet_list_candidacies_by_offer:
     path:     /offre/{offer}/candidatures
     defaults: { _controller: JobBundle:Intranet/Candidacy:listByOffer }
+
+intranet_candidacy_offer_results:
+    path:     /offre/{offer}/candidatures/results
+    defaults: { _controller: JobBundle:Intranet/Candidacy:candidaciesByOfferResults }
+
+
+intranet_candidacy:
+    path:     /candidature/{candidacy}
+    defaults: { _controller: JobBundle:Intranet/Candidacy:view }
+    options:
+        expose: true
 
 
 ############# Skills ################

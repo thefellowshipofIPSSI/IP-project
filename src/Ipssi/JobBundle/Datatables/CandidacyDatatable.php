@@ -15,23 +15,23 @@ class CandidacyDatatable extends AbstractDatatableView
     /**
      * {@inheritdoc}
      */
-    public function buildDatatable(array $options = array())
+    public function buildDatatable(array $options = array(), $offer = null)
     {
         $this->topActions->set(array(
             'start_html' => '<div class="row"><div class="col-sm-3">',
             'end_html' => '<hr></div></div>',
             'actions' => array(
-                array(
-                    'route' => $this->router->generate('intranet_page_create'),
-                    'label' => $this->translator->trans('datatables.actions.new'),
-                    'icon' => 'glyphicon glyphicon-plus',
-                    'attributes' => array(
-                        'rel' => 'tooltip',
-                        'title' => $this->translator->trans('datatables.actions.new'),
-                        'class' => 'btn btn-primary',
-                        'role' => 'button'
-                    ),
-                )
+//                array(
+//                    'route' => $this->router->generate('intranet_page_create'),
+//                    'label' => $this->translator->trans('datatables.actions.new'),
+//                    'icon' => 'glyphicon glyphicon-plus',
+//                    'attributes' => array(
+//                        'rel' => 'tooltip',
+//                        'title' => $this->translator->trans('datatables.actions.new'),
+//                        'class' => 'btn btn-primary',
+//                        'role' => 'button'
+//                    ),
+//                )
             )
         ));
 
@@ -50,27 +50,27 @@ class CandidacyDatatable extends AbstractDatatableView
             'scroll_y' => '',
             'scroll_x' => false,
             'extensions' => array(
-//                'buttons' =>
-//                    array(
-//                        'colvis',
-//                        'excel',
-//                        'pdf' => array(
-//                            'extend' => 'pdf',
-//                            'exportOptions' => array(
-//                                // show only the following columns:
-//                                'columns' => array(
-//                                    '0', // title column
-//                                    '1', // title column
-//                                    '2', // title column
-//                                    '3', // visible column
-//                                    '4', // visible column
-//                                    '5', // publishedAt column
-//                                    '6', // updatedAt column
-//                                    '7', // createdBy column
-//                                )
-//                            )
-//                        ),
-//                    ),
+                'buttons' =>
+                    array(
+                        'colvis',
+                        'excel',
+                        'pdf' => array(
+                            'extend' => 'pdf',
+                            'exportOptions' => array(
+                                // show only the following columns:
+                                'columns' => array(
+                                    '0', // title column
+                                    '1', // title column
+                                    '2', // title column
+                                    '3', // visible column
+                                    '4', // visible column
+                                    '5', // publishedAt column
+                                    '6', // updatedAt column
+                                    '7', // createdBy column
+                                )
+                            )
+                        ),
+                    ),
                 'responsive' => true,
                 'fixedHeader' => true,
             ),
@@ -78,11 +78,22 @@ class CandidacyDatatable extends AbstractDatatableView
             'highlight_color' => 'yellow'
         ));
 
-        $this->ajax->set(array(
-            'url' => $this->router->generate('intranet_page_results'),
-            'type' => 'POST',
-            'pipeline' => 0
-        ));
+        if($offer)
+        {
+            $this->ajax->set(array(
+                'url' => $this->router->generate('intranet_candidacy_offer_results', array('offer' => $offer)),
+                'type' => 'POST',
+                'pipeline' => 0
+            ));
+        } else {
+            $this->ajax->set(array(
+                'url' => $this->router->generate('intranet_candidacy_results'),
+                'type' => 'POST',
+                'pipeline' => 0
+            ));
+        }
+
+
 
         $this->options->set(array(
             'display_start' => 0,
@@ -111,7 +122,7 @@ class CandidacyDatatable extends AbstractDatatableView
             ->add('id', 'column', array(
                 'title' => 'Id',
             ))
-            ->add('offer', 'column', array(
+            ->add('offer.name', 'column', array(
                 'title' => 'Offre',
             ))
             ->add('createdAt', 'datetime', array(
@@ -120,7 +131,7 @@ class CandidacyDatatable extends AbstractDatatableView
             ->add('candidate.username', 'column', array(
                 'title' => 'Candidat',
             ))
-            ->add('cv', 'column', array(
+            ->add('cv.file', 'column', array(
                 'title' => 'CV',
             ))
             ->add('status', 'column', array(
@@ -130,14 +141,14 @@ class CandidacyDatatable extends AbstractDatatableView
                 'title' => 'Modifiée le',
             ))
             ->add('updatedBy.username', 'column', array(
-                'title' => 'Utilisateur',
+                'title' => 'Modifié par',
             ))
 
             ->add(null, 'action', array(
                 'title' => $this->translator->trans('datatables.actions.title'),
                 'actions' => array(
                     array(
-                        'route' => 'intranet_candidacy_view',
+                        'route' => 'intranet_candidacy',
                         'route_parameters' => array(
                             'candidacy' => 'id'
                         ),
