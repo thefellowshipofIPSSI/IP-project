@@ -112,7 +112,7 @@
                         </a>
                     </div>
                 </div>
-                {% if not is_granted('ROLE_COLLABORATEUR') %}
+                {% if is_granted('ROLE_RH') or is_granted('ROLE_MANAGER') or is_granted('ROLE_SUPERVISEUR') %}
                     <div class="col-lg-3 col-md-6">
                         <div class="panel panel-red">
                             <div class="panel-heading">

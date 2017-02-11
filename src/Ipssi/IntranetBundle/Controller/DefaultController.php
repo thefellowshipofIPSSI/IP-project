@@ -49,7 +49,8 @@ class DefaultController extends Controller
                 'users' => $users,
             ]);
 
-        } else if ($this->get('security.authorization_checker')->isGranted('ROLE_COLLABORATEUR')) {
+        } else if ($this->get('security.authorization_checker')->isGranted('ROLE_COLLABORATEUR')
+            || $this->get('security.authorization_checker')->isGranted('ROLE_USER')) {
 
             $user_id = $this->getUser()->getId();
             $cras = count($this->get('intranet.repository.cra')->findBy(['user' => $user_id]));
