@@ -55,6 +55,12 @@ services:
         arguments:
           - 'IntranetBundle:UserVacation'
 
+    intranet.repository.statut:
+            class: IntranetBundle\Repository\StatutRepository
+            factory: ['@doctrine.orm.entity_manager', 'getRepository']
+            arguments:
+              - 'IntranetBundle:Statut'
+
 
     #-----------------------MENU---------------------------------------------
     app.menu_builder:

@@ -24,14 +24,53 @@
 
 {% block body %}
 
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-12">
+
+                <!-- Title -->
+                <h1>CV de : {{ cV.user.username|capitalize }}</h1>
+
+                <!-- Author -->
+                <p class="lead">
+                    par {{ cV.user.username }} le {{ cV.createdAt|date('d/m/Y') }} à {{ cV.createdAt|date('H:i') }}
+                </p>
+
+                <hr>
+                <embed src="{{ vich_uploader_asset(cV, 'cvFile') }}" width="800px" height="1000" />
+
+                <table class="table table-user-information">
+                    <tbody>
+                        <tr>
+                            <td>
+                                <p>Creé le {{ cV.createdAt|date('d/m/Y') }}</p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <br>
+                <a href="{{ path('cv_edit', {'id': cV.id}) }}" class="btn btn-primary" style="margin-bottom:10px;">Modifier</a>
+                {% if is_granted('ROLE_EDIT_CV') %}
+                    {% if cV.statut.id == '1' %}
+                        <a href="{{ path('cv_online', {'id': cV.id}) }}" class="btn btn-success" style="margin-bottom:10px;">Valider</a>
+                        <a href="{{ path('cv_offline', {'id': cV.id}) }}" class="btn btn-danger" style="margin-bottom:10px;">Refuser</a>
+                    {% elseif cV.statut.id != '2' %}
+                        <a href="{{ path('cv_online', {'id': cV.id}) }}" class="btn btn-success" style="margin-bottom:10px;">Valider</a>
+                    {% elseif cV.statut.id != '3' %}
+                        <a href="{{ path('cv_offline', {'id': cV.id}) }}" class="btn btn-danger" style="margin-bottom:10px;">Refuser</a>
+                    {% endif %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
     <div class="col-lg-12">
 
+        <p></p>
+        <p>Creé le {{ cV.createdAt|date('d/m/Y') }}</p>
 
-        <img src="{{ vich_uploader_asset(cV, 'cvFile') }}" />
 
-
-        <br><br><br>
-        <a href="{{ path('cv_edit', {'id': cV.id}) }}" class="btn btn-primary" style="margin-bottom:10px;">Modifier</a>
 
     </div>
 

@@ -67,13 +67,6 @@ class UserExpense
     private $endDate;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="status", type="integer", options={"default":0})
-     */
-    private $status;
-
-    /**
      * @var \DateTime
      *
      * @ORM\Column(name="validationDate", type="datetime", nullable=true)
@@ -100,6 +93,12 @@ class UserExpense
      */
     private $expense_line;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="Ipssi\IntranetBundle\Entity\Statut", inversedBy="userExpense")
+     * @ORM\JoinColumn(name="statut_id", referencedColumnName="id")
+     */
+    private $statut;
+
 
     /**
      * Before persist or update, call the updatedTimestamps() function.
@@ -114,7 +113,6 @@ class UserExpense
         if($this->getCreationDate() == null)
         {
             $this->setCreationDate(new \DateTime('now'));
-            $this->setStatus(0);
         }
     }
 
@@ -296,30 +294,6 @@ class UserExpense
     }
 
     /**
-     * Set status
-     *
-     * @param integer $status
-     *
-     * @return UserExpense
-     */
-    public function setStatus($status)
-    {
-        $this->status = $status;
-
-        return $this;
-    }
-
-    /**
-     * Get status
-     *
-     * @return integer
-     */
-    public function getStatus()
-    {
-        return $this->status;
-    }
-
-    /**
      * Set validationDate
      *
      * @param \DateTime $validationDate
@@ -423,5 +397,29 @@ class UserExpense
     public function getExpenseLine()
     {
         return $this->expense_line;
+    }
+
+    /**
+     * Set statut
+     *
+     * @param \Ipssi\IntranetBundle\Entity\Statut $statut
+     *
+     * @return UserExpense
+     */
+    public function setStatut(\Ipssi\IntranetBundle\Entity\Statut $statut)
+    {
+        $this->statut = $statut;
+
+        return $this;
+    }
+
+    /**
+     * Get statut
+     *
+     * @return \Ipssi\IntranetBundle\Entity\Statut
+     */
+    public function getStatut()
+    {
+        return $this->statut;
     }
 }

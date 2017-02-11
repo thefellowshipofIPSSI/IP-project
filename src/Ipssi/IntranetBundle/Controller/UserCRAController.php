@@ -16,10 +16,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\HttpFoundation\Response;
 
 
-
 class UserCRAController extends Controller
 {
-
     /**
      * List all CRA in table
      * @return \Symfony\Component\HttpFoundation\Response
@@ -82,6 +80,10 @@ class UserCRAController extends Controller
             $userCRA->setUser($this->getUser());
 
             $em = $this->getDoctrine()->getEntityManager();
+
+            $statut = $this->get('intranet.repository.statut')->findOneBy(array('name' => 'En attente'));
+            $userCRA->setStatut($statut);
+
             $em->persist($userCRA);
             $em->flush();
 
@@ -120,6 +122,7 @@ class UserCRAController extends Controller
             $userCRA = $form->getData();
 
             $em = $this->getDoctrine()->getEntityManager();
+
             $em->persist($userCRA);
             $em->flush();
 
@@ -204,7 +207,8 @@ class UserCRAController extends Controller
      * @Security("is_granted('edit', userCRA)")
      */
     public function onlineAction(UserCRA $userCRA) {
-        $userCRA->setStatus(1);
+        $statut = $this->get('intranet.repository.statut')->findOneBy(array('name' => 'Validé'));
+        $userCRA->setStatut($statut);
         $userCRA->setUserValidation($this->getUser());
 
         $em = $this->getDoctrine()->getEntityManager();
@@ -228,7 +232,8 @@ class UserCRAController extends Controller
      */
     public function offlineAction(UserCRA $userCRA)
     {
-        $userCRA->setStatus(2);
+        $statut = $this->get('intranet.repository.statut')->findOneBy(array('name' => 'Refusé'));
+        $userCRA->setStatut($statut);
         $userCRA->setUserValidation($this->getUser());
 
 

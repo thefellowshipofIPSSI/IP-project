@@ -86,6 +86,12 @@ class User extends BaseUser {
      */
     private $cv;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Ipssi\JobBundle\Entity\CV", mappedBy="user_validation")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $user_validation_cv;
+
 
     /*****  A revoir ****/
 

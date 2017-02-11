@@ -129,16 +129,13 @@ class UserExpenseDatatable extends AbstractDatatableView
             ->add('endDate', 'datetime', array(
                 'title' => 'Fin',
             ))
-            ->add('status', 'column', array(
-                'title' => 'Statut',
-            ))
 //            ->add('validationDate', 'datetime', array(
 //                'title' => 'ValidationDate',
 //            ))
             ->add('user.username', 'column', array(
                 'title' => 'Utilisateur',
                 'add_if' => function() {
-                    return $this->authorizationChecker->isGranted('ROLE_ADMIN');
+                    return $this->authorizationChecker->isGranted('ROLE_ALL_EXPENSE');
                 },
             ))
 //            ->add('user.google_id', 'column', array(
@@ -156,6 +153,9 @@ class UserExpenseDatatable extends AbstractDatatableView
 //            ->add('user_validation.google_access_token', 'column', array(
 //                'title' => 'User_validation Google_access_token',
 //            ))
+            ->add('statut.name', 'column', array(
+                'title' => 'Statut',
+            ))
             ->add(null, 'action', array(
                 'title' => $this->translator->trans('datatables.actions.title'),
                 'actions' => array(

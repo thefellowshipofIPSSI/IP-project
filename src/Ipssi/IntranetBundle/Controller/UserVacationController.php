@@ -93,6 +93,8 @@ class UserVacationController extends Controller {
             $userVacation->setUser($this->getUser());
 
             $em = $this->getDoctrine()->getEntityManager();
+            $statut = $this->get('intranet.repository.statut')->findOneBy(array('name' => 'En attente'));
+            $userVacation->setStatut($statut);
             $em->persist($userVacation);
             $em->flush();
 
@@ -221,7 +223,8 @@ class UserVacationController extends Controller {
      */
     public function onlineAction(UserVacation $userVacation)
     {
-        $userVacation->setStatus(1);
+        $statut = $this->get('intranet.repository.statut')->findOneBy(array('name' => 'Validé'));
+        $userVacation->setStatut($statut);
         $userVacation->setUserValidation($this->getUser());
 
         $em = $this->getDoctrine()->getEntityManager();
@@ -245,7 +248,8 @@ class UserVacationController extends Controller {
      */
     public function offlineAction(UserVacation $userVacation)
     {
-        $userVacation->setStatus(2);
+        $statut = $this->get('intranet.repository.statut')->findOneBy(array('name' => 'Refusé'));
+        $userVacation->setStatut($statut);
         $userVacation->setUserValidation($this->getUser());
 
         $em = $this->getDoctrine()->getEntityManager();

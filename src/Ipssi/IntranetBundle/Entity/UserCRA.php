@@ -74,13 +74,6 @@ class UserCRA
     /**
      * @var int
      *
-     * @ORM\Column(name="status", type="integer", options={"default":0})
-     */
-    private $status;
-
-    /**
-     * @var int
-     *
      * @ORM\Column(name="nbLostTimeAccident", type="integer", options={"default":0})
      */
     private $nbLostTimeAccident;
@@ -185,6 +178,12 @@ class UserCRA
      */
     private $user_validation;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="Ipssi\IntranetBundle\Entity\Statut", inversedBy="userCRA")
+     * @ORM\JoinColumn(name="statut_id", referencedColumnName="id")
+     */
+    private $statut;
+
 
     /**
      * Before persist or update, call the updatedTimestamps() function.
@@ -199,7 +198,6 @@ class UserCRA
         if($this->getCreationDate() == null)
         {
             $this->setCreationDate(new \DateTime('now'));
-            $this->setStatus(0);
             $this->setClientSatisfaction(0);
         }
     }
@@ -371,30 +369,6 @@ class UserCRA
     public function getEndDate()
     {
         return $this->endDate;
-    }
-
-    /**
-     * Set status
-     *
-     * @param integer $status
-     *
-     * @return UserCRA
-     */
-    public function setStatus($status)
-    {
-        $this->status = $status;
-
-        return $this;
-    }
-
-    /**
-     * Get status
-     *
-     * @return integer
-     */
-    public function getStatus()
-    {
-        return $this->status;
     }
 
     /**
@@ -755,5 +729,29 @@ class UserCRA
     public function getUserValidation()
     {
         return $this->user_validation;
+    }
+
+    /**
+     * Set statut
+     *
+     * @param \Ipssi\IntranetBundle\Entity\Statut $statut
+     *
+     * @return UserCRA
+     */
+    public function setStatut(\Ipssi\IntranetBundle\Entity\Statut $statut)
+    {
+        $this->statut = $statut;
+
+        return $this;
+    }
+
+    /**
+     * Get statut
+     *
+     * @return \Ipssi\IntranetBundle\Entity\Statut
+     */
+    public function getStatut()
+    {
+        return $this->statut;
     }
 }

@@ -67,11 +67,10 @@ class UserVacation
     private $comment;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="status", type="integer")
+     * @ORM\ManyToOne(targetEntity="Ipssi\IntranetBundle\Entity\Statut", inversedBy="userExpense")
+     * @ORM\JoinColumn(name="statut_id", referencedColumnName="id")
      */
-    private $status;
+    private $statut;
 
     /**
      * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User", inversedBy="user_vacation")
@@ -100,7 +99,6 @@ class UserVacation
         if($this->getCreationDate() == null)
         {
             $this->setCreationDate(new \DateTime('now'));
-            $this->setStatus(0);
         }
     }
 
@@ -273,30 +271,6 @@ class UserVacation
     }
 
     /**
-     * Set status
-     *
-     * @param integer $status
-     *
-     * @return UserVacation
-     */
-    public function setStatus($status)
-    {
-        $this->status = $status;
-
-        return $this;
-    }
-
-    /**
-     * Get status
-     *
-     * @return integer
-     */
-    public function getStatus()
-    {
-        return $this->status;
-    }
-
-    /**
      * Set user
      *
      * @param \UserBundle\Entity\User $user
@@ -342,5 +316,29 @@ class UserVacation
     public function getUserValidation()
     {
         return $this->user_validation;
+    }
+
+    /**
+     * Set statut
+     *
+     * @param \Ipssi\IntranetBundle\Entity\Statut $statut
+     *
+     * @return UserVacation
+     */
+    public function setStatut(\Ipssi\IntranetBundle\Entity\Statut $statut)
+    {
+        $this->statut = $statut;
+
+        return $this;
+    }
+
+    /**
+     * Get statut
+     *
+     * @return \Ipssi\IntranetBundle\Entity\Statut
+     */
+    public function getStatut()
+    {
+        return $this->statut;
     }
 }

@@ -132,9 +132,6 @@ class UserCRADatatable extends AbstractDatatableView
             ->add('endDate', 'datetime', array(
                 'title' => 'Fin',
             ))
-            ->add('status', 'column', array(
-                'title' => 'Statut',
-            ))
 //            ->add('nbLostTimeAccident', 'column', array(
 //                'title' => 'NbLostTimeAccident',
 //            ))
@@ -174,7 +171,7 @@ class UserCRADatatable extends AbstractDatatableView
             ->add('user.username', 'column', array(
                 'title' => 'Utilisateur',
                 'add_if' => function() {
-                    return $this->authorizationChecker->isGranted('ROLE_ADMIN');
+                    return $this->authorizationChecker->isGranted('ROLE_EDIT_CRA');
                 },
             ))
 //            ->add('user.google_id', 'column', array(
@@ -192,6 +189,9 @@ class UserCRADatatable extends AbstractDatatableView
 //            ->add('user_validation.google_access_token', 'column', array(
 //                'title' => 'User_validation Google_access_token',
 //            ))
+            ->add('statut.name', 'column', array(
+                'title' => 'Statut',
+            ))
             ->add(null, 'action', array(
                 'title' => $this->translator->trans('datatables.actions.title'),
                 'actions' => array(

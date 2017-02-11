@@ -1,5 +1,3 @@
-
-
 intranet_candidacies:
     path:     /candidatures
     defaults: { _controller: JobBundle:Intranet/Candidacy:index }
@@ -112,7 +110,7 @@ cv_index:
 
 cv_results:
     path:     /cv/results
-    defaults: { _controller: JobBundle:Intranet/CV:index }
+    defaults: { _controller: JobBundle:Intranet/CV:indexResults }
     options:
         expose: true
 
@@ -137,5 +135,17 @@ cv_edit:
 cv_delete:
     path:     /cv/{id}/delete
     defaults: { _controller: JobBundle:Intranet/CV:delete }
+    options:
+        expose: true
+
+cv_online:
+    path:     /cv/{id}/online
+    defaults: { _controller: JobBundle:Intranet/CV:online }
+    options:
+        expose: true
+
+cv_offline:
+    path:     /cv/{id}/offline
+    defaults: { _controller: JobBundle:Intranet/CV:offline }
     options:
         expose: true

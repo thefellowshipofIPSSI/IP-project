@@ -61,17 +61,23 @@ class CV
     private $updatedAt;
 
     /**
-     * @ORM\Column(type="boolean", options={"default" : 0})
-     *
-     * @var string
-     */
-    private $valid;
-
-    /**
      * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User", inversedBy="cv")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     private $user;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User", inversedBy="user_validation_cv")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $user_validation;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Ipssi\IntranetBundle\Entity\Statut", inversedBy="cv")
+     * @ORM\JoinColumn(name="statut_id", referencedColumnName="id", nullable=false)
+     */
+    private $statut;
+
 
 
     /**
@@ -87,10 +93,6 @@ class CV
         if($this->getCreatedAt() == null)
         {
             $this->setCreatedAt(new \DateTime('now'));
-        }
-        if($this->getValid() == null)
-        {
-            $this->setValid(0);
         }
     }
 
@@ -224,26 +226,50 @@ class CV
     }
 
     /**
-     * Set valid
+     * Set statut
      *
-     * @param boolean $valid
+     * @param \Ipssi\IntranetBundle\Entity\Statut $statut
      *
      * @return CV
      */
-    public function setValid($valid)
+    public function setStatut(\Ipssi\IntranetBundle\Entity\Statut $statut)
     {
-        $this->valid = $valid;
+        $this->statut = $statut;
 
         return $this;
     }
 
     /**
-     * Get valid
+     * Get statut
      *
-     * @return boolean
+     * @return \Ipssi\IntranetBundle\Entity\Statut
      */
-    public function getValid()
+    public function getStatut()
     {
-        return $this->valid;
+        return $this->statut;
+    }
+
+    /**
+     * Set userValidation
+     *
+     * @param \UserBundle\Entity\User $userValidation
+     *
+     * @return CV
+     */
+    public function setUserValidation(\UserBundle\Entity\User $userValidation = null)
+    {
+        $this->user_validation = $userValidation;
+
+        return $this;
+    }
+
+    /**
+     * Get userValidation
+     *
+     * @return \UserBundle\Entity\User
+     */
+    public function getUserValidation()
+    {
+        return $this->user_validation;
     }
 }

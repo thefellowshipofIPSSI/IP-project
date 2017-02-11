@@ -5,6 +5,7 @@ namespace Ipssi\JobBundle\Controller\Intranet;
 use Ipssi\JobBundle\Entity\CV;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
 
 
@@ -36,6 +37,7 @@ class CVController extends Controller
         ));
     }
 
+
     public function indexResultsAction()
     {
         $datatable = $this->get('app.datatable.cv');
@@ -61,6 +63,8 @@ class CVController extends Controller
             $em = $this->getDoctrine()->getManager();
 
             $cV->setUser($this->getUser());
+            $statut = $this->get('intranet.repository.statut')->findOneBy(array('name' => 'En attente'));
+            $cV->setStatut($statut);
             $em->persist($cV);
             $em->flush($cV);
 
@@ -146,4 +150,54 @@ class CVController extends Controller
             ->getForm()
         ;
     }
+
+    /**
+     * Make a CV valid
+     * @param $cV
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @Security("is_granted('ROLE_EDIT_CV')")
+     */
+    public function onlineAction(CV $cV)
+    {
+        $statut = $this->get('intranet.repository.statut')->findOneBy(array('name' => 'Validé'));
+        $cV->setStatut($statut);
+        $cV->setUserValidation($this->getUser());
+
+        $em = $this->getDoctrine()->getEntityManager();
+        $em->persist($cV);
+        $em->flush();
+
+        $this->addFlash(
+            'success',
+            'CV validé'
+        );
+
+        return $this->redirectToRoute('cv_index');
+    }
+
+    /**
+     * Make a CV invalide
+     * @param $cV
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @Security("is_granted('ROLE_EDIT_CV')")
+     */
+    public function offlineAction(CV $cV)
+    {
+        $statut = $this->get('intranet.repository.statut')->findOneBy(array('name' => 'Refusé'));
+        $cV->setStatut($statut);
+        $cV->setUserValidation($this->getUser());
+
+
+        $em = $this->getDoctrine()->getEntityManager();
+        $em->persist($cV);
+        $em->flush();
+
+        $this->addFlash(
+            'success',
+            'CV refusé'
+        );
+
+        return $this->redirectToRoute('cv_index');
+    }
+
 }

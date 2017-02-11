@@ -131,14 +131,6 @@ class MenuBuilder
             }
         }
 
-        $menu->addChild('ToolBox', array('label' => 'Boite à outils '))
-            ->setAttribute('icon', 'wrench')
-            ->setAttribute('icon2', 'caret-down')
-            ->setAttribute('target', 'toolbox');
-            $menu['ToolBox']->addChild('Outil 1', array('route' => 'intranet_homepage'));
-            $menu['ToolBox']->addChild('Outil 2', array('route' => 'intranet_homepage'));
-
-
         if ($authorizationChecker->isGranted('ROLE_SUPERVISEUR')){
 
             $menu->addChild('Admin', array('label' => 'Administration '))

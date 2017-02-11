@@ -129,13 +129,10 @@ class UserVacationDatatable extends AbstractDatatableView
 //            ->add('comment', 'column', array(
 //                'title' => 'Comment',
 //            ))
-            ->add('status', 'column', array(
-                'title' => 'Statut',
-            ))
             ->add('user.username', 'column', array(
                 'title' => 'Utilisateur',
                 'add_if' => function() {
-                    return $this->authorizationChecker->isGranted('ROLE_ADMIN');
+                    return $this->authorizationChecker->isGranted('ROLE_EDIT_VACATION');
                 },
             ))
 //            ->add('user.google_id', 'column', array(
@@ -153,6 +150,9 @@ class UserVacationDatatable extends AbstractDatatableView
 //            ->add('user_validation.google_access_token', 'column', array(
 //                'title' => 'User_validation Google_access_token',
 //            ))
+            ->add('statut.name', 'column', array(
+                'title' => 'Statut',
+            ))
             ->add(null, 'action', array(
                 'title' => $this->translator->trans('datatables.actions.title'),
                 'actions' => array(

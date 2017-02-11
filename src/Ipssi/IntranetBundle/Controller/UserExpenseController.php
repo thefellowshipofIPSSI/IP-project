@@ -94,6 +94,8 @@ class UserExpenseController extends Controller {
             $userExpense->setUser($this->getUser());
 
             $em = $this->getDoctrine()->getEntityManager();
+            $statut = $this->get('intranet.repository.statut')->findOneBy(array('name' => 'En attente'));
+            $userExpense->setStatut($statut);
             $em->persist($userExpense);
             $em->flush();
 
@@ -230,7 +232,8 @@ class UserExpenseController extends Controller {
      */
     public function onlineAction(UserExpense $userExpense)
     {
-        $userExpense->setStatus(1);
+        $statut = $this->get('intranet.repository.statut')->findOneBy(array('name' => 'Validé'));
+        $userExpense->setStatut($statut);
         $userExpense->setUserValidation($this->getUser());
 
 
@@ -255,7 +258,8 @@ class UserExpenseController extends Controller {
      */
     public function offlineAction(UserExpense $userExpense)
     {
-        $userExpense->setStatus(2);
+        $statut = $this->get('intranet.repository.statut')->findOneBy(array('name' => 'Refusé'));
+        $userExpense->setStatut($statut);
         $userExpense->setUserValidation($this->getUser());
 
         $em = $this->getDoctrine()->getEntityManager();

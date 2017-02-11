@@ -4,6 +4,7 @@ namespace Ipssi\JobBundle\Datatables;
 
 use Sg\DatatablesBundle\Datatable\View\AbstractDatatableView;
 use Sg\DatatablesBundle\Datatable\View\Style;
+use Sg\DatatablesBundle\Datatable\Filter\SelectFilter;
 
 /**
  * Class CVDatatable
@@ -97,19 +98,22 @@ class CVDatatable extends AbstractDatatableView
             ))
             ->add('user.username', 'column', array(
                 'title' => 'Utilisateur',
+                'add_if' => function() {
+                    return $this->authorizationChecker->isGranted('ROLE_EDIT_CV');
+                },
             ))
 //            ->add('updatedAt', 'datetime', array(
 //                'title' => 'UpdatedAt',
 //            ))
-            ->add('valid', 'boolean', array(
-                'title' => 'Validation',
-            ))
 //            ->add('user.google_id', 'column', array(
 //                'title' => 'User Google_id',
 //            ))
 //            ->add('user.google_access_token', 'column', array(
 //                'title' => 'User Google_access_token',
 //            ))
+            ->add('statut.name', 'column', array(
+                'title' => 'Statut',
+            ))
             ->add(null, 'action', array(
                 'title' => $this->translator->trans('datatables.actions.title'),
                 'actions' => array(
