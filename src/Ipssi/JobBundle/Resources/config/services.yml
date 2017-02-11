@@ -1,4 +1,6 @@
 services:
-#    job.example:
-#        class: JobBundle\Example
-#        arguments: ["@service_id", "plain_value", "%parameter%"]
+
+    #-----------------------DATATABLES---------------------------------------------
+    app.datatable.candidacy:
+        class: Ipssi\JobBundle\Datatables\CandidacyDatatable
+        parent: sg_datatables.datatable.abstract

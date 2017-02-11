@@ -64,6 +64,18 @@ intranet_offer_publish:
     path:     /offres-de-poste/publier/{offer}
     defaults: { _controller: JobBundle:Intranet/Offer:publish }
 
+
+############# Candidatures ################
+
+intranet_candidacies:
+    path:     /candidatures
+    defaults: { _controller: JobBundle:Intranet/Candidacy:index }
+
+intranet_list_candidacies_by_offer:
+    path:     /offre/{offer}/candidatures
+    defaults: { _controller: JobBundle:Intranet/Candidacy:listByOffer }
+
+
 ############# Skills ################
 intranet_skills:
     path:     /administration/competences

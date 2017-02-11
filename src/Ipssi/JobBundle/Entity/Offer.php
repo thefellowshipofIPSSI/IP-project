@@ -113,15 +113,23 @@ class Offer
 
     /**
      * @ORM\OneToOne(targetEntity="UserBundle\Entity\User")
-     * @ORM\JoinColumn(name="created_by", referencedColumnName="id")
+     * @ORM\JoinTable(name="offer_created_by_user",
+     *      joinColumns={@ORM\JoinColumn(name="offer_id", referencedColumnName="id", unique=true)},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")}
+     *      )
+     *
      */
     private $createdBy;
 
 
     /**
      * @ORM\OneToOne(targetEntity="UserBundle\Entity\User")
-     * @ORM\JoinColumn(name="updated_by", referencedColumnName="id")
-     */
+     * @ORM\JoinTable(name="offer_updated_by_user",
+     *      joinColumns={@ORM\JoinColumn(name="offer_id", referencedColumnName="id", unique=true)},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")}
+     *      )
+     *
+    */
     private $updatedBy;
 
 
