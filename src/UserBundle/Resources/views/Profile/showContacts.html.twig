@@ -1,0 +1,49 @@
+{% extends "::intranet.html.twig" %}
+
+{% block flashMessages %}
+    {% for label, flashes in app.session.flashbag.all %}
+        {% for flash in flashes %}
+            <div class="alert alert-{{ label }} alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                {{ flash }}
+            </div>
+        {% endfor %}
+    {% endfor %}
+{% endblock %}
+
+{% block body %}
+    <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 col-xs-offset-0 col-sm-offset-0 col-md-offset-2 col-lg-offset-2 toppad">
+
+        <div class="panel panel-default">
+            <div class="panel-heading text-center">
+                <h3 class="panel-title">Vos contacts</h3>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-8 col-lg-8 right-part">
+                        <table class="table table-user-information">
+                            <thead>
+                                <tr>
+                                    <td>Nom</td>
+                                    <td>Email</td>
+                                    <td>Tel</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            {% for contact in contacts %}
+                            <tr>
+                                <td>{{ contact.name }}</td>
+                                <td><a href="mailto:{{ contact.email }}">{{ contact.email }}</a></td>
+                                <td><a href="tel:{{ contact.phone }}">{{ contact.phone }}</a></td>
+                            </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
