@@ -32,6 +32,17 @@
         <!-- Title -->
         <h1>{{ offer.name|capitalize }}</h1>
 
+
+        <h3>
+        {% for candidacy in offer.candidacies %}
+            {% if candidacy.status.name == "Validé" %}
+                <span class="label label-success">Une candidature a déjà été acceptée !</span>
+            {% else %}
+                <span class="label label-warning">Aucune candidature n'a encore été acceptée (<a href="{{ path('intranet_list_candidacies_by_offer', { 'offer': offer.id }) }}">{{ offer.candidacies | length }} candidatures</a>)</span>
+            {% endif %}
+        {% endfor %}
+        </h3>
+
         <!-- Author -->
         <p class="lead">
             Société ajoutée le {{ offer.createdAt|date('d/m/Y') }} à {{ offer.createdAt|date('H:i') }}
