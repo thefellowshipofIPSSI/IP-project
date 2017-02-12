@@ -28,10 +28,16 @@ class LoadPageTemplateData extends AbstractFixture implements OrderedFixtureInte
         $manager->persist($pageTemplate2);
         $manager->persist($pageTemplate3);
         $manager->flush();
+
+        $this->addReference('accueil', $pageTemplate);
+        $this->addReference('pageSimple', $pageTemplate2);
+        $this->addReference('actualites', $pageTemplate3);
+        $this->addReference('contact', $pageTemplate4);
+
     }
 
     public function getOrder()
     {
-        return 6;
+        return 1;
     }
 }
