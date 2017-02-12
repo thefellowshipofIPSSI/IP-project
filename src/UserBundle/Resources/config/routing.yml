@@ -13,6 +13,10 @@ user_profile:
     path:       /intranet/profil
     defaults:   { _controller: UserBundle:Profile:show }
 
+user_contacts:
+    path:       /intranet/profil/contacts
+    defaults:   { _controller: UserBundle:Profile:showContacts }
+
 user_profile_public:
     path:       /intranet/profil/{pseudo}
     defaults:   { _controller: UserBundle:Profile:publicProfile }

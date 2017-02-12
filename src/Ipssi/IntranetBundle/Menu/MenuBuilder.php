@@ -42,8 +42,8 @@ class MenuBuilder
             //$menu['User']->addChild('Profile', array('route' => 'intranet_user_profile', 'routeParameters' => array('user_id' => $user->getId())))
             $menu['User']->addChild('Profile', array('route' => 'user_profile'))
                 ->setAttribute('icon', 'user');
-            $menu['User']->addChild('Messages', array('uri' => '#'))
-                ->setAttribute('icon', 'envelope');
+            $menu['User']->addChild('Contacts', array('route' => 'user_contacts'))
+                ->setAttribute('icon', 'group');
             $menu['User']->addChild('Retour au site', array('route' => 'ipssi_homepage'))
                 ->setAttribute('icon', 'arrow-left');
             $menu['User']->addChild('')
@@ -130,6 +130,13 @@ class MenuBuilder
                 $menu['RH']->addChild('Collaborateurs', array('route' => 'intranet_user_homepage'));
             }
         }
+
+        $menu->addChild('ToolBox', array('label' => 'Boite à outils '))
+            ->setAttribute('icon', 'wrench')
+            ->setAttribute('icon2', 'caret-down')
+            ->setAttribute('target', 'toolbox');
+        $menu['ToolBox']->addChild('Google Drive', array('uri' => 'https://drive.google.com/drive/my-drive'));
+        $menu['ToolBox']->addChild('Google Calendar', array('uri' => 'https://calendar.google.com/calendar/'));
 
         if ($authorizationChecker->isGranted('ROLE_SUPERVISEUR')){
 

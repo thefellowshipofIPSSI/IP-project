@@ -32,6 +32,7 @@ use UserBundle\Entity\User;
 use UserBundle\Form\ImageType;
 use UserBundle\Form\SwitchAvatarType;
 
+use Google_Client;
 
 /**
  * Controller managing the user profile
@@ -46,7 +47,7 @@ class ProfileController extends BaseController
     {
         $user = $this->getUser();
         if (!is_object($user) || !$user instanceof UserInterface) {
-            throw new AccessDeniedException('This user does not have access to this section.');
+            throw new AccessDeniedException('Erreur');
         }
 
         $em = $this->getDoctrine()->getManager();
@@ -55,6 +56,52 @@ class ProfileController extends BaseController
         return $this->render('UserBundle:Profile:show.html.twig', [
             'user' => $user,
             'cvs' => $cVs,
+        ]);
+    }
+
+    /**
+     * Show the user's contacts
+     */
+    public function showContactsAction()
+    {
+        $user = $this->getUser();
+        if (!is_object($user) || !$user instanceof UserInterface) {
+            throw new AccessDeniedException('Erreur');
+        }
+
+        $token = $this->getUser()->getGoogleAccessToken();
+        if (!isset($token) && empty($token)) {
+            throw new AccessDeniedException('Vous devez synchroniser votre compte google');
+        }
+        $client = new Google_Client();
+        $client->setApplicationName('ip-project');
+        $client->setClientId($this->getParameter('google_app_id'));
+        $client->setClientSecret($this->getParameter('google_app_secret'));
+        $client->setRedirectUri('http://www.ip-project.app/intranet');
+        $client->setAccessType('online');
+
+        $curl = curl_init('https://www.google.com/m8/feeds/contacts/default/full?alt=json&access_token='.$token);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($curl, CURLOPT_TIMEOUT, 10);
+        $contacts_json = curl_exec($curl);
+        curl_close($curl);
+        $results = json_decode($contacts_json, true);
+
+        $contacts = [];
+        foreach ($results['feed']['entry'] as $cont) {
+            $contacts[] = [
+                'name' => $cont['title']['$t'],
+                'email' => isset($cont['gd$email'][0]['address'])
+                    ? $cont['gd$email'][0]['address'] : false,
+                'phone' => isset($cont['gd$phoneNumber'][0]['$t'])
+                    ? $cont['gd$phoneNumber'][0]['$t'] : false,
+            ];
+        }
+
+        return $this->render('UserBundle:Profile:showContacts.html.twig', [
+            'user' => $user,
+            'contacts' => $contacts,
         ]);
     }
 
