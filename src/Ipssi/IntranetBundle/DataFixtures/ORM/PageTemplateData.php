@@ -27,6 +27,7 @@ class LoadPageTemplateData extends AbstractFixture implements OrderedFixtureInte
         $manager->persist($pageTemplate);
         $manager->persist($pageTemplate2);
         $manager->persist($pageTemplate3);
+        $manager->persist($pageTemplate4);
         $manager->flush();
 
         $this->addReference('accueilT', $pageTemplate);
