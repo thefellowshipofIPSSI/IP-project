@@ -64,7 +64,7 @@ class Candidacy
 
     /**
      * @var
-     * @ORM\Column(name="updated_at", type="datetime")
+     * @ORM\Column(name="updated_at", type="datetime", nullable=true)
      */
     private $updatedAt;
 
@@ -98,11 +98,13 @@ class Candidacy
      */
     public function onPrePersist()
     {
-        $this->setUpdatedAt(new \DateTime('now'));
-
         if($this->getCreatedAt() == null)
         {
             $this->setCreatedAt(new \DateTime('now'));
+        } else {
+            if($this->getUpdatedAt() == null) {
+                $this->setUpdatedAt(new \DateTime('now'));
+            }
         }
     }
 
