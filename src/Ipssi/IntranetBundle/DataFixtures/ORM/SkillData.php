@@ -20,6 +20,8 @@ class SkillData extends AbstractFixture implements OrderedFixtureInterface
         $skillType2 = new SkillType();
         $skillType2->setName('Organisation');
 
+        $skillType3 = new SkillType();
+        $skillType3->setName('Big Data');
 
         $skill = new Skill();
         $skill->setName('Php');
@@ -33,6 +35,9 @@ class SkillData extends AbstractFixture implements OrderedFixtureInterface
         $skill3->setName('Symfony3');
         $skill3->setType($skillType);
 
+        $skill4 = new Skill();
+        $skill4->setName('Data Mining');
+        $skill4->setType($skillType3);
 
         $manager->persist($skillType);
         $manager->persist($skillType2);
@@ -42,6 +47,13 @@ class SkillData extends AbstractFixture implements OrderedFixtureInterface
         $manager->persist($skill3);
 
         $manager->flush();
+
+
+        $this->setReference('php-skill', $skill);
+        $this->setReference('sql-skill', $skill2);
+        $this->setReference('symfony-skill', $skill3);
+        $this->setReference('data-mining-skill', $skill4);
+
     }
 
     public function getOrder()

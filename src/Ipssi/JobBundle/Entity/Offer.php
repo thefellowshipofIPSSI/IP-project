@@ -1,10 +1,5 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: devow
- * Date: 17/12/16
- * Time: 18:25
- */
+
 
 namespace Ipssi\JobBundle\Entity;
 
@@ -112,23 +107,15 @@ class Offer
 
 
     /**
-     * @ORM\OneToOne(targetEntity="UserBundle\Entity\User")
-     * @ORM\JoinTable(name="offer_created_by_user",
-     *      joinColumns={@ORM\JoinColumn(name="offer_id", referencedColumnName="id", unique=true)},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")}
-     *      )
-     *
+     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User")
+     * @ORM\JoinColumn(name="created_by", referencedColumnName="id")
      */
     private $createdBy;
 
 
     /**
-     * @ORM\OneToOne(targetEntity="UserBundle\Entity\User")
-     * @ORM\JoinTable(name="offer_updated_by_user",
-     *      joinColumns={@ORM\JoinColumn(name="offer_id", referencedColumnName="id", unique=true)},
-     *      inverseJoinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")}
-     *      )
-     *
+     * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User")
+     * @ORM\JoinColumn(name="updated_by", referencedColumnName="id")
     */
     private $updatedBy;
 
@@ -488,53 +475,6 @@ class Offer
         return $this->updatedAt;
     }
 
-    /**
-     * Set createdBy
-     *
-     * @param \UserBundle\Entity\User $createdBy
-     *
-     * @return Offer
-     */
-    public function setCreatedBy(\UserBundle\Entity\User $createdBy = null)
-    {
-        $this->createdBy = $createdBy;
-
-        return $this;
-    }
-
-    /**
-     * Get createdBy
-     *
-     * @return \UserBundle\Entity\User
-     */
-    public function getCreatedBy()
-    {
-        return $this->createdBy;
-    }
-
-    /**
-     * Set updatedBy
-     *
-     * @param \UserBundle\Entity\User $updatedBy
-     *
-     * @return Offer
-     */
-    public function setUpdatedBy(\UserBundle\Entity\User $updatedBy = null)
-    {
-        $this->updatedBy = $updatedBy;
-
-        return $this;
-    }
-
-    /**
-     * Get updatedBy
-     *
-     * @return \UserBundle\Entity\User
-     */
-    public function getUpdatedBy()
-    {
-        return $this->updatedBy;
-    }
 
     /**
      * Set society
@@ -690,5 +630,53 @@ class Offer
         } else {
             return NULL;
         }
+    }
+
+    /**
+     * Set createdBy
+     *
+     * @param \UserBundle\Entity\User $createdBy
+     *
+     * @return Offer
+     */
+    public function setCreatedBy(\UserBundle\Entity\User $createdBy = null)
+    {
+        $this->createdBy = $createdBy;
+
+        return $this;
+    }
+
+    /**
+     * Get createdBy
+     *
+     * @return \UserBundle\Entity\User
+     */
+    public function getCreatedBy()
+    {
+        return $this->createdBy;
+    }
+
+    /**
+     * Set updatedBy
+     *
+     * @param \UserBundle\Entity\User $updatedBy
+     *
+     * @return Offer
+     */
+    public function setUpdatedBy(\UserBundle\Entity\User $updatedBy = null)
+    {
+        $this->updatedBy = $updatedBy;
+
+        return $this;
+    }
+
+    /**
+     * Get updatedBy
+     *
+     * @return \UserBundle\Entity\User
+     */
+    public function getUpdatedBy()
+    {
+        return $this->updatedBy;
     }
 }

@@ -111,7 +111,19 @@ class LoadUserData extends AbstractFixture implements ContainerAwareInterface, O
 
         $manager->persist($user6);
 
+        $user8 = new User();
+        $user8->setUsername('Jean-Michel');
+        $user8->setUsernameCanonical('Durand');
+        $user8->setEmail('user@ipssi.com');
+        $user8->setEnabled(1);
 
+        $password8 = $encoder->encodePassword($user8, 'secret');
+        $user8->setPassword($password8);
+
+        $manager->persist($user8);
+        
+        
+        
         $manager->flush();
 
         $this->addReference('admin-user', $user);
@@ -121,6 +133,7 @@ class LoadUserData extends AbstractFixture implements ContainerAwareInterface, O
         $this->addReference('rh-user', $user4);
         $this->addReference('manager-user', $user5);
         $this->addReference('superviseur-user', $user6);
+        $this->addReference('base-user', $user8);
     }
 
     public function getOrder()

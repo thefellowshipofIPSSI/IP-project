@@ -48,6 +48,11 @@ class Statut
      */
     private $cv;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Ipssi\JobBundle\Entity\Candidacy", mappedBy="status")
+     */
+    private $candidacies;
+
 
     /**
      * Get id
@@ -224,5 +229,39 @@ class Statut
     public function getCv()
     {
         return $this->cv;
+    }
+
+    /**
+     * Add candidacy
+     *
+     * @param \Ipssi\JobBundle\Entity\Candidacy $candidacy
+     *
+     * @return Statut
+     */
+    public function addCandidacy(\Ipssi\JobBundle\Entity\Candidacy $candidacy)
+    {
+        $this->candidacies[] = $candidacy;
+
+        return $this;
+    }
+
+    /**
+     * Remove candidacy
+     *
+     * @param \Ipssi\JobBundle\Entity\Candidacy $candidacy
+     */
+    public function removeCandidacy(\Ipssi\JobBundle\Entity\Candidacy $candidacy)
+    {
+        $this->candidacies->removeElement($candidacy);
+    }
+
+    /**
+     * Get candidacies
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getCandidacies()
+    {
+        return $this->candidacies;
     }
 }

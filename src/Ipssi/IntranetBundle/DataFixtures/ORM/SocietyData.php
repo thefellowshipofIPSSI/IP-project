@@ -34,6 +34,11 @@ class SocietyData extends AbstractFixture implements OrderedFixtureInterface
         $manager->persist($society3);
 
         $manager->flush();
+
+        $this->setReference('google-society', $society);
+        $this->setReference('facebook-society', $society2);
+        $this->setReference('microsoft-society', $society3);
+
     }
 
     public function getOrder()

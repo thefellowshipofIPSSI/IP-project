@@ -49,6 +49,13 @@ class JobData extends AbstractFixture implements OrderedFixtureInterface
         $manager->persist($job5);
         $manager->persist($job6);
         $manager->flush();
+
+        $this->setReference('data-scientist-job', $job);
+        $this->setReference('web-dev-job', $job2);
+        $this->setReference('cto-job', $job3);
+        $this->setReference('security-job', $job4);
+        $this->setReference('community-job', $job5);
+
     }
 
     public function getOrder()

@@ -184,14 +184,16 @@ class JobType
         $this->offers = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
+
+
     /**
      * Add offer
      *
-     * @param \Ipssi\JobBundle\Entity\Offers $offer
+     * @param \Ipssi\JobBundle\Entity\Offer $offer
      *
      * @return JobType
      */
-    public function addOffer(\Ipssi\JobBundle\Entity\Offers $offer)
+    public function addOffer(\Ipssi\JobBundle\Entity\Offer $offer)
     {
         $this->offers[] = $offer;
 
@@ -201,9 +203,9 @@ class JobType
     /**
      * Remove offer
      *
-     * @param \Ipssi\JobBundle\Entity\Offers $offer
+     * @param \Ipssi\JobBundle\Entity\Offer $offer
      */
-    public function removeOffer(\Ipssi\JobBundle\Entity\Offers $offer)
+    public function removeOffer(\Ipssi\JobBundle\Entity\Offer $offer)
     {
         $this->offers->removeElement($offer);
     }

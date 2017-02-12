@@ -31,14 +31,14 @@ class Candidacy
     private $content;
 
     /**
-     * @var
-     * @ORM\Column(name="status", type="integer")
+     * @ORM\ManyToOne(targetEntity="Ipssi\IntranetBundle\Entity\Statut", inversedBy="cv")
+     * @ORM\JoinColumn(name="status_id", referencedColumnName="id", nullable=false)
      */
     private $status;
 
     /**
      * @var
-     * @ORM\Column(name="decision", type="text")
+     * @ORM\Column(name="decision", type="text", nullable=true)
      */
     private $decision;
 
@@ -142,29 +142,7 @@ class Candidacy
         return $this->content;
     }
 
-    /**
-     * Set status
-     *
-     * @param integer $status
-     *
-     * @return Candidacy
-     */
-    public function setStatus($status)
-    {
-        $this->status = $status;
 
-        return $this;
-    }
-
-    /**
-     * Get status
-     *
-     * @return integer
-     */
-    public function getStatus()
-    {
-        return $this->status;
-    }
 
     /**
      * Set decision
@@ -359,5 +337,29 @@ class Candidacy
     public function getCv()
     {
         return $this->cv;
+    }
+
+    /**
+     * Set status
+     *
+     * @param \Ipssi\IntranetBundle\Entity\Statut $status
+     *
+     * @return Candidacy
+     */
+    public function setStatus(\Ipssi\IntranetBundle\Entity\Statut $status)
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+
+    /**
+     * Get status
+     *
+     * @return \Ipssi\IntranetBundle\Entity\Statut
+     */
+    public function getStatus()
+    {
+        return $this->status;
     }
 }
