@@ -78,6 +78,70 @@ class CandidacyController extends Controller
 
     }
 
+    public function validateAction($candidacy)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $candidacy = $em->getRepository('JobBundle:Candidacy')->find($candidacy);
+
+        $acceptStatus = $em->getRepository('IntranetBundle:Statut')->findOneBy(['name' => 'Validé']);
+
+        $candidacy->setStatus($acceptStatus);
+
+        $cv = $candidacy->getCv();
+        $cv->setStatut($acceptStatus);
+
+        $user = $candidacy->getCandidate();
+        $roleCollaborateur = $em->getRepository('UserBundle:Group')->findOneBy(['name' => 'Collaborateur']);
+        $user->addGroup($roleCollaborateur);
+
+        $em->persist($candidacy);
+        $em->persist($cv);
+
+        $em->flush();
+
+
+        $this->addFlash(
+            'success',
+            'La candidature de '. $candidacy->getCandidate()->getProfile()->getFirstname() . ' ' . $candidacy->getCandidate()->getProfile()->getLastname() .
+            ' pour l\'offre ' . $candidacy->getOffer()->getName() . ' a été validée. <br> Il a été ajouté aux collaborateurs d\'IPSSI.'
+        );
+
+
+        return $this->redirectToRoute('intranet_offers');
+
+    }
+
+
+    public function refuseAction($candidacy)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $candidacy = $em->getRepository('JobBundle:Candidacy')->find($candidacy);
+
+        $refuseStatus = $em->getRepository('IntranetBundle:Statut')->findOneBy(['name' => 'Refusé']);
+
+        $candidacy->setStatus($refuseStatus);
+
+        $cv = $candidacy->getCv();
+        $cv->setStatut($refuseStatus);
+
+        $em->persist($candidacy);
+        $em->persist($cv);
+
+        $em->flush();
+
+
+        $this->addFlash(
+            'success',
+            'La candidature de '. $candidacy->getCandidate()->getProfile()->getFirstname() . ' ' . $candidacy->getCandidate()->getProfile()->getLastname() .
+            ' pour l\'offre ' . $candidacy->getOffer()->getName() . ' a été déclinée.'
+        );
+
+
+        return $this->redirectToRoute('intranet_offers');
+    }
+
 
     /*********** Results AJAX  **********/
 

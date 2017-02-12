@@ -23,6 +23,11 @@
                                      class="img-circle img-responsive">
                             {% endif %}
 
+                            {% for group in user.groups %}
+
+                                <div class="alert alert-success alert-member" role="alert">{{ group.name }}</div>
+
+                            {% endfor %}
 
                         </div>
                     </div>

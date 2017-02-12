@@ -19,6 +19,7 @@ devbox.box
 .vagrant/
 /nbproject/private/
 nbproject/
+!/web/uploads/example-cv-developpeur.pdf
 !/web/uploads/
 /web/uploads/*
 *~
@@ -33,3 +34,4 @@ src/UserBundle/Resources/.DS_Store
 src/UserBundle/Resources/views/.DS_Store
 var/cache/
 var/logs/
+!/web/uploads/cv/example-cv-developpeur.pdf

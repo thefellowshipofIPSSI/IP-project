@@ -20,6 +20,8 @@ user_contacts:
 user_profile_public:
     path:       /intranet/profil/{pseudo}
     defaults:   { _controller: UserBundle:Profile:publicProfile }
+    options:
+        expose: true
 
 user_profile_edit:
     path:       /intranet/user/edit
