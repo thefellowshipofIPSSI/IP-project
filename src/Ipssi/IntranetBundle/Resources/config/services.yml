@@ -13,6 +13,12 @@ services:
         arguments:
           - 'IntranetBundle:Page'
 
+    intranet.repository.pagecategorie:
+        class: IntranetBundle\Repository\PageCategoryRepository
+        factory: ['@doctrine.orm.entity_manager', 'getRepository']
+        arguments:
+          - 'IntranetBundle:PageCategory'
+
     intranet.repository.job:
         class: IntranetBundle\Repository\JobRepository
         factory: ['@doctrine.orm.entity_manager', 'getRepository']

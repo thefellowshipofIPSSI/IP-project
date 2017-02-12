@@ -22,29 +22,29 @@ class DefaultController extends Controller
             throw new AccessDeniedException('Erreur');
         }
 
-        $token = $this->getUser()->getGoogleAccessToken();
-        $userGoogleId = $this->getUser()->getGoogleId();
-        if (!isset($token) && empty($token)) {
-            throw new AccessDeniedException('Vous devez synchroniser votre compte google');
-        }
-        $client = new Google_Client();
-        $client->setApplicationName('ip-project');
-        $client->setClientId($this->getParameter('google_app_id'));
-        $client->setClientSecret($this->getParameter('google_app_secret'));
-        $client->setRedirectUri('http://www.ip-project.app/intranet');
-        $client->setAccessType('online');
-
-        $curl = curl_init('https://www.googleapis.com/gmail/v1/users/'.$userGoogleId.'/labels?alt=json&access_token='.$token);
-        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
-        curl_setopt($curl, CURLOPT_TIMEOUT, 10);
-        $contacts_json = curl_exec($curl);
-        curl_close($curl);
-        $results = json_decode($contacts_json, true);
-
-
-        dump($results['labels'][15]);
-        die();
+//        $token = $this->getUser()->getGoogleAccessToken();
+//        $userGoogleId = $this->getUser()->getGoogleId();
+//        if (!isset($token) && empty($token)) {
+//            throw new AccessDeniedException('Vous devez synchroniser votre compte google');
+//        }
+//        $client = new Google_Client();
+//        $client->setApplicationName('ip-project');
+//        $client->setClientId($this->getParameter('google_app_id'));
+//        $client->setClientSecret($this->getParameter('google_app_secret'));
+//        $client->setRedirectUri('http://www.ip-project.app/intranet');
+//        $client->setAccessType('online');
+//
+//        $curl = curl_init('https://www.googleapis.com/gmail/v1/users/'.$userGoogleId.'/labels?alt=json&access_token='.$token);
+//        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+//        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+//        curl_setopt($curl, CURLOPT_TIMEOUT, 10);
+//        $contacts_json = curl_exec($curl);
+//        curl_close($curl);
+//        $results = json_decode($contacts_json, true);
+//
+//
+//        dump($results['labels'][15]);
+//        die();
 
 
 
