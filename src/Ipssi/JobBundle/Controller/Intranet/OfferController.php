@@ -10,6 +10,7 @@ use Ipssi\JobBundle\Entity\Offer;
 
 use Ipssi\JobBundle\Form\OfferType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\HttpFoundation\Response;
 
 class OfferController extends Controller
 {
@@ -152,7 +153,7 @@ class OfferController extends Controller
     }
 
 
-    public function deleteAction($offer)
+    public function deleteAction($offer, Request $request)
     {
 
         $em = $this->getDoctrine()->getManager();
@@ -162,6 +163,9 @@ class OfferController extends Controller
         $em->remove($offer);
         $em->flush();
 
+        if($request->isXmlHttpRequest()) {
+            return new Response("Offre supprimée");
+        }
 
         $this->addFlash(
             'danger',
@@ -169,6 +173,32 @@ class OfferController extends Controller
         );
 
         return $this->redirectToRoute('intranet_offers');
+    }
+
+
+    public function publishAction($offer, Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        // Get current offer and delete it
+        $offer = $em->getRepository('JobBundle:Offer')->find($offer);
+
+        $offer->setStatus(1);
+
+        $em->persist($offer);
+        $em->flush();
+
+        if($request->isXmlHttpRequest()) {
+            return new Response("Offre mise en ligne");
+        }
+
+        $this->addFlash(
+            'success',
+            'Offre mise en ligne'
+        );
+
+        return $this->redirectToRoute('intranet_offers');
+
     }
 
 }

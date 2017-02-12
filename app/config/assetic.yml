@@ -20,6 +20,18 @@ assetic:
    
    
     assets:
+
+        intranet_js:
+            inputs:
+                - "%kernel.root_dir%/../src/Ipssi/IntranetBundle/Resources/public/js/intranet.js"
+            output: js/intranet/intranet.js
+
+        intranet_css:
+            inputs:
+                - "%kernel.root_dir%/../src/Ipssi/IntranetBundle/Resources/public/css/style.css"
+           #filters: [?yui_js]
+            output: css/intranet/style.css
+
    
         jquery_js:
             inputs:
@@ -84,3 +96,13 @@ assetic:
             inputs:
                 - "%kernel.root_dir%/../vendor/kartik-v/bootstrap-fileinput/themes/fa/theme.js"
             output: js/fileinput-theme.js
+
+        sweet_alert_js:
+            inputs:
+                - "%kernel.root_dir%/../bower_components/sweetalert/dist/sweetalert.min.js"
+            output: js/sweetalert.min.js
+
+        sweet_alert_css:
+            inputs:
+                - "%kernel.root_dir%/../bower_components/sweetalert/dist/sweetalert.css"
+            output: css/sweetalert.css

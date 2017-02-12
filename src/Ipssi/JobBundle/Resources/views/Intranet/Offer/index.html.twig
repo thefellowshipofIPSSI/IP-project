@@ -9,7 +9,7 @@
         </h1>
         <ol class="breadcrumb">
             <li>
-                <i class="fa fa-home"></i>  <a href="{{ path('intranet_homepage') }}">Accueil</a>
+                <i class="fa fa-home"></i> <a href="{{ path('intranet_homepage') }}">Accueil</a>
             </li>
             <li class="active">
                 <i class="fa fa-eye"></i> Offres
@@ -32,7 +32,7 @@
                         {% if offer.society.logo is not null %}
 
                             <div class="card-image">
-                                <img  src="{{ asset(offer.society.logo.webPath) }}" height="200" style="margin:auto;">
+                                <img src="{{ asset(offer.society.logo.webPath) }}" height="200" style="margin:auto;">
                             </div>
 
                             <hr>
@@ -43,16 +43,112 @@
 
                         <div class="card-content">
                             <p>{{ offer.description|slice(1,200) }}</p>
+
+                            <hr>
+
+                            {% set countCandidacies = offer.candidacies | length %}
+                            <p>
+                                {% if countCandidacies > 0 %}
+                                    <a href="{{ path('intranet_list_candidacies_by_offer', { 'offer': offer.id }) }}" title="Voir les candidatures">
+                                {% endif %}
+                                {{ countCandidacies }} candidature{% if countCandidacies > 1 %}s{% endif %} pour cette offre
+                                {% if countCandidacies > 0 %}
+                                    </a>
+                                {% endif %}
+                            </p>
+
                         </div>
 
                         <div class="card-action">
                             <a href="{{ path('intranet_offer_view', {'offer': offer.id}) }}" class="fa fa-eye"></a>
+
                             <a href="{{ path('intranet_offer_update', {'offer': offer.id}) }}" class="fa fa-edit"></a>
-                            <a href="{{ path('intranet_offer_delete', {'offer': offer.id}) }}" class="fa fa-trash" onClick="return confirm('Supprimer la société ?')"></a>
+
+                            <a href="#" class="fa fa-trash "
+                               onClick="confirmDelete('{{ path('intranet_offer_delete', {'offer': offer.id}) }}')"></a>
+
+                            {% if offer.status == 0 %}
+                            <a href="#" class="fa fa-times inactive" title="Publier l'offre"
+                               onclick="confirmPublish('{{ path('intranet_offer_publish', {'offer': offer.id}) }}')"></a>
+                            {% else %}
+                            <i class="fa fa-check active" title="Offre en ligne"></i>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
             {% endfor %}
         </div>
     </div>
+{% endblock %}
+
+{% block customJavascripts %}
+
+    <script type="text/javascript">
+        function confirmPublish(route) {
+
+            swal({
+                        title: "Publier ?",
+                        type: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "#1fad2f",
+                        confirmButtonText: "Mettre en ligne",
+                        cancelButtonText: "Annuler",
+                        closeOnConfirm: false
+                    }, function (isConfirm) {
+
+                        if (!isConfirm) return;
+
+                        $.ajax({
+                            url: route,
+                            type: 'POST',
+                            success: function (msg) {
+                                swal("OK !", msg, "success");
+
+                                setTimeout(function() {
+                                    location.reload()
+                                }, 1000)
+                            },
+                            error: function () {
+                                swal("Erreur !", "Une erreur est survenue", "error");
+                            }
+                        })
+                    }
+            )
+
+        }
+
+        function confirmDelete(route) {
+
+            swal({
+                title: "Supprimer ?",
+                type: "error",
+                showCancelButton: true,
+                confirmButtonColor: "#1fad2f",
+                confirmButtonText: "Supprimer",
+                cancelButtonText: "Annuler",
+                closeOnConfirm: false
+            }, function (isConfirm) {
+
+                if (!isConfirm) return;
+
+                $.ajax({
+                    url: route,
+                    type: 'POST',
+                    success: function (msg) {
+                        swal("OK !", msg, "success");
+
+                        setTimeout(function() {
+                            location.reload()
+                        }, 1000)
+                    },
+                    error: function () {
+                        swal("Erreur !", "Une erreur est survenue", "error");
+                    }
+                })
+            })
+
+        }
+
+    </script>
+
 {% endblock %}

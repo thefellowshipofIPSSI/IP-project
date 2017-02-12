@@ -1,0 +1,102 @@
+{% extends "intranet.html.twig" %}
+
+{% block title %} Candidatures {% endblock %}
+
+{% block headerContainer %}
+    <div class="col-lg-12">
+        <h1 class="page-header">
+            Candidatures
+        </h1>
+        <ol class="breadcrumb">
+            <li>
+                <i class="fa fa-home"></i> <a href="{{ path('intranet_homepage') }}">Accueil</a>
+            </li>
+            <li class="active">
+                <i class="fa fa-eye"></i> Candidatures
+            </li>
+        </ol>
+    </div>
+{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+        <hr>
+
+        <div class="row">
+            {{ datatable_render(datatables) }}
+        </div>
+    </div>
+{% endblock %}
+
+{% block customJavascripts %}
+
+    <script type="text/javascript">
+//        function confirmPublish(route) {
+//
+//            swal({
+//                        title: "Publier ?",
+//                        type: "warning",
+//                        showCancelButton: true,
+//                        confirmButtonColor: "#1fad2f",
+//                        confirmButtonText: "Mettre en ligne",
+//                        cancelButtonText: "Annuler",
+//                        closeOnConfirm: false
+//                    }, function (isConfirm) {
+//
+//                        if (!isConfirm) return;
+//
+//                        $.ajax({
+//                            url: route,
+//                            type: 'POST',
+//                            success: function (msg) {
+//                                swal("OK !", msg, "success");
+//
+//                                setTimeout(function() {
+//                                    location.reload()
+//                                }, 1000)
+//                            },
+//                            error: function () {
+//                                swal("Erreur !", "Une erreur est survenue", "error");
+//                            }
+//                        })
+//                    }
+//            )
+//
+//        }
+//
+//        function confirmDelete(route) {
+//
+//            swal({
+//                title: "Supprimer ?",
+//                type: "error",
+//                showCancelButton: true,
+//                confirmButtonColor: "#1fad2f",
+//                confirmButtonText: "Supprimer",
+//                cancelButtonText: "Annuler",
+//                closeOnConfirm: false
+//            }, function (isConfirm) {
+//
+//                if (!isConfirm) return;
+//
+//                $.ajax({
+//                    url: route,
+//                    type: 'POST',
+//                    success: function (msg) {
+//                        swal("OK !", msg, "success");
+//
+//                        setTimeout(function() {
+//                            location.reload()
+//                        }, 1000)
+//                    },
+//                    error: function () {
+//                        swal("Erreur !", "Une erreur est survenue", "error");
+//                    }
+//                })
+//            })
+//
+//        }
+
+    </script>
+
+{% endblock %}

@@ -11,7 +11,7 @@
 
     <div class="form-group">
         <label>Date de naissance</label>
-        {{ form_widget(form.profile.birthDate, {'attr': {'value': user.profile.birthDate|date('d/m/Y'), 'required': 'true'}}) }}
+        {{ form_widget(form.profile.birthDate, {'attr': {'value': user.profile.birthDate|date('d/m/Y'), 'required': 'true', 'class': 'form-control js-datepicker'}}) }}
     </div>
 
     <div class="form-group">
@@ -56,7 +56,7 @@
     <hr>
 
     <div class="form-group">
-        {{ form_widget(form.cv.file.file, { 'id': 'input-cv' }) }}
+        {{ form_widget(form.cv.cvFile.file, { 'id': 'input-cv' }) }}
     </div>
 
 </div>

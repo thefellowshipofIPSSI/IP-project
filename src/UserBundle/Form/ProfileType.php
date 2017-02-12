@@ -59,7 +59,8 @@ class ProfileType extends AbstractType
                 'label' => 'Date de naissance (facultatif)',
                 'widget' => 'single_text',
                 'html5' => false,
-                'required' => false
+                'required' => false,
+                'format' => 'dd/MM/yyyy'
 
             ]);
     }

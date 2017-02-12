@@ -75,15 +75,15 @@ class OfferController extends Controller
                 // Upload CV
                 $cv = $candidacy->getCV();
                 $cv->setUser($user);
-
-                $file = $cv->getFile();
+                $statut = $this->get('intranet.repository.statut')->findOneBy(array('name' => 'En attente'));
+                $cv->setStatut($statut);
 
 
                 // Update profile informations
                 $profile = $em->getRepository('UserBundle:Profile')->updateCandidateProfile($user->getProfile(), $form->get('profile')->getData(), $em);
 
                 $em->persist($candidacy);
-                $em->persist($file);
+                //$em->persist($file);
                 $em->persist($cv);
                 $em->persist($profile);
 
