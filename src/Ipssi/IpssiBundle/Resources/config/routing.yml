@@ -2,15 +2,19 @@ ipssi_homepage:
     path:   /
     defaults:   { _controller: "IpssiBundle:Default:index"}
 
-
 ##### News #####
 news_homepage:
-    path:   /news
+    path:   /actus
     defaults:   { _controller: "IpssiBundle:News:index" }
 
 news_show:
     path:   /news/{slug}
     defaults:   { _controller: "IpssiBundle:News:show" }
+
+
+ipssi_view_page:
+    path:   /{slug}
+    defaults:   { _controller: "IpssiBundle:Page:viewFront"}
 
 
 ###### File #####

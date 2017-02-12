@@ -78,13 +78,13 @@ class DefaultController extends Controller
             $cras = count($this->get('intranet.repository.cra')->findAll());
             $expenses = count($this->get('intranet.repository.expense')->findAll());
             $vacations = count($this->get('intranet.repository.vacation')->findAll());
-            $users = count($this->get('user.repository.user')->findAll());
+            $candidacies = count($this->get('job.repository.candidacy')->findAll());
 
             return $this->render('IntranetBundle:Default:index.html.twig', [
                 'cras' => $cras,
                 'expenses' => $expenses,
                 'vacations' => $vacations,
-                'users' => $users,
+                'candidacies' => $candidacies,
             ]);
 
         } else if ($this->get('security.authorization_checker')->isGranted('ROLE_COLLABORATEUR')

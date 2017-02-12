@@ -11,9 +11,11 @@ class LoadPageCategoryData extends AbstractFixture implements OrderedFixtureInte
 {
     public function load(ObjectManager $manager)
     {
+        $pageCategory17 = new PageCategory();
+        $pageCategory17->setName('Actualités');
+
         $pageCategory = new PageCategory();
         $pageCategory->setName('Le groupe');
-        $pageCategory->setParent(null);
 
 
         $pageCategory2 = new PageCategory();
@@ -21,6 +23,7 @@ class LoadPageCategoryData extends AbstractFixture implements OrderedFixtureInte
 
         $pageCategory3 = new PageCategory();
         $pageCategory3->setName('Nous rejoindre');
+
 
 
         $pageCategory5 = new PageCategory();
@@ -32,7 +35,7 @@ class LoadPageCategoryData extends AbstractFixture implements OrderedFixtureInte
         $pageCategory7 = new PageCategory();
         $pageCategory7->setName('Accueil');
 
-
+        $manager->persist($pageCategory17);
         $manager->persist($pageCategory);
         $manager->persist($pageCategory2);
         $manager->persist($pageCategory3);
@@ -43,6 +46,7 @@ class LoadPageCategoryData extends AbstractFixture implements OrderedFixtureInte
         $this->addReference('groupe', $pageCategory);
         $this->addReference('activite', $pageCategory2);
         $this->addReference('rejoindre', $pageCategory3);
+        $this->addReference('actus', $pageCategory17);
         $this->addReference('contact', $pageCategory5);
         $this->addReference('autre', $pageCategory6);
         $this->addReference('accueil', $pageCategory7);
@@ -71,7 +75,7 @@ class LoadPageCategoryData extends AbstractFixture implements OrderedFixtureInte
         $pageCategory12->setParent($this->getReference('activite'));
 
         $pageCategory13 = new PageCategory();
-        $pageCategory13->setName('Nos secteurs d\'activité');
+        $pageCategory13->setName('Nos secteurs d\'activités');
         $pageCategory13->setParent($this->getReference('activite'));
 
         $pageCategory14 = new PageCategory();

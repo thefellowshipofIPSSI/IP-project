@@ -29,7 +29,12 @@ class PageCategory
     private $name;
 
     /**
-     * @ORM\ManyToOne(targetEntity="PageCategory")
+     * @ORM\OneToMany(targetEntity="PageCategory", mappedBy="parent")
+     */
+    private $children;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="PageCategory", inversedBy="children")
      * @ORM\JoinColumn(name="parent_id", referencedColumnName="id", nullable=true)
      */
     private $parent;
@@ -138,5 +143,39 @@ class PageCategory
     public function getParent()
     {
         return $this->parent;
+    }
+
+    /**
+     * Add child
+     *
+     * @param \Ipssi\IntranetBundle\Entity\PageCategory $child
+     *
+     * @return PageCategory
+     */
+    public function addChild(\Ipssi\IntranetBundle\Entity\PageCategory $child)
+    {
+        $this->children[] = $child;
+
+        return $this;
+    }
+
+    /**
+     * Remove child
+     *
+     * @param \Ipssi\IntranetBundle\Entity\PageCategory $child
+     */
+    public function removeChild(\Ipssi\IntranetBundle\Entity\PageCategory $child)
+    {
+        $this->children->removeElement($child);
+    }
+
+    /**
+     * Get children
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getChildren()
+    {
+        return $this->children;
     }
 }

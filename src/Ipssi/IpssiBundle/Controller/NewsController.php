@@ -25,6 +25,9 @@ class NewsController extends Controller
         $newsRepo = $this->getDoctrine()->getRepository('IntranetBundle:News');
 
         $allNews = $newsRepo->findBy(['status' => 1]);
+        
+//        dump($allNews);
+//        die;
 
         return $this->render('IpssiBundle:News:index.html.twig', [
             'allNews' => $allNews

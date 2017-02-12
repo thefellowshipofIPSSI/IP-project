@@ -8,3 +8,9 @@ services:
     app.datatable.cv:
             class: Ipssi\JobBundle\Datatables\CVDatatable
             parent: sg_datatables.datatable.abstract
+
+    job.repository.candidacy:
+            class: IntranetBundle\Repository\CandidacyRepository
+            factory: ['@doctrine.orm.entity_manager', 'getRepository']
+            arguments:
+              - 'JobBundle:Candidacy'

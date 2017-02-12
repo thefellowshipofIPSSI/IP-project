@@ -66,22 +66,166 @@ class LoadPageData extends AbstractFixture implements OrderedFixtureInterface
         $pageAccueil->setStatus(1);
         $pageAccueil->setUser($this->getReference('redacteur-user'));
         $pageAccueil->setPageCategory($this->getReference('accueil'));
-        $pageAccueil->setPageTemplate($this->getReference('accueil'));
+        $pageAccueil->setPageTemplate($this->getReference('accueilT'));
+
+        $pageActus = new Page();
+        $pageActus->setName('Actualités');
+        $pageActus->setTitle('Ippsi - Actualités');
+        $pageActus->setContent('test');
+        $pageActus->setMetaDescription('Ippsi - Actualités');
+        $pageActus->setMetaKeywords('Ippsi - Actualités');
+        $pageActus->setSlug('actus');
+        $pageActus->setStatus(1);
+        $pageActus->setUser($this->getReference('redacteur-user'));
+        $pageActus->setPageCategory($this->getReference('actus'));
+        $pageActus->setPageTemplate($this->getReference('actualitesT'));
 
 
-//        $pageTemplate2 = new Page();
-//        $pageTemplate2->setName('pageSimple');
-//
-//        $pageTemplate3 = new Page();
-//        $pageTemplate3->setName('actualites');
-//
-//        $pageTemplate4 = new Page();
-//        $pageTemplate4->setName('contact');
+        $pagePresentation = new Page();
+        $pagePresentation->setName('Présentation');
+        $pagePresentation->setTitle('Ippsi - Présentation');
+        $pagePresentation->setContent('test');
+        $pagePresentation->setMetaDescription('Ippsi - Présentation');
+        $pagePresentation->setMetaKeywords('Ippsi - Présentation');
+        $pagePresentation->setSlug('presentation');
+        $pagePresentation->setStatus(1);
+        $pagePresentation->setUser($this->getReference('redacteur-user'));
+        $pagePresentation->setPageCategory($this->getReference('presentation'));
+        $pagePresentation->setPageTemplate($this->getReference('pageSimpleT'));
+
+        $pageChiffres = new Page();
+        $pageChiffres->setName('Chiffres Clés');
+        $pageChiffres->setTitle('Ippsi - Chiffres Clés');
+        $pageChiffres->setContent('test');
+        $pageChiffres->setMetaDescription('Ippsi - Chiffres Clés');
+        $pageChiffres->setMetaKeywords('Ippsi - Chiffres Clés');
+        $pageChiffres->setSlug('chiffres');
+        $pageChiffres->setStatus(1);
+        $pageChiffres->setUser($this->getReference('redacteur-user'));
+        $pageChiffres->setPageCategory($this->getReference('chiffres'));
+        $pageChiffres->setPageTemplate($this->getReference('pageSimpleT'));
+
+        $pageExpertise = new Page();
+        $pageExpertise->setName('Expertise');
+        $pageExpertise->setTitle('Ippsi - Expertise');
+        $pageExpertise->setContent('test');
+        $pageExpertise->setMetaDescription('Ippsi - Expertise');
+        $pageExpertise->setMetaKeywords('Ippsi - Expertise');
+        $pageExpertise->setSlug('expertise');
+        $pageExpertise->setStatus(1);
+        $pageExpertise->setUser($this->getReference('redacteur-user'));
+        $pageExpertise->setPageCategory($this->getReference('expertise'));
+        $pageExpertise->setPageTemplate($this->getReference('pageSimpleT'));
+
+        $pageValeurs = new Page();
+        $pageValeurs->setName('Valeurs');
+        $pageValeurs->setTitle('Ippsi - Valeurs');
+        $pageValeurs->setContent('test');
+        $pageValeurs->setMetaDescription('Ippsi - Valeurs');
+        $pageValeurs->setMetaKeywords('Ippsi - Valeurs');
+        $pageValeurs->setSlug('valeurs');
+        $pageValeurs->setStatus(1);
+        $pageValeurs->setUser($this->getReference('redacteur-user'));
+        $pageValeurs->setPageCategory($this->getReference('valeurs'));
+        $pageValeurs->setPageTemplate($this->getReference('pageSimpleT'));
+
+
+
+        $pageMetiers = new Page();
+        $pageMetiers->setName('Nos métiers');
+        $pageMetiers->setTitle('Ippsi - Nos métiers');
+        $pageMetiers->setContent('test');
+        $pageMetiers->setMetaDescription('Ippsi - Nos métierss');
+        $pageMetiers->setMetaKeywords('Ippsi - Nos métiers');
+        $pageMetiers->setSlug('metiers');
+        $pageMetiers->setStatus(1);
+        $pageMetiers->setUser($this->getReference('redacteur-user'));
+        $pageMetiers->setPageCategory($this->getReference('metiers'));
+        $pageMetiers->setPageTemplate($this->getReference('pageSimpleT'));
+
+        $pageSecteurs = new Page();
+        $pageSecteurs->setName('Nos secteurs d\'activités');
+        $pageSecteurs->setTitle('Ippsi - Nos secteurs d\'activités');
+        $pageSecteurs->setContent('test');
+        $pageSecteurs->setMetaDescription('Ippsi - Nos secteurs d\'activités');
+        $pageSecteurs->setMetaKeywords('Ippsi - Nos secteurs d\'activités');
+        $pageSecteurs->setSlug('secteurs');
+        $pageSecteurs->setStatus(1);
+        $pageSecteurs->setUser($this->getReference('redacteur-user'));
+        $pageSecteurs->setPageCategory($this->getReference('secteurs'));
+        $pageSecteurs->setPageTemplate($this->getReference('pageSimpleT'));
+
+        $pageConfiance = new Page();
+        $pageConfiance->setName('Ils nous font confiance');
+        $pageConfiance->setTitle('Ippsi - Ils nous font confiance');
+        $pageConfiance->setContent('test');
+        $pageConfiance->setMetaDescription('Ippsi - Ils nous font confiance');
+        $pageConfiance->setMetaKeywords('Ippsi - Ils nous font confiance');
+        $pageConfiance->setSlug('confiance');
+        $pageConfiance->setStatus(1);
+        $pageConfiance->setUser($this->getReference('redacteur-user'));
+        $pageConfiance->setPageCategory($this->getReference('confiance'));
+        $pageConfiance->setPageTemplate($this->getReference('pageSimpleT'));
+
+
+
+        $pagePostes = new Page();
+        $pagePostes->setName('Nos secteurs d\'activités');
+        $pagePostes->setTitle('Ippsi - Nos secteurs d\'activités');
+        $pagePostes->setContent('test');
+        $pagePostes->setMetaDescription('Ippsi - Nos secteurs d\'activités');
+        $pagePostes->setMetaKeywords('Ippsi - Nos secteurs d\'activités');
+        $pagePostes->setSlug('postes');
+        $pagePostes->setStatus(1);
+        $pagePostes->setUser($this->getReference('redacteur-user'));
+        $pagePostes->setPageCategory($this->getReference('postes'));
+        $pagePostes->setPageTemplate($this->getReference('pageSimpleT'));
+
+        $pagePostuler = new Page();
+        $pagePostuler->setName('Ils nous font confiance');
+        $pagePostuler->setTitle('Ippsi - Ils nous font confiance');
+        $pagePostuler->setContent('test');
+        $pagePostuler->setMetaDescription('Ippsi - Ils nous font confiance');
+        $pagePostuler->setMetaKeywords('Ippsi - Ils nous font confiance');
+        $pagePostuler->setSlug('pourvoir');
+        $pagePostuler->setStatus(1);
+        $pagePostuler->setUser($this->getReference('redacteur-user'));
+        $pagePostuler->setPageCategory($this->getReference('pourvoir'));
+        $pagePostuler->setPageTemplate($this->getReference('pageSimpleT'));
+
+
+
+        $pageContact = new Page();
+        $pageContact->setName('Contact');
+        $pageContact->setTitle('Ippsi - Contact');
+        $pageContact->setContent('test');
+        $pageContact->setMetaDescription('Ippsi - Contact');
+        $pageContact->setMetaKeywords('Ippsi - Contact');
+        $pageContact->setSlug('contact');
+        $pageContact->setStatus(1);
+        $pageContact->setUser($this->getReference('redacteur-user'));
+        $pageContact->setPageCategory($this->getReference('contact'));
+        $pageContact->setPageTemplate($this->getReference('pageSimpleT'));
+
 
 
         $manager->persist($pageAccueil);
-//        $manager->persist($pageTemplate2);
-//        $manager->persist($pageTemplate3);
+        $manager->persist($pageActus);
+        $manager->persist($pagePresentation);
+        $manager->persist($pageChiffres);
+        $manager->persist($pageExpertise);
+        $manager->persist($pageValeurs);
+
+        $manager->persist($pageMetiers);
+        $manager->persist($pageSecteurs);
+        $manager->persist($pageConfiance);
+
+        $manager->persist($pagePostes);
+        $manager->persist($pagePostuler);
+
+        $manager->persist($pageContact);
+
+
         $manager->flush();
     }
 
