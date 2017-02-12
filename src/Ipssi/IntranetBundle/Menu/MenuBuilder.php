@@ -144,12 +144,8 @@ class MenuBuilder
                 ->setAttribute('icon', 'cog')
                 ->setAttribute('icon2', 'caret-down')
                 ->setAttribute('target', 'admin');
-            $menu['Admin']->addChild('Compte rendu d\'activité', array('route' => 'intranet_cra_homepage'));
-            $menu['Admin']->addChild('Note de frais', array('route' => 'intranet_expense_homepage'));
-            $menu['Admin']->addChild('Demande de congés', array('route' => 'intranet_vacation_homepage'));
-    //            $menu['Admin']->addChild('CVthèque', array('route' => 'intranet_cv_homepage'));
-            $menu['Admin']->addChild('Postes', array('route' => 'intranet_offers'));
-            $menu['Admin']->addChild('Compétences', array('route' => 'intranet_skills'));
+            $menu['Admin']->addChild('Gestion des utilisateurs', array('route' => 'intranet_user_homepage'));
+            $menu['Admin']->addChild('Application', array('route' => 'intranet_homepage'));
         }
         return $menu;
     }
