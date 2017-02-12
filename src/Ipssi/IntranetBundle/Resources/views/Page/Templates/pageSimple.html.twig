@@ -1,53 +1,46 @@
-{% extends "intranet.html.twig" %}
+{% extends "base.html.twig" %}
 
-{% block title %} Page {% endblock %}
+{% block description %} {{ page.metaDescription }} {% endblock %}
+{% block keywords %} {{ page.metaKeywords }} {% endblock %}
+{% block title %} {{ page.title }} {% endblock %}
 
 {% block headerContainer %}
-    <div class="col-lg-12">
-        <h1 class="page-header">
-            Page
-            <small>Aperçu template page simple : {{ page.name }}</small>
-        </h1>
-        <ol class="breadcrumb">
-            <li>
-                <i class="fa fa-home"></i>  <a href="{{ path('intranet_homepage') }}">Accueil</a>
-            </li>
-            <li class="active">
-                <a href="{{ path('intranet_page_homepage') }}">Page</a>
-            </li>
-            <li class="active">
-                <i class="fa fa-eye"></i> Aperçu : {{ page.name }}
-            </li>
-        </ol>
-    </div>
+
+    <header class="business-header">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="tagline">{{ page.title }}</h1>
+                </div>
+            </div>
+        </div>
+    </header>
+
 {% endblock %}
 
 {% block body %}
 
-
-    <div class="col-lg-12">
-
-        <!-- Title -->
-        <h1>{{ page.title|capitalize }}</h1>
-
-        <!-- Author -->
-        <p class="lead">
-            par {{ page.user.username }} le {{ page.dateCreation|date('m/d/Y') }} à {{ page.dateCreation|date('H:i') }}
-        </p>
+    <!-- Page Content -->
+    <div class="container">
 
         <hr>
 
-        <!-- Page Content -->
-        <p class="lead">{{ page.content }}</p>
 
-        <p>
-            {{ page.content|raw }}
-        </p>
+        {{ page.content|raw }}
+
+
+        <hr>
+
+        <!-- Footer -->
+        <footer>
+            <div class="row">
+                <div class="col-lg-12">
+                    <p>Copyright &copy; Ipssi 2017</p>
+                </div>
+            </div>
+            <!-- /.row -->
+        </footer>
 
     </div>
-
-    <br><br><br>
-    <a href="{{ path('intranet_page_update', {'id': page.id}) }}" class="btn btn-primary" style="margin-bottom:10px;">Modifier</a>
-
 
 {% endblock %}

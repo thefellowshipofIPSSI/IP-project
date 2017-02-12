@@ -112,7 +112,7 @@
                         </a>
                     </div>
                 </div>
-                {% if not is_granted('ROLE_COLLABORATEUR') %}
+                {% if is_granted('ROLE_RH') or is_granted('ROLE_MANAGER') or is_granted('ROLE_SUPERVISEUR') %}
                     <div class="col-lg-3 col-md-6">
                         <div class="panel panel-red">
                             <div class="panel-heading">
@@ -121,7 +121,7 @@
                                         <i class="fa fa-suitcase fa-5x"></i>
                                     </div>
                                     <div class="col-xs-9 text-right">
-                                        <div class="huge">{{ users }}</div>
+                                        <div class="huge">{{ candidacies }}</div>
                                         <div>Candidatures</div>
                                     </div>
                                 </div>

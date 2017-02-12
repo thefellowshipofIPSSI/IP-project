@@ -28,6 +28,16 @@ class PageCategory
      */
     private $name;
 
+    /**
+     * @ORM\OneToMany(targetEntity="PageCategory", mappedBy="parent")
+     */
+    private $children;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="PageCategory", inversedBy="children")
+     * @ORM\JoinColumn(name="parent_id", referencedColumnName="id", nullable=true)
+     */
+    private $parent;
 
     /**
      * @ORM\OneToMany(targetEntity="Ipssi\IntranetBundle\Entity\Page", mappedBy="page_category")
@@ -109,5 +119,63 @@ class PageCategory
     public function getPage()
     {
         return $this->page;
+    }
+
+    /**
+     * Set parent
+     *
+     * @param \Ipssi\IntranetBundle\Entity\PageCategory $parent
+     *
+     * @return PageCategory
+     */
+    public function setParent(\Ipssi\IntranetBundle\Entity\PageCategory $parent = null)
+    {
+        $this->parent = $parent;
+
+        return $this;
+    }
+
+    /**
+     * Get parent
+     *
+     * @return \Ipssi\IntranetBundle\Entity\PageCategory
+     */
+    public function getParent()
+    {
+        return $this->parent;
+    }
+
+    /**
+     * Add child
+     *
+     * @param \Ipssi\IntranetBundle\Entity\PageCategory $child
+     *
+     * @return PageCategory
+     */
+    public function addChild(\Ipssi\IntranetBundle\Entity\PageCategory $child)
+    {
+        $this->children[] = $child;
+
+        return $this;
+    }
+
+    /**
+     * Remove child
+     *
+     * @param \Ipssi\IntranetBundle\Entity\PageCategory $child
+     */
+    public function removeChild(\Ipssi\IntranetBundle\Entity\PageCategory $child)
+    {
+        $this->children->removeElement($child);
+    }
+
+    /**
+     * Get children
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getChildren()
+    {
+        return $this->children;
     }
 }

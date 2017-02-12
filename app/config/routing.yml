@@ -24,10 +24,6 @@ fos_user:
 fos_user_group:
     resource: "@FOSUserBundle/Resources/config/routing/group.xml"
     prefix: /group
-    
-ipssi:
-    resource: "@IpssiBundle/Resources/config/routing.yml"
-    prefix:   /
 
 #intranet:
 #    resource: "@IntranetBundle/Resources/config/routing.yml"
@@ -50,3 +46,9 @@ sg_datatables_bundle:
 
 fos_js_routing:
     resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
+
+
+
+ipssi:
+    resource: "@IpssiBundle/Resources/config/routing.yml"
+    prefix:   /

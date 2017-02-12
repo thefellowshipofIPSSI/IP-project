@@ -52,6 +52,7 @@ class FOSUBUserProvider extends BaseClass
         //when the user is registrating
         if (null === $user) {
             $service = $response->getResourceOwner()->getName();
+            $rand = rand(0, 9);
 
             $setter = 'set'.ucfirst($service);
             $setter_id = $setter.'Id';
@@ -62,7 +63,7 @@ class FOSUBUserProvider extends BaseClass
             $user->$setter_token($response->getAccessToken());
             //I have set all requested data with the user's username
             //modify here with relevant data
-            $user->setUsername($firstname);
+            $user->setUsername($firstname.$lastname.$rand);
             $user->setUsernameCanonical($realName);
             $user->setEmail($email);
             //@TODO encode password
@@ -73,7 +74,7 @@ class FOSUBUserProvider extends BaseClass
             $profile->setGravatar(1);
             $profile->setFirstname($firstname);
             $profile->setLastname($lastname);
-            $profile->setPseudo($firstname.$lastname);
+            $profile->setPseudo($firstname.$lastname.$rand);
             $profile->setOther('Comtpte créé avec Google');
             $user->setProfile($profile);
 
