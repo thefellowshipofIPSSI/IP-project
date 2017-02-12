@@ -3,6 +3,7 @@
 namespace Ipssi\JobBundle\Form;
 
 use Ipssi\JobBundle\Transformer\SkillTagsTransformer;
+use Ivory\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -20,11 +21,8 @@ class CandidacyType extends AbstractType
     {
 
         $builder
-            ->add('content', TextareaType::class, array(
-                'attr' => array(
-                    'class' => 'form-control',
-                    'cols' => '5', 'rows' => '19'
-                )
+            ->add('content', CKEditorType::class, array(
+                'config_name' => 'default'
             ))
             ->add('cv', CVType::class, array(
                 'attr' => array(

@@ -22,11 +22,12 @@ class CandidacyController extends Controller
 
         $em = $this->getDoctrine()->getManager();
 
-        $offers = $em->getRepository('JobBundle:Offer')->findAll();
 
+        $datatable = $this->get('app.datatable.candidacy');
+        $datatable->buildDatatable();
 
-        return $this->render('JobBundle:Intranet/Offer:index.html.twig', array(
-            'offers' => $offers
+        return $this->render('JobBundle:Intranet/Candidacy:index.html.twig', array(
+            'datatables' => $datatable
         ));
 
     }
@@ -68,11 +69,11 @@ class CandidacyController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $offer = $em->getRepository('JobBundle:Candidacy')->find($candidacy);
+        $candidacy = $em->getRepository('JobBundle:Candidacy')->find($candidacy);
 
 
         return $this->render('JobBundle:Intranet/Candidacy:view.html.twig', array(
-            'offer' => $offer
+            'candidacy' => $candidacy
         ));
 
     }
@@ -117,15 +118,17 @@ class CandidacyController extends Controller
      */
     public function candidaciesResultsAction()
     {
-        $datatable = $this->get('app.datatable.usercra');
+        $datatable = $this->get('app.datatable.candidacy');
         $datatable->buildDatatable();
 
         $query = $this->get('sg_datatables.query')->getQueryFrom($datatable);
 
-        //Display only user's cra if ROLE_CREATE_CRA
-        if ($this->get('security.authorization_checker')->isGranted('ROLE_CREATE_CRA')) {
+        //Display only user's cra if ROLE_RH or ROLE_SUPERVISEUR or ROLE_MANAGER
+        if ($this->get('security.authorization_checker')->isGranted('ROLE_SUPERVISEUR')
+            || $this->get('security.authorization_checker')->isGranted('ROLE_RH')
+            ||$this->get('security.authorization_checker')->isGranted('ROLE_MANAGER')
+        ) {
             $query->buildQuery();
-            $qb = $query->getQuery();
 
             return $query->getResponse(false);
         } else {

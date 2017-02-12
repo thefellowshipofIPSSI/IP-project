@@ -134,7 +134,7 @@ class CandidacyDatatable extends AbstractDatatableView
             ->add('cv.cvName', 'column', array(
                 'title' => 'CV',
             ))
-            ->add('status', 'column', array(
+            ->add('status.name', 'column', array(
                 'title' => 'Statut',
             ))
             ->add('updatedAt', 'datetime', array(

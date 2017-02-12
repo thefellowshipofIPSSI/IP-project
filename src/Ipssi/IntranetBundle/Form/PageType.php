@@ -25,11 +25,9 @@ class PageType extends AbstractType
         $builder
             ->add('name', TextType::class, ['attr' => ['class' => 'form-control']])
             ->add('title', TextType::class, ['attr' => ['class' => 'form-control']])
-            ->add('content', CKEditorType::class,  [
-                'config' => [
-                    'uiColor' => '#ffffff',
-                    //...
-                ]])
+            ->add('content', CKEditorType::class, [
+                'config_name' => 'full'
+            ])
             ->add('slug', TextType::class, ['attr' => ['class' => 'form-control']])
             ->add('metaDescription', TextAreaType::class, ['attr' => ['class' => 'form-control']])
             ->add('metaKeywords', TextType::class, ['attr' => ['class' => 'form-control']])

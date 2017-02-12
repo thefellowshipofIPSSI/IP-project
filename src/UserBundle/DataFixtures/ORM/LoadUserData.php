@@ -112,8 +112,8 @@ class LoadUserData extends AbstractFixture implements ContainerAwareInterface, O
         $manager->persist($user6);
 
         $user8 = new User();
-        $user8->setUsername('Jean-Michel');
-        $user8->setUsernameCanonical('Durand');
+        $user8->setUsername('user');
+        $user8->setUsernameCanonical('user');
         $user8->setEmail('user@ipssi.com');
         $user8->setEnabled(1);
 

@@ -138,3 +138,10 @@ vich_uploader:
             uri_prefix:         /uploads/cv
             upload_destination: '%kernel.root_dir%/../web/uploads/cv'
             namer:              vich_uploader.namer_uniqid
+
+ivory_ck_editor:
+    configs:
+        default:
+            toolbar: standard
+        full:
+            toolbar: full

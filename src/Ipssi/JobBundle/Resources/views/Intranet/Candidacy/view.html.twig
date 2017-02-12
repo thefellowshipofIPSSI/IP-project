@@ -1,0 +1,131 @@
+{% extends 'intranet.html.twig' %}
+
+{% block title %} Candidature de {{ candidacy.candidate.profile.lastname }} {{ candidacy.candidate.profile.firstname }} pour l'offre {{ candidacy.offer.name }} {% endblock %}
+
+{% block headerContainer %}
+    <div class="col-lg-12">
+        <h1 class="page-header">
+            Candidature pour l'offre {{ candidacy.offer.name }}
+            <small>{{ candidacy.candidate.profile.lastname }} {{ candidacy.candidate.profile.firstname }}</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li>
+                <i class="fa fa-home"></i> <a href="{{ path('intranet_homepage') }}">Accueil</a>
+            </li>
+            <li>
+                <a href="{{ path('intranet_offers') }}">Offres</a>
+            </li>
+            <li>
+                <a href="{{ path('intranet_list_candidacies_by_offer', { 'offer': candidacy.offer.id }) }}">
+                    Candidatures : {{ candidacy.offer.name }} </a>
+            </li>
+            <li class="active">
+                <i class="fa fa-eye"></i> Candidature
+                de {{ candidacy.candidate.profile.lastname }} {{ candidacy.candidate.profile.firstname }}
+            </li>
+        </ol>
+    </div>
+{% endblock %}
+
+{% block body %}
+
+
+
+
+    <!-- Contenu de la candidature -->
+    <div class="row">
+
+        <div class="col-md-10 col-md-offset-1">
+
+            <div class="row">
+
+                <h3><small>Identité du candidat :</small> {{ candidacy.candidate.profile.firstName }} {{ candidacy.candidate.profile.lastName }}</h3>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+    <hr>
+
+    <!-- Rappel de l'offre -->
+    <div class="row">
+
+        <div class="col-md-10 col-md-offset-1">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Offre : {{ candidacy.offer.name }}</h3>
+                    <span class="pull-right clickable panel-collapsed"><i class="glyphicon glyphicon-chevron-down"></i></span>
+                </div>
+                <div class="panel-body" style="display:none">{{ candidacy.offer.description | raw }}</div>
+            </div>
+        </div>
+    </div>
+
+    <hr>
+
+    <!-- Actions -->
+    <div class="row">
+        <div class="col-md-6 text-left">
+            <a href="{{ path('user_profile_public', {'pseudo': candidacy.candidate.profile.pseudo}) }}"
+               class="btn btn-primary" style="margin-bottom:10px;">
+                Profil de {{ candidacy.candidate.profile.firstname }} {{ candidacy.candidate.profile.lastname }}
+            </a>
+            <a href="{{ path('intranet_candidacy_update', {'candidacy': candidacy.id}) }}" class="btn btn-primary"
+               style="margin-bottom:10px;">
+                Modifier
+            </a>
+        </div>
+
+        <div class="col-md-6 text-right">
+            <a href="{{ path('intranet_candidacy_validate', {'candidacy': candidacy.id}) }}" class="btn btn-success"
+               style="margin-bottom:10px;">
+                <i class="fa fa-check-circle"></i> &nbsp; Valider la candidature
+            </a>
+            <a href="{{ path('intranet_candidacy_refuse', {'candidacy': candidacy.id}) }}" class="btn btn-danger"
+               style="margin-bottom:10px;">
+                <i class="fa fa-times-circle"></i> &nbsp; Refuser la candidature
+            </a>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block customStylesheets %}
+
+    <style>
+        .row{
+            margin-top:40px;
+            padding: 0 10px;
+        }
+
+        .clickable{
+            cursor: pointer;
+        }
+
+        .panel-heading span {
+            margin-top: -20px;
+            font-size: 15px;
+        }
+    </style>
+
+{% endblock %}
+
+{% block customJavascripts %}
+    <script type="text/javascript">
+        $(document).on('click', '.panel-heading span.clickable', function(e){
+            var $this = $(this);
+            if(!$this.hasClass('panel-collapsed')) {
+                $this.parents('.panel').find('.panel-body').slideUp();
+                $this.addClass('panel-collapsed');
+                $this.find('i').removeClass('glyphicon-chevron-up').addClass('glyphicon-chevron-down');
+            } else {
+                $this.parents('.panel').find('.panel-body').slideDown();
+                $this.removeClass('panel-collapsed');
+                $this.find('i').removeClass('glyphicon-chevron-down').addClass('glyphicon-chevron-up');
+            }
+        })
+    </script>
+{% endblock %}

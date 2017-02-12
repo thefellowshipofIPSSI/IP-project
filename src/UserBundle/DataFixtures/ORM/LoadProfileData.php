@@ -96,6 +96,18 @@ class LoadProfileData extends AbstractFixture implements OrderedFixtureInterface
 
         $manager->persist($profileSuperviseur);
 
+        $profileUser = new Profile();
+        $profileUser->setUser($this->getReference('base-user'));
+        $profileUser->setPseudo('userBase');
+        $profileUser->setFirstname('Jean-Michel');
+        $profileUser->setLastname('Durand');
+        $profileUser->setPhone('04 00 00 00 00');
+        $profileUser->setAddress('00 rue de la liberté');
+        $profileUser->setBirthDate(new \DateTime('2016-12-25'));
+
+        $manager->persist($profileUser);
+
+
         $manager->flush();
     }
 

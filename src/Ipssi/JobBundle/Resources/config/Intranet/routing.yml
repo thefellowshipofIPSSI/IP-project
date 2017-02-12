@@ -90,6 +90,24 @@ intranet_candidacy:
     options:
         expose: true
 
+intranet_candidacy_update:
+    path:     /candidature/{candidacy}/modifier
+    defaults: { _controller: JobBundle:Intranet/Candidacy:update }
+    options:
+        expose: true
+
+intranet_candidacy_validate:
+    path:     /candidature/{candidacy}/accepter
+    defaults: { _controller: JobBundle:Intranet/Candidacy:validate }
+    options:
+        expose: true
+
+intranet_candidacy_refuse:
+    path:     /candidature/{candidacy}/decliner
+    defaults: { _controller: JobBundle:Intranet/Candidacy:refuse }
+    options:
+        expose: true
+
 
 ############# Skills ################
 intranet_skills:
