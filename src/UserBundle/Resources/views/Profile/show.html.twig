@@ -39,6 +39,11 @@
                                  class="img-circle img-responsive">
                         {% endif %}
 
+                        {% for group in user.groups %}
+
+                            <div class="alert alert-success alert-member" role="alert">{{ group.name }}</div>
+
+                        {% endfor %}
 
                         {% if user.newsletter and user.newsletter.enabled %}
                         <div class="alert alert-success alert-member" role="alert">Inscrit à la liste de diffusion <br> <a href="{{ path('user_unsubscribe') }}" class="alert-link">Désinscription</a></div>

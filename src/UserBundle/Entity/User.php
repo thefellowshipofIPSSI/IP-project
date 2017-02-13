@@ -71,7 +71,7 @@ class User extends BaseUser {
 
     /**
      * User skills
-     * @ORM\ManyToMany(targetEntity="Ipssi\JobBundle\Entity\Skill", inversedBy="users")
+     * @ORM\ManyToMany(targetEntity="Ipssi\JobBundle\Entity\Skill", inversedBy="users", cascade={"persist"})
      * @ORM\JoinTable(name="user_skills")
      */
     private $skills;

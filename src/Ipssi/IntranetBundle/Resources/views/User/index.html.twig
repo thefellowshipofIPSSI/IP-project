@@ -34,60 +34,6 @@
 {% endblock %}
 
 {% block body %}
-    {#{% if is_granted('ROLE_RH') %}#}
-        {#<a href="{{ path('intranet_user_create') }}" class="btn btn-primary" style="margin-bottom:10px;">Ajouter un utilisateur</a>#}
-    {#{% endif %}#}
-    {#<div class="table-responsive">#}
-        {#<table class="table table-bordered table-hover">#}
-            {#<thead>#}
-            {#<tr>#}
-                {#<th>#</th>#}
-                {#<th>Login</th>#}
-                {#<th>email</th>#}
-                {#<th>Statut</th>#}
-                {#<th>Groupe</th>#}
-                {#{% if is_granted('ROLE_RH') %}#}
-                    {#<th>Actions</th>#}
-                {#{% endif %}#}
-            {#</tr>#}
-            {#</thead>#}
-            {#<tbody>#}
-            {#{% for user in allUsers %}#}
-                {#<tr>#}
-                    {#<td>{{ user.id }}</td>#}
-                    {#<td>{{ user.username }}</td>#}
-                    {#<td>{{ user.email }}</td>#}
-                    {#<td>#}
-                        {#{% if user.enabled == 0 %}#}
-                            {#Compte désactivé#}
-                        {#{% else %}#}
-                            {#Compte activé#}
-                        {#{% endif %}#}
-                    {#</td>#}
-                    {#<td>#}
-                        {#{{ dump(user.group) }}#}
-                        {#{% for group in user.groups %}#}
-                            {#<p>{{group.name}}</p>#}
-                        {#{% endfor %}#}
-                    {#</td>#}
-                    {#{% if is_granted('ROLE_RH') %}#}
-                        {#<td>#}
-                            {#<a href="{{ path('user_profile_public', {'pseudo': user.profile.pseudo}) }}" class="fa fa-eye" title="Aperçu"></a>#}
-                            {#<a href="{{ path('intranet_user_update', {'id': user.id}) }}" class="fa fa-pencil-square-o" title="Modifier"></a>#}
-                            {#<a href="{{ path('intranet_user_delete', {'id': user.id}) }}" class="fa fa-trash-o" title="Supprimer"></a>#}
-                            {#{% if user.enabled == 0 %}#}
-                                {#<a href="{{ path('intranet_user_enable', {'id': user.id}) }}" class="fa fa-toggle-off" title="Activer"></a>#}
-                            {#{% else %}#}
-                                {#<a href="{{ path('intranet_user_disable', {'id': user.id}) }}" class="fa fa-toggle-on" title="Désactiver"></a>#}
-                            {#{% endif %}#}
-                        {#</td>#}
-                    {#{% endif %}#}
-                {#</tr>#}
-            {#{% endfor %}#}
-
-            {#</tbody>#}
-        {#</table>#}
-    {#</div>#}
 
     {{ datatable_render(datatable) }}
 

@@ -214,9 +214,9 @@ class UserDatatable extends AbstractDatatableView
                 'title' => $this->translator->trans('datatables.actions.title'),
                 'actions' => array(
                     array(
-                        'route' => 'intranet_user_view',
+                        'route' => 'user_profile_public',
                         'route_parameters' => array(
-                            'id' => 'id'
+                            'pseudo' => 'profile.pseudo'
                         ),
                         'label' => '',
                         'icon' => 'glyphicon glyphicon-eye-open',

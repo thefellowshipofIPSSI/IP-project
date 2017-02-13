@@ -33,70 +33,89 @@
 
 
         <!-- Contenu de la candidature -->
-        <div class="container">
-
-            <div class="row">
-                <div class="col-md-8">
+        <div class="row">
+            <div class="col-md-8">
 
 
-                    <label>Candidat</label>
-                    <p>
-                        {{ candidacy.candidate.profile.firstName }} {{ candidacy.candidate.profile.lastName }}
-                        <br>
-                        <a href="{{ path('user_profile_public', {'pseudo': candidacy.candidate.profile.pseudo}) }}" target="_blank">
-                            Profil du candidat
-                        </a>
-                    </p>
+                <label>Candidat</label>
+                <p>
+                    {{ candidacy.candidate.profile.firstName }} {{ candidacy.candidate.profile.lastName }}
+                    <br>
+                    <a href="{{ path('user_profile_public', {'pseudo': candidacy.candidate.profile.pseudo}) }}" target="_blank">
+                        Profil du candidat
+                    </a>
+                </p>
 
-                    <label>Motivations</label>
-                    <p>{{ candidacy.content | raw }}</p>
-
-
+                <label>Motivations</label>
+                <p>{{ candidacy.content | raw }}</p>
 
 
-                </div>
-
-                <div class="col-md-4">
-
-                    <label>Candidature créée le :</label>
-                    <p>{{ candidacy.createdAt | date('d/m/Y') }}</p>
-
-                    <label>Statut</label>
-                    <p>{{ candidacy.status.name }}</p>
+                <p><a class="btn btn-primary" href="{{ vich_uploader_asset(candidacy.cv, 'cvFile') }}" target="_blank"><i class="fa fa-eye"></i> Voir le CV</a></p>
 
 
-                    {% if candidacy.updatedAt is not null %}
-                        <label>Modifiée le : </label>
-                        <p>{{ candidacy.updatedAt | date('d/m/Y') }}
-
-                        {% if candidacy.updatedBy is not null %}
-                            {{ candidacy.updatedBy.profil.pseudo }}
-                        {% endif %}
-
-                        </p>
-                    {% endif %}
-
-                    {% if candidacy.decision is not null %}
-                        <label>Décision :</label>
-                        <p>{{ candidacy.decision }}</p>
-
-                    {% endif %}
-
-                    {% if candidacy.closedBy is not null %}
-                        <label>Candidature close par :</label>
-                        <p>{{ candidacy.closedBy.profil.pseudo }}</p>
-                    {% endif %}
-
-                </div>
             </div>
 
+            <div class="col-md-4">
+
+                <label>Candidature créée le :</label>
+                <p>{{ candidacy.createdAt | date('d/m/Y') }}</p>
+
+                <label>Statut</label>
+                <p>{{ candidacy.status.name }}</p>
+
+
+                {% if candidacy.updatedAt is not null %}
+                    <label>Modifiée le : </label>
+                    <p>{{ candidacy.updatedAt | date('d/m/Y') }}
+
+                    {% if candidacy.updatedBy is not null %}
+                        {{ candidacy.updatedBy.profil.pseudo }}
+                    {% endif %}
+
+                    </p>
+                {% endif %}
+
+                {% if candidacy.decision is not null %}
+                    <label>Décision :</label>
+                    <p>{{ candidacy.decision }}</p>
+
+                {% endif %}
+
+                {% if candidacy.closedBy is not null %}
+                    <label>Candidature close par :</label>
+                    <p>{{ candidacy.closedBy.profil.pseudo }}</p>
+                {% endif %}
+
+            </div>
         </div>
 
         <hr>
 
         <!-- Compétences utilisateur et demandées dans l'offre -->
         <div class="row">
+            <label>Compétences du candidat :</label>
+            {% for skill in candidacy.candidate.skills %}
+                {% if skill in candidacy.offer.skills %}
+                <span style="color:green;">
+                {% endif %}
+                    {{ skill.name }}
+                {% if skill in candidacy.offer.skills %}
+                    </span>
+                {% endif %}
+            {% endfor %}
 
+            <br>
+
+            <label>Compétences requises :</label>
+            {% for skill in candidacy.offer.skills %}
+                {% if skill in candidacy.candidate.skills %}
+                <span style="color:green;">
+                {% endif %}
+                {{ skill.name }}
+                {% if skill in candidacy.candidate.skills %}
+                    </span>
+                {% endif %}
+            {% endfor %}
         </div>
 
         <hr>
@@ -111,7 +130,34 @@
                         <span class="pull-right clickable panel-collapsed"><i
                                     class="glyphicon glyphicon-chevron-down"></i></span>
                     </div>
-                    <div class="panel-body" style="display:none">{{ candidacy.offer.description | raw }}</div>
+                    <div class="panel-body" style="display:none">
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <div class="container">
+                                    <div class="col-md-3">
+                                        <a class="btn btn-success" style="margin-top: 5%;" href="{{ path('intranet_offer_view', {'offer': candidacy.offer.id}) }}" target="_blank">
+                                            <i class="fa fa-eye"></i> &nbsp; Voir l'offre
+                                        </a>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <p>Société : <a href="{{ path('intranet_society_view', { 'society': candidacy.offer.society.id }) }}" target="_blank" >{{ candidacy.offer.society.name }}</a></p>
+                                        <p>Localisation : {{ candidacy.offer.location }}</p>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <p>Type de contrat : {{ candidacy.offer.contract }}</p>
+                                        {% if candidacy.offer.duration is not null %}<p>Durée : {{ candidacy.offer.duration }}</p>{% endif %}
+                                        <p>A partir de : {{ candidacy.offer.beginDate }}</p>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <p>Rémunération : {{ candidacy.offer.salary }} {{ candidacy.offer.currency }}</p>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        {{ candidacy.offer.description | raw }}
+                    </div>
                 </div>
             </div>
         </div>
@@ -120,13 +166,17 @@
 
         <!-- Actions -->
         <div class="row">
+
+            {% if is_granted('ROLE_ADMIN') %}
             <div class="col-md-6 text-left">
                 <a href="{{ path('intranet_candidacy_update', {'candidacy': candidacy.id}) }}" class="btn btn-primary"
                    style="margin-bottom:10px;">
                     Modifier
                 </a>
             </div>
+            {% endif %}
 
+            {% if candidacy.status.name == "En attente" %}
             <div class="col-md-6 text-right">
                 <a href="{{ path('intranet_candidacy_validate', {'candidacy': candidacy.id}) }}" class="btn btn-success"
                    style="margin-bottom:10px;">
@@ -137,6 +187,7 @@
                     <i class="fa fa-times-circle"></i> &nbsp; Refuser la candidature
                 </a>
             </div>
+            {% endif %}
         </div>
 
     </div>

@@ -116,6 +116,8 @@ class LoadUserData extends AbstractFixture implements ContainerAwareInterface, O
         $user8->setUsernameCanonical('user');
         $user8->setEmail('user@ipssi.com');
         $user8->setEnabled(1);
+        $user8->addSkill($this->getReference('php-skill'));
+        $user8->addSkill($this->getReference('linux-skill'));
 
         $password8 = $encoder->encodePassword($user8, 'secret');
         $user8->setPassword($password8);
