@@ -13,28 +13,29 @@ class LoadPageData extends AbstractFixture implements OrderedFixtureInterface
     {
         $pageAccueil = new Page();
         $pageAccueil->setName('accueil');
-        $pageAccueil->setTitle('Ippsi - Accueil');
+        $pageAccueil->setTitle('Ipssi - Accueil');
         $pageAccueil->setContent('<div class="row">
             <div class="col-sm-8">
-                <h2>What We Do</h2>
-                <p>Introduce the visitor to the business using clear, informative text. Use well-targeted keywords within your sentences to make sure search engines can find the business.</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Et molestiae similique eligendi reiciendis sunt distinctio odit? Quia, neque, ipsa, adipisci quisquam ullam deserunt accusantium illo iste exercitationem nemo voluptates asperiores.</p>
+                <h2>L\'école IPSSI</h2>
+                <p>L’IT-Akademy est, depuis sa création, spécialisée dans le domaine de l’ingénierie informatique professionnalisante et délivre des certifications, diplômes ou titres professionnels inscrits au RNCP jusqu’au niveau 1.
+            Les cursus sont suivis dans le cadre de l’alternance, de la formation initiale, de parcours de professionnalisation ou VAE. Les différentes filières conduisent principalement aux métiers de <a href="">Développeur Full Stack</a>, d\'<a href="">Administrateur Système et Réseau</a> ou encore de <a href="">Chef de Projets Informatiques</a> et <a href="">Manager du Système d\'Information</a>.</p>
+            Les formations préparent également aux certifications techniques d\'éditeurs reconnus sur le marché (Microsoft, Zend PHP, Oracle MySQL...).</p>
+
                 <p>
-                    <a class="btn btn-default btn-lg" href="#">Call to Action &raquo;</a>
+                    <a class="btn btn-default btn-lg" href="#">En savoir plus &raquo;</a>
                 </p>
             </div>
             <div class="col-sm-4">
-                <h2>Contact Us</h2>
+                <h2>Contactez nous</h2>
                 <address>
-                    <strong>Start Bootstrap</strong>
-                    <br>3481 Melrose Place
-                    <br>Beverly Hills, CA 90210
+                    <strong>IPSSI</strong>
+                    <br>6 Place Charles Hernu<br>69100 Villeurbanne
                     <br>
                 </address>
                 <address>
-                    <abbr title="Phone">P:</abbr>(123) 456-7890
+                    <abbr title="Phone">T:</abbr> 04 82 53 73 75
                     <br>
-                    <abbr title="Email">E:</abbr> <a href="mailto:#">name@example.com</a>
+                    <abbr title="Email">E:</abbr> <a href="mailto:contact@ipssi.com">contact@ipssi.com</a>
                 </address>
             </div>
         </div>
@@ -60,8 +61,8 @@ class LoadPageData extends AbstractFixture implements OrderedFixtureInterface
             </div>
         </div>
         <!-- /.row -->');
-        $pageAccueil->setMetaDescription('Ippsi - Accueil');
-        $pageAccueil->setMetaKeywords('Ippsi - Accueil');
+        $pageAccueil->setMetaDescription('Ipssi - Accueil');
+        $pageAccueil->setMetaKeywords('Ipssi - Accueil');
         $pageAccueil->setSlug('accueil');
         $pageAccueil->setStatus(1);
         $pageAccueil->setUser($this->getReference('redacteur-user'));
@@ -70,10 +71,10 @@ class LoadPageData extends AbstractFixture implements OrderedFixtureInterface
 
         $pageActus = new Page();
         $pageActus->setName('Actualités');
-        $pageActus->setTitle('Ippsi - Actualités');
+        $pageActus->setTitle('Ipssi - Actualités');
         $pageActus->setContent('test');
-        $pageActus->setMetaDescription('Ippsi - Actualités');
-        $pageActus->setMetaKeywords('Ippsi - Actualités');
+        $pageActus->setMetaDescription('Ipssi - Actualités');
+        $pageActus->setMetaKeywords('Ipssi - Actualités');
         $pageActus->setSlug('actus');
         $pageActus->setStatus(1);
         $pageActus->setUser($this->getReference('redacteur-user'));
@@ -83,10 +84,10 @@ class LoadPageData extends AbstractFixture implements OrderedFixtureInterface
 
         $pagePresentation = new Page();
         $pagePresentation->setName('Présentation');
-        $pagePresentation->setTitle('Ippsi - Présentation');
+        $pagePresentation->setTitle('Ipssi - Présentation');
         $pagePresentation->setContent('test');
-        $pagePresentation->setMetaDescription('Ippsi - Présentation');
-        $pagePresentation->setMetaKeywords('Ippsi - Présentation');
+        $pagePresentation->setMetaDescription('Ipssi - Présentation');
+        $pagePresentation->setMetaKeywords('Ipssi - Présentation');
         $pagePresentation->setSlug('presentation');
         $pagePresentation->setStatus(1);
         $pagePresentation->setUser($this->getReference('redacteur-user'));
@@ -95,10 +96,10 @@ class LoadPageData extends AbstractFixture implements OrderedFixtureInterface
 
         $pageChiffres = new Page();
         $pageChiffres->setName('Chiffres Clés');
-        $pageChiffres->setTitle('Ippsi - Chiffres Clés');
+        $pageChiffres->setTitle('Ipssi - Chiffres Clés');
         $pageChiffres->setContent('test');
-        $pageChiffres->setMetaDescription('Ippsi - Chiffres Clés');
-        $pageChiffres->setMetaKeywords('Ippsi - Chiffres Clés');
+        $pageChiffres->setMetaDescription('Ipssi - Chiffres Clés');
+        $pageChiffres->setMetaKeywords('Ipssi - Chiffres Clés');
         $pageChiffres->setSlug('chiffres');
         $pageChiffres->setStatus(1);
         $pageChiffres->setUser($this->getReference('redacteur-user'));
@@ -107,10 +108,10 @@ class LoadPageData extends AbstractFixture implements OrderedFixtureInterface
 
         $pageExpertise = new Page();
         $pageExpertise->setName('Expertise');
-        $pageExpertise->setTitle('Ippsi - Expertise');
+        $pageExpertise->setTitle('Ipssi - Expertise');
         $pageExpertise->setContent('test');
-        $pageExpertise->setMetaDescription('Ippsi - Expertise');
-        $pageExpertise->setMetaKeywords('Ippsi - Expertise');
+        $pageExpertise->setMetaDescription('Ipssi - Expertise');
+        $pageExpertise->setMetaKeywords('Ipssi - Expertise');
         $pageExpertise->setSlug('expertise');
         $pageExpertise->setStatus(1);
         $pageExpertise->setUser($this->getReference('redacteur-user'));
@@ -119,10 +120,10 @@ class LoadPageData extends AbstractFixture implements OrderedFixtureInterface
 
         $pageValeurs = new Page();
         $pageValeurs->setName('Valeurs');
-        $pageValeurs->setTitle('Ippsi - Valeurs');
+        $pageValeurs->setTitle('Ipssi - Valeurs');
         $pageValeurs->setContent('test');
-        $pageValeurs->setMetaDescription('Ippsi - Valeurs');
-        $pageValeurs->setMetaKeywords('Ippsi - Valeurs');
+        $pageValeurs->setMetaDescription('Ipssi - Valeurs');
+        $pageValeurs->setMetaKeywords('Ipssi - Valeurs');
         $pageValeurs->setSlug('valeurs');
         $pageValeurs->setStatus(1);
         $pageValeurs->setUser($this->getReference('redacteur-user'));
@@ -133,10 +134,10 @@ class LoadPageData extends AbstractFixture implements OrderedFixtureInterface
 
         $pageMetiers = new Page();
         $pageMetiers->setName('Nos métiers');
-        $pageMetiers->setTitle('Ippsi - Nos métiers');
+        $pageMetiers->setTitle('Ipssi - Nos métiers');
         $pageMetiers->setContent('test');
-        $pageMetiers->setMetaDescription('Ippsi - Nos métierss');
-        $pageMetiers->setMetaKeywords('Ippsi - Nos métiers');
+        $pageMetiers->setMetaDescription('Ipssi - Nos métierss');
+        $pageMetiers->setMetaKeywords('Ipssi - Nos métiers');
         $pageMetiers->setSlug('metiers');
         $pageMetiers->setStatus(1);
         $pageMetiers->setUser($this->getReference('redacteur-user'));
@@ -145,10 +146,10 @@ class LoadPageData extends AbstractFixture implements OrderedFixtureInterface
 
         $pageSecteurs = new Page();
         $pageSecteurs->setName('Nos secteurs d\'activités');
-        $pageSecteurs->setTitle('Ippsi - Nos secteurs d\'activités');
+        $pageSecteurs->setTitle('Ipssi - Nos secteurs d\'activités');
         $pageSecteurs->setContent('test');
-        $pageSecteurs->setMetaDescription('Ippsi - Nos secteurs d\'activités');
-        $pageSecteurs->setMetaKeywords('Ippsi - Nos secteurs d\'activités');
+        $pageSecteurs->setMetaDescription('Ipssi - Nos secteurs d\'activités');
+        $pageSecteurs->setMetaKeywords('Ipssi - Nos secteurs d\'activités');
         $pageSecteurs->setSlug('secteurs');
         $pageSecteurs->setStatus(1);
         $pageSecteurs->setUser($this->getReference('redacteur-user'));
@@ -157,10 +158,10 @@ class LoadPageData extends AbstractFixture implements OrderedFixtureInterface
 
         $pageConfiance = new Page();
         $pageConfiance->setName('Ils nous font confiance');
-        $pageConfiance->setTitle('Ippsi - Ils nous font confiance');
+        $pageConfiance->setTitle('Ipssi - Ils nous font confiance');
         $pageConfiance->setContent('test');
-        $pageConfiance->setMetaDescription('Ippsi - Ils nous font confiance');
-        $pageConfiance->setMetaKeywords('Ippsi - Ils nous font confiance');
+        $pageConfiance->setMetaDescription('Ipssi - Ils nous font confiance');
+        $pageConfiance->setMetaKeywords('Ipssi - Ils nous font confiance');
         $pageConfiance->setSlug('confiance');
         $pageConfiance->setStatus(1);
         $pageConfiance->setUser($this->getReference('redacteur-user'));
@@ -171,10 +172,10 @@ class LoadPageData extends AbstractFixture implements OrderedFixtureInterface
 
         $pagePostes = new Page();
         $pagePostes->setName('Les postes à pourvoir');
-        $pagePostes->setTitle('Ippsi - Les postes à pourvoir');
+        $pagePostes->setTitle('Ipssi - Les postes à pourvoir');
         $pagePostes->setContent('test');
-        $pagePostes->setMetaDescription('Ippsi - Les postes à pourvoir');
-        $pagePostes->setMetaKeywords('Ippsi - Les postes à pourvoir');
+        $pagePostes->setMetaDescription('Ipssi - Les postes à pourvoir');
+        $pagePostes->setMetaKeywords('Ipssi - Les postes à pourvoir');
         $pagePostes->setSlug('postes');
         $pagePostes->setStatus(1);
         $pagePostes->setUser($this->getReference('redacteur-user'));
@@ -183,10 +184,10 @@ class LoadPageData extends AbstractFixture implements OrderedFixtureInterface
 
         $pagePostuler = new Page();
         $pagePostuler->setName('Postuler');
-        $pagePostuler->setTitle('Ippsi - Postuler');
+        $pagePostuler->setTitle('Ipssi - Postuler');
         $pagePostuler->setContent('test');
-        $pagePostuler->setMetaDescription('Ippsi - Postuler');
-        $pagePostuler->setMetaKeywords('Ippsi - Postuler');
+        $pagePostuler->setMetaDescription('Ipssi - Postuler');
+        $pagePostuler->setMetaKeywords('Ipssi - Postuler');
         $pagePostuler->setSlug('postuler');
         $pagePostuler->setStatus(1);
         $pagePostuler->setUser($this->getReference('redacteur-user'));
@@ -197,15 +198,15 @@ class LoadPageData extends AbstractFixture implements OrderedFixtureInterface
 
         $pageContact = new Page();
         $pageContact->setName('Contact');
-        $pageContact->setTitle('Ippsi - Contact');
+        $pageContact->setTitle('Ipssi - Contact');
         $pageContact->setContent('test');
-        $pageContact->setMetaDescription('Ippsi - Contact');
-        $pageContact->setMetaKeywords('Ippsi - Contact');
+        $pageContact->setMetaDescription('Ipssi - Contact');
+        $pageContact->setMetaKeywords('Ipssi - Contact');
         $pageContact->setSlug('contact');
         $pageContact->setStatus(1);
         $pageContact->setUser($this->getReference('redacteur-user'));
         $pageContact->setPageCategory($this->getReference('contact'));
-        $pageContact->setPageTemplate($this->getReference('pageSimpleT'));
+        $pageContact->setPageTemplate($this->getReference('contactT'));
 
 
 

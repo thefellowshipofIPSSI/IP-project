@@ -46,7 +46,10 @@ class UserCRAController extends Controller
         $query = $this->get('sg_datatables.query')->getQueryFrom($datatable);
 
         //Display only user's cra if ROLE_CREATE_CRA
-        if ($this->get('security.authorization_checker')->isGranted('ROLE_CREATE_CRA')) {
+        if ($this->get('security.authorization_checker')->isGranted('ROLE_CREATE_CRA')
+            && !$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')
+            && !$this->get('security.authorization_checker')->isGranted('ROLE_RH')
+            && !$this->get('security.authorization_checker')->isGranted('ROLE_MANAGER')) {
             $query->buildQuery();
             $qb = $query->getQuery();
             $user = $this->getUser()->getId();

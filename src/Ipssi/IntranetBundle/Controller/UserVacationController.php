@@ -59,7 +59,11 @@ class UserVacationController extends Controller {
         $query = $this->get('sg_datatables.query')->getQueryFrom($datatable);
 
         //Display only user's vacation if ROLE_CREATE_VACATION
-        if ($this->get('security.authorization_checker')->isGranted('ROLE_CREATE_VACATION')) {
+        if ($this->get('security.authorization_checker')->isGranted('ROLE_CREATE_VACATION')
+            && !$this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')
+            && !$this->get('security.authorization_checker')->isGranted('ROLE_RH')
+            && !$this->get('security.authorization_checker')->isGranted('ROLE_MANAGER')
+        ) {
             $query->buildQuery();
             $qb = $query->getQuery();
             $user = $this->getUser()->getId();
@@ -233,7 +237,7 @@ class UserVacationController extends Controller {
 
         $this->addFlash(
             'success',
-            'Demande de congés mise en ligne'
+            'Demande de congés validée'
         );
 
         return $this->redirectToRoute('intranet_vacation_homepage');
@@ -258,7 +262,7 @@ class UserVacationController extends Controller {
 
         $this->addFlash(
             'success',
-            'La demande de congés n\'est plus visible sur le site !'
+            'La demande de congés refusée'
         );
 
         return $this->redirectToRoute('intranet_vacation_homepage');
