@@ -6,46 +6,44 @@
 
 {% block headerContainer %}
 
-    <h2>Offres d'IPSSI</h2>
-
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">Offres
+                    <small>de poste</small>
+                </h1>
+            </div>
+        </div>
+    </div>
 
 {% endblock %}
 
 
 {% block body %}
 
-
     <div class="container">
-        <hr>
 
+        <!-- Projects Row -->
         <div class="row">
             {% for offer in offers %}
-            <div class="col-md-4">
-                <div class="card">
 
-                    {% if offer.society.logo is not null %}
-
-                        <div class="card-image">
-                            <img  src="{{ asset(offer.society.logo.webPath) }}" height="200" style="margin:auto;">
-                        </div>
-
-                        <hr>
-
-                    {% endif %}
-
-                    <span class="card-title">{{ offer.name }}</span>
-
-                    <div class="card-content">
-                        <p>{{ offer.description|slice(1,200) }}</p>
-                    </div>
-
-                    <div class="card-action">
-                        <a href="{{ path('offer_show', {'slug': offer.slug}) }}">Lire</a>
-                    </div>
+                <div class="col-md-4 img-portfolio">
+                    <a href="{{ path('offer_show', {'slug': offer.slug}) }}">
+                        {% if offer.society.logo is not null %}
+                            <img class="img-responsive img-hover" src="{{ asset(offer.society.logo.webPath) }}" alt="">
+                        {% else %}
+                            <img class="img-responsive img-hover" src="http://placehold.it/700x400" alt="">
+                        {% endif %}
+                    </a>
+                    <h3>
+                        <a href="{{ path('offer_show', {'slug': offer.slug}) }}">{{ offer.name }}</a>
+                    </h3>
+                    <p>{{ offer.description|slice(1,200) }}</p>
                 </div>
-            </div>
             {% endfor %}
         </div>
+        <!-- /.row -->
+
     </div>
 
 {% endblock %}

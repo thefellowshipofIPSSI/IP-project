@@ -23,6 +23,24 @@
 
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
 
+        <!-- Piwik tracking -->
+        <script type="text/javascript">
+            var _paq = _paq || [];
+            // tracker methods like "setCustomDimension" should be called before "trackPageView"
+            _paq.push(['trackPageView']);
+            _paq.push(['enableLinkTracking']);
+            (function() {
+                var u="//analytics.echos-libres.org/";
+                _paq.push(['setTrackerUrl', u+'piwik.php']);
+                _paq.push(['setSiteId', '4']);
+                var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+                g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+            })();
+        </script>
+        <!-- End Piwik Code -->
+
+
+
     </head>
     <body>
 
@@ -48,7 +66,17 @@
 
         {% endblock %}
 
-
+        <!-- Footer -->
+        <footer>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <p>Copyright &copy; Ipssi 2017</p>
+                    </div>
+                </div>
+                <!-- /.row -->
+            </div>
+        </footer>
 
         {% block javascripts %}
 

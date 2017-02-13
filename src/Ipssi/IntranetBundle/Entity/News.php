@@ -112,7 +112,6 @@ class News
         if($this->getCreationDate() == null)
         {
             $this->setCreationDate(new \DateTime('now'));
-            $this->setStatus(0);
         }
     }
 
