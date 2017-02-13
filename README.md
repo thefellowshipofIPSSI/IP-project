@@ -7,7 +7,7 @@ A Symfony project created on April 15, 2016, 11:05 am.
 - Vagrant 1.9.0
 - VirtuelBox 5.1.10
 
-## Installation
+## Local Installation
 
 - Clone or download repository
 - Move to the `Ip-project` folder
@@ -38,3 +38,7 @@ $ ssh-keygen -t rsa -C "your@email.com")
 $ sudo apt-get install nfs-kernel-server
 ```
 - if an error print, check your Vagrant and VirtualBox versions
+
+## Server and application deployment
+
+https://github.com/Raydicul/Ansible-symfony3
