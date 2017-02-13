@@ -118,7 +118,7 @@ class LoadPageCategoryData extends AbstractFixture implements OrderedFixtureInte
         $this->addReference('confiance', $pageCategory14);
 
         $this->addReference('postes', $pageCategory15);
-        $this->addReference('pourvoir', $pageCategory16);
+        $this->addReference('postuler', $pageCategory16);
 
 
     }

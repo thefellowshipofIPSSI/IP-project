@@ -170,11 +170,11 @@ class LoadPageData extends AbstractFixture implements OrderedFixtureInterface
 
 
         $pagePostes = new Page();
-        $pagePostes->setName('Nos secteurs d\'activités');
-        $pagePostes->setTitle('Ippsi - Nos secteurs d\'activités');
+        $pagePostes->setName('Les postes à pourvoir');
+        $pagePostes->setTitle('Ippsi - Les postes à pourvoir');
         $pagePostes->setContent('test');
-        $pagePostes->setMetaDescription('Ippsi - Nos secteurs d\'activités');
-        $pagePostes->setMetaKeywords('Ippsi - Nos secteurs d\'activités');
+        $pagePostes->setMetaDescription('Ippsi - Les postes à pourvoir');
+        $pagePostes->setMetaKeywords('Ippsi - Les postes à pourvoir');
         $pagePostes->setSlug('postes');
         $pagePostes->setStatus(1);
         $pagePostes->setUser($this->getReference('redacteur-user'));
@@ -182,15 +182,15 @@ class LoadPageData extends AbstractFixture implements OrderedFixtureInterface
         $pagePostes->setPageTemplate($this->getReference('pageSimpleT'));
 
         $pagePostuler = new Page();
-        $pagePostuler->setName('Ils nous font confiance');
-        $pagePostuler->setTitle('Ippsi - Ils nous font confiance');
+        $pagePostuler->setName('Postuler');
+        $pagePostuler->setTitle('Ippsi - Postuler');
         $pagePostuler->setContent('test');
-        $pagePostuler->setMetaDescription('Ippsi - Ils nous font confiance');
-        $pagePostuler->setMetaKeywords('Ippsi - Ils nous font confiance');
-        $pagePostuler->setSlug('pourvoir');
+        $pagePostuler->setMetaDescription('Ippsi - Postuler');
+        $pagePostuler->setMetaKeywords('Ippsi - Postuler');
+        $pagePostuler->setSlug('postuler');
         $pagePostuler->setStatus(1);
         $pagePostuler->setUser($this->getReference('redacteur-user'));
-        $pagePostuler->setPageCategory($this->getReference('pourvoir'));
+        $pagePostuler->setPageCategory($this->getReference('postuler'));
         $pagePostuler->setPageTemplate($this->getReference('pageSimpleT'));
 
 

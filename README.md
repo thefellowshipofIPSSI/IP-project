@@ -1,15 +1,40 @@
-ipssiProject
+IpssiProject
 ============
 
 A Symfony project created on April 15, 2016, 11:05 am.
 
-- composer install
-- add "192.168.10.10    www.ip-project.dev" to your /etc/hosts file
-- run vagrant up (if Errno::ENOENT print, run $ ssh-keygen -t rsa -C "your@email.com")
-- adapt the path of your install directory in Homestead.yml
-- if NFS missing, sudo apt-get install nfs-kernel-server
-- if an error print ==> update vagrant !!
+## Requirements
+- Vagrant 1.9.0
+- VirtuelBox 5.1.10
 
+## Installation
 
+- Clone or download repository
+- Move to the `Ip-project` folder
+``` 
+$ cd Ip-project
+ ```
+- run composer install to get the vagrant box : Homestead
+``` 
+$ ./composer.phar install
+ ```
+- Edit `Homestead.yaml` file to configure the vagrant box if necessary
+- add the project's ip defined in `Homestead.yaml` to your `/etc/hosts` file
+``` 
+$ nano /etc/hosts
 
-Intranet : https://startbootstrap.com/template-overviews/sb-admin/
+  192.168.10.10    www.ip-project.dev
+```
+- run the vagrant box
+ ```
+$ vagrant up 
+ ```
+- if SSH error print, generate a key 
+```
+$ ssh-keygen -t rsa -C "your@email.com")
+ ```
+- if NFS is missing, install NFS
+ ```
+$ sudo apt-get install nfs-kernel-server
+```
+- if an error print, check your Vagrant and VirtualBox versions
