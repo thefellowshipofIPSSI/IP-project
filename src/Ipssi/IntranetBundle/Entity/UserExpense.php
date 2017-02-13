@@ -80,7 +80,6 @@ class UserExpense
      */
     private $user;
 
-
     /**
      * @ORM\ManyToOne(targetEntity="UserBundle\Entity\User", inversedBy="user_validation_expense")
      * @ORM\JoinColumn(nullable=true)
