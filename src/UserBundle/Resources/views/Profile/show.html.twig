@@ -65,6 +65,14 @@
                             <td>Email</td>
                             <td><a href="mailto:{{ user.email }}">{{ user.email }}</a></td>
                         </tr>
+                        <tr>
+                            <td>Nom</td>
+                            <td>{{ user.profile.lastname }}</td>
+                        </tr>
+                        <tr>
+                            <td>Prénom</td>
+                            <td>{{ user.profile.firstname }}</td>
+                        </tr>
                         </tbody>
                     </table>
                 </div>
