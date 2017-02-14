@@ -55,6 +55,10 @@
 
     <br><br><br>
     <a href="{{ path('intranet_news_update', {'id': news.id}) }}" class="btn btn-primary" style="margin-bottom:10px;">Modifier</a>
-
+    {% if news.status === 0 %}
+        <a href="{{ path('intranet_news_online', {'id': news.id}) }}" class="btn btn-success" style="margin-bottom:10px;">Mettre en ligne</a>
+    {% else %}
+        <a href="{{ path('intranet_news_offline', {'id': news.id}) }}" class="btn btn-danger" style="margin-bottom:10px;">Mettre hors ligne</a>
+    {% endif %}
 
 {% endblock %}

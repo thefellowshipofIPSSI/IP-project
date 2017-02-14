@@ -91,7 +91,7 @@ class LoadPageData extends AbstractFixture implements OrderedFixtureInterface
         $pagePresentation->setSlug('presentation');
         $pagePresentation->setStatus(1);
         $pagePresentation->setUser($this->getReference('redacteur-user'));
-        $pagePresentation->setPageCategory($this->getReference('presentation'));
+        $pagePresentation->setPageCategory($this->getReference('groupe'));
         $pagePresentation->setPageTemplate($this->getReference('pageSimpleT'));
 
         $pageChiffres = new Page();
@@ -103,7 +103,7 @@ class LoadPageData extends AbstractFixture implements OrderedFixtureInterface
         $pageChiffres->setSlug('chiffres');
         $pageChiffres->setStatus(1);
         $pageChiffres->setUser($this->getReference('redacteur-user'));
-        $pageChiffres->setPageCategory($this->getReference('chiffres'));
+        $pageChiffres->setPageCategory($this->getReference('groupe'));
         $pageChiffres->setPageTemplate($this->getReference('pageSimpleT'));
 
         $pageExpertise = new Page();
@@ -115,7 +115,7 @@ class LoadPageData extends AbstractFixture implements OrderedFixtureInterface
         $pageExpertise->setSlug('expertise');
         $pageExpertise->setStatus(1);
         $pageExpertise->setUser($this->getReference('redacteur-user'));
-        $pageExpertise->setPageCategory($this->getReference('expertise'));
+        $pageExpertise->setPageCategory($this->getReference('groupe'));
         $pageExpertise->setPageTemplate($this->getReference('pageSimpleT'));
 
         $pageValeurs = new Page();
@@ -127,7 +127,7 @@ class LoadPageData extends AbstractFixture implements OrderedFixtureInterface
         $pageValeurs->setSlug('valeurs');
         $pageValeurs->setStatus(1);
         $pageValeurs->setUser($this->getReference('redacteur-user'));
-        $pageValeurs->setPageCategory($this->getReference('valeurs'));
+        $pageValeurs->setPageCategory($this->getReference('groupe'));
         $pageValeurs->setPageTemplate($this->getReference('pageSimpleT'));
 
 
@@ -141,7 +141,7 @@ class LoadPageData extends AbstractFixture implements OrderedFixtureInterface
         $pageMetiers->setSlug('metiers');
         $pageMetiers->setStatus(1);
         $pageMetiers->setUser($this->getReference('redacteur-user'));
-        $pageMetiers->setPageCategory($this->getReference('metiers'));
+        $pageMetiers->setPageCategory($this->getReference('activite'));
         $pageMetiers->setPageTemplate($this->getReference('pageSimpleT'));
 
         $pageSecteurs = new Page();
@@ -153,7 +153,7 @@ class LoadPageData extends AbstractFixture implements OrderedFixtureInterface
         $pageSecteurs->setSlug('secteurs');
         $pageSecteurs->setStatus(1);
         $pageSecteurs->setUser($this->getReference('redacteur-user'));
-        $pageSecteurs->setPageCategory($this->getReference('secteurs'));
+        $pageSecteurs->setPageCategory($this->getReference('activite'));
         $pageSecteurs->setPageTemplate($this->getReference('pageSimpleT'));
 
         $pageConfiance = new Page();
@@ -165,7 +165,7 @@ class LoadPageData extends AbstractFixture implements OrderedFixtureInterface
         $pageConfiance->setSlug('confiance');
         $pageConfiance->setStatus(1);
         $pageConfiance->setUser($this->getReference('redacteur-user'));
-        $pageConfiance->setPageCategory($this->getReference('confiance'));
+        $pageConfiance->setPageCategory($this->getReference('activite'));
         $pageConfiance->setPageTemplate($this->getReference('pageSimpleT'));
 
 
@@ -179,7 +179,7 @@ class LoadPageData extends AbstractFixture implements OrderedFixtureInterface
         $pagePostes->setSlug('postes');
         $pagePostes->setStatus(1);
         $pagePostes->setUser($this->getReference('redacteur-user'));
-        $pagePostes->setPageCategory($this->getReference('postes'));
+        $pagePostes->setPageCategory($this->getReference('rejoindre'));
         $pagePostes->setPageTemplate($this->getReference('pageSimpleT'));
 
         $pagePostuler = new Page();
@@ -191,7 +191,7 @@ class LoadPageData extends AbstractFixture implements OrderedFixtureInterface
         $pagePostuler->setSlug('postuler');
         $pagePostuler->setStatus(1);
         $pagePostuler->setUser($this->getReference('redacteur-user'));
-        $pagePostuler->setPageCategory($this->getReference('postuler'));
+        $pagePostuler->setPageCategory($this->getReference('rejoindre'));
         $pagePostuler->setPageTemplate($this->getReference('pageSimpleT'));
 
 

@@ -55,4 +55,10 @@
         <hr>
     </div>
 
+    {% if page.status === 0 %}
+        <a href="{{ path('intranet_page_online', {'id': page.id}) }}" class="btn btn-success" style="margin-bottom:10px;">Mettre en ligne</a>
+    {% else %}
+        <a href="{{ path('intranet_page_offline', {'id': page.id}) }}" class="btn btn-danger" style="margin-bottom:10px;">Mettre hors ligne</a>
+    {% endif %}
+
 {% endblock %}
