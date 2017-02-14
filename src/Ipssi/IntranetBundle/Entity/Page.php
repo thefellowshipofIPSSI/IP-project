@@ -117,7 +117,7 @@ class Page
         if($this->getDateCreation() == null)
         {
             $this->setDateCreation(new \DateTime('now'));
-            $this->setStatus(0);
+            $this->setStatus(1);
         }
     }
 

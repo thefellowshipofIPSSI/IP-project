@@ -151,9 +151,9 @@ class PageController extends Controller {
      */
     public function viewAction(Page $page)
     {
-        $pageTemplate = $page->getPageTemplate()->getName();
+//        $pageTemplate = $page->getPageTemplate()->getName();
 
-        return $this->render('IntranetBundle:Page\Templates:'. $pageTemplate .'.html.twig', [
+        return $this->render('IntranetBundle:Page:view.html.twig', [
             'page' => $page
         ]);
     }
