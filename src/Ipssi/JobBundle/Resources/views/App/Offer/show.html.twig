@@ -28,12 +28,47 @@
     <div class="container">
         <div class="col-lg-12">
 
+
+            <!-- Blog Post -->
+
+            <!-- Title -->
+            <h1>{{ offer.name|capitalize }}</h1>
+
+            <!-- Author -->
+            <p class="lead">
+                Offre ajoutée le {{ offer.createdAt|date('d/m/Y') }} à {{ offer.createdAt|date('H:i') }}
+            </p>
+
             <hr>
 
-            <!-- Date/Time -->
-            <p><span class="glyphicon glyphicon-time"></span> Créé le {{ offer.createdAt|date('m/d/Y') }} à {{ offer.createdAt|date('H:i') }}</p>
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <div class="container">
+                        <div class="col-md-4">
+                            <p>Société : <a href="{{ path('intranet_society_view', { 'society': offer.society.id }) }}" target="_blank" >{{ offer.society.name }}</a></p>
+                            <p>Localisation : {{ offer.location }}</p>
+                        </div>
+                        <div class="col-md-4">
+                            <p>Type de contrat : {{ offer.contract }}</p>
+                            <p>A partir de : {{ offer.beginDate }}</p>
+                        </div>
+                        <div class="col-md-4">
+                            <p>Rémunération : {{ offer.salary }} {{ offer.currency }}</p>
+                            {% if offer.duration is not null %}<p>Durée : {{ offer.duration }}</p>{% endif %}
+                        </div>
+                    </div>
 
-            <hr>
+                </div>
+            </div>
+
+            {% if offer.society.logo is not null %}
+
+                <hr>
+
+                <img src="{{ asset(offer.society.logo.webPath) }}" height="200">
+
+            {% endif %}
+
 
             {# If the user already postulated #}
             {% set candidate = false %}
