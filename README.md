@@ -17,7 +17,7 @@ A Symfony project created on April 15, 2016, 11:05 am.
 - Move to the `Ip-project` folder
 ``` 
 $ cd Ip-project/
- ```
+ ``` 
 - Run composer install to get the vagrant box : Homestead
 ``` 
 $ ./composer.phar install
